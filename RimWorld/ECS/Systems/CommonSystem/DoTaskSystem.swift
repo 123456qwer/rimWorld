@@ -16,11 +16,10 @@ class DoTaskSystem: System {
     
    
     ///  KEY：执行人entityID
-    var cuttingTasks:[Int : WorkTask] = [:]
-    var restingTasks:[Int : WorkTask] = [:]
-    
-    /// 休息,key是休息人id,value是休息人
-    var rests:[Int : RMEntity] = [:]
+    var cuttingTasks :[Int : WorkTask] = [:]
+    var restingTasks :[Int : WorkTask] = [:]
+    var buildingTasks:[Int : WorkTask] = [:]
+ 
 
     /// 记录上次处理的tick
     var lastProcessedTick: Int = 0
@@ -40,19 +39,28 @@ class DoTaskSystem: System {
         let elapsedTicks = currentTick - lastProcessedTick
         lastProcessedTick = currentTick
      
+        /// 休息
+        for (executorEntityID, workTask) in restingTasks {
+            executeRestingAction(executorEntityID: executorEntityID,
+                                 task: workTask,
+                                 tick: elapsedTicks)
+        }
+        
+        /// 建造
+        for (executorEntityID, workTask) in buildingTasks {
+            executeBuildingAction(executorEntityID: executorEntityID,
+                                  task: workTask,
+                                  tick: elapsedTicks)
+        }
+        
         /// 砍伐
         for (executorEntityID, workTask) in cuttingTasks {
-            cuttingAction(executorID: executorEntityID,
-                          task: workTask,
-                          tick: elapsedTicks)
+            executeCuttingAction(executorEntityID: executorEntityID,
+                                 task: workTask,
+                                 tick: elapsedTicks)
         }
         
-        /// 休息
-        for (executorEntityID, workTsk) in restingTasks {
-            restAction(entityID: executorEntityID, task: workTsk, tick: elapsedTicks)
-        }
-        
-      
+    
     }
 
 
@@ -63,11 +71,11 @@ class DoTaskSystem: System {
         switch task.type {
             
         case .Cutting:
-            self.cancelCuttingAction(entity: entity,
-                                  task: task)
+            self.cancelCuttingAction(entity: entity,task: task)
         case .Hauling:
-            self.cancelHaulingAction(entity: entity,
-                                  task: task)
+            self.cancelHaulingAction(entity: entity,task: task)
+        case .Building:
+            self.cancelBuildingAction(entity: entity, task: task)
             
         default:
             print("默认方法")
@@ -82,14 +90,16 @@ class DoTaskSystem: System {
         switch task.type {
             
         case .Cutting:
-            cuttingTasks[entity.entityID] = task
+            setCuttingAction(entity: entity, task: task)
             
         case .Rest:
-            EntityActionTool.startRest(entity: entity)
-            restingTasks[entity.entityID] = task
+            setRestingAction(entity: entity, task: task)
             
         case .Hauling:
             setHaulingAction(entity: entity, task: task)
+            
+        case .Building:
+            setBuildingAction(entity: entity, task: task)
             
         default:
             break

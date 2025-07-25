@@ -33,22 +33,52 @@ extension CharacterTaskSystem {
     
     /// 添加搬运任务
     @discardableResult
-    func addHaulingTask(_ entity: RMEntity) -> WorkTask?{
+    func addHaulingTask(_ entity: RMEntity) -> WorkTask? {
+        
+        /// 已存在
+        if haveTaskWithTarget(entity) != nil {
+            return nil
+        }
+        /// 正在执行
+        if haveDoTaskWithTarget(entity) != nil {
+            return nil
+        }
         
         let task = WorkTask(type: .Hauling, targetEntityID: entity.entityID, executorEntityID: 0)
         task.haulStage = .movingToItem
-        let saveAreaEntity = nearestAvailableStorageArea(entity)
-        guard let ableSaveEntity = saveAreaEntity else {
-            ECSLogger.log("当前搬运任务没有任何存储区域可存储，直接废除！🤕🤕🤕")
-            return nil
-        }
-        task.targetEntityID2 = ableSaveEntity.entityID
         taskQueue.append(task)
         sortTaskQueue()
-
+        
         return task
     }
     
+    /// 建造过程中，搬运任务
+    @discardableResult
+    func addHaulingTaskForBuild(_ entity: RMEntity,
+                                _ blueprintID: Int) -> WorkTask? {
+        
+        /// 已存在
+        if let existingTask = haveTaskWithTarget(entity) {
+            existingTask.realType = .Building
+            existingTask.targetEntityID2 = blueprintID
+            return nil
+        }
+        
+        /// 正在执行
+        if haveDoTaskWithTarget(entity) != nil {
+            return nil
+        }
+        
+        
+        let task = WorkTask(type: .Hauling, targetEntityID: entity.entityID, executorEntityID: 0)
+        task.haulStage = .movingToItem
+        task.realType = .Building
+        task.targetEntityID2 = blueprintID
+        taskQueue.append(task)
+        sortTaskQueue()
+        
+        return task
+    }
     
     
     /// 执行搬运任务
@@ -56,11 +86,11 @@ extension CharacterTaskSystem {
         
         guard let haulEntity = ecsManager.getEntityNode(task.targetEntityID)?.rmEntity else {
             ECSLogger.log("此搬运任务没有实体")
-            return 
+            return
         }
         
         let exectorEntity = ableToDoTaskEntity(ableEntities: ecsManager.entitiesAbleToHaul(), task: task)
-
+        
         /// 如果没有可以执行的角色，直接任务分配失败，还留存在任务列表里
         guard let ableExectorEntity = exectorEntity else {
             ECSLogger.log("当前搬运任务没有任何角色执行！🤕🤕🤕")
@@ -71,10 +101,27 @@ extension CharacterTaskSystem {
             return
         }
         
-        let saveAreaEntity = nearestAvailableStorageArea(haulEntity)
+        var haulingTargerEntity: RMEntity?
         
-        guard let ableSaveEntity = saveAreaEntity else {
-            ECSLogger.log("当前搬运任务没有任何存储区域可存储！🤕🤕🤕")
+        /// 目标区域
+        if task.targetEntityID2 != 0 {
+            haulingTargerEntity = ecsManager.getEntity(task.targetEntityID2)
+        }
+        
+        /// 最近蓝图
+        if haulingTargerEntity == nil {
+            haulingTargerEntity = nearestAvailableBlueprint(haulEntity)
+        }
+        
+        /// 存储区域（最后是存储区域）
+        if haulingTargerEntity == nil {
+            haulingTargerEntity = nearestAvailableStorageArea(haulEntity)
+        }
+        
+        
+        
+        guard let ableSaveEntity = haulingTargerEntity else {
+            ECSLogger.log("当前搬运任务没有任何可达目标！🤕🤕🤕")
             return
         }
         
@@ -84,8 +131,10 @@ extension CharacterTaskSystem {
             RMEventBus.shared.requestForceSwitchTask(entity: ableExectorEntity, task: execturfirstTask)
             /// 移除之前执行的任务
             EntityActionTool.removeTask(entity: ableExectorEntity, task: execturfirstTask)
- 
+            
         }
+        
+  
         
         removeNotDoTask(task: task)
         doTaskQueue.insert(task)
@@ -123,7 +172,7 @@ extension CharacterTaskSystem {
         removeNotDoTask(task: task)
         doTaskQueue.insert(task)
     }
-
+    
     
     
     /// 获取最近、级别最高的存储区域
@@ -148,7 +197,7 @@ extension CharacterTaskSystem {
             guard let storageComponent = storageArea.getComponent(ofType: StorageInfoComponent.self) else {
                 continue
             }
-          
+            
             /// 说明可以存储此类型
             if storageComponent.canStorageType[textAction(targetEntity.type)] == true {
                 
@@ -163,7 +212,7 @@ extension CharacterTaskSystem {
                 
                 /// 存储的位置
                 var selectIndex = -1
-
+                
                 /// 遍历格子，看是否有能存储的位置
                 for index in 0..<totalTiles {
                     /// 存储的实体
@@ -198,15 +247,79 @@ extension CharacterTaskSystem {
         return bestSaveAreaEntity(from: canStorageAreas, to: targetPoint)
     }
     
+    
+    /// 获取最近的蓝图区域
+    func nearestAvailableBlueprint(_ targetEntity: RMEntity) -> RMEntity?{
+        
+        guard let categorizationComponent = targetEntity.getComponent(ofType: CategorizationComponent.self) else {
+            return nil
+        }
+        
+        let blueprint = ecsManager.entitiesAbleToBeBuild()
+        /// 当前材料目标
+        let targetType = categorizationComponent.categorization
+        
+        
+        let targetPoint = PositionTool.nowPosition(targetEntity)
+        
+        var distance = 1000000.0
+        var targetBlueprint:RMEntity?
+        /// 此蓝图
+        let haulTasks = taskQueue.filter{ $0.type == .Hauling }
+        let doHaulTasks = doTaskQueue.filter{ $0.type == .Hauling }
+        
+        for (_,blueEntity) in blueprint {
+            guard let blueComponent = blueEntity.getComponent(ofType: BlueprintComponent.self) else {
+                continue
+            }
+            var canGo = true
+            /// 此蓝图已有对应的任务
+            for task in haulTasks {
+                if blueEntity.entityID == task.targetEntityID2 {
+                    canGo = false
+                    break
+                }
+            }
+            /// 此蓝图已有对应的任务
+            for task in doHaulTasks {
+                if blueEntity.entityID == task.targetEntityID2 {
+                    canGo = false
+                    break
+                }
+            }
+            
+            if canGo == false { continue }
+            
+            /// 需要的原材料
+            for (materialType,valueCount) in blueComponent.alreadyMaterials {
+                let maxCount = blueComponent.materials[materialType] ?? 0
+                /// 说明这个蓝图缺此材料
+                if Int(materialType) == targetType && valueCount < maxCount {
+                    let bluePoint = PositionTool.nowPosition(blueEntity)
+                    let d = MathUtils.distance(targetPoint, bluePoint)
+                    if distance > d {
+                        distance = d
+                        targetBlueprint = blueEntity
+                    }
+                }
+            }
+            
+        }
+        
+       
+        
+        return targetBlueprint
+    }
+    
     func bestSaveAreaEntity(from canSaveAreas: [RMEntity], to targetPoint: CGPoint) -> RMEntity? {
         guard !canSaveAreas.isEmpty else { return nil }
-
+        
         var bestEntity: RMEntity?
         var bestDistance: CGFloat = .greatestFiniteMagnitude
-
+        
         // 用于记录当前最高优先级
         var currentPriority: Int?
-
+        
         for entity in canSaveAreas {
             guard
                 let saveComponent = entity.getComponent(ofType: StorageInfoComponent.self),
@@ -214,32 +327,63 @@ extension CharacterTaskSystem {
             else {
                 continue
             }
-
+            
             // 如果还没设定 currentPriority，就取第一个实体的优先级
             if currentPriority == nil {
                 currentPriority = saveComponent.priority
             }
-
+            
             // 如果当前实体优先级低于 currentPriority，说明优先级已经下降，停止遍历
             if saveComponent.priority < currentPriority! {
                 break
             }
-
+            
             // 比较距离
             let distance = MathUtils.distance(
                 CGPoint(x: positionComponent.x, y: positionComponent.y),
                 targetPoint
             )
-
+            
             if distance < bestDistance {
                 bestDistance = distance
                 bestEntity = entity
             }
         }
-
+        
         return bestEntity
     }
-
+    
+    
+    /// 是否已有对应的搬运任务
+    func haveTaskWithTarget(_ entity: RMEntity) -> WorkTask? {
+        /// 先判断下当前搬运任务是否存在于已有的任务队列中
+        let haulTasks = taskQueue.filter{ $0.type == .Hauling }
+        let doTasks = taskQueue.filter{ $0.type == .Hauling }
+        
+        /// 说明有这个任务了，直接返回
+        for task in haulTasks {
+            if task.targetEntityID == entity.entityID {
+                return task
+            }
+        }
+        
+        return nil
+    }
+    
+    /// 此任务是否已经正在做
+    func haveDoTaskWithTarget(_ entity: RMEntity) -> WorkTask? {
+        /// 先判断下当前搬运任务是否存在于已有的任务队列中
+        let doTasks = doTaskQueue.filter{ $0.type == .Hauling }
+        
+        /// 说明有这个任务了，直接返回
+        for task in doTasks {
+            if task.targetEntityID == entity.entityID {
+                return task
+            }
+        }
+        
+        return nil
+    }
 
 }
 
@@ -266,11 +410,7 @@ extension CharacterTaskSystem {
             ECSLogger.log("搬运目的地为空！💀💀💀")
             return
         }
-        /// 搬运控件
-        guard let saveBasicComponent = saveEntity.getComponent(ofType: StorageInfoComponent.self) else {
-            ECSLogger.log("搬运目的地为基础组件为空！💀💀💀")
-            return
-        }
+      
         
         let startPoint = PositionTool.nowPosition(executorEntity)
         var endPoint = CGPoint(x: 0, y: 0)
@@ -370,4 +510,13 @@ extension CharacterTaskSystem {
     func refreshHaulingTasksForChangeSaveArea(_ saveArea: RMEntity) {
         isUpEvent = true
     }
+    
+    
+    /// 生成木头
+    func refreshHaulingTasksForWood(_ entity: RMEntity) {
+        let task = addHaulingTask(entity)
+        handleHaulingTask(task!)
+    }
+    
+    
 }

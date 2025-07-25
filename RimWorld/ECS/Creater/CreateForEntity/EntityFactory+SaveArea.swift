@@ -10,13 +10,14 @@ import Foundation
 extension EntityFactory {
  
     /// 创建存储区域
-    func createSaveAreaEntityWithoutSaving(point:CGPoint,size:CGSize?) -> RMEntity{
+    func createSaveAreaEntityWithoutSaving(point:CGPoint,
+                                           params: StorageParams) -> RMEntity{
         
         let entity = RMEntity()
-        entity.type = kSaveArea
+        entity.type = kStorageArea
         
         let treeComponent = StorageInfoComponent()
-        treeComponent.size = size ?? CGSize(width: 0, height: 0)
+        treeComponent.size = params.size 
         
         let pointComponent = PositionComponent()
         pointComponent.x = point.x

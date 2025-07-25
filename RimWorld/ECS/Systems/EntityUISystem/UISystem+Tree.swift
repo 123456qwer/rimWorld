@@ -11,7 +11,7 @@ import UIKit
 extension UISystem {
     
     /// 树信息
-    func showTreeInfoView(node: RMBaseNode, nodes: [Any]) {
+    func showTreeInfo(node: RMBaseNode, nodes: [Any]) {
         guard let entity = node.rmEntity else {
             ECSLogger.log("此node：\(node.name ?? "")，未有实体")
             return

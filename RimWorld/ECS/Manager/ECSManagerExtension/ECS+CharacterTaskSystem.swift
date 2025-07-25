@@ -106,8 +106,14 @@ extension ECSManager {
     func characterTaskAdd(entity: RMEntity) {
         
         /// 新增存储区域
-        if entity.type == kSaveArea {
+        if entity.type == kStorageArea {
             systemManager.getSystem(ofType:CharacterTaskSystem.self)?.refreshHaulingTasksForNewSaveArea(entity)
+        }else if entity.type == kBlueprint {
+            /// 新增蓝图
+            systemManager.getSystem(ofType: CharacterTaskSystem.self)?.refreshBuildTask(entity)
+        }else if entity.type == kWood {
+            /// 新增搬运任务
+            systemManager.getSystem(ofType: CharacterTaskSystem.self)?.refreshHaulingTasksForWood(entity)
         }
     }
     
@@ -115,9 +121,15 @@ extension ECSManager {
     func characterTaskRemove(entity: RMEntity) {
         
         /// 移除存储区域
-        if entity.type == kSaveArea {
+        if entity.type == kStorageArea {
             systemManager.getSystem(ofType:CharacterTaskSystem.self)?.refreshHaulingTasksForRemoveSaveArea(entity)
         }
+    }
+    
+    
+    /// 蓝图状态更新，看是否需要去建造
+    func updateBlueprint(entity: RMEntity) {
+        
     }
     
 }

@@ -32,20 +32,23 @@ extension EntityFactory {
     
     
     func createWoodEntityWithoutSaving(point:CGPoint,
-                                       count:Int) -> RMEntity{
+                                       params:WoodParams) -> RMEntity{
         
         let entity = RMEntity()
         entity.type = kWood
         
-      
+        /// 分类
+        let categorizationComponent = CategorizationComponent()
+        categorizationComponent.categorization = MaterialType.wood.rawValue
 
+        
         let woodComponent = WoodBasicInfoComponent()
         let woodName = "wood"
         woodComponent.woodTexture = woodName
         
         let haulComponent = HaulableComponent()
         haulComponent.weight = 1
-        haulComponent.currentCount = count
+        haulComponent.currentCount = params.woodCount
 
        
         let pointComponent = PositionComponent()
@@ -58,6 +61,7 @@ extension EntityFactory {
         entity.addComponent(pointComponent)
         entity.addComponent(woodComponent)
         entity.addComponent(haulComponent)
+        entity.addComponent(categorizationComponent)
         
         
         return entity

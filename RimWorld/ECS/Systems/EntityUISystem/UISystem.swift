@@ -42,7 +42,11 @@ class UISystem: System {
     var woodInfoView:WoodInfoView?
     
     // MARK: - 存储区域设置 -
-    var saveInfoView:SaveAreaInfoView?
+    var storageInfoView:StorageInfoView?
+    
+    // MARK: - 蓝图 -
+    var blueprintInfoView:BlueprintInfoView?
+    
     
     let ecsManager: ECSManager
     
@@ -77,13 +81,16 @@ class UISystem: System {
             showCharacterInfo(node: node, nodes: nodes)
         }else if entity.type == kTree {
             /// 点击树
-            showTreeInfoView(node: node, nodes: nodes)
+            showTreeInfo(node: node, nodes: nodes)
         }else if entity.type == kWood {
             /// 点击木头
             showWoodInfo(node: node, nodes: nodes)
-        }else if entity.type == kSaveArea {
+        }else if entity.type == kStorageArea {
             /// 点击了存储区域
-            showSaveAreaView(node: node, nodes: nodes)
+            showStorageInfo(node: node, nodes: nodes)
+        }else if entity.type == kBlueprint {
+            /// 点击蓝图
+            showBlueprintInfo(node: node, nodes: nodes)
         }
     }
     
@@ -93,7 +100,8 @@ class UISystem: System {
         removeTreeInfo()
         removeWoodInfo()
         removeUserInfo()
-        removeSaveInfo()
+        removeStorageInfo()
+        removeBlueprintInfo()
     }
 }
 

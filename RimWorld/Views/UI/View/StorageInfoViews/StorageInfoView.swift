@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SaveAreaInfoView: UIView {
+class StorageInfoView: UIView {
     
     weak var entity:RMEntity?
     
@@ -165,7 +165,7 @@ class SaveAreaInfoView: UIView {
     }()
     
     lazy var saveTableView = {
-        let view = SaveAreaTableView.init(frame: CGRectZero, style: .grouped)
+        let view = StorageInfoTabelView.init(frame: CGRectZero, style: .grouped)
         return view
     }()
     

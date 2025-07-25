@@ -230,6 +230,8 @@ enum WorkType: String, CaseIterable, Codable {
     case Cleaning
     /// 研究
     case Research
+    
+    
 }
 
 /// 人物技能
@@ -568,4 +570,35 @@ extension MaterialType: CustomStringConvertible {
         }
     }
 }
+
+/// 蓝图类型枚举
+enum BlueprintType: Int {
+    case wall = 1            // 墙
+    case airConditioner = 2  // 空调
+    case table = 3           // 桌子
+    case chair = 4           // 椅子
+    case door = 5            // 门
+    case bed = 6             // 床
+    case cabinet = 7         // 柜子
+    case floor = 8           // 地板
+    case window = 9          // 窗户
+    case roof = 10           // 屋顶
+
+    /// 获取英文描述
+    var description: String {
+        switch self {
+        case .wall: return "Wall"                     // 墙
+        case .airConditioner: return "Air Conditioner" // 空调
+        case .table: return "Table"                   // 桌子
+        case .chair: return "Chair"                   // 椅子
+        case .door: return "Door"                     // 门
+        case .bed: return "Bed"                       // 床
+        case .cabinet: return "Cabinet"               // 柜子
+        case .floor: return "Floor"                   // 地板
+        case .window: return "Window"                 // 窗户
+        case .roof: return "Roof"                     // 屋顶
+        }
+    }
+}
+
 

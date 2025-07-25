@@ -7,6 +7,40 @@
 
 import Foundation
 import Combine
+
+
+/// 所有实体的参数都遵循这个协议
+protocol EntityCreationParams {}
+
+/// 蓝图参数
+struct BlueprintParams: EntityCreationParams {
+    let size: CGSize
+    let materials: [String: Int]
+    let type: BlueprintType
+    let totalBuildPoint: Double
+}
+
+/// 存储区域参数
+struct StorageParams: EntityCreationParams {
+    let size: CGSize
+}
+
+/// 木头参数
+struct WoodParams: EntityCreationParams {
+    let woodCount: Int
+}
+
+/// 墙参数
+struct WallParams: EntityCreationParams {
+    /// 类型材质
+    let material: MaterialType
+    /// texture （直接传进来，省的在判断了）
+    let wallTexture: String
+    /// 类型
+    let type: String
+}
+
+
 /// 创建Node的管理者
 class EntityNodeFactorySystem: System {
     
@@ -19,53 +53,56 @@ class EntityNodeFactorySystem: System {
     }
     
     
-    func createEntity(_ type: String,
-                      _ point: CGPoint,
-                      _ size:CGSize?,
-                      _ subContent:[String:Any]?) {
+    func createEntity(type: String,
+                      point: CGPoint,
+                      params: EntityCreationParams) {
         
         if type == kWood {
-            createWood(point,subContent!["haulCount"] as! Int)
-        }else if type == kSaveArea{
-            createSaveArea(point, size: size)
+            createWood(point, params: params as! WoodParams)
+        }else if type == kStorageArea{
+            createSaveArea(point,params: params as! StorageParams)
         }else if type == kBlueprint {
-            createBlueprint(point, size: size,sub: subContent)
+            createBlueprint(point, params: params as! BlueprintParams)
+        }else if type == kWoodWall {
+            createWall(point, params: params as! WallParams)
         }
     }
     
     
     /// 创建木头
-    func createWood(_ point:CGPoint,
-                    _ count:Int){
+    func createWood(_ point:CGPoint,params: WoodParams) {
         
-        
-        let entity = EntityFactory.shared.createWoodEntityWithoutSaving(point: point,count: count)
-        
+        let count = params.woodCount
+        let entity = EntityFactory.shared.createWoodEntityWithoutSaving(point: point,params: params)
         createNodeAction(entity)
-        
-        /// 添加搬运任务
-        RMEventBus.shared.requestHaulTask(entity)
+    }
+
+    
+    /// 创建墙
+    func createWall(_ point: CGPoint, params: WallParams) {
+        let entity = EntityFactory.shared.createWall(point: point, params: params)
+        createNodeAction(entity)
     }
     
-    
     /// 创建存储区域
-    func createSaveArea(_ point:CGPoint,
-                        size:CGSize?) {
-        let entity = EntityFactory.shared.createSaveAreaEntityWithoutSaving(point: point, size: size)
+    func createSaveArea(_ point:CGPoint, params: StorageParams) {
+        let entity = EntityFactory.shared.createSaveAreaEntityWithoutSaving(point: point, params:params)
         createNodeAction(entity)
     }
     
     
     /// 创建建造蓝图
-    func createBlueprint(_ point:CGPoint,
-                         size:CGSize?,
-                         sub:[String:Any]?) {
-        let material = sub!["material"] as! MaterialType
-        let entity = EntityFactory.shared.createBlueprint(point: point, size: size!, material: material)
-        createNodeAction(entity)
+    func createBlueprint(_ point:CGPoint, params: BlueprintParams) {
         
-        RMEventBus.shared.requestBuildTask(entity)
+        let material = params.materials
+        let size = params.size
+        let blueType = params.type
+        let entity = EntityFactory.shared.createBlueprint(point: point,params: params)
+        createNodeAction(entity)
     }
+    
+    
+    
     
     
     /// 创建node和设置实体

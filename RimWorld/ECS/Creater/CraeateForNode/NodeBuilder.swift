@@ -17,8 +17,11 @@ final class NodeBuilder: NSObject {
         kWeapon: buildWeapon,
         kTree:buildTree,
         kWood:buildWood,
-        kSaveArea:saveArea,
+        kStorageArea:saveArea,
         kBlueprint:blueprint,
+        
+        kWoodWall:woodWall,
+        
     ]
     
     /// 根据类型创建Node

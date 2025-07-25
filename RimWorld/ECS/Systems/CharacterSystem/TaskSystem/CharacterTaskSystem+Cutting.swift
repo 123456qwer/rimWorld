@@ -58,6 +58,7 @@ extension CharacterTaskSystem {
         let task = WorkTask(type: .Cutting,
                             targetEntityID: tree.entityID,
                             executorEntityID: 0)
+
         taskQueue.append(task)
         sortTaskQueue()
     }
@@ -95,7 +96,8 @@ extension CharacterTaskSystem {
         
         // 如果没有空闲实体，则寻找可以强制切换任务的实体
         let dummyTask = WorkTask(type: .Cutting, targetEntityID: 1, executorEntityID: 1)
-        let executor = idleEntity ?? ableToCut.first { 
+        
+        let executor = idleEntity ?? ableToCut.first {
             EntityAbilityTool.ableForceSwitchTask(entity: $0, task: dummyTask)
         }
         

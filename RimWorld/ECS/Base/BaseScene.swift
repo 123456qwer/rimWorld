@@ -339,8 +339,14 @@ extension BaseScene: AreaSelectProvider {
     
         if yCount <= 0 || xCount <= 0 { return }
         
+        let params =  StorageParams(
+            size: areaSize
+        )
+        
         /// 创建对应实体
-        RMEventBus.shared.requestCreateEntity(areaPoint, kSaveArea, size: areaSize)
+        RMEventBus.shared.requestCreateEntity(type: kStorageArea,
+                                              point: areaPoint,
+                                              params: params)
         
         
         for y in 0...Int(yCount - 1) {

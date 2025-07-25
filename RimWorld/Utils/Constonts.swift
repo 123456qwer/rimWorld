@@ -92,6 +92,10 @@ let kMoveComponent = "MoveComponent"
 let kStorageInfoComponent = "StorageInfoComponent"
 /// 蓝图组件
 let kBlueprintComponent = "BlueprintComponent"
+/// 分类组件
+let kCategorizationComponent = "CategorizationComponent"
+/// 墙组件
+let kWallComponent = "WallComponent"
 
 /// 搬运状态组件
 let kHaulableComponent = "HaulableComponent"
@@ -150,6 +154,8 @@ let componentTypeMap: [String: Decodable.Type] = [
     kHaulableComponent:HaulableComponent.self,
     kLogComponent:LogComponent.self,
     kBlueprintComponent:BlueprintComponent.self,
+    kCategorizationComponent:CategorizationComponent.self,
+    kWallComponent:WallComponent.self,
 ]
 
 // MARK: - 实体类型 -
@@ -171,6 +177,9 @@ let kMedicine = "Medicine"
 /// 木头
 let kWood = "Wood"
 
+/// 木墙
+let kWoodWall = "WoodWall"
+
 
 /// 食物
 /// 鸡腿
@@ -187,4 +196,4 @@ let kYueFei = "YueFei"
 
 
 // MARK: - 区域 -
-let kSaveArea = "SaveArea"
+let kStorageArea = "StorageArea"

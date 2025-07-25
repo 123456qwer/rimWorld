@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
+
+
+
+
 class ECSManager {
     
     var entityManager: EntityManager
@@ -41,9 +45,11 @@ class ECSManager {
                 /// 创建实体
             case .createEntity(let type,
                                let point,
-                               let size,
-                               let subContent):
-                self.createEntity(type, point, size, subContent)
+                               let params):
+                
+                self.createEntity(type: type,
+                                  point: point,
+                                  params: params)
                 
                 /// 选中实体
             case .didSelectEntity(let entity,let nodes):

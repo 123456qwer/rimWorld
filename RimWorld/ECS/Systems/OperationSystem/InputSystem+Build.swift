@@ -13,7 +13,7 @@ struct TilePoint: Hashable {
     let y: Int
 }
 
-/// Normal模式
+
 extension InputSystem {
     
     /// 按下
@@ -44,6 +44,7 @@ extension InputSystem {
     
     
     private func createBluePrint(atPoint pos: CGPoint, scene: BaseScene){
+       
         let converPoint = scene.converPointForTile(point: pos)
         let key = TilePoint(x: Int(converPoint.x), y: Int(converPoint.y))
         let blueprintNodes = ecsManager.entitiesAbleToBeBuild()
@@ -51,7 +52,22 @@ extension InputSystem {
             return
         }
         
+        /// 这里的参数需要玩家自己设置的
+        let wood = MaterialType.wood.rawValue
+        let woodCount = 10
+        let blueprintType = BlueprintType.wall
+        
+        let params = BlueprintParams(
+            size: CGSizeMake(tileSize, tileSize),
+            materials: ["\(wood)":woodCount],
+            type: blueprintType,
+            totalBuildPoint: 1000
+        )
+        
         /// 创建蓝图
-        ecsManager.createEntity(kBlueprint, converPoint, CGSizeMake(tileSize, tileSize), ["material":MaterialType.wood])
+        RMEventBus.shared.requestCreateEntity(type: kBlueprint,
+                                              point: converPoint,
+                                              params: params)
+        
     }
 }

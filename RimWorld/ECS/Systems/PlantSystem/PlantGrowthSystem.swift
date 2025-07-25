@@ -40,7 +40,7 @@ class PlantGrowthSystem: System {
             }
         }
         
-        /// 实时更新
-        RMInfoViewEventBus.shared.publish(.updatePlant)
+        /// 树长大
+        RMInfoViewEventBus.shared.requestTreeInfo()
     }
 }

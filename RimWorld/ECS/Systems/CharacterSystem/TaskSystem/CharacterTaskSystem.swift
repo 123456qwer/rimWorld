@@ -264,6 +264,7 @@ extension CharacterTaskSystem {
             ECSLogger.log("开始狩猎！")
         case .Building:
             ECSLogger.log("开始建造！")
+            doBuildingTask(task)
         case .Growing:
             ECSLogger.log("开始种植！")
         case .Mining:
@@ -398,13 +399,16 @@ extension CharacterTaskSystem {
             }else if task.type == .Hauling {
                 handleHaulingTaskWithEntity(task: task,
                                             entity: entity)
+            }else if task.type == .Building {
+                handleBuildingTaskWithEntity(task: task,
+                                             entity: entity)
             }
        
         }else{
             ECSLogger.log("当前实体没有能执行的任务啊！💀💀💀")
         }
-        
     }
+    
     
 }
 
@@ -465,7 +469,6 @@ extension CharacterTaskSystem {
                 }
             }
         }
-        
         
         if notWorkEntitys.isEmpty == false {
             /// 空闲角色，直接分配任务
@@ -537,4 +540,7 @@ extension CharacterTaskSystem {
             }
         }
     }
+    
+  
+   
 }

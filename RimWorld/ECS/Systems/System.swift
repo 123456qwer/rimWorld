@@ -77,7 +77,7 @@ struct OwnerShipTool {
                                      ecsManager: ECSManager){
         
         /// 存储区域重置
-        if owner.type == kSaveArea {
+        if owner.type == kStorageArea {
             reloadSaveArea(owner: owner,
                            owned: owned,
                            ecsManager: ecsManager)
@@ -326,6 +326,16 @@ struct EntityAbilityTool {
         return false
     }
     
+    /// 是否可以建造
+    static func ableBuild(_ entity: RMEntity) -> Bool {
+        if let workComponent = entity.getComponent(ofType: WorkPriorityComponent.self) {
+            if workComponent.building > 0 {
+                return true
+            }
+        }
+        return false
+    }
+    
     /// 可以存储的实体
     static func ableToSaving(_ entity: RMEntity) -> Bool {
         if entity.getComponent(ofType: StorageInfoComponent.self) != nil {
@@ -386,6 +396,7 @@ struct EntityAbilityTool {
         return false
     }
     
+    
     /// 蓝图，可被建造的实体
     static func ableToBeBuild(_ entity: RMEntity) -> BlueprintComponent? {
         if let component = entity.getComponent(ofType: BlueprintComponent.self) {
@@ -394,54 +405,69 @@ struct EntityAbilityTool {
         return nil
     }
     
+    /// 素材材料等
+    static func ableToBeMaterial(_ entity: RMEntity) -> CategorizationComponent? {
+        if let component = entity.getComponent(ofType: CategorizationComponent.self) {
+            return component
+        }
+        return nil
+    }
+    
     /// 是否可以强制替换任务
     static func ableForceSwitchTask(entity: RMEntity,
-                             task: WorkTask) -> Bool{
+                            task: WorkTask) -> Bool{
         
-        if let workComponent = entity.getComponent(ofType: WorkPriorityComponent.self) {
-            
-            let currentTask = EntityInfoTool.currentTask(entity)
-            /// 类型相同，不能替换
-            if currentTask?.type == task.type {
-                return false
-            }
-            
-            /// 当前正在休息中，不能替换（后边玩家主动操作，可以替换）
-            if currentTask?.type == .Rest {
-                return false
-            }
-            
-            /// 当前任务
-            if let currentTask = currentTask {
-                /// 当前任务
-                let currentLevel = EntityInfoTool.workPriority(entity: entity, workType: currentTask.type)
-                /// 传入的任务等级
-                let level = EntityInfoTool.workPriority(entity: entity, workType: task.type)
-                
-                if currentLevel > level {
-                    /// 当前任务优先级低于传入的任务，可以替换
-                    return true
-                }else if currentLevel == level {
-                    
-                    /// 玩家设置的优先级相等，比较从左至右优先级
-                    let type = EntityActionTool.compareTaskPriority(type1: task.type, type2: currentTask.type)
-
-                   
-                    if type == task.type {
-                        return true
-                    }else{
-                        return false
-                    }
-                    
-                }
-            } else {
-                /// 当前没任务
-                return true
-            }
+        guard entity.getComponent(ofType: WorkPriorityComponent.self) != nil else {
+            return false
         }
         
-        return false
+        /// 没有任务，直接替换
+        guard let currentTask = EntityInfoTool.currentTask(entity) else {
+            return true
+        }
+        
+        let currentType = currentTask.type
+        let useCurrentType = currentTask.realType ?? currentType
+        
+        let newType = task.type
+        let useNewType = task.realType ?? newType
+        
+        /// 任务类型完全相同，不能替换
+        if useCurrentType == useNewType {
+            return false
+        }
+        
+        /// 当前正在休息中，不可替换（除非未来支持玩家强制替换）
+        if currentTask.type == .Rest {
+            return false
+        }
+        
+        /// 当前任务等级
+        let currentTaskLevel = EntityInfoTool.workPriority(entity: entity, workType: useCurrentType)
+        /// 新任务等级
+        let newTaskLevel = EntityInfoTool.workPriority(entity: entity, workType: useNewType)
+        
+        /// 当前任务级别更高，不能强转任务
+        if currentTaskLevel < newTaskLevel {
+            return false
+        }else if currentTaskLevel > newTaskLevel {
+            /// 当前任务级别低，能强转任务
+            return true
+        }else {
+            /// 相等的情况
+            /// 玩家设置的优先级相等，比较从左至右优先级，返回优先级高的
+            let type = EntityActionTool.compareTaskPriority(type1: useNewType, type2: useCurrentType)
+
+            /// 如果返回的是新任务，那么新任务优先级高，可以强转
+            if type == task.type {
+                return true
+            }else{
+                return false
+            }
+        }
+      
     }
+
  
 }
 
@@ -449,6 +475,14 @@ struct EntityAbilityTool {
 
 //MARK: - 🚩 优先级工具类 🚩 -
 struct PriorityTool {
+    
+    /// 建造优先级
+    static func buildPriority(_ entity: RMEntity) -> Int {
+        if let workComponent = entity.getComponent(ofType: WorkPriorityComponent.self){
+            return workComponent.building
+        }
+        return 0
+    }
     
     /// 割除优先级
     static func cuttingPriority(_ entity: RMEntity) -> Int {
@@ -515,6 +549,25 @@ struct EntityInfoTool {
             return 0
         }
         return haulComponent.currentCount
+    }
+    
+    /// 蓝图需要的数量
+    static func blueprintNeedCount(_ entity: RMEntity,
+                                   _ material: Int) -> Int {
+        
+        guard let blueComponent = entity.getComponent(ofType: BlueprintComponent.self) else {
+            return 0
+        }
+        /// 需要的原材料
+        for (materialType,valueCount) in blueComponent.alreadyMaterials {
+            /// 说明这个蓝图缺此材料
+            if Int(materialType) == material {
+                let maxCount = blueComponent.materials[materialType] ?? 0
+                return maxCount - valueCount
+            }
+        }
+        
+        return 0
     }
     
     /// 获取所有可做的任务
@@ -688,8 +741,6 @@ struct EntityActionTool {
     static func addTask(entity: RMEntity,
                  task: WorkTask) {
         guard let taskCompnent = entity.getComponent(ofType: TaskQueueComponent.self) else { return }
-        /// 设置当前任务等级，执行过程中修改要用到
-        task.workLevel = EntityInfoTool.workPriority(entity: entity, workType: task.type)
         taskCompnent.tasks.append(task)
     }
     
@@ -818,6 +869,18 @@ struct EntityNodeTool {
         
         let cutting = targetNode.childNode(withName: "cutting")
         cutting?.removeFromParent()
+        targetNode.progressBar.isHidden = true
+    }
+    
+    /// 停止建造
+    static func stopBuildingAnimation(entity: RMEntity) {
+        guard let targetNode = entity.node else {
+            ECSLogger.log("强制停止建造失败，没有找到对应的Node：\(entity.name)💀💀💀")
+            return
+        }
+        
+        let building = targetNode.childNode(withName: "building")
+        building?.removeFromParent()
         targetNode.progressBar.isHidden = true
     }
     

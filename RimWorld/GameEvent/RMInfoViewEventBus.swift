@@ -16,6 +16,9 @@ enum InfoViewEvent {
     
     /// 人物当前状态刷新
     case updateCharacter
+    
+    /// 刷新蓝图
+    case updateBlueprint
 }
 
 /// 事件总线（针对显示的view）
@@ -35,4 +38,16 @@ final class RMInfoViewEventBus {
         subject.eraseToAnyPublisher()
     }
     
+}
+
+
+extension RMInfoViewEventBus {
+    /// 刷新蓝图界面
+    func requestReloadBlueprintInfo(){
+        RMInfoViewEventBus.shared.publish(.updateBlueprint)
+    }
+    /// 刷新树界面
+    func requestTreeInfo(){
+        RMInfoViewEventBus.shared.publish(.updatePlant)
+    }
 }

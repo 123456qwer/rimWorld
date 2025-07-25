@@ -16,12 +16,18 @@ extension DoTaskSystem {
         
     }
     
+    
+    func setRestingAction(entity: RMEntity, task: WorkTask) {
+        EntityActionTool.startRest(entity: entity)
+        restingTasks[entity.entityID] = task
+    }
+    
     /// 开始休息
-    func restAction (entityID: Int,
-                     task: WorkTask,
-                     tick: Int) {
+    func executeRestingAction (executorEntityID: Int,
+                               task: WorkTask,
+                               tick: Int) {
         
-        guard let executorEntity = ecsManager.getEntity(entityID) else {
+        guard let executorEntity = ecsManager.getEntity(executorEntityID) else {
             ECSLogger.log("未找到休息执行人！💀💀💀")
             return
         }
@@ -46,7 +52,7 @@ extension DoTaskSystem {
        
         
         /// 休息完
-        restingTasks.removeValue(forKey: entityID)
+        restingTasks.removeValue(forKey: executorEntityID)
        
         energyComponent.current = energyComponent.total
         energyComponent.isResting = false

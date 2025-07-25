@@ -54,8 +54,12 @@ class WorkTask: Hashable {
     
     /// 任务类型
     var type: WorkType
-    /// 任务等级
-    var workLevel: Int = 3
+    
+    
+    /// 可能是建造过程中的搬运任务
+    var realType:WorkType?
+    
+    
     /// 任务目标，例如一棵树、一块矿
     var targetEntityID: Int = 0
     /// 执行者的实体ID，可选：未分配时为 nil
@@ -68,13 +72,25 @@ class WorkTask: Hashable {
     var isCompleted: Bool = false
     var isInProgress: Bool = false
     
+    /// 蓝图状态下，是否材料齐全
+    var isMaterialComplete: Bool = false
+    
     /// 越大，执行级别越高，为-1，默认非必要
     var mustDo:Int = -1
     let id: UUID = UUID()
     
     
+    /// 有可能是建造任务，然后得先执行搬运，所以这个搬运任务实际是建造任务。。。。。
+    /// 默认-1，就是任务对应的type
+    var realTaskLevel: Int = -1
+    
+    
     /// 搬运状态
     var haulStage: HaulTaskStage?
+    
+   
+    
+    
     
     static func == (lhs: WorkTask, rhs: WorkTask) -> Bool {
         return lhs.id == rhs.id // 比较依据
@@ -87,9 +103,13 @@ class WorkTask: Hashable {
     init(type: WorkType,
          targetEntityID: Int,
          executorEntityID: Int) {
+        
         self.type = type
         self.targetEntityID = targetEntityID
         self.executorEntityID = executorEntityID
+        
     }
     
+    
+
 }

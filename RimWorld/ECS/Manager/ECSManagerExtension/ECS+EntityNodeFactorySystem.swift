@@ -10,10 +10,10 @@ import Foundation
 /// 创建实体系统
 extension ECSManager {
     /// 创建实体
-    func createEntity(_ type: String,
-                      _ point: CGPoint,
-                      _ size:CGSize?,
-                      _ subContent:[String:Any]?){
-        systemManager.getSystem(ofType: EntityNodeFactorySystem.self)?.createEntity(type, point, size, subContent)
+    func createEntity(type: String,
+                      point: CGPoint,
+                      params: EntityCreationParams){
+        
+        systemManager.getSystem(ofType: EntityNodeFactorySystem.self)?.createEntity(type: type, point: point, params: params)
     }
 }

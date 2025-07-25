@@ -26,6 +26,10 @@ extension ECSManager {
         return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesAbleToCut ?? []
     }
     
+    func entitiesAbleToBuild() -> [RMEntity] {
+        return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesAbleToBuild ?? []
+    }
+    
     /// 获取所有可被砍伐的实体
     func entitiesAbleToBeCut() -> Set<RMEntity> {
         return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesAbleToBeCut ?? []
@@ -61,9 +65,14 @@ extension ECSManager {
         return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesAbleToPlantGrowth ?? []
     }
     
-    /// 所有可以被建造的实体
+    /// 所有可以被建造的蓝图实体
     func entitiesAbleToBeBuild() -> [TilePoint:RMEntity] {
         return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesBlueprint ?? [:]
+    }
+    
+    /// 所有素材实体
+    func entitiesAbleToMaterial(key: MaterialType) -> Set<RMEntity>? {
+        return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesMaterial[key] ?? []
     }
     
     /// 添加实体，分区需要刷新

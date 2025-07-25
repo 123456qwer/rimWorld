@@ -12,7 +12,7 @@ extension DoTaskSystem {
     
     /// 强制结束砍树任务
     func cancelCuttingAction(entity: RMEntity,
-                               task: WorkTask) {
+                             task: WorkTask) {
         
         guard let targetEntity = ecsManager.getEntity(task.targetEntityID) else {
             ECSLogger.log("强制停止砍伐任务失败，没有找到目标实体：\(entity.name)！💀💀💀")
@@ -23,11 +23,18 @@ extension DoTaskSystem {
         EntityNodeTool.stopCuttingAnimation(entity: targetEntity)
     }
     
+    
+    
+    func setCuttingAction(entity: RMEntity, task: WorkTask) {
+        cuttingTasks[entity.entityID] = task
+    }
+    
   
-    /// 砍树
-    func cuttingAction(executorID: Int,
-                       task: WorkTask,
-                       tick: Int){
+    
+    /// 执行砍树命令
+    func executeCuttingAction(executorEntityID: Int,
+                              task: WorkTask,
+                              tick: Int){
         
         guard let targetEntity = ecsManager.getEntity(task.targetEntityID) else {
             ECSLogger.log("未找到砍伐的目标实体💀💀💀")
@@ -37,7 +44,7 @@ extension DoTaskSystem {
             ECSLogger.log("未找到砍伐的目标💀💀💀")
             return
         }
-        guard let executorEntity = ecsManager.getEntity(executorID) else {
+        guard let executorEntity = ecsManager.getEntity(executorEntityID) else {
             ECSLogger.log("未找到砍伐实体")
             return
         }
@@ -63,6 +70,9 @@ extension DoTaskSystem {
         /// 砍伐完毕
         if targetBasicComponent.currentHealth <= 0 {
             
+            /// 完成任务
+            EntityActionTool.completeTaskAction(entity: executorEntity, task: task)
+            
             /// 砍伐结束动画
             EntityNodeTool.cuttingFinish(targetNode: targetNode)
             
@@ -74,15 +84,19 @@ extension DoTaskSystem {
             
             /// 生成树大于0，才产生新的木头
             if woodCount > 0 {
+                
+                let params = WoodParams(
+                    woodCount: woodCount
+                )
+                
                 /// 创建木材实体（需要当前这个树来确定生成多少个木头）
-                RMEventBus.shared.requestCreateEntity(targetPoint, kWood,subContent: ["haulCount":woodCount])
+                RMEventBus.shared.requestCreateEntity(type: kWood,
+                                                      point: targetPoint,
+                                                      params: params)
             }
           
             /// 删除被砍伐的木材
             RMEventBus.shared.requestRemoveEntity(targetEntity)
-            
-            /// 完成任务
-            EntityActionTool.completeTaskAction(entity: executorEntity, task: task)
             
             /// 删除
             cuttingTasks.removeValue(forKey: executorEntity.entityID)
@@ -92,7 +106,7 @@ extension DoTaskSystem {
             
             /// 砍伐动画
             targetNode.cuttingAnimation()
-            targetNode.treeBarAnimation(total: targetBasicComponent.health, current: targetBasicComponent.currentHealth)
+            targetNode.barAnimation(total: targetBasicComponent.health, current: targetBasicComponent.currentHealth)
         }
         
     }

@@ -38,6 +38,21 @@ class RMBaseNode:SKSpriteNode {
 
 }
 
+
+/// 通用
+extension RMBaseNode {
+    
+    /// 进度条
+    func barAnimation(total: Double, current: Double) {
+        if progressBar.parent == nil {
+            addChild(progressBar)
+        }
+        progressBar.isHidden = false
+        progressBar.updateProgress(current: current, total: total)
+    }
+}
+
+
 /// 砍树相关
 extension RMBaseNode {
     
@@ -52,7 +67,7 @@ extension RMBaseNode {
             self.addChild(cutting)
         }
         
-         let animation = cutting.action(forKey: "cutting")
+        let animation = cutting.action(forKey: "cutting")
         if animation == nil {
             let animation = AnimationUtils.rotateActionRep(withDegreesArr: [10,-10], timeArr: [0.6,0.6])
             cutting.run(animation,withKey: "cutting")
@@ -65,22 +80,49 @@ extension RMBaseNode {
         cutting?.removeFromParent()
         self.progressBar.isHidden = true
     }
-    
-    
-    /// 树进度条
-    func treeBarAnimation(total: Double, current: Double) {
-        if progressBar.parent == nil {
-            addChild(progressBar)
-        }
-        progressBar.isHidden = false
-        progressBar.updateProgress(current: current, total: total)
-    }
-    
-    
-    /// 树被砍断动画
-    func treeCutAnimation() {
-        self.run(SKAction.sequence([SKAction.fadeAlpha(to: 0, duration: 0.3),SKAction.removeFromParent()]))
-    }
+   
 }
 
 
+
+/// 建造相关
+extension RMBaseNode {
+    
+    /// 建造动画
+    func buildingAnimation(){
+        
+        let cutting = self.childNode(withName: "building") ?? SKSpriteNode(texture: TextureManager.shared.getTexture("building"), size: CGSize(width: 40, height: 40))
+        cutting.name = "building"
+        cutting.position = CGPoint(x: 0, y: 0)
+        cutting.zPosition = 12
+        cutting.zRotation = MathUtils.degreesToRadians(-20)
+        if cutting.parent == nil {
+            self.addChild(cutting)
+        }
+        
+        let animation = cutting.action(forKey: "building")
+        if animation == nil {
+            let animation = AnimationUtils.rotateActionRep(withDegreesArr: [10,-10], timeArr: [0.6,0.6])
+            cutting.run(animation,withKey: "building")
+        }
+    }
+    
+    /// 停止建造
+    func stopBuildingAnimation() {
+        let cutting = self.childNode(withName: "building")
+        cutting?.removeFromParent()
+        self.progressBar.isHidden = true
+    }
+    
+    
+    /// 建造完成（这里需要根据建造类型生成对应对象）
+    func buildFinishAnimation(_ blueprintEntity: RMEntity) {
+        
+        stopBuildingAnimation()
+        
+  
+    }
+    
+    
+   
+}

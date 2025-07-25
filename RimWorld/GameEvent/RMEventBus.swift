@@ -67,8 +67,7 @@ enum GameEvent {
     /// 创建实体
     case createEntity(type: String,
                       point: CGPoint,
-                      size: CGSize?,
-                      subContent:[String:Any]?)
+                      param: EntityCreationParams)
     
     /// 添加实体
     case addEntity(entity: RMEntity)
@@ -139,11 +138,10 @@ extension RMEventBus {
     }
     
     /// 创建实体
-    func requestCreateEntity(_ point: CGPoint,
-                             _ type:String,
-                             size: CGSize? =
-                             nil,subContent:[String:Any]? = nil) {
-        self.publish(.createEntity(type: type, point: point, size: size,subContent: subContent))
+    func requestCreateEntity(type: String,
+                             point: CGPoint,
+                             params: EntityCreationParams) {
+        self.publish(.createEntity(type: type, point: point, param: params))
     }
     
     /// 添加实体（游戏过程中，这个调用，总是在创建实体之后）

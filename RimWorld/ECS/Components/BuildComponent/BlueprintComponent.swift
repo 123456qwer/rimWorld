@@ -27,8 +27,18 @@ final class BlueprintComponent: TableCodable, Component {
     var left : Bool = false
     var right: Bool = false
     
-    /// 建筑用料 (默认木头)
-    var materials: Int = MaterialType.wood.rawValue
+    /// 建筑用料 (默认木头)(key = "\(MaterialType.type.rawValue)" MaterialType)
+    var materials: [String:Int] = [:]
+    /// 已经放入的材料
+    var alreadyMaterials: [String: Int] = [:]
+    
+    /// 蓝图类型
+    var blueprintType: Int = BlueprintType.wall.rawValue
+    
+    /// 总建造需要的点数
+    var totalBuildPoints:Double = 100
+    /// 当前建造的点数
+    var currentBuildPoints:Double = 0
    
     /// 蓝图坐标位置
     var key: TilePoint {
@@ -53,6 +63,11 @@ final class BlueprintComponent: TableCodable, Component {
         case bottom
         case left
         case right
+        case materials
+        case alreadyMaterials
+        case blueprintType
+        case totalBuildPoints
+        case currentBuildPoints
     }
     
     func bindEntityID(_ bindEntityID: Int) { entityID = bindEntityID }

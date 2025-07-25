@@ -22,6 +22,8 @@ class EntityCategorizatonSystem: System {
     var entitiesAbleToStorage: [RMEntity] = []
     /// 可执行休息任务的实体
     var entitiesAbleToRest: Set<RMEntity> = []
+    /// 可执行建造任务的实体
+    var entitiesAbleToBuild: [RMEntity] = []
     /// 所有可以执行任务的实体
     var entitiesAbleToTask: Set<RMEntity> = []
     
@@ -41,6 +43,10 @@ class EntityCategorizatonSystem: System {
     var entitiesBlueprint: [TilePoint:RMEntity] = [:]
     
     
+    // MARK: - 建造素材等 -
+    var entitiesMaterial: [MaterialType:Set<RMEntity>] = [:]
+    
+    
     init(ecsManger: ECSManager) {
         self.ecsManger = ecsManger
         categorize()
@@ -48,10 +54,11 @@ class EntityCategorizatonSystem: System {
     
     /// 排序
     func sortEntities() {
-        /// 由低到高排序
+        /// 由低到高排序 (级别越高，优先级越高)
         entitiesAbleToCut.sort { PriorityTool.cuttingPriority($0)  < PriorityTool.cuttingPriority($1) }
         entitiesAbleToHaul.sort { PriorityTool.haulingPriority($0) < PriorityTool.haulingPriority($1) }
         entitiesAbleToStorage.sort { PriorityTool.storagePriority($0) > PriorityTool.storagePriority($1)}
+        entitiesAbleToBuild.sort{ PriorityTool.buildPriority($0) > PriorityTool.buildPriority($1)}
     }
     
     
@@ -73,14 +80,27 @@ class EntityCategorizatonSystem: System {
         if let index = entitiesAbleToStorage.firstIndex(where: { $0 === entity}){
             entitiesAbleToStorage.remove(at: index)
         }
+        if let index = entitiesAbleToBuild.firstIndex(where: {
+            $0 == entity}){
+            entitiesAbleToBuild.remove(at: index)
+        }
         
         entitiesAbleToRest.remove(entity)
         entitiesAbleToBeHaul.remove(entity)
         entitiesAbleToBeCut.remove(entity)
         entitiesAbleToPlantGrowth.remove(entity)
         
+        /// 删除建筑蓝图
         if let component = EntityAbilityTool.ableToBeBuild(entity) {
             entitiesBlueprint.removeValue(forKey: component.key)
+        }
+        
+        /// 删除素材
+        if let component = EntityAbilityTool.ableToBeMaterial(entity) {
+            if let key = MaterialType(rawValue: component.categorization) {
+                var set: Set<RMEntity> = entitiesMaterial[key] ?? []
+                set.remove(entity)
+            }
         }
         
         sortEntities()
@@ -138,7 +158,15 @@ class EntityCategorizatonSystem: System {
     
     /// 分类
     func categorization(_ entity: RMEntity) {
-
+        
+        if EntityAbilityTool.ableToRest(entity) {
+            entitiesAbleToRest.insert(entity)
+        }
+        
+        if EntityAbilityTool.ableBuild(entity) {
+            entitiesAbleToBuild.append(entity)
+        }
+        
         if EntityAbilityTool.ableCutting(entity) {
             entitiesAbleToCut.append(entity)
         }
@@ -149,10 +177,6 @@ class EntityCategorizatonSystem: System {
         
         if EntityAbilityTool.ableToSaving(entity) {
             entitiesAbleToStorage.append(entity)
-        }
-        
-        if EntityAbilityTool.ableToRest(entity) {
-            entitiesAbleToRest.insert(entity)
         }
         
         if EntityAbilityTool.ableToBeCut(entity) {
@@ -173,6 +197,16 @@ class EntityCategorizatonSystem: System {
         
         if let component = EntityAbilityTool.ableToBeBuild(entity) {
             entitiesBlueprint[component.key] = entity
+        }
+        
+       
+        
+        if let component = EntityAbilityTool.ableToBeMaterial(entity) {
+            if let key = MaterialType(rawValue: component.categorization) {
+                var set: Set<RMEntity> = entitiesMaterial[key] ?? []
+                set.insert(entity)
+                entitiesMaterial[key] = set
+            }
         }
     }
     

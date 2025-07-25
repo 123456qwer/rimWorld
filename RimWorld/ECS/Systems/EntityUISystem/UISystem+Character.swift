@@ -42,7 +42,9 @@ extension UISystem {
         
         removeTreeInfo()
         removeWoodInfo()
-        removeSaveInfo()
+        removeStorageInfo()
+        removeBlueprintInfo()
+        
         
         characterView.removeFromSuperview()
         characterTabbarView.removeFromSuperview()

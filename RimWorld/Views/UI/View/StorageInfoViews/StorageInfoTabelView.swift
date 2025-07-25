@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SaveAreaTableView: UITableView,UITableViewDataSource,UITableViewDelegate {
+class StorageInfoTabelView: UITableView,UITableViewDataSource,UITableViewDelegate {
   
     var reloadBlock:(()->Void)?
     let headerHeight:CGFloat = 30.0
