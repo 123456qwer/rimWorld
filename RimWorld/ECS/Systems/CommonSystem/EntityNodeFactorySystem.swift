@@ -28,6 +28,10 @@ struct StorageParams: EntityCreationParams {
 /// 木头参数
 struct WoodParams: EntityCreationParams {
     let woodCount: Int
+    /// 如果有，直接关联（搬运，从仓库中取出，有剩余时，创建新的，需要直接关联仓库）
+    var superEntity: Int = -1
+    /// 对应存储的位置
+    var saveIndex: Int = -1
 }
 
 /// 墙参数
@@ -45,11 +49,13 @@ struct WallParams: EntityCreationParams {
 class EntityNodeFactorySystem: System {
     
     var ecsManager:ECSManager
+    let provider: PathfindingProvider
     var cancellables = Set<AnyCancellable>()
 
     
-    init(ecsManager: ECSManager) {
-        self.ecsManager = ecsManager        
+    init(ecsManager: ECSManager, provider: PathfindingProvider) {
+        self.ecsManager = ecsManager
+        self.provider = provider
     }
     
     
@@ -72,15 +78,14 @@ class EntityNodeFactorySystem: System {
     /// 创建木头
     func createWood(_ point:CGPoint,params: WoodParams) {
         
-        let count = params.woodCount
-        let entity = EntityFactory.shared.createWoodEntityWithoutSaving(point: point,params: params)
+        let entity = EntityFactory.shared.createWoodEntityWithoutSaving(point: point,params: params, ecsManager: ecsManager)
         createNodeAction(entity)
     }
 
     
     /// 创建墙
     func createWall(_ point: CGPoint, params: WallParams) {
-        let entity = EntityFactory.shared.createWall(point: point, params: params)
+        let entity = EntityFactory.shared.createWall(point: point, params: params, provider: provider)
         createNodeAction(entity)
     }
     
@@ -94,9 +99,6 @@ class EntityNodeFactorySystem: System {
     /// 创建建造蓝图
     func createBlueprint(_ point:CGPoint, params: BlueprintParams) {
         
-        let material = params.materials
-        let size = params.size
-        let blueType = params.type
         let entity = EntityFactory.shared.createBlueprint(point: point,params: params)
         createNodeAction(entity)
     }

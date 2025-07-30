@@ -44,6 +44,7 @@ class EntityManager {
             rmEntityMap[entity.entityID] = entity
             entity.node = node
             node.rmEntity = entity
+     
         }
         
         
@@ -68,8 +69,6 @@ class EntityManager {
         rmEntityNodeMap.removeValue(forKey: entity.entityID)
         rmEntityMap.removeValue(forKey: entity.entityID)
         entitiesToRemove.append(entity)
-        
-        
     }
     
     

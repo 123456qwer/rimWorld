@@ -32,7 +32,8 @@ extension EntityFactory {
     
     
     func createWoodEntityWithoutSaving(point:CGPoint,
-                                       params:WoodParams) -> RMEntity{
+                                       params:WoodParams,
+                                       ecsManager: ECSManager) -> RMEntity{
         
         let entity = RMEntity()
         entity.type = kWood
@@ -62,6 +63,21 @@ extension EntityFactory {
         entity.addComponent(woodComponent)
         entity.addComponent(haulComponent)
         entity.addComponent(categorizationComponent)
+        
+        /// 需要直接关联父实体
+        if params.superEntity != -1 {
+            
+            let ownedComponent = OwnedComponent()
+            ownedComponent.ownedEntityID = params.superEntity
+            
+            entity.addComponent(ownedComponent)
+            
+            /// 如果是仓库，记录下存储
+            let storage = ecsManager.getEntity(params.superEntity)
+            let storageComponent = storage?.getComponent(ofType: StorageInfoComponent.self)
+            storageComponent?.saveEntities[params.saveIndex] = entity.entityID
+        }
+        
         
         
         return entity

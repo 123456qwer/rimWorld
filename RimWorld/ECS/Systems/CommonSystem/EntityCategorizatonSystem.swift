@@ -49,7 +49,6 @@ class EntityCategorizatonSystem: System {
     
     init(ecsManger: ECSManager) {
         self.ecsManger = ecsManger
-        categorize()
     }
     
     /// 排序

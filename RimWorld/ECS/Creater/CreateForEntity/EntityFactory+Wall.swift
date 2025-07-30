@@ -11,7 +11,8 @@ extension EntityFactory {
     
     /// 创建墙
     func createWall(point: CGPoint,
-                    params: WallParams) -> RMEntity {
+                    params: WallParams,
+                    provider: PathfindingProvider) -> RMEntity {
         
         let wall = RMEntity()
         wall.type = params.type
@@ -35,6 +36,9 @@ extension EntityFactory {
         
         wall.addComponent(wallComponent)
         wall.addComponent(positionComponent)
+        
+        let point = PositionTool.nowPosition(wall)
+        provider.setWalkable(x: Int(point.x), y: Int(point.y), canWalk: false)
         
         return wall
     }

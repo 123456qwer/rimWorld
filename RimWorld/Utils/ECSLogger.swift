@@ -36,13 +36,12 @@ struct ECSLogger {
         guard isLoggingEnabled else { return }
 
         let filename = (file as NSString).lastPathComponent
-        let timestamp = currentTime()
-//        let logText = "[\(level.rawValue)] [\(timestamp)] [\(filename):\(line)] \(function) ➜ \(message)"
-        let logText = "[\(timestamp)] \(function) ➜ \(message)"
+//        let timestamp = currentTime()
+        let logText = "[\(filename):\(line)] \(function) ➜ \(message)"
 
-
-        // 控制台输出（带颜色）
-        print("\(level.colorCode)\(logText)\u{001B}")
+        if message.contains("💀💀💀") {
+            print("\(logText)")
+        }
 
         // 写入文件
         if logToFile {

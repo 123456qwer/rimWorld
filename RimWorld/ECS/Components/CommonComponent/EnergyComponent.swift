@@ -17,7 +17,7 @@ final class EnergyComponent: TableCodable, Component {
     var entityID:Int = -1
     
     var total:Double = 100
-    var current:Double = 40
+    var current:Double = 100
     
     /// 休息阈值
     var threshold3:Double = 15

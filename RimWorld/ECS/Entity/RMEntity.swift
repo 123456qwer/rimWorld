@@ -69,7 +69,9 @@ class RMEntity: NSObject {
         let temperatureComponent = self.getComponent(ofType: ComfortTemperatureComponent.self) ?? ComfortTemperatureComponent()
         
         
-        
+        /// 初始化的时候，把负重调整下
+        carryingComponent.currentLoad = 0
+
         
         /// 所拥有的武器、挂件等
         if let ownershipComponent = self.getComponent(ofType: OwnershipComponent.self) {

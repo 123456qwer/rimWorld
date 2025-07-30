@@ -27,9 +27,12 @@ class DoTaskSystem: System {
   
     
     let ecsManager: ECSManager
-    
-    init (ecsManager: ECSManager) {
+    let provider: PathfindingProvider
+
+    init (ecsManager: ECSManager,
+          provider: PathfindingProvider) {
         self.ecsManager = ecsManager
+        self.provider = provider
     }
     
     
@@ -86,6 +89,10 @@ class DoTaskSystem: System {
     func moveEnd(entity: RMEntity,
                          task: WorkTask) {
   
+        if task.isCancel {
+            ECSLogger.log("做任务系统出问题了 \(entity.name) 💀💀💀 ")
+            return
+        }
         
         switch task.type {
             

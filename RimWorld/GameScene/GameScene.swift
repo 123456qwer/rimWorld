@@ -29,8 +29,7 @@ class GameScene: BaseScene {
         
         super.didMove(to: view)
         
-        createMap()
-
+        
         RMEventBus.shared.subscribe {[weak self] event in
             guard let self = self else {return}
             switch event {

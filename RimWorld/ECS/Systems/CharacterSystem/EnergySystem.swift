@@ -28,8 +28,10 @@ class EnergySystem: System {
     
     init (ecsManager: ECSManager) {
         self.ecsManager = ecsManager
-        
-        
+    }
+    
+    
+    func setupEnergy(){
         for entity in ecsManager.allEntities() {
             if entity.type == kCharacter {
                 characters.append(entity)
@@ -77,7 +79,7 @@ class EnergySystem: System {
             
             /// 每tick减少休息值
 //            let speed = energyComponent.restDecayPerTick * Double(elapsedTicks)
-            let speed = 0.01 * Double(elapsedTicks)
+            let speed = 0.001 * Double(elapsedTicks)
             energyComponent.current -= speed
             if energyComponent.current <= 0 {
                 energyComponent.current = 0

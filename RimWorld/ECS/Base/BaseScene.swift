@@ -50,6 +50,8 @@ class BaseScene:SKScene, RenderContext {
         DispatchQueue.after(5) {
             self.canGo = true
         }
+        
+        
     }
     
     /// 初始化实例
@@ -67,8 +69,6 @@ class BaseScene:SKScene, RenderContext {
         ecsManager.addSystem(movementSystem)
         /// 添加动画、执行任务系统
         ecsManager.addSystem(actionAnimationSystem)
-        /// 添加任务系统
-        ecsManager.addSystem(taskSystem)
         /// 添加饥饿系统
         ecsManager.addSystem(hungerSystem)
         /// 添加能量系统
@@ -79,9 +79,12 @@ class BaseScene:SKScene, RenderContext {
         ecsManager.addSystem(createSystem)
         /// 添加植物成长系统
         ecsManager.addSystem(plantGrowthSystem)
+        /// 添加任务系统
+        ecsManager.addSystem(taskSystem)
         
-        /// 初始化任务
-        taskSystem.taskInitAction()
+        /// 初始化各种行为
+        ecsManager.setupAllEntityBehaviors(provider: self)
+        
     }
     
  
@@ -202,7 +205,8 @@ class BaseScene:SKScene, RenderContext {
 
     /// 人物任务系统
     lazy var taskSystem: CharacterTaskSystem = {
-        CharacterTaskSystem(ecsManager: ecsManager)
+        CharacterTaskSystem(ecsManager: ecsManager,
+                            provider: self)
     }()
 
     /// 寻路系统
@@ -218,12 +222,13 @@ class BaseScene:SKScene, RenderContext {
 
     /// 行为动画系统
     lazy var actionAnimationSystem: DoTaskSystem = {
-        DoTaskSystem(ecsManager: ecsManager)
+        DoTaskSystem(ecsManager: ecsManager,
+                     provider: self)
     }()
     
     /// 创建系统
     lazy var createSystem: EntityNodeFactorySystem = {
-        EntityNodeFactorySystem(ecsManager: ecsManager)
+        EntityNodeFactorySystem(ecsManager: ecsManager, provider: self)
     }()
     
     /// 实体分类系统
@@ -273,16 +278,58 @@ extension BaseScene: PathfindingProvider {
               column >= 0,
               row < walkableMap.count,
               column < walkableMap[row].count else {
-            ECSLogger.log("数组越界了！")
+            ECSLogger.log("数组越界了！💀💀💀")
             return false
         }
         
         return walkableMap[row][column]
     }
     
+    /// 设置当前区域是否可行走
+    func setWalkable(x: Int, y: Int, canWalk: Bool) {
+        let pos = CGPoint(x: x, y: y)
+        // 将点击位置转换为 tileMap 的本地坐标系（如果 tileMap 不是在 (0,0)）
+        let parent = tileMap!.parent
+        let localPos = tileMap!.convert(pos, from: parent!)
+        // 获取列和行（注意坐标是反着的）
+        let column = tileMap!.tileColumnIndex(fromPosition: localPos)
+        let row = tileMap!.tileRowIndex(fromPosition: localPos)
+        
+        // 越界检查
+        guard row >= 0,
+              column >= 0,
+              row < walkableMap.count,
+              column < walkableMap[row].count else {
+            ECSLogger.log("数组越界了！💀💀💀")
+            return
+        }
+        
+        walkableMap[row][column] = canWalk
+    }
+    
+    
     /// 添加寻路的路径node
     func addPathNode(pathNode: SKSpriteNode) {
         self.addChild(pathNode)
+    }
+    
+    
+    func pointFromScene(_ entity: RMEntity) -> CGPoint {
+        
+        guard entity.getComponent(ofType: OwnedComponent.self) != nil else {
+            return PositionTool.nowPosition(entity)
+        }
+        
+        guard let father = entity.node?.parent else {
+            return PositionTool.nowPosition(entity)
+        }
+        
+        guard let target = entity.node else {
+            return PositionTool.nowPosition(entity)
+        }
+        
+        return father.convert(target.position, to: self)
+        
     }
 }
 
@@ -416,19 +463,6 @@ extension BaseScene {
                 tileMap.setTileGroup(randomTileGroup, forColumn: column, row: row)
                 
                 walkableMap[row][column] = true
-                /*
-                let isBlocked = Int.random(in: 0..<100) < 20
-                walkableMap[row][column] = !isBlocked
-                
-                if isBlocked {
-                    let randomTileGroup = tileGroups[1]
-                    tileMap.setTileGroup(randomTileGroup, forColumn: column, row: row)
-                }else{
-                    let randomTileGroup = tileGroups[0]
-                    tileMap.setTileGroup(randomTileGroup, forColumn: column, row: row)
-                }
-                 */
-                
             }
         }
 

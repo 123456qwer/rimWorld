@@ -17,7 +17,10 @@ class HungerSystem: System {
     
     init (ecsManager: ECSManager) {
         self.ecsManager = ecsManager
-        
+    }
+    
+    /// 初始化饥饿值系统
+    func setupHunger(){
         /// 更新饥饿值
         NotificationCenter.default.addObserver(self, selector: #selector(updateDropHunger), name: .RMGameTimeHungerTick, object: nil)
         for entity in ecsManager.allEntities() {

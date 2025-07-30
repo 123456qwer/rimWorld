@@ -106,13 +106,21 @@ class BlueprintInfoView: UIView {
             
             needMaterialText.append(attrString)
         }
+        
+        
+        let totalBuildPoints = blueComponent.totalBuildPoints
+        let currentBuildPoints = blueComponent.currentBuildPoints
+        let progress = totalBuildPoints == 0 ? 0 : Int((currentBuildPoints / totalBuildPoints * 100).rounded())
+        let last = Int(totalBuildPoints - currentBuildPoints)
 
+        let text = "\(textAction("Progress")):\(progress)%   \(textAction("Todo")):\(last)"
+        
+//        needMaterialText.append(NSAttributedString(string: text))
         
         let blueType = textAction(BlueprintType(rawValue: blueComponent.blueprintType)?.description ?? "")
         need.attributedText = needMaterialText
-        name.text = blueType
+        name.text = "\(blueType)\n\(text)"
         
-        print(entity)
     }
     
     

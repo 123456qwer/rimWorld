@@ -47,17 +47,7 @@ extension CharacterTaskSystem {
     
     /// 初始化时分配休息任务
     func assignInitialRestTasks() {
-        
-        /// 所有休息任务
-        let restTasks = taskQueue.filter{ $0.type == .Rest }
-        guard !restTasks.isEmpty else { return }
-        
-        for task in restTasks {
-            guard let entity = ecsManager.getEntity(task.targetEntityID) else { continue }
-            task.targetEntityID = entity.entityID
-            task.executorEntityID = entity.entityID
-            EntityActionTool.addTask(entity: entity, task: task)
-        }
+     
         
     }
     
@@ -66,98 +56,20 @@ extension CharacterTaskSystem {
     func addRestTask(_ entity: RMEntity,
                      _ mustRest:Bool) -> WorkTask{
         
-        let task = WorkTask(type: .Rest, targetEntityID: entity.entityID, executorEntityID: 0)
-        task.mustDo = mustRest == true ? 1 : -1
-        taskQueue.append(task)
-        sortTaskQueue()
         
+        let task = WorkTask(type: .Rest,
+                            targetEntityID: entity.entityID,
+                            executorEntityID: entity.entityID)
+        allTaskQueue.append(task)
+        assignTask(executorEntity: entity)
         return task
     }
     
     
-    
-    /// 执行休息任务
-    func handleRestTask(_ task: WorkTask,
-                        _ mustRest:Bool) {
-        
-        guard let executorEntity = ecsManager.getEntityNode(task.targetEntityID)?.rmEntity else {
-            ECSLogger.log("休息任务⭐️：未找到对应实体")
-            return
-        }
-        
-        guard let taskComponent = executorEntity.getComponent(ofType: TaskQueueComponent.self) else {
-            ECSLogger.log("休息任务⭐️：此实体没有任务控件：\(executorEntity.name)")
-            return
-        }
-        
-        guard let workPriorityComponent = executorEntity.getComponent(ofType: WorkPriorityComponent.self) else {
-            ECSLogger.log("休息任务⭐️：此实体没有工作排序等级：\(executorEntity.name)")
-            return
-        }
-     
-        /// 这里需要对比优先级
-        if taskComponent.tasks.count > 0 {
-            
-            /// 当前任务
-            let currentTask = taskComponent.tasks.first!
-
-            /// 休息任务
-            let taskLevel = EntityInfoTool.workPriority(entity: executorEntity, workType: currentTask.type)
-            
-            /// 休息任务
-            let restLevel = EntityInfoTool.workPriority(entity: executorEntity, workType: .Rest)
-            
-            /// 必须休息
-            if mustRest == true {
-                ECSLogger.log("休息任务⭐️：此实体正在执行其他任务：\(executorEntity.name)，但是休息之为0了，必须执行休息任务")
-                
-            }else if restLevel > taskLevel {
-                ECSLogger.log("休息任务⭐️：此实体正在执行其他任务：\(executorEntity.name),任务类型是：\(currentTask.type.rawValue)")
-                return
-                
-            }else if restLevel == taskLevel {
-                /// 任务等级相等，根据类型对比左右优先级
-                ECSLogger.log("休息任务⭐️：此实体目前执行的任务和休息任务等级一致，对比优先级")
-                
-                let priorityType = EntityActionTool.compareTaskPriority(type1: .Rest, type2: currentTask.type)
-               
-                
-                if priorityType != .Rest {
-                    ECSLogger.log("休息任务⭐️：此实体正在执行其他任务：\(executorEntity.name),任务类型是：\(currentTask.type.rawValue)")
-                    return
-                }
-            }
-            
-            
-        
-            /// 将任务终止
-            RMEventBus.shared.requestForceSwitchTask(entity: executorEntity, task: currentTask)
-            
-            /// 移除正在执行的此任务
-            EntityActionTool.removeTask(entity: executorEntity, task: currentTask)
-            
-
-            
-            ECSLogger.log("执行了终止任务⭐️：\(executorEntity.name)")
-
-        }
-        
-        ECSLogger.log("将休息任务分配到了实体中：\(executorEntity.name)")
-        
-        removeNotDoTask(task: task)
-        doTaskQueue.insert(task)
-       
+    /// 处理休息任务
+    func handleRestingTask(executorEntity: RMEntity, task:WorkTask) {
         task.executorEntityID = executorEntity.entityID
-        
-        /// 将休息任务添加到任务序列中
-        EntityActionTool.addTask(entity: executorEntity, task: task)
-        EntityActionTool.doTask(entity: executorEntity)
-        
-
-        return
     }
-    
-
     
 }
 

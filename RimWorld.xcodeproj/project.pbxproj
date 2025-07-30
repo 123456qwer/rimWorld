@@ -82,6 +82,11 @@
 		9467A2142E336B6D0097734D /* EntityFactory+Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2132E336B6D0097734D /* EntityFactory+Wall.swift */; };
 		9467A2162E3382BB0097734D /* WallComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2152E3382BB0097734D /* WallComponent.swift */; };
 		9467A2182E33898C0097734D /* NodeBuilder+Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2172E33898C0097734D /* NodeBuilder+Wall.swift */; };
+		9467A21A2E3715440097734D /* RMWorkTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2192E3715440097734D /* RMWorkTask.swift */; };
+		9467A21C2E3719030097734D /* TaskAssigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A21B2E3719030097734D /* TaskAssigner.swift */; };
+		9467A21F2E39A5B20097734D /* NewEntityTaskUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A21E2E39A5B20097734D /* NewEntityTaskUpdater.swift */; };
+		9467A2212E39A6720097734D /* RemoveEntityTaskUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2202E39A6720097734D /* RemoveEntityTaskUpdater.swift */; };
+		9467A2232E39EC8D0097734D /* ReloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2222E39EC8D0097734D /* ReloadTask.swift */; };
 		946E543B2E1FDE1D008A841B /* ECS+CharacterTaskSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946E543A2E1FDE1D008A841B /* ECS+CharacterTaskSystem.swift */; };
 		946E543D2E1FE0DD008A841B /* ECS+RenderSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946E543C2E1FE0DD008A841B /* ECS+RenderSystem.swift */; };
 		946E543F2E1FE1DD008A841B /* ECS+MovementSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946E543E2E1FE1DD008A841B /* ECS+MovementSystem.swift */; };
@@ -291,6 +296,11 @@
 		9467A2132E336B6D0097734D /* EntityFactory+Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+Wall.swift"; sourceTree = "<group>"; };
 		9467A2152E3382BB0097734D /* WallComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallComponent.swift; sourceTree = "<group>"; };
 		9467A2172E33898C0097734D /* NodeBuilder+Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Wall.swift"; sourceTree = "<group>"; };
+		9467A2192E3715440097734D /* RMWorkTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMWorkTask.swift; sourceTree = "<group>"; };
+		9467A21B2E3719030097734D /* TaskAssigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAssigner.swift; sourceTree = "<group>"; };
+		9467A21E2E39A5B20097734D /* NewEntityTaskUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntityTaskUpdater.swift; sourceTree = "<group>"; };
+		9467A2202E39A6720097734D /* RemoveEntityTaskUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveEntityTaskUpdater.swift; sourceTree = "<group>"; };
+		9467A2222E39EC8D0097734D /* ReloadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadTask.swift; sourceTree = "<group>"; };
 		946E543A2E1FDE1D008A841B /* ECS+CharacterTaskSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ECS+CharacterTaskSystem.swift"; sourceTree = "<group>"; };
 		946E543C2E1FE0DD008A841B /* ECS+RenderSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ECS+RenderSystem.swift"; sourceTree = "<group>"; };
 		946E543E2E1FE1DD008A841B /* ECS+MovementSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ECS+MovementSystem.swift"; sourceTree = "<group>"; };
@@ -458,6 +468,7 @@
 		943677612DF7C6B10052A36F /* TaskSystem */ = {
 			isa = PBXGroup;
 			children = (
+				9467A21D2E39A5690097734D /* TaskAssigner */,
 				94B705E82DF173C500A47EE5 /* CharacterTaskSystem.swift */,
 				9436775D2DF7C63E0052A36F /* CharacterTaskSystem+Fire.swift */,
 				9436775F2DF7C6A90052A36F /* CharacterTaskSystem+SelfCare.swift */,
@@ -679,6 +690,17 @@
 			path = BlueprintInfoViews;
 			sourceTree = "<group>";
 		};
+		9467A21D2E39A5690097734D /* TaskAssigner */ = {
+			isa = PBXGroup;
+			children = (
+				9467A21B2E3719030097734D /* TaskAssigner.swift */,
+				9467A21E2E39A5B20097734D /* NewEntityTaskUpdater.swift */,
+				9467A2202E39A6720097734D /* RemoveEntityTaskUpdater.swift */,
+				9467A2222E39EC8D0097734D /* ReloadTask.swift */,
+			);
+			path = TaskAssigner;
+			sourceTree = "<group>";
+		};
 		946E54392E1FDDFA008A841B /* ECSManagerExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -792,6 +814,7 @@
 				94B705C02DEE939300A47EE5 /* RMGameTime.swift */,
 				94B705D32DF01B1A00A47EE5 /* RMEventBus.swift */,
 				944B55662E1D01A90006D639 /* RMInfoViewEventBus.swift */,
+				9467A2192E3715440097734D /* RMWorkTask.swift */,
 			);
 			path = GameEvent;
 			sourceTree = "<group>";
@@ -1209,6 +1232,7 @@
 				946E544B2E1FE588008A841B /* ECS+DoTaskSystem.swift in Sources */,
 				94B705C72DEEA96100A47EE5 /* Notification+Extensions.swift in Sources */,
 				94B705C12DEE939300A47EE5 /* RMGameTime.swift in Sources */,
+				9467A21F2E39A5B20097734D /* NewEntityTaskUpdater.swift in Sources */,
 				944B55562E17A6070006D639 /* HaulableComponent.swift in Sources */,
 				9436775C2DF7C2830052A36F /* CharacterTaskSystem+Rest.swift in Sources */,
 				949FACBF2DD1881C0044E4E5 /* TraitComponent.swift in Sources */,
@@ -1239,6 +1263,7 @@
 				94973BBA2DC087A7005AB8DB /* EntityManager.swift in Sources */,
 				946577DE2DCDEB1F005D34F3 /* EmotionComponent.swift in Sources */,
 				94973BBB2DC087A7005AB8DB /* GameScene.swift in Sources */,
+				9467A21A2E3715440097734D /* RMWorkTask.swift in Sources */,
 				9436776D2DF7C8C70052A36F /* CharacterTaskSystem+Hunting.swift in Sources */,
 				94973BE12DC9AB56005AB8DB /* UIAppliaction+Extensions.swift in Sources */,
 				949FAD062DD70C370044E4E5 /* EntityFactory+Armor.swift in Sources */,
@@ -1266,6 +1291,7 @@
 				9436777D2DF7CB110052A36F /* CharacterTaskSystem+Hauling.swift in Sources */,
 				944B556B2E1D21E30006D639 /* RMEntity+SaveAreaEntity.swift in Sources */,
 				94973C1C2DCC5307005AB8DB /* DBManager+Entity.swift in Sources */,
+				9467A2212E39A6720097734D /* RemoveEntityTaskUpdater.swift in Sources */,
 				94B7059F2DE6DB3500A47EE5 /* TalkTableView.swift in Sources */,
 				94973C112DCB88C7005AB8DB /* WeaponComponent.swift in Sources */,
 				946577D52DCDB3F7005D34F3 /* TextureManager.swift in Sources */,
@@ -1304,6 +1330,7 @@
 				94B705EB2DF1B0E300A47EE5 /* TestScene.swift in Sources */,
 				949FACE02DD42C3F0044E4E5 /* MoodDetailView.swift in Sources */,
 				949FAD002DD5E6810044E4E5 /* DefenseComponent.swift in Sources */,
+				9467A21C2E3719030097734D /* TaskAssigner.swift in Sources */,
 				944B55452E14EB620006D639 /* StorageInfoComponent.swift in Sources */,
 				949FACDA2DD347220044E4E5 /* AestheticComponent.swift in Sources */,
 				946577D72DCDD2FE005D34F3 /* OwnedComponent.swift in Sources */,
@@ -1328,6 +1355,7 @@
 				949FACF42DD4904B0044E4E5 /* BodyPowerDetailView.swift in Sources */,
 				9467A20B2E3204BD0097734D /* CategorizationComponent.swift in Sources */,
 				94B705F22DF29A8A00A47EE5 /* PathfindingSystem.swift in Sources */,
+				9467A2232E39EC8D0097734D /* ReloadTask.swift in Sources */,
 				9467A2072E31D5330097734D /* EntityFactory+Blueprint.swift in Sources */,
 				94B705A72DE6E20400A47EE5 /* LogView.swift in Sources */,
 				9436774F2DF6716C0052A36F /* DoTaskSystem.swift in Sources */,

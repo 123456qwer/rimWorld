@@ -14,21 +14,12 @@ extension ECSManager {
     func addRestTask(_ entity: RMEntity,
                      _ mustRest:Bool){
         
-        let task = systemManager.getSystem(ofType: CharacterTaskSystem.self)?.addRestTask(entity, mustRest)
-        if let task = task {
-            handleRestTask(task, mustRest)
-        }
+        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.addRestTask(entity, mustRest)
     }
     
     /// 添加搬运任务
     func addHaulingTask(_ entity: RMEntity){
-        
-        let task = systemManager.getSystem(ofType: CharacterTaskSystem.self)?.addHaulingTask(entity)
-        if let task = task {
-            /// 执行搬运任务
-            handleHaulingTask(task)
-        }
-        
+        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.addHaulingTask(entity)
     }
     
     /// 添加砍伐任务
@@ -37,40 +28,16 @@ extension ECSManager {
         systemManager.getSystem(ofType: CharacterTaskSystem.self)?.addOrCancelCuttingTask(entity, canChop)
         /// UI显示是否有斧头
         self.treeStatusChange(entity,canChop: canChop)
-        
-        if canChop {
-            handleCuttingTask()
-        }
     }
     
     /// 添加建造任务
     func addBuildTask (_ entity: RMEntity){
-        let task = systemManager.getSystem(ofType: CharacterTaskSystem.self)?.addBuildTask(entity)
-        if let task = task {
-            handleBuildTask(task)
-        }
+        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.addBuildTask(entity)
     }
     
-    /// 处理休息任务
-    func handleRestTask(_ task: WorkTask,_ mustRest:Bool) {
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.handleRestTask(task, mustRest)
-    }
-    
-    /// 处理建造任务
-    func handleBuildTask(_ task: WorkTask) {
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.handleBuildTask(task)
-    }
-    
-    /// 处理砍伐任务
-    func handleCuttingTask() {
-        systemManager.getSystem(ofType:CharacterTaskSystem.self)?.handleCuttingTask()
-    }
-    
-    /// 处理搬运任务
-    func handleHaulingTask(_ task: WorkTask) {
-        systemManager.getSystem(ofType:CharacterTaskSystem.self)?.handleHaulingTask(task)
-    }
-    
+
+
+ 
   
     
     /// 执行任务
@@ -105,27 +72,25 @@ extension ECSManager {
     /// 任务系统新增实体
     func characterTaskAdd(entity: RMEntity) {
         
-        /// 新增存储区域
-        if entity.type == kStorageArea {
-            systemManager.getSystem(ofType:CharacterTaskSystem.self)?.refreshHaulingTasksForNewSaveArea(entity)
-        }else if entity.type == kBlueprint {
-            /// 新增蓝图
-            systemManager.getSystem(ofType: CharacterTaskSystem.self)?.refreshBuildTask(entity)
-        }else if entity.type == kWood {
-            /// 新增搬运任务
-            systemManager.getSystem(ofType: CharacterTaskSystem.self)?.refreshHaulingTasksForWood(entity)
-        }
+        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.addForRefreshTasks(entity: entity)
     }
     
     /// 任务系统删除实体
     func characterTaskRemove(entity: RMEntity) {
         
-        /// 移除存储区域
-        if entity.type == kStorageArea {
-            systemManager.getSystem(ofType:CharacterTaskSystem.self)?.refreshHaulingTasksForRemoveSaveArea(entity)
-        }
+        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.removeForRefreshTasks(entity: entity)
     }
     
+    /// 重置此类型的搬运任务
+    func reloadHaulingTasks(materialType: MaterialType) {
+        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.reloadHaulTaskWithMaterial(material: materialType)
+    }
+    
+    
+    /// 完成一个搬运任务后，刷新一下蓝图任务
+    func refreshBlueprint(entity: RMEntity) {
+        
+    }
     
     /// 蓝图状态更新，看是否需要去建造
     func updateBlueprint(entity: RMEntity) {

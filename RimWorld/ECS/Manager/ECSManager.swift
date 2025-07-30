@@ -39,7 +39,7 @@ class ECSManager {
                 self.addEntity(entity)
                 
                 /// 修改存储实体
-            case .changeSaveEntity(let entity):
+            case .changeStorage(let entity):
                 self.changeSaveAreaEntity(entity)
                 
                 /// 创建实体
@@ -59,6 +59,10 @@ class ECSManager {
             case .clickEmpty:
                 self.removeAllInfoAction()
                 
+                /// 重置此类型搬运任务
+            case .reloadHaulingTasks(let materialType):
+                self.reloadHaulingTasks(materialType: materialType)
+                
                 /// 修改休息状态
             case .restStatusChange(let entity, let isRest):
                 self.restStatusAction(entity: entity, isRest: isRest)
@@ -68,7 +72,7 @@ class ECSManager {
                 self.startFind(entity: entity, start: startPoint, end: endPoint,task: task)
                 
                 /// 强制终止任务
-            case .forceSwitchTask(let entity, let task):
+            case .forceCancelTask(let entity, let task):
                 self.forceSwitchTask(entity: entity, task: task)
                 
                 /// 移动结束
@@ -146,8 +150,8 @@ class ECSManager {
         /// 植物成长系统
         systemManager.getSystem(ofType: PlantGrowthSystem.self)?.growUpdate(currentTick: tick)
         
-        /// 任务系统
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.eventUpdate()
+//        /// 任务系统
+//        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.eventUpdate()
     }
  
     
@@ -179,6 +183,7 @@ extension ECSManager {
         
         /// 任务系统，刷新可搬运的任务列表
         characterTaskAdd(entity: entity)
+        
     }
     
     
@@ -220,7 +225,40 @@ extension ECSManager {
         return entityManager.getEntity(entityId)
     }
 
-  
+    
+    /// 初始化设置
+    func setupAllEntityBehaviors(provider :PathfindingProvider) {
+        
+        /// 初始化分类系统
+        systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.categorize()
+        
+        /// 初始化渲染系统
+        systemManager.getSystem(ofType: RenderSystem.self)?.setupNodes()
+        
+        /// 初始化饥饿值系统
+        systemManager.getSystem(ofType: HungerSystem.self)?.setupHunger()
+        
+        /// 初始化能量值系统
+        systemManager.getSystem(ofType: EnergySystem.self)?.setupEnergy()
+        
+        /// 初始化娱乐值系统
+        systemManager.getSystem(ofType: JoySystem.self)?.setupJoy()
+        
+        
+        /// 初始化任务系统
+        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.setupTasks()
+        
+       
+        /// 初始化不能行走的路径
+        let allEntities = allEntities()
+        for entity in allEntities {
+            guard let wallComponent = entity.getComponent(ofType: WallComponent.self),
+                  let pointComponent = entity.getComponent(ofType: PositionComponent.self) else { continue }
+            provider.setWalkable(x: Int(pointComponent.x), y: Int(pointComponent.y), canWalk: false)
+        }
+        
+    }
+    
 }
 
 

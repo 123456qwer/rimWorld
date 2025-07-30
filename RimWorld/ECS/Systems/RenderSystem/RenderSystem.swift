@@ -24,10 +24,16 @@ final class RenderSystem: System {
         self.ecsManager = ecsManager
         self.renderContent = renderContent
       
+      
+    }
+    
+    /// 初始化添加所有node
+    func setupNodes(){
         for entity in ecsManager.allEntities() {
             addNode(entity)
         }
     }
+    
     
     /// 添加Node
     func addNode(_ entity: RMEntity){

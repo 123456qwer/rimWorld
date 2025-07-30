@@ -24,6 +24,9 @@ final class HaulableComponent: TableCodable, Component {
     /// 是否正在被搬运
     var isHauled: Bool = false
     
+    /// 原材料
+    var materialType: Int = MaterialType.wood.rawValue
+    
     /// 自身唯一标识
     var componentID:Int = -1
     /// 所属实体
@@ -41,6 +44,7 @@ final class HaulableComponent: TableCodable, Component {
         case isHauled
         case currentCount
         case stackLimit
+        case materialType
     }
     
     func bindEntityID(_ bindEntityID: Int) { entityID = bindEntityID }

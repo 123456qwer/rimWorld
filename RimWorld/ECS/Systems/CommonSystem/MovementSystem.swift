@@ -22,9 +22,7 @@ class MovementSystem: System {
     let ecsManager: ECSManager
     
     init (ecsManager: ECSManager) {
-        
         self.ecsManager = ecsManager
-        
     }
     
     
@@ -122,11 +120,11 @@ class MovementSystem: System {
     /// 切换任务，停止行走，把之前的路径也要清除
     func forceSwitchTask(entityID: Int,task: WorkTask) {
         guard let entity = moveCharacter[entityID] else {
-            ECSLogger.log("切换任务，停止行走的操作，没有找到对应的实体")
+            ECSLogger.log("切换任务，停止行走的操作，没有找到对应的实体💀💀💀")
             return
         }
         guard let moveComponent = entity.getComponent(ofType: MoveComponent.self) else {
-            ECSLogger.log("切换任务，停止行走的操作，没有找到实体的移动控件")
+            ECSLogger.log("切换任务，停止行走的操作，没有找到实体的移动控件💀💀💀")
             return
         }
         for point in moveComponent.points {
@@ -136,7 +134,6 @@ class MovementSystem: System {
             pathNode?.run(SKAction.sequence([SKAction.fadeAlpha(to: 0, duration: 0.15),SKAction.removeFromParent()]))
         }
         moveCharacter.removeValue(forKey: entityID)
-        ECSLogger.log("强制停止了行走")
     }
  
     /// A*寻路算法，逐帧行走
@@ -144,7 +141,12 @@ class MovementSystem: System {
                     entity: RMEntity,
                     task:WorkTask){
         guard let moveComponent = entity.getComponent(ofType: MoveComponent.self) else {
-            ECSLogger.log("移动系统出问题了 \(entity.name)")
+            ECSLogger.log("移动系统出问题了 \(entity.name) 💀💀💀 ")
+            return
+        }
+        
+        if task.isCancel {
+            ECSLogger.log("移动系统出问题了 \(entity.name),取消了行走 💀💀💀 ")
             return
         }
         

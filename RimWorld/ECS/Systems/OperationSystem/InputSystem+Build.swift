@@ -54,14 +54,14 @@ extension InputSystem {
         
         /// 这里的参数需要玩家自己设置的
         let wood = MaterialType.wood.rawValue
-        let woodCount = 10
+        let woodCount = 30
         let blueprintType = BlueprintType.wall
         
         let params = BlueprintParams(
             size: CGSizeMake(tileSize, tileSize),
             materials: ["\(wood)":woodCount],
             type: blueprintType,
-            totalBuildPoint: 1000
+            totalBuildPoint: 100
         )
         
         /// 创建蓝图

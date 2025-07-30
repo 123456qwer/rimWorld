@@ -42,7 +42,7 @@ enum GameEvent {
     /// 完成任务
     case completeTask(entityID: Int, task: WorkTask)
     /// 切换任务，停止之前的寻路
-    case forceSwitchTask(entity: RMEntity, task: WorkTask)
+    case forceCancelTask(entity: RMEntity, task: WorkTask)
     
     
     /// 寻路事件
@@ -60,6 +60,8 @@ enum GameEvent {
     case moveEnd(entity: RMEntity,
                  task: WorkTask)
     
+    /// 重置此类型的搬运任务
+    case reloadHaulingTasks(materialType:MaterialType)
     
     /// 删除实体
     case removeEntity(entity: RMEntity)
@@ -78,7 +80,7 @@ enum GameEvent {
                         point:CGPoint)
     
     /// 修改存储实体
-    case changeSaveEntity(entity:RMEntity)
+    case changeStorage(entity:RMEntity)
     
     /// 修改角色优先级
     case updatePriorityEntity(entity: RMEntity,
@@ -165,7 +167,7 @@ extension RMEventBus {
     
     /// 修改存储实体
     func requestChangeSaveAreaEntity(entity:RMEntity) {
-        self.publish(.changeSaveEntity(entity: entity))
+        self.publish(.changeStorage(entity: entity))
     }
     
 }
@@ -188,9 +190,6 @@ extension RMEventBus {
     func requestBuildTask (_ entity: RMEntity) {
         self.publish(.buildingTask(entity: entity))
     }
-   
-    
- 
 }
 
 
@@ -221,9 +220,9 @@ extension RMEventBus {
                                   task: task))
     }
     
-    /// 强制转换任务
-    func requestForceSwitchTask(entity: RMEntity,task: WorkTask) {
-        self.publish(.forceSwitchTask(entity: entity, task: task))
+    /// 强制取消任务
+    func requestForceCancelTask(entity: RMEntity,task: WorkTask) {
+        self.publish(.forceCancelTask(entity: entity, task: task))
     }
     
     /// 移动任务
@@ -234,6 +233,11 @@ extension RMEventBus {
     /// 移动结束
     func requestMoveEndTask(entity: RMEntity, task: WorkTask){
         self.publish(.moveEnd(entity: entity, task: task))
+    }
+    
+    /// 根据类型重置搬运任务
+    func requestReloadHaulingTasks(material: MaterialType){
+        self.publish(.reloadHaulingTasks(materialType: material))
     }
     
     /// 退出游戏，删除依赖

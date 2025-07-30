@@ -10,38 +10,33 @@ import Combine
 import SpriteKit
 
 class CharacterTaskSystem: System {
-   
-    /// 还没执行的任务队列
-    var taskQueue:[WorkTask] = []
+
+    
+    /// 所有任务
+    var allTaskQueue: [WorkTask] = []
     /// 正在执行的任务队列
     var doTaskQueue: Set<WorkTask> = []
     /// 完成的任务
     var finishTaskQueue: Set<WorkTask> = []
-
+    
+    
     
     var cancellables = Set<AnyCancellable>()
+   
+    let provider: PathfindingProvider
     
-    /// 有新事件，统一在下一帧执行，如果直接在返回的方法中执行，是同步的，会有问题
-    var isUpEvent:Bool = false
-    
-    
-
     let ecsManager: ECSManager
-    
-    let taskDispatchQueue = DispatchQueue(label: "com.rm.taskEventQueue")
 
-    
-    init (ecsManager: ECSManager) {
+    init (ecsManager: ECSManager,
+          provider: PathfindingProvider) {
         self.ecsManager = ecsManager
+        self.provider = provider
     }
     
-    /// 只有在有新事件生成时，加入到更新队列，因为sink方法是异步的，如果在sink中直接处理事件，会有一些列问题
-    func eventUpdate(){
-      
-    }
+
     
     /// 初始化任务
-    func taskInitAction() {
+    func setupTasks() {
      
         /**
          任务队列，按照基础优先级排列
@@ -95,29 +90,7 @@ class CharacterTaskSystem: System {
  
     /// 初始化调用的任务分配队列
     private func assignInitialTasks() {
-        
-        /// 分配休息
-        assignInitialRestTasks()
-        /// 分配砍伐
-        assignInitialCuttingTasks()
-        /// 分配搬运
-        assignInitialHaulingTasks()
-        
-        /// 分配完毕后开始执行任务
-        let entities = ecsManager.entitiesAbleToTask()
-        for entity in entities {
-            EntityActionTool.doTask(entity: entity)
-        }
-        
-        // 1. 找出将要移除的任务（executorEntityID != 0）
-        let assignedTasks = taskQueue.filter { $0.executorEntityID != 0 }
-
-        // 2. 加入到 doTaskQueue（Set 可避免重复）
-        doTaskQueue.formUnion(assignedTasks)
-
-        // 3. 从 taskQueue 中移除这些任务
-        taskQueue.removeAll { $0.executorEntityID != 0 }
-
+        assignTask()
     }
     
     
@@ -147,73 +120,7 @@ extension CharacterTaskSystem {
         /// 重置任务分类
         ecsManager.reloadEntityCategorization(workType: workType,
                                               entity: entity)
-        isUpEvent = true
-  
-        /*
-        /// 修改后的任务等级
-        var nowWorkLevel = EntityInfoTool.workPriority(entity: entity, workType: workType)
-        /// 等于0相当于无法做，变为最低优先级
-        if nowWorkLevel == 0 {
-            nowWorkLevel = 10000
-        }
-        
-        /// 当前的任务等级
-        let doWorkLevel = doTask.workLevel
-        
-        /// 任务类型相同
-        if doTask.type == workType {
-            /// 等级越小，直优先级越高，不需要强制转换任务
-            if nowWorkLevel <= doWorkLevel {
-                return
-            }
-        }
-        
-        var changeTask:WorkTask?
-        /// 遍历任务，看是否需要强制切换任务
-        for task in taskQueue {
-            
-            if task.type == workType { continue }
-            
-            /// 有比他小的，直接转换
-            if task.workLevel < nowWorkLevel {
-                /// 从任务队列中移除
-                changeTask = task
-                break
-                
-            }else if task.workLevel == nowWorkLevel {
-                /// 相等，比优先级
-                let type = EntityActionTool.compareTaskPriority(type1: task.type, type2: doTask.type)
-                if type != doTask.type {
-                    changeTask = task
-                    break
-                }
-            }
-        }
-        
-        /// 如果不需要强制转换，直接忽略
-        guard let changeTask = changeTask else {
-            return
-        }
-        
-        /// 没有任务目标，也直接忽略
-        guard let taskTarget = ecsManager.getEntity(changeTask.targetEntityID) else {
-            return
-        }
 
-        
-        /// 删除此任务
-        removeNotDoTask(task: changeTask)
-        
-        /// 重新添加此任务，走执行逻辑
-        switch changeTask.type {
-        case .Hauling:
-            RMEventBus.shared.requestHaulTask(taskTarget)
-        case .Cutting:
-            RMEventBus.shared.requestCuttingTask(entity: taskTarget, canChop: true)
-        default:
-            break
-        }
-        */
     }
     
     
@@ -303,18 +210,29 @@ extension CharacterTaskSystem {
                       task: WorkTask) {
   
         guard let entity = ecsManager.getEntity(entityID) else {
-            ECSLogger.log("此完成任务的实体已经不存在了")
+            ECSLogger.log("此完成任务的实体已经不存在了，💀💀💀")
             return
         }
         
         ECSLogger.log("实体完成了任务：\(task.type.rawValue)")
 
-        /// 完成以后，移除实体
+        /// 完成以后，移除实体任务列表中的任务
         EntityActionTool.removeTask(entity: entity, task: task)
 
         removeDoTask(task: task)
-        
         finishTaskQueue.insert(task)
+        
+        
+        guard let stateComponent = entity.getComponent(ofType: ActionStateComponent.self) else {
+            ECSLogger.log("当前执行任务的角色：\(entity.name)没有状态组件。💀💀💀")
+            return
+        }
+        
+        /// 更改角色状态
+        stateComponent.actions.append(textAction("闲逛"))
+        /// 同步到视图
+        RMInfoViewEventBus.shared.publish(.updateCharacter)
+        
         
         assignNextTask(entity)
     }
@@ -330,83 +248,19 @@ extension CharacterTaskSystem {
             cancelRest(entity: entity, task: task)
         case .Hauling:
             cancelHauling(entity: entity, task: task)
+        case .Building:
+            cancelBuilding(entity: entity, task: task)
         default:
             break
         }
         
-        addForceSwitchTask(task: task)
     }
-    
-    /// 添加强制替换的任务
-    func addForceSwitchTask(task: WorkTask) {
-        if task.isCompleted {
-            ECSLogger.log("此任务已经完成了！")
-        }
-        
-        taskQueue.append(task)
-        sortTaskQueue()
-    }
+  
     
     
     /// 实体执行完任务后，重新分配新任务，以后如果卡顿，优化用吧
     func assignNextTask(_ entity: RMEntity) {
-        
-        guard !taskQueue.isEmpty else {
-            ECSLogger.log("当前任务队列为空，所以不继续分配任务了！💀💀💀")
-            return
-        }
-        
-        let allCanDoTaskType = EntityInfoTool.allCanDoTask(entity)
-        
-        // 1. 构建 WorkType -> 优先级（位置）映射表
-        let taskPriorityMap: [WorkType: Int] = Dictionary(
-            uniqueKeysWithValues: allCanDoTaskType.enumerated().map { ($0.element, $0.offset) }
-        )
-
-        let entityPosition = PositionTool.nowPosition(entity)
-        
-        // 筛选出当前实体可以执行的任务，并按优先级排序
-        let filteredSortedTasks = taskQueue
-            .filter { taskPriorityMap[$0.type] != nil } // 只保留实体能执行的任务
-            .sorted {                                     // 按优先级排序
-                let priorityA = taskPriorityMap[$0.type]!
-                let priorityB = taskPriorityMap[$1.type]!
-                
-                if priorityA != priorityB {
-                    return priorityA < priorityB // 优先级不同：按优先级排
-                }
-                
-                var posA = CGPoint(x: 0, y: 0)
-                var posB = CGPoint(x: 0, y: 0)
-                // 优先级相同：按距离排
-                if let a = ecsManager.getEntity($0.targetEntityID){
-                    posA = PositionTool.nowPosition(a)
-                }
-                if let b = ecsManager.getEntity($1.targetEntityID){
-                    posB = PositionTool.nowPosition(b)
-                }
-                let distanceA = MathUtils.distance(entityPosition, posA)
-                let distanceB = MathUtils.distance(entityPosition, posB)
-                return distanceA < distanceB
-        }
-        
-        /// 执行任务
-        if let task = filteredSortedTasks.first {
-            
-            if task.type == .Cutting {
-                handleCuttingTaskWithEntity(task: task,
-                                            entity: entity)
-            }else if task.type == .Hauling {
-                handleHaulingTaskWithEntity(task: task,
-                                            entity: entity)
-            }else if task.type == .Building {
-                handleBuildingTaskWithEntity(task: task,
-                                             entity: entity)
-            }
-       
-        }else{
-            ECSLogger.log("当前实体没有能执行的任务啊！💀💀💀")
-        }
+        assignTask(executorEntity: entity)
     }
     
     
@@ -417,66 +271,12 @@ extension CharacterTaskSystem {
 //MARK: - TOOL ACTION -
 extension CharacterTaskSystem {
     
-    /// 工具方法： 排序任务，优先级（工作类型正序）
-    func sortTaskQueue() {
-        taskQueue.sort {
-            guard let indexA = WorkType.allCases.firstIndex(of: $0.type),
-                  let indexB = WorkType.allCases.firstIndex(of: $1.type) else {
-                return false
-            }
-            return indexA < indexB
-        }
-    }
-    
-    
-    /// 工具方法： 删除还未做的任务（taskQueue）
-    func removeNotDoTask(task: WorkTask) {
-        if let index = taskQueue.firstIndex(where: { $0.id == task.id }){
-            taskQueue.remove(at: index)
-            ECSLogger.log("成功从未执行队列中删除了此任务：\(task.type.rawValue)")
-        }else{
-            ECSLogger.log("从未执行队列中删除此任务失败：\(task.type.rawValue)")
-        }
-    }
-    
+
     /// 工具方法： 删除正在做的任务（doTaskQueue）
     func removeDoTask(task: WorkTask) {
-        if let index = doTaskQueue.firstIndex(where: { $0.id == task.id }){
-            doTaskQueue.remove(at: index)
-            ECSLogger.log("实体成功删除了任务：\(task.type.rawValue)")
-        }
+        doTaskQueue.remove(task)
     }
     
-    
-    /// 工具方法：最终可执行人
-    func ableToDoTaskEntity(ableEntities: [RMEntity],
-                            task: WorkTask) -> RMEntity? {
-        
-        var notWorkEntitys:[RMEntity] = []
-        
-        var exectorEntity: RMEntity?
-
-        /// 优先当前没有任务的实体执行
-        for entity in ableEntities {
-            
-            if EntityInfoTool.currentTask(entity) == nil {
-                notWorkEntitys.append(entity)
-            }
-            
-            if exectorEntity == nil {
-                if EntityAbilityTool.ableForceSwitchTask(entity: entity, task: task) {
-                    exectorEntity = entity
-                }
-            }
-        }
-        
-        if notWorkEntitys.isEmpty == false {
-            /// 空闲角色，直接分配任务
-            exectorEntity = notWorkEntitys.first!
-        }
-        
-        return exectorEntity
-    }
     
 
     /// 工具方法：有目标的任务，如砍树、搬运，就近排序

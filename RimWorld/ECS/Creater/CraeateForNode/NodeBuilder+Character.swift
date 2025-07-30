@@ -13,10 +13,6 @@ extension NodeBuilder {
     /// 创建人物Node
     func buildCharacter(_ entity:RMEntity) -> RMBaseNode {
         
-//        if let taskComponent = entity.getComponent(ofType: TaskQueueComponent.self) {
-//            print(taskComponent)
-//        }
-        
         if let basicComponent = entity.getComponent(ofType: BasicInfoComponent.self),
            let pointComponent = entity.getComponent(ofType: PositionComponent.self){
             let node = RMBaseNode(color: UIColor.randomColor(), size: CGSize(width: 64, height: 64))

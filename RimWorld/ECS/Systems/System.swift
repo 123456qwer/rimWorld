@@ -24,6 +24,52 @@ struct PositionTool {
         return CGPoint(x: pos.x, y: pos.y)
     }
     
+    /// 当前实体在scene上的坐标
+    static func nowPositionForScene(_ entity: RMEntity,
+                                    provider: PathfindingProvider) -> CGPoint {
+        return provider.pointFromScene(entity)
+    }
+    
+    /// 实体数组排序，按距离由近到远
+    static func sortEntityForDistance(entity: RMEntity, entities:[RMEntity]) -> [RMEntity] {
+        
+        let targetPos = PositionTool.nowPosition(entity)
+        
+        return entities.sorted {
+            let pos1 = PositionTool.nowPosition($0)
+            let pos2 = PositionTool.nowPosition($1)
+            let dis1 = MathUtils.distance(targetPos, pos1)
+            let dis2 = MathUtils.distance(targetPos, pos2)
+            return dis1 < dis2
+        }
+    }
+    
+    /// 按需求排序，需求量最小的优先
+    /// 按照对目标材料的需求量（越少越优先）对蓝图排序
+    static func sortBlueprintEntitiesByNeed(targetEntity: RMEntity,
+                                            blueprintEntities: [RMEntity]) -> [RMEntity] {
+        
+        let materialType = EntityInfoTool.materialType(targetEntity)
+        let key = "\(materialType.rawValue)"
+        
+        func needCount(for blueprint: RMEntity) -> Int {
+            guard let blueprintComp = blueprint.getComponent(ofType: BlueprintComponent.self) else {
+                return Int.max
+            }
+            
+            let maxNeed = blueprintComp.materials[key] ?? 0
+            let already = blueprintComp.alreadyMaterials[key] ?? 0
+            let hauling = blueprintComp.alreadyCreateHaulTask[materialType]?.values.reduce(0, +) ?? 0
+            
+            return max(0, maxNeed - already - hauling)
+        }
+        
+        return blueprintEntities.sorted {
+            needCount(for: $0) < needCount(for: $1)
+        }
+    }
+
+    
     /// 设置当前实体坐标
     static func setPosition( entity: RMEntity,
                              point: CGPoint) {
@@ -65,6 +111,9 @@ struct PositionTool {
         
         return .zero
     }
+    
+    
+    
 }
 
 
@@ -72,20 +121,70 @@ struct PositionTool {
 struct OwnerShipTool {
     
     /// 处理关联关系改变的逻辑方法
-    static func handleOwnershipChange( owner: RMEntity,
-                                     owned: RMEntity,
-                                     ecsManager: ECSManager){
+    static func handleOwnershipChange(newOwner: RMEntity,
+                                         owned: RMEntity,
+                                    ecsManager: ECSManager){
         
         /// 存储区域重置
-        if owner.type == kStorageArea {
-            reloadSaveArea(owner: owner,
+        if newOwner.type == kStorageArea {
+            reloadStorage(owner: newOwner,
                            owned: owned,
                            ecsManager: ecsManager)
             return
         }
         
+        
         /// 普通重置
-        OwnerShipTool.assignOwner(owner: owner, owned: owned, ecsManager: ecsManager)
+        OwnerShipTool.assignOwner(owner: newOwner, owned: owned, ecsManager: ecsManager)
+    }
+    
+    
+    /// 处理关联关系改变，从仓库中移除或减少
+    static func detachFromStorage(storage: RMEntity,
+                                  owned: RMEntity,
+                                  lastCount: Int,
+                                  ecsManager: ECSManager){
+        
+        guard let storageComponent = storage.getComponent(ofType: StorageInfoComponent.self) else {
+            ECSLogger.log("此存储区域没有基础存储控件！💀💀💀")
+            return
+        }
+        
+        let allKeys = getStorageAllKeys(storage: storage)
+        var allSaveEntities = storageComponent.saveEntities
+        
+        for index in allKeys {
+            let entityID = allSaveEntities[index]
+            ///
+            if entityID == owned.entityID {
+                
+                /// 如果剩余为0，说明全部取走，直接置空就好了
+                if lastCount == 0 {
+                    storageComponent.saveEntities[index] = nil
+                    return
+                }else {
+                    
+                    /// 如果还有剩余，创建对应的实体，并放入到仓库中
+                    var params:EntityCreationParams?
+                    if owned.type == kWood {
+                        params = WoodParams(woodCount: lastCount,
+                                            superEntity: storage.entityID,
+                                            saveIndex: index)
+                        
+                    }
+                    
+                    /// 创建对应剩余实体
+                    let point = PositionTool.nowPosition(owned)
+                    RMEventBus.shared.requestCreateEntity(type: owned.type,
+                                                          point: point,
+                                                          params: params!)
+                    
+                }
+                
+            }
+            
+        }
+        
     }
     
     
@@ -195,11 +294,33 @@ struct OwnerShipTool {
         owner.addComponent(onwerShipComponent)
     }
     
+    /// 所有key
+    private static func getStorageAllKeys(storage: RMEntity) -> [Int] {
+        guard let storageComponent = storage.getComponent(ofType: StorageInfoComponent.self) else {
+            ECSLogger.log("此存储区域没有基础存储控件！💀💀💀")
+            return []
+        }
+        
+        let size = storageComponent.size
+        
+        let cols = Int(size.width / tileSize)
+        let rows = Int(size.height / tileSize)
+        
+        // 存储区域总格子数
+        let totalTiles = abs(cols * rows)
+        var keys:[Int] = []
+        for index in 0..<totalTiles {
+            keys.append(index)
+        }
+        
+        return keys
+    }
+    
  
-    /// 重置
-    private static func reloadSaveArea(owner: RMEntity,
-                                       owned: RMEntity,
-                                       ecsManager: ECSManager) {
+    /// 重载存储区域
+    private static func reloadStorage(owner: RMEntity,
+                              owned: RMEntity,
+                        ecsManager: ECSManager) {
         
         guard let saveComponent = owner.getComponent(ofType: StorageInfoComponent.self) else {
             ECSLogger.log("此存储区域没有基础存储控件！💀💀💀")
@@ -209,6 +330,9 @@ struct OwnerShipTool {
             ECSLogger.log("此待存储的实体没有搬运控件！💀💀💀")
             return
         }
+        
+        /// 重置实体关系（需要放到前边，否则称重会变动，产生问题）
+        OwnerShipTool.assignOwner(owner: owner, owned: owned, ecsManager: ecsManager)
         
         
         let size = saveComponent.size
@@ -292,8 +416,6 @@ struct OwnerShipTool {
         saveComponent.saveEntities[selectIndex] = owned.entityID
         /// 重置实体的位置
         PositionTool.setPosition(entity: owned, point: ownedPoint)
-        /// 重置实体关系
-        OwnerShipTool.assignOwner(owner: owner, owned: owned, ecsManager: ecsManager)
         /// 替换父类实体
         RMEventBus.shared.requestReparentEntity(entity: owned, z: 10, point: ownedPoint)
         
@@ -364,18 +486,7 @@ struct EntityAbilityTool {
     static func ableToBeHaul(_ entity: RMEntity,
                              _ ecsManager: ECSManager) -> Bool {
         if entity.getComponent(ofType: HaulableComponent.self) != nil {
-            if entity.getComponent(ofType: OwnedComponent.self) == nil {
-                return true
-            }else{
-                /// 有持有者但是非存储系统，可以搬运
-                if let ownedComponent = entity.getComponent(ofType: OwnedComponent.self) {
-                    if let ownerEntity = ecsManager.getEntity(ownedComponent.ownedEntityID){
-                        if EntityAbilityTool.ableToSaving(ownerEntity) == false {
-                            return true
-                        }
-                    }
-                }
-            }
+            return true
         }
         return false
     }
@@ -394,6 +505,17 @@ struct EntityAbilityTool {
             return true
         }
         return false
+    }
+    
+    /// 是否可以存储当前元素
+    static func ableToStorage(storage: RMEntity,material: RMEntity) -> Bool {
+        
+        guard let storageComponent = storage.getComponent(ofType: StorageInfoComponent.self) else {
+            return false
+        }
+        
+        return storageComponent.canStorageType[textAction(material.type)] ?? false
+        
     }
     
     
@@ -427,10 +549,10 @@ struct EntityAbilityTool {
         }
         
         let currentType = currentTask.type
-        let useCurrentType = currentTask.realType ?? currentType
+        let useCurrentType = currentTask.type
         
         let newType = task.type
-        let useNewType = task.realType ?? newType
+        let useNewType = task.type
         
         /// 任务类型完全相同，不能替换
         if useCurrentType == useNewType {
@@ -526,6 +648,16 @@ struct EntityInfoTool {
         return nil
     }
     
+    /// 当前实体原料
+    static func materialType(_ entity: RMEntity) -> MaterialType {
+        
+        guard let haulComponent = entity.getComponent(ofType: HaulableComponent.self) else {
+            return MaterialType.unowned
+        }
+        
+        return MaterialType(rawValue: haulComponent.materialType) ?? MaterialType.unowned
+    }
+    
     /// 当前可以承担的重量
     static func remainingCarryCapacity(_ entity: RMEntity) -> Double {
         guard let carryComponent = entity.getComponent(ofType: CarryingCapacityComponent.self) else {
@@ -551,6 +683,42 @@ struct EntityInfoTool {
         return haulComponent.currentCount
     }
     
+    /// 是否在仓库
+    static func isInStorage(entity: RMEntity, ecsManager: ECSManager) -> Bool{
+        guard let ownedComponent = entity.getComponent(ofType: OwnedComponent.self) else {
+            return false
+        }
+        
+        var isInStorage = false
+        
+        let storage = ecsManager.getEntity(ownedComponent.ownedEntityID)
+        if (storage != nil) && storage?.type == kStorageArea {
+            isInStorage = true
+        }
+        
+        return isInStorage
+    }
+    
+    /// 仓库最大载容量
+    static func maxStorageCapacity(storage: RMEntity) -> Int{
+        guard let storageComponent = storage.getComponent(ofType: StorageInfoComponent.self) else {
+            return 0
+        }
+        
+        let size = storageComponent.size
+        let cols = Int(size.width / tileSize)
+        let rows = Int(size.height / tileSize)
+        /// 存储区域总格子数
+        let totalTiles = abs(cols * rows)
+        /// 当前格子上存储的实体
+        let storageEntities = storageComponent.saveEntities
+        
+        let lastStorageArea = totalTiles - storageEntities.count
+        
+        return lastStorageArea * 75
+    }
+    
+    
     /// 蓝图需要的数量
     static func blueprintNeedCount(_ entity: RMEntity,
                                    _ material: Int) -> Int {
@@ -568,6 +736,25 @@ struct EntityInfoTool {
         }
         
         return 0
+    }
+    
+    /// 蓝图所需素材是否完毕
+    static func blueprintIsComplete(_ entity: RMEntity) {
+        guard let blueComponent = entity.getComponent(ofType: BlueprintComponent.self) else {
+            return
+        }
+        
+        let maxMaterials = blueComponent.materials
+        let alreadyMaterials = blueComponent.alreadyMaterials
+        
+        var isComplete = true
+        for (key,count) in alreadyMaterials {
+            let maxCount = maxMaterials[key]!
+            if maxCount != count {
+                isComplete = false
+            }
+        }
+        blueComponent.isMaterialCompelte = isComplete
     }
     
     /// 获取所有可做的任务
@@ -681,10 +868,31 @@ struct EntityActionTool {
     /// 设置搬运走的数量
     static func setHaulingCount(entity: RMEntity,
                                 count: Int) {
-        guard let haulComponent = entity.getComponent(ofType: HaulableComponent.self) else {
-            return
-        }
+        guard let haulComponent = entity.getComponent(ofType: HaulableComponent.self) else { return }
         haulComponent.currentCount = count
+        
+        EntityNodeTool.updateHaulCountLabel(entity: entity, count: count)
+    }
+    
+    /// 在实际搬运的时候，要考虑搬运人负重，所以需要更新蓝图对应的搬运中的素材数量
+    static func setBlueprintHaulTaskCount(entity: RMEntity,
+                                          blueEntity:RMEntity,
+                                          count: Int){
+        guard let blueComponent = blueEntity.getComponent(ofType: BlueprintComponent.self) else { return }
+        
+        let materialType = EntityInfoTool.materialType(entity)
+        blueComponent.alreadyCreateHaulTask[materialType]?[entity.entityID] = count
+    }
+    
+    /// 对应的存储仓库
+    static func storageEntity(entity: RMEntity,
+                              ecsManager: ECSManager) -> RMEntity?{
+        guard let ownedComponent = entity.getComponent(ofType: OwnedComponent.self) else {
+            return nil
+        }
+        
+        return ecsManager.getEntity(ownedComponent.ownedEntityID)
+        
     }
     
     /// 执行任务
@@ -704,8 +912,6 @@ struct EntityActionTool {
             return
         }
         
-        
-        writeLog(entity: entity, text: "开始执行任务：\(task.type)")
         
         /// 更改角色状态
         stateComponent.actions.append(EntityActionTool.taskDescription(task))
@@ -741,7 +947,7 @@ struct EntityActionTool {
     static func addTask(entity: RMEntity,
                  task: WorkTask) {
         guard let taskCompnent = entity.getComponent(ofType: TaskQueueComponent.self) else { return }
-        taskCompnent.tasks.append(task)
+        taskCompnent.tasks.insert(task, at: 0)
     }
     
     /// 移除任务
@@ -752,6 +958,10 @@ struct EntityActionTool {
             $0.id == task.id
         }){
             taskCompnent.tasks.remove(at: index)
+        }
+        
+        if taskCompnent.tasks.count > 1 {
+            ECSLogger.log("为什么会大于一个任务？？？？💀💀💀")
         }
     }
     
@@ -825,6 +1035,7 @@ struct EntityActionTool {
         eventLog.addLog(from: entity.entityID, to: entity.entityID, content: text, emotion: .neutral)
         DBManager.shared.updateEventLog(eventLog)
     }
+    
 
     
     /// 比较任务优先级

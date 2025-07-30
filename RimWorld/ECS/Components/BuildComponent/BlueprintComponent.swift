@@ -32,6 +32,10 @@ final class BlueprintComponent: TableCodable, Component {
     /// 已经放入的材料
     var alreadyMaterials: [String: Int] = [:]
     
+    /// 创建搬运任务，搬运的素材量，还未实装，搬运过程中
+    var alreadyCreateHaulTask: [MaterialType:[Int: Int]] = [:]
+
+    
     /// 蓝图类型
     var blueprintType: Int = BlueprintType.wall.rawValue
     
@@ -39,6 +43,9 @@ final class BlueprintComponent: TableCodable, Component {
     var totalBuildPoints:Double = 100
     /// 当前建造的点数
     var currentBuildPoints:Double = 0
+    
+    /// 是否所需素材全部都有了
+    var isMaterialCompelte = false
    
     /// 蓝图坐标位置
     var key: TilePoint {
@@ -68,6 +75,7 @@ final class BlueprintComponent: TableCodable, Component {
         case blueprintType
         case totalBuildPoints
         case currentBuildPoints
+        case isMaterialCompelte
     }
     
     func bindEntityID(_ bindEntityID: Int) { entityID = bindEntityID }

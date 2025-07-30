@@ -230,8 +230,6 @@ enum WorkType: String, CaseIterable, Codable {
     case Cleaning
     /// 研究
     case Research
-    
-    
 }
 
 /// 人物技能
@@ -557,6 +555,9 @@ enum MaterialType: Int {
     case steel = 3        // 钢材（你可以按需添加）
     case stone = 4        // 石材
     case cloth = 5        // 布料
+    
+    
+    case unowned = 10000
 }
 
 extension MaterialType: CustomStringConvertible {
@@ -567,6 +568,7 @@ extension MaterialType: CustomStringConvertible {
         case .steel: return "Steel"
         case .stone: return "Stone"
         case .cloth: return "Cloth"
+        case .unowned: return "Unowned"
         }
     }
 }
@@ -599,6 +601,17 @@ enum BlueprintType: Int {
         case .roof: return "Roof"                     // 屋顶
         }
     }
+    
+ 
+}
+
+
+
+enum HaulTaskStage {
+    /// 前往物品
+    case movingToItem
+    /// 正在搬运到目标位置
+    case movingToTarget
 }
 
 

@@ -64,11 +64,17 @@ extension DoTaskSystem {
             
             buildComplete(blueTargetEntity: blueTargetEntity, blueprintComponent: blueprintComponent)
             
+            buildingTasks.removeValue(forKey: executorEntity.entityID)
+
+            
         }else {
             /// 建造动画
             blueTargetEntity.node?.buildingAnimation()
             blueTargetEntity.node?.barAnimation(total: blueprintComponent.totalBuildPoints, current: blueprintComponent.currentBuildPoints)
         }
+        
+        /// 刷新蓝图Inof
+        RMInfoViewEventBus.shared.requestReloadBlueprintInfo()
     }
     
     

@@ -17,7 +17,9 @@ class JoySystem: System {
     
     init (ecsManager: ECSManager) {
         self.ecsManager = ecsManager
-        
+    }
+    
+    func setupJoy(){
         /// 更新娱乐值
         NotificationCenter.default.addObserver(self, selector: #selector(updateJoyDrop), name: .RMGameTimeJoyTick, object: nil)
         for entity in ecsManager.allEntities() {
