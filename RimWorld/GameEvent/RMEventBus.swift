@@ -36,6 +36,8 @@ enum GameEvent {
     /// 建造任务
     case buildingTask(entity: RMEntity)
     
+    /// 将实体从可搬运列表里移除
+    case removeFromHaulCategory(entity: RMEntity)
     
     /// 去做任务
     case doTask(entityID: Int, task: WorkTask)
@@ -166,8 +168,13 @@ extension RMEventBus {
     }
     
     /// 修改存储实体
-    func requestChangeSaveAreaEntity(entity:RMEntity) {
+    func requestChangeSaveAreaEntity(entity: RMEntity) {
         self.publish(.changeStorage(entity: entity))
+    }
+    
+    /// 实体放入到了蓝图中，需要修改其状态，不能再次搬运了
+    func requestRemoveFromHaulCategory(entity: RMEntity) {
+        self.publish(.removeFromHaulCategory(entity: entity))
     }
     
 }

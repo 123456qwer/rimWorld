@@ -75,6 +75,11 @@ extension ECSManager {
         return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesMaterial[key] ?? []
     }
     
+    /// 将此实体从搬运列表中删除
+    func removeHaulEntity(entity: RMEntity) {
+        systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.removeHaulEntity(entity: entity)
+    }
+    
     /// 添加实体，分区需要刷新
     func categorizationAdd(entity: RMEntity) {
         /// 分类系统，新加存储区域

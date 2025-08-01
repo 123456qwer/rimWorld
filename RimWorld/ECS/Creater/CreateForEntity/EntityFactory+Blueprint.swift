@@ -22,6 +22,8 @@ extension EntityFactory {
         blueprintComponent.totalBuildPoints = params.totalBuildPoint
         
         
+        let ownerComponent = OwnershipComponent()
+        
         let positionComponent = PositionComponent()
         positionComponent.x = point.x
         positionComponent.y = point.y
@@ -38,6 +40,7 @@ extension EntityFactory {
         
         entity.addComponent(blueprintComponent)
         entity.addComponent(positionComponent)
+        entity.addComponent(ownerComponent)
         
         return entity
     }

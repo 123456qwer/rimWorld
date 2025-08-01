@@ -135,6 +135,12 @@ class EntityCategorizatonSystem: System {
             break // 其他类型暂不处理
         }
     }
+    
+    
+    /// 移除可搬运物
+    func removeHaulEntity(entity: RMEntity){
+        entitiesAbleToBeHaul.remove(entity)
+    }
 
     
     private func updateEntityList(_ list: inout [RMEntity], entity: RMEntity, isEligible: Bool) {
@@ -199,7 +205,6 @@ class EntityCategorizatonSystem: System {
         }
         
        
-        
         if let component = EntityAbilityTool.ableToBeMaterial(entity) {
             if let key = MaterialType(rawValue: component.categorization) {
                 var set: Set<RMEntity> = entitiesMaterial[key] ?? []

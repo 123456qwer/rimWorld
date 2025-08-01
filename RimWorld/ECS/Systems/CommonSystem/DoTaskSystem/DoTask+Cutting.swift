@@ -70,9 +70,7 @@ extension DoTaskSystem {
         /// 砍伐完毕
         if targetBasicComponent.currentHealth <= 0 {
             
-            /// 完成任务
-            EntityActionTool.completeTaskAction(entity: executorEntity, task: task)
-            
+
             /// 砍伐结束动画
             EntityNodeTool.cuttingFinish(targetNode: targetNode)
             
@@ -101,6 +99,8 @@ extension DoTaskSystem {
             /// 删除
             cuttingTasks.removeValue(forKey: executorEntity.entityID)
 
+            /// 完成任务
+            EntityActionTool.completeTaskAction(entity: executorEntity, task: task)
             
         }else{
             

@@ -34,7 +34,7 @@ final class BlueprintComponent: TableCodable, Component {
     
     /// 创建搬运任务，搬运的素材量，还未实装，搬运过程中
     var alreadyCreateHaulTask: [MaterialType:[Int: Int]] = [:]
-
+    
     
     /// 蓝图类型
     var blueprintType: Int = BlueprintType.wall.rawValue

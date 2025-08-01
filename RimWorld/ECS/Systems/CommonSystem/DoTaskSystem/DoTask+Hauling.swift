@@ -308,8 +308,19 @@ extension DoTaskSystem {
         blueprintComponent.alreadyMaterials[key] = pushCount + existingCount
         blueprintComponent.alreadyCreateHaulTask[type]?[materialEntity.entityID] = 0
         
+                
+        /** 两种方式，1是直接移除，2是不移除，绑定关系 */
         /// 删除这个原件
         RMEventBus.shared.requestRemoveEntity(materialEntity)
+        
+//        /// 重新设置从属关系
+//        OwnerShipTool.handleOwnershipChange(newOwner: targetEntity, owned: materialEntity, ecsManager: ecsManager)
+//        /// 更换父视图
+//        RMEventBus.shared.requestReparentEntity(entity: materialEntity, z: 100, point: CGPoint(x: 0, y: 0))
+      
+        /// 不删除，所有者非仓库，不能搬运
+//        RMEventBus.shared.requestRemoveFromHaulCategory(entity: materialEntity)
+        
         
         /// 更新蓝图界面
         RMInfoViewEventBus.shared.publish(.updateBlueprint)
@@ -318,6 +329,9 @@ extension DoTaskSystem {
         /// 如果完成搬运，发布建造任务
         let materials = blueprintComponent.materials
         let currentMaterials = blueprintComponent.alreadyMaterials
+        
+        
+        targetEntity.node?.texture = TextureManager.shared.getTexture("bluePrint2")
         
 
         for (key,maxCount) in materials {

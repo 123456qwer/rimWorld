@@ -105,6 +105,10 @@ class ECSManager {
                 self.completeTask(entityID: entityID,
                                   task: task)
                 
+                /// 将实体从搬运列表中移除
+            case .removeFromHaulCategory(let entity):
+                self.removeHaulEntity(entity: entity)
+                
                 /// 修改角色优先级
             case .updatePriorityEntity(let entity, let workType):
                 self.updatePriorityEntity(entity: entity, workType: workType)
@@ -126,8 +130,8 @@ class ECSManager {
             case .speed1: break
             case .speed2: break
             case .speed3: break
-            case .moveStop(entity: let entity): break
-            case .updateAllSystem(entitys: let entitys, entityMap: let entityMap): break
+            case .moveStop(_): break
+            case .updateAllSystem(_,_): break
                 
             }
         }
@@ -152,6 +156,7 @@ class ECSManager {
         
 //        /// 任务系统
 //        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.eventUpdate()
+        
     }
  
     

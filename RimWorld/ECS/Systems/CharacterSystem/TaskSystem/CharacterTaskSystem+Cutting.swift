@@ -141,11 +141,6 @@ extension CharacterTaskSystem {
             return
         }
         
-        treeBasicComponent.choppedEntityID = 0
-        
-        task.isCompleted = false
-        task.isInProgress = false
-        task.executorEntityID = 0
         
         removeDoTask(task: task)
         allTaskQueue.append(task)

@@ -108,9 +108,7 @@ extension CharacterTaskSystem {
             targetEntity.removeComponent(ofType: OwnedComponent.self)
             
             RMEventBus.shared.requestReparentEntity(entity: targetEntity, z: 10, point: PositionTool.nowPosition(entity))
-       
-            task.executorEntityID = 0
-            task.haulingTask.haulStage = .movingToItem
+
         }
         
         

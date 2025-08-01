@@ -17,6 +17,21 @@ extension NodeBuilder {
         /// 先简单添加
         let node = RMBaseNode(color: .blue.withAlphaComponent(0.3), size: CGSize(width: blueComponent.width, height: blueComponent.height))
         node.position = CGPoint(x: blueComponent.tileX, y: blueComponent.tileY)
+        
+        var isSubMaterial = false
+        for (_,count) in blueComponent.alreadyMaterials {
+            if count != 0 {
+                isSubMaterial = true
+                break
+            }
+        }
+        
+        /// 如果有，说明是在建状态，改变下
+        if isSubMaterial {
+            node.texture = TextureManager.shared.getTexture("bluePrint2")
+            node.alpha = 1
+        }
+        
         return node
         
     }

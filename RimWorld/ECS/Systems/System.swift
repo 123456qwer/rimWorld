@@ -426,6 +426,7 @@ struct OwnerShipTool {
 
 
 //MARK: - 🚩 用于判断实体是否具有某些能力的工具类 🚩 -
+/// 用于判断实体是否具有某些能力的工具类
 struct EntityAbilityTool {
     
     /// 是否可以割除
@@ -482,13 +483,23 @@ struct EntityAbilityTool {
         return false
     }
     
-    /// 可以被搬运的实体
+    /// 判断实体是否可以被搬运
     static func ableToBeHaul(_ entity: RMEntity,
                              _ ecsManager: ECSManager) -> Bool {
-        if entity.getComponent(ofType: HaulableComponent.self) != nil {
-            return true
+        
+        /// 搬运组件
+        guard entity.getComponent(ofType: HaulableComponent.self) != nil else {
+            return false
         }
-        return false
+
+        /// 可搬运物体，如果在非仓库的情况下，不能再次被搬运(后续在看有别的变化没)
+        if let owned = entity.getComponent(ofType: OwnedComponent.self),
+           let ownerEntity = ecsManager.getEntity(owned.ownedEntityID),
+           ownerEntity.type != kStorageArea {
+            return false
+        }
+
+        return true
     }
     
     /// 可以成长的植物
@@ -590,6 +601,12 @@ struct EntityAbilityTool {
       
     }
 
+    
+    /// 删除时，是否会撒下子类数据
+    func removeAbleToLastSubEntity() {
+        
+    }
+  
  
 }
 
