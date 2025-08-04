@@ -25,6 +25,12 @@ struct StorageParams: EntityCreationParams {
     let size: CGSize
 }
 
+/// 种植区域参数
+struct GrowingParams: EntityCreationParams {
+    let size: CGSize
+    let cropType: RimWorldCrop
+}
+
 /// 木头参数
 struct WoodParams: EntityCreationParams {
     let woodCount: Int
@@ -71,7 +77,10 @@ class EntityNodeFactorySystem: System {
             createBlueprint(point, params: params as! BlueprintParams)
         }else if type == kWoodWall {
             createWall(point, params: params as! WallParams)
+        }else if type == kGrowingArea {
+            createGrowingArea(point, params: params as! GrowingParams)
         }
+        
     }
     
     
@@ -95,6 +104,11 @@ class EntityNodeFactorySystem: System {
         createNodeAction(entity)
     }
     
+    /// 创建种植区域
+    func createGrowingArea(_ point: CGPoint, params: GrowingParams) {
+        let entity = EntityFactory.shared.createGrowingArea(point: point, params: params)
+        createNodeAction(entity)
+    }
     
     /// 创建建造蓝图
     func createBlueprint(_ point:CGPoint, params: BlueprintParams) {

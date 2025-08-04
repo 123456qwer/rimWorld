@@ -39,6 +39,9 @@ final class BlueprintComponent: TableCodable, Component {
     /// 蓝图类型
     var blueprintType: Int = BlueprintType.wall.rawValue
     
+    /// 是否建造完成，建造完成，移除蓝图的时候，就不要把已有的数据删除了
+    var isBuildFinish: Bool = false
+    
     /// 总建造需要的点数
     var totalBuildPoints:Double = 100
     /// 当前建造的点数

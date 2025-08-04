@@ -507,7 +507,8 @@ enum MedicalQuality: String {
 enum GameMode {
     case normal               // 默认模式：点击、移动等常规操作
     case build                // 建造模式：拖动放置建筑
-    case selectingArea        // 区域选择模式：拉框选中一片区域（如设置存储区）
+    case storage              // 拉框选择存储区域
+    case growing              // 拉框选择种植区域
     case deconstruct          // 拆除：拆除建造好的或者没建造的蓝图
 }
 
@@ -613,5 +614,28 @@ enum HaulTaskStage {
     /// 正在搬运到目标位置
     case movingToTarget
 }
+
+
+enum RimWorldCrop: String, CaseIterable {
+    // 粮食类
+    case rice = "Rice"              // 稻米 - 生长快，产量适中，适合早期种植
+    case potato = "Potato"          // 土豆 - 适合贫瘠土壤，生长稳定
+    case corn = "Corn"              // 玉米 - 高产但生长周期长，适合后期批量种植
+    case strawberry = "Strawberry"  // 草莓 - 可直接生吃，适合没有厨房的前期
+
+    // 药用类
+    case healroot = "Healroot"      // 愈伤草 - 可收获草药，用于治疗（需要种植技能8）
+
+    // 纤维/工业类
+    case cotton = "Cotton"          // 棉花 - 可产出布料，用于制作衣物和床铺等
+    case devilstrand = "Devilstrand"// 恶魔皮菌丝 - 高耐久布料，生长极慢但很强（需要技能10）
+
+    // 娱乐/奢侈品类
+    case smokeleaf = "Smokeleaf"    // 烟叶 - 可制成烟草卷，缓解压力但会上瘾
+    case psychoid = "Psychoid"      // 迷幻叶 - 用于制作迷幻茶或药物（如G茶、耀魂等）
+    case hops = "Hops"              // 啤酒花 - 用于酿造啤酒，需配合啤酒桶
+}
+
+
 
 

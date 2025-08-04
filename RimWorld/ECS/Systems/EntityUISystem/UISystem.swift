@@ -44,6 +44,9 @@ class UISystem: System {
     // MARK: - 存储区域设置 -
     var storageInfoView:StorageInfoView?
     
+    // MARK: - 种植区域设置 -
+    var growingInfoView: GrowingInfoView?
+    
     // MARK: - 蓝图 -
     var blueprintInfoView:BlueprintInfoView?
     
@@ -88,6 +91,9 @@ class UISystem: System {
         }else if entity.type == kStorageArea {
             /// 点击了存储区域
             showStorageInfo(node: node, nodes: nodes)
+        }else if entity.type == kGrowingArea {
+            /// 点击种植区域
+            showGrowingInfo(node: node, nodes: nodes)
         }else if entity.type == kBlueprint {
             /// 点击蓝图
             showBlueprintInfo(node: node, nodes: nodes)
@@ -102,6 +108,7 @@ class UISystem: System {
         removeUserInfo()
         removeStorageInfo()
         removeBlueprintInfo()
+        removeGrowingInfo()
     }
 }
 

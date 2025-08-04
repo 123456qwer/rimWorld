@@ -17,10 +17,13 @@ final class NodeBuilder: NSObject {
         kWeapon: buildWeapon,
         kTree:buildTree,
         kWood:buildWood,
-        kStorageArea:saveArea,
+        kStorageArea:storage,
+        kGrowingArea:growing,
+        
         kBlueprint:blueprint,
         
         kWoodWall:woodWall,
+        
         
     ]
     

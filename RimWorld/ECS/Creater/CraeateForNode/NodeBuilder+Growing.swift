@@ -1,18 +1,18 @@
 //
-//  NodeBuilder+SaveArea.swift
+//  NodeBuilder+Growing.swift
 //  RimWorld
 //
-//  Created by wu on 2025/7/2.
+//  Created by wu on 2025/8/4.
 //
 
 import Foundation
 
 extension NodeBuilder {
-        
-    func saveArea(_ entity:RMEntity) -> RMBaseNode{
+    
+    func growing(_ entity: RMEntity) -> RMBaseNode {
         
         guard let pointComponent = entity.getComponent(ofType: PositionComponent.self),
-                let basicComponent = entity.getComponent(ofType: StorageInfoComponent.self) else {
+              let basicComponent = entity.getComponent(ofType: GrowInfoComponent.self) else {
             return RMBaseNode()
         }
         
@@ -23,6 +23,6 @@ extension NodeBuilder {
         node.name = "saveArea"
         node.zPosition = 10000
         return node
-
     }
+    
 }

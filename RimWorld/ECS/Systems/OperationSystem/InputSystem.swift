@@ -52,12 +52,14 @@ class InputSystem: System {
         switch gameContext.currentMode {
         case .normal:
             normalTouchdown(atPoint: pos, scene: scene)
-        case .selectingArea:
+        case .storage:
             areaSelectTouchdown(atPoint: pos, scene: scene)
         case .build:
             buildTouchdown(atPoint: pos, scene: scene)
         case .deconstruct:
             deconstructTouchdown(atPoint: pos, scene: scene)
+        case .growing:
+            growingTouchdown(atPoint: pos, scene: scene)
         }
     }
     
@@ -67,12 +69,14 @@ class InputSystem: System {
         switch gameContext.currentMode {
         case .normal:
             normalTouchMoved(atPoint: pos, scene: scene)
-        case .selectingArea:
+        case .storage:
             areaSelectTouchMoved(atPoint: pos, scene: scene)
         case .build:
             buildTouchMoved(atPoint: pos, scene: scene)
         case .deconstruct:
             deconstructTouchMoved(atPoint: pos, scene: scene)
+        case .growing:
+            growingTouchMoved(atPoint: pos, scene: scene)
         }
     }
     
@@ -83,12 +87,14 @@ class InputSystem: System {
         switch gameContext.currentMode {
         case .normal:
             normalTouchUp(atPoint: pos, scene: scene)
-        case .selectingArea:
+        case .storage:
             areaSelectTouchUp(atPoint: pos, scene: scene)
         case .build:
             buildTouchUp(atPoint: pos, scene: scene)
         case .deconstruct:
             deconstructTouchUp(atPoint: pos, scene: scene)
+        case .growing:
+            growingTouchUp(atPoint: pos, scene: scene)
         }
 
     }

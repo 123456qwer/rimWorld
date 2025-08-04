@@ -90,6 +90,9 @@ extension DoTaskSystem {
             break
         }
         
+        /// 建造完成
+        blueprintComponent.isBuildFinish = true
+        
         /// 移除蓝图
         RMEventBus.shared.requestRemoveEntity(blueTargetEntity)
     }

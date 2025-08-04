@@ -38,9 +38,9 @@
 		944B553B2E1382610006D639 /* NodeBuilder+Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B553A2E1382610006D639 /* NodeBuilder+Tree.swift */; };
 		944B553E2E13916D0006D639 /* WoodInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B553D2E13916D0006D639 /* WoodInfoView.swift */; };
 		944B55402E13945A0006D639 /* EntityNodeFactorySystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B553F2E13945A0006D639 /* EntityNodeFactorySystem.swift */; };
-		944B55422E14EAEF0006D639 /* EntityFactory+SaveArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55412E14EAEF0006D639 /* EntityFactory+SaveArea.swift */; };
+		944B55422E14EAEF0006D639 /* EntityFactory+Stroage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55412E14EAEF0006D639 /* EntityFactory+Stroage.swift */; };
 		944B55452E14EB620006D639 /* StorageInfoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55442E14EB620006D639 /* StorageInfoComponent.swift */; };
-		944B55472E14EBF10006D639 /* NodeBuilder+SaveArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55462E14EBF10006D639 /* NodeBuilder+SaveArea.swift */; };
+		944B55472E14EBF10006D639 /* NodeBuilder+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55462E14EBF10006D639 /* NodeBuilder+Storage.swift */; };
 		944B55492E14FE170006D639 /* UISystem+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55482E14FE170006D639 /* UISystem+Storage.swift */; };
 		944B554C2E1501280006D639 /* StorageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B554B2E1501280006D639 /* StorageInfoView.swift */; };
 		944B554E2E150C230006D639 /* StorageInfoTabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B554D2E150C230006D639 /* StorageInfoTabelView.swift */; };
@@ -87,6 +87,13 @@
 		9467A21F2E39A5B20097734D /* NewEntityTaskUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A21E2E39A5B20097734D /* NewEntityTaskUpdater.swift */; };
 		9467A2212E39A6720097734D /* RemoveEntityTaskUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2202E39A6720097734D /* RemoveEntityTaskUpdater.swift */; };
 		9467A2232E39EC8D0097734D /* ReloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2222E39EC8D0097734D /* ReloadTask.swift */; };
+		9467A2272E404A0F0097734D /* InputSystem+Growing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2262E404A0F0097734D /* InputSystem+Growing.swift */; };
+		9467A2292E404CF40097734D /* EntityFactory+Growing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2282E404CF40097734D /* EntityFactory+Growing.swift */; };
+		9467A22B2E404D840097734D /* GrowInfoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A22A2E404D840097734D /* GrowInfoComponent.swift */; };
+		9467A22E2E4051CA0097734D /* GrowingInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A22D2E4051CA0097734D /* GrowingInfoView.swift */; };
+		9467A2302E4052990097734D /* GrowingInfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A22F2E4052990097734D /* GrowingInfoTableView.swift */; };
+		9467A2322E40548B0097734D /* UISystem+Growing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2312E40548B0097734D /* UISystem+Growing.swift */; };
+		9467A2342E40564C0097734D /* NodeBuilder+Growing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2332E40564C0097734D /* NodeBuilder+Growing.swift */; };
 		946E543B2E1FDE1D008A841B /* ECS+CharacterTaskSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946E543A2E1FDE1D008A841B /* ECS+CharacterTaskSystem.swift */; };
 		946E543D2E1FE0DD008A841B /* ECS+RenderSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946E543C2E1FE0DD008A841B /* ECS+RenderSystem.swift */; };
 		946E543F2E1FE1DD008A841B /* ECS+MovementSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946E543E2E1FE1DD008A841B /* ECS+MovementSystem.swift */; };
@@ -252,9 +259,9 @@
 		944B553A2E1382610006D639 /* NodeBuilder+Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Tree.swift"; sourceTree = "<group>"; };
 		944B553D2E13916D0006D639 /* WoodInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoodInfoView.swift; sourceTree = "<group>"; };
 		944B553F2E13945A0006D639 /* EntityNodeFactorySystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityNodeFactorySystem.swift; sourceTree = "<group>"; };
-		944B55412E14EAEF0006D639 /* EntityFactory+SaveArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+SaveArea.swift"; sourceTree = "<group>"; };
+		944B55412E14EAEF0006D639 /* EntityFactory+Stroage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+Stroage.swift"; sourceTree = "<group>"; };
 		944B55442E14EB620006D639 /* StorageInfoComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageInfoComponent.swift; sourceTree = "<group>"; };
-		944B55462E14EBF10006D639 /* NodeBuilder+SaveArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+SaveArea.swift"; sourceTree = "<group>"; };
+		944B55462E14EBF10006D639 /* NodeBuilder+Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Storage.swift"; sourceTree = "<group>"; };
 		944B55482E14FE170006D639 /* UISystem+Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISystem+Storage.swift"; sourceTree = "<group>"; };
 		944B554B2E1501280006D639 /* StorageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageInfoView.swift; sourceTree = "<group>"; };
 		944B554D2E150C230006D639 /* StorageInfoTabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageInfoTabelView.swift; sourceTree = "<group>"; };
@@ -301,6 +308,13 @@
 		9467A21E2E39A5B20097734D /* NewEntityTaskUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntityTaskUpdater.swift; sourceTree = "<group>"; };
 		9467A2202E39A6720097734D /* RemoveEntityTaskUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveEntityTaskUpdater.swift; sourceTree = "<group>"; };
 		9467A2222E39EC8D0097734D /* ReloadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadTask.swift; sourceTree = "<group>"; };
+		9467A2262E404A0F0097734D /* InputSystem+Growing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputSystem+Growing.swift"; sourceTree = "<group>"; };
+		9467A2282E404CF40097734D /* EntityFactory+Growing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+Growing.swift"; sourceTree = "<group>"; };
+		9467A22A2E404D840097734D /* GrowInfoComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowInfoComponent.swift; sourceTree = "<group>"; };
+		9467A22D2E4051CA0097734D /* GrowingInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingInfoView.swift; sourceTree = "<group>"; };
+		9467A22F2E4052990097734D /* GrowingInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingInfoTableView.swift; sourceTree = "<group>"; };
+		9467A2312E40548B0097734D /* UISystem+Growing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISystem+Growing.swift"; sourceTree = "<group>"; };
+		9467A2332E40564C0097734D /* NodeBuilder+Growing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Growing.swift"; sourceTree = "<group>"; };
 		946E543A2E1FDE1D008A841B /* ECS+CharacterTaskSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ECS+CharacterTaskSystem.swift"; sourceTree = "<group>"; };
 		946E543C2E1FE0DD008A841B /* ECS+RenderSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ECS+RenderSystem.swift"; sourceTree = "<group>"; };
 		946E543E2E1FE1DD008A841B /* ECS+MovementSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ECS+MovementSystem.swift"; sourceTree = "<group>"; };
@@ -504,7 +518,8 @@
 				949FAD0A2DD73DC30044E4E5 /* EntityFactory+Goods.swift */,
 				94B705D72DF12D2C00A47EE5 /* EntityFactory+tree.swift */,
 				944B55302E1279660006D639 /* EntityFactory+wood.swift */,
-				944B55412E14EAEF0006D639 /* EntityFactory+SaveArea.swift */,
+				944B55412E14EAEF0006D639 /* EntityFactory+Stroage.swift */,
+				9467A2282E404CF40097734D /* EntityFactory+Growing.swift */,
 				9467A2062E31D5330097734D /* EntityFactory+Blueprint.swift */,
 				9467A2132E336B6D0097734D /* EntityFactory+Wall.swift */,
 			);
@@ -518,7 +533,8 @@
 				944B55362E13820C0006D639 /* NodeBuilder+Character.swift */,
 				944B55382E1382440006D639 /* NodeBuilder+Weapon.swift */,
 				944B553A2E1382610006D639 /* NodeBuilder+Tree.swift */,
-				944B55462E14EBF10006D639 /* NodeBuilder+SaveArea.swift */,
+				944B55462E14EBF10006D639 /* NodeBuilder+Storage.swift */,
+				9467A2332E40564C0097734D /* NodeBuilder+Growing.swift */,
 				9467A2082E31D81A0097734D /* NodeBuilder+Blueprint.swift */,
 				9467A2172E33898C0097734D /* NodeBuilder+Wall.swift */,
 			);
@@ -534,12 +550,13 @@
 			path = GoodsInfoViews;
 			sourceTree = "<group>";
 		};
-		944B55432E14EB4A0006D639 /* SaveAreaComponent */ = {
+		944B55432E14EB4A0006D639 /* AreaComponent */ = {
 			isa = PBXGroup;
 			children = (
 				944B55442E14EB620006D639 /* StorageInfoComponent.swift */,
+				9467A22A2E404D840097734D /* GrowInfoComponent.swift */,
 			);
-			path = SaveAreaComponent;
+			path = AreaComponent;
 			sourceTree = "<group>";
 		};
 		944B554A2E1500F00006D639 /* StorageInfoViews */ = {
@@ -701,6 +718,15 @@
 			path = TaskAssigner;
 			sourceTree = "<group>";
 		};
+		9467A22C2E40519E0097734D /* GrowingInfoViews */ = {
+			isa = PBXGroup;
+			children = (
+				9467A22D2E4051CA0097734D /* GrowingInfoView.swift */,
+				9467A22F2E4052990097734D /* GrowingInfoTableView.swift */,
+			);
+			path = GrowingInfoViews;
+			sourceTree = "<group>";
+		};
 		946E54392E1FDDFA008A841B /* ECSManagerExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -747,7 +773,7 @@
 			children = (
 				9467A2032E31D0BC0097734D /* BuildComponent */,
 				944B55622E1CF1780006D639 /* PlantComponent */,
-				944B55432E14EB4A0006D639 /* SaveAreaComponent */,
+				944B55432E14EB4A0006D639 /* AreaComponent */,
 				949FAD072DD73A500044E4E5 /* GoodsComponent */,
 				946577DC2DCDEAB1005D34F3 /* EquipComponent */,
 				946577DB2DCDEA77005D34F3 /* CommonComponent */,
@@ -914,6 +940,7 @@
 		94973BE62DC9B00D005AB8DB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9467A22C2E40519E0097734D /* GrowingInfoViews */,
 				9467A20E2E331AA00097734D /* BlueprintInfoViews */,
 				944B554A2E1500F00006D639 /* StorageInfoViews */,
 				944B553C2E1391530006D639 /* GoodsInfoViews */,
@@ -1034,6 +1061,7 @@
 				94B705DB2DF1446100A47EE5 /* UISystem+Character.swift */,
 				94B705DF2DF1451D00A47EE5 /* UISystem+Tree.swift */,
 				944B55482E14FE170006D639 /* UISystem+Storage.swift */,
+				9467A2312E40548B0097734D /* UISystem+Growing.swift */,
 				9467A20C2E3319500097734D /* UISystem+Blueprint.swift */,
 			);
 			path = EntityUISystem;
@@ -1047,6 +1075,7 @@
 				9467A1FB2E31C9280097734D /* InputSystem+AreaSelect.swift */,
 				9467A1FF2E31C95D0097734D /* InputSystem+Build.swift */,
 				9467A2012E31CF990097734D /* InputSystem+Deconstruct.swift */,
+				9467A2262E404A0F0097734D /* InputSystem+Growing.swift */,
 			);
 			path = OperationSystem;
 			sourceTree = "<group>";
@@ -1226,6 +1255,7 @@
 			files = (
 				94973BB32DC087A7005AB8DB /* WorkOptionsView.swift in Sources */,
 				946E543F2E1FE1DD008A841B /* ECS+MovementSystem.swift in Sources */,
+				9467A22B2E404D840097734D /* GrowInfoComponent.swift in Sources */,
 				9467A20D2E3319500097734D /* UISystem+Blueprint.swift in Sources */,
 				949FACD32DD33DA80044E4E5 /* NutritionComponent.swift in Sources */,
 				94973BB42DC087A7005AB8DB /* CameraManager.swift in Sources */,
@@ -1240,7 +1270,8 @@
 				943677542DF67F0E0052A36F /* RMProgressBarNode.swift in Sources */,
 				9436775A2DF6E3300052A36F /* CharacterTaskSystem+Cutting.swift in Sources */,
 				946E54452E1FE4D2008A841B /* ECS+UISystem.swift in Sources */,
-				944B55472E14EBF10006D639 /* NodeBuilder+SaveArea.swift in Sources */,
+				944B55472E14EBF10006D639 /* NodeBuilder+Storage.swift in Sources */,
+				9467A22E2E4051CA0097734D /* GrowingInfoView.swift in Sources */,
 				94973BF02DC9B38C005AB8DB /* WorkPanelVM.swift in Sources */,
 				94973BB62DC087A7005AB8DB /* ECSLogger.swift in Sources */,
 				94973BDF2DC9A9D0005AB8DB /* BottomActionBar.swift in Sources */,
@@ -1269,7 +1300,7 @@
 				949FAD062DD70C370044E4E5 /* EntityFactory+Armor.swift in Sources */,
 				949FACDC2DD3483E0044E4E5 /* ComfortComponent.swift in Sources */,
 				943677692DF7C8320052A36F /* CharacterTaskSystem+AnimalHandling.swift in Sources */,
-				944B55422E14EAEF0006D639 /* EntityFactory+SaveArea.swift in Sources */,
+				944B55422E14EAEF0006D639 /* EntityFactory+Stroage.swift in Sources */,
 				9436776F2DF7C90D0052A36F /* CharacterTaskSystem+Building.swift in Sources */,
 				94973BBC2DC087A7005AB8DB /* BuildingModel.swift in Sources */,
 				946E543B2E1FDE1D008A841B /* ECS+CharacterTaskSystem.swift in Sources */,
@@ -1278,6 +1309,7 @@
 				9467A2162E3382BB0097734D /* WallComponent.swift in Sources */,
 				949FACE22DD4323F0044E4E5 /* SocialComponent.swift in Sources */,
 				949FACFA2DD5E1A50044E4E5 /* CarryingCapacityComponent.swift in Sources */,
+				9467A2322E40548B0097734D /* UISystem+Growing.swift in Sources */,
 				94B705C92DEED80300A47EE5 /* HungerSystem.swift in Sources */,
 				9436777B2DF7CAD80052A36F /* CharacterTaskSystem+Crafting.swift in Sources */,
 				9467A1FE2E31C9490097734D /* InputSystem+Normal.swift in Sources */,
@@ -1304,6 +1336,7 @@
 				9436775E2DF7C63E0052A36F /* CharacterTaskSystem+Fire.swift in Sources */,
 				946577D12DCD990C005D34F3 /* BaseScene.swift in Sources */,
 				94B705BE2DE93EBB00A47EE5 /* TileMapResource.swift in Sources */,
+				9467A2342E40564C0097734D /* NodeBuilder+Growing.swift in Sources */,
 				94973BBF2DC087A7005AB8DB /* SKTexture+Utils.swift in Sources */,
 				94973BC02DC087A7005AB8DB /* RenderSystem.swift in Sources */,
 				944B55312E1279660006D639 /* EntityFactory+wood.swift in Sources */,
@@ -1379,6 +1412,7 @@
 				946577C42DCCB304005D34F3 /* EntityFactory.swift in Sources */,
 				949FAD022DD5F7B60044E4E5 /* ArmorComponent.swift in Sources */,
 				949FACCA2DD2F05D0044E4E5 /* BlockedActionComponent.swift in Sources */,
+				9467A2292E404CF40097734D /* EntityFactory+Growing.swift in Sources */,
 				94973BCC2DC087A7005AB8DB /* System.swift in Sources */,
 				94973BEA2DC9B036005AB8DB /* BottomActionBarVM.swift in Sources */,
 				946E54412E1FE2E2008A841B /* ECS+PathfindingSystem.swift in Sources */,
@@ -1405,11 +1439,13 @@
 				94973C1A2DCC50E4005AB8DB /* EntityData.swift in Sources */,
 				94B705DA2DF134D600A47EE5 /* UISystem.swift in Sources */,
 				94973BF92DC9F1F3005AB8DB /* DBManager+BasicInfo.swift in Sources */,
+				9467A2302E4052990097734D /* GrowingInfoTableView.swift in Sources */,
 				94B705A32DE6DEE400A47EE5 /* TalkCell.swift in Sources */,
 				94973BEE2DC9B384005AB8DB /* WorkPanelView.swift in Sources */,
 				94973BE32DC9ACE9005AB8DB /* UIScreen+Extensions.swift in Sources */,
 				944B55392E1382440006D639 /* NodeBuilder+Weapon.swift in Sources */,
 				944B553E2E13916D0006D639 /* WoodInfoView.swift in Sources */,
+				9467A2272E404A0F0097734D /* InputSystem+Growing.swift in Sources */,
 				943677512DF676800052A36F /* AnimationUtils.swift in Sources */,
 				94973BF52DC9EBAB005AB8DB /* DBManager.swift in Sources */,
 				944B55402E13945A0006D639 /* EntityNodeFactorySystem.swift in Sources */,

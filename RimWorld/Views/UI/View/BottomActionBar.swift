@@ -31,6 +31,7 @@ class BottomActionBar: UIView {
         planBtnBuild.isHidden = !planBtn.isSelected
         planBtnSaveArea.isHidden = !planBtn.isSelected
         plantBtnRemove.isHidden = !planBtn.isSelected
+        planBtnGrowing.isHidden = !planBtn.isSelected
     }
     
     
@@ -38,6 +39,7 @@ class BottomActionBar: UIView {
         planBtnBuild.isHidden = true
         planBtnSaveArea.isHidden = true
         plantBtnRemove.isHidden = true
+        planBtnGrowing.isHidden = true
     }
     
     func setupUI() {
@@ -46,6 +48,7 @@ class BottomActionBar: UIView {
         addSubview(planBtnSaveArea)
         addSubview(planBtnBuild)
         addSubview(plantBtnRemove)
+        addSubview(planBtnGrowing)
     }
     
     func setupLayout() {
@@ -67,10 +70,16 @@ class BottomActionBar: UIView {
             make.bottom.equalTo(planBtn.snp.top).offset(-5)
             make.height.equalTo(planBtn.snp.height)
         }
-        planBtnBuild.snp.makeConstraints { make in
+        planBtnGrowing.snp.makeConstraints { make in
             make.left.equalTo(workBtn.snp.right)
             make.width.equalTo(60.0)
             make.bottom.equalTo(planBtnSaveArea.snp.top).offset(-5)
+            make.height.equalTo(planBtn.snp.height)
+        }
+        planBtnBuild.snp.makeConstraints { make in
+            make.left.equalTo(workBtn.snp.right)
+            make.width.equalTo(60.0)
+            make.bottom.equalTo(planBtnGrowing.snp.top).offset(-5)
             make.height.equalTo(planBtn.snp.height)
         }
         plantBtnRemove.snp.makeConstraints { make in
@@ -83,6 +92,7 @@ class BottomActionBar: UIView {
         planBtnSaveArea.isHidden = true
         planBtnBuild.isHidden = true
         plantBtnRemove.isHidden = true
+        planBtnGrowing.isHidden = true
     }
     
     
@@ -117,6 +127,12 @@ class BottomActionBar: UIView {
         return btn
     }()
     
+    lazy var planBtnGrowing:UIButton = {
+        let btn = UIButton(type: .custom)
+        styleButton(sender: btn, text: textAction("PlantZone"))
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 12.0)
+        return btn
+    }()
     
     
     

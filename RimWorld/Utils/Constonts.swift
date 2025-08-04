@@ -90,6 +90,8 @@ let kTaskQueueComponent = "TaskQueueComponent"
 let kMoveComponent = "MoveComponent"
 /// 存储区域
 let kStorageInfoComponent = "StorageInfoComponent"
+/// 种植区域
+let kGrowInfoComponent = "GrowInfoComponent"
 /// 蓝图组件
 let kBlueprintComponent = "BlueprintComponent"
 /// 分类组件
@@ -156,6 +158,7 @@ let componentTypeMap: [String: Decodable.Type] = [
     kBlueprintComponent:BlueprintComponent.self,
     kCategorizationComponent:CategorizationComponent.self,
     kWallComponent:WallComponent.self,
+    kGrowInfoComponent:GrowInfoComponent.self,
 ]
 
 // MARK: - 实体类型 -
@@ -197,3 +200,4 @@ let kYueFei = "YueFei"
 
 // MARK: - 区域 -
 let kStorageArea = "StorageArea"
+let kGrowingArea = "GrowingArea"

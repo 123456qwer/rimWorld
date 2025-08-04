@@ -386,15 +386,25 @@ extension BaseScene: AreaSelectProvider {
     
         if yCount <= 0 || xCount <= 0 { return }
         
-        let params =  StorageParams(
-            size: areaSize
-        )
         
-        /// 创建对应实体
-        RMEventBus.shared.requestCreateEntity(type: kStorageArea,
-                                              point: areaPoint,
-                                              params: params)
+        var type = ""
+        var params:EntityCreationParams?
         
+        if gameContext.currentMode == .storage {
+            /// 仓库
+            params = StorageParams( size: areaSize )
+            type = kStorageArea
+        }else if gameContext.currentMode == .growing {
+            /// 种植区域
+            params = GrowingParams(size: areaSize, cropType: .rice)
+            type = kGrowingArea
+        }
+        
+        
+        RMEventBus.shared.requestCreateEntity(type: type,
+                                             point: areaPoint,
+                                            params: params!)
+       
         
         for y in 0...Int(yCount - 1) {
             for x in 0...Int(xCount - 1) {
