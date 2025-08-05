@@ -96,6 +96,8 @@ let kGrowInfoComponent = "GrowInfoComponent"
 let kBlueprintComponent = "BlueprintComponent"
 /// 分类组件
 let kCategorizationComponent = "CategorizationComponent"
+/// 食物组件
+let kFoodInfoComponent = "FoodInfoComponent"
 /// 墙组件
 let kWallComponent = "WallComponent"
 
@@ -159,6 +161,7 @@ let componentTypeMap: [String: Decodable.Type] = [
     kCategorizationComponent:CategorizationComponent.self,
     kWallComponent:WallComponent.self,
     kGrowInfoComponent:GrowInfoComponent.self,
+    kFoodInfoComponent:FoodInfoComponent.self,
 ]
 
 // MARK: - 实体类型 -
@@ -170,6 +173,9 @@ let kWeapon = "weapon"
 let kArmor = "armor"
 /// 树
 let kTree = "tree"
+/// 苹果树
+let kAppleTree = "AppleTree"
+
 /// 蓝图
 let kBlueprint = "bluePrint"
 

@@ -17,13 +17,14 @@ final class PlantBasicInfoComponent: TableCodable, Component {
     /// 植物纹理
     var plantTexture:String = ""
     /// 是否可以砍伐
-    var canChop:Bool = false
-    /// 是否正在被人砍伐
-    var choppedEntityID = 0
+    var canChop: Bool = false
+    /// 是否可以收获
+    var canHarvest: Bool = false
 
+    
     /// 收货后可获得的最大数量
     var harvestYield:Int = 25
-    /// 成熟度
+    /// 成熟度（设置成熟度到一定值后可以收获）
     var growthPercent:Float = 0.0
     
     /// 成长速度
@@ -46,6 +47,7 @@ final class PlantBasicInfoComponent: TableCodable, Component {
         case health
         case currentHealth
         case canChop
+        case canHarvest
         case harvestYield
         case growthPercent
         case growthSpeed

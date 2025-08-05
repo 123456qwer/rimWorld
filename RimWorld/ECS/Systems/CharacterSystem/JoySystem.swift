@@ -42,7 +42,7 @@ class JoySystem: System {
                 joyComponent.current = max(0, joyComponent.current)
                 
                 if joyComponent.current < joyComponent.threshold {
-                    ECSLogger.log("娱乐值小于临界点，需要玩了！")
+                    RMEventBus.shared.requestRelaxTask(entity: entity)
                 }
                 
             }

@@ -87,7 +87,8 @@ class WorkPanelVM: NSObject {
     }
     
     func entityWorkType(index: Int) -> WorkType? {
-        let allCases = WorkType.allCases
+        var allCases = WorkType.allCases
+        allCases.remove(at: 0)
         guard index >= 0 && index < allCases.count else { return nil }
         return allCases[index]
     }

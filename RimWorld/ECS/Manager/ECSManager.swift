@@ -96,6 +96,10 @@ class ECSManager {
             case .buildingTask(let entity):
                 self.addBuildTask(entity)
                 
+                /// 创建睡觉任务
+            case .sleepTask(let entity):
+                self.addSleepTask(entity)
+                
                 /// 执行任务
             case .doTask(let entityID, let task):
                 self.doTask(entityID: entityID, task:task)
@@ -133,6 +137,11 @@ class ECSManager {
             case .moveStop(_): break
             case .updateAllSystem(_,_): break
                 
+          
+            case .eatTask(_):
+                break
+            case .relaxTask(_):
+                break
             }
         }
     

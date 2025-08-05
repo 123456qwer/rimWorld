@@ -33,6 +33,7 @@ extension TaskSystem {
                             targetEntityID: entity.entityID,
                             executorEntityID: 0)
         allTaskQueue.append(task)
+        assignTask(executorEntity: entity)
         return task
     }
     

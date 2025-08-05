@@ -31,12 +31,15 @@ extension ECSManager {
     }
     
     /// 添加建造任务
-    func addBuildTask (_ entity: RMEntity){
+    func addBuildTask (_ entity: RMEntity) {
         systemManager.getSystem(ofType: TaskSystem.self)?.addBuildTask(entity)
     }
     
 
-
+    /// 添加睡觉任务
+    func addSleepTask (_ entity: RMEntity) {
+        systemManager.getSystem(ofType: TaskSystem.self)?.addSleepTask(entity)
+    }
  
   
     

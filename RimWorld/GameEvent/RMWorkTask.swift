@@ -11,9 +11,14 @@ import Foundation
 /// 任务
 class WorkTask: Hashable {
     
-    /// 任务类型
+    /// 任务类型 （通用）
     var type: WorkType
-  
+    
+    /// 例如，可能是建造过程中生成的搬运任务，那么这个任务真实等级是建造
+    var realType: WorkType
+    
+    /// 任务类型 （高优先级，默认是无）
+    var hightType: HightWorkType = .None
     
     /// 休息任务
     var restingTask: RestingTask = RestingTask()
@@ -61,7 +66,7 @@ class WorkTask: Hashable {
         self.type = type
         self.targetEntityID = targetEntityID
         self.executorEntityID = executorEntityID
-        
+        self.realType = type
     }
 }
 

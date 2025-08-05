@@ -34,6 +34,11 @@ extension TaskSystem {
         /// 然后遍历当前任务清单
         for task in allTaskQueue {
             
+            /// 这种任务只能自己执行
+            if (task.type == .Rest || task.hightType == .Sleep || task.hightType == .Eat || task.hightType == .Relax) && task.targetEntityID != executorEntity.entityID {
+                continue
+            }
+            
             if EntityAbilityTool.ableForceSwitchTask(entity: executorEntity, task: task) {
                 
                 task.isCancel = false
@@ -85,8 +90,8 @@ extension TaskSystem {
         
         /// 在按任务优先级排序
         allTaskQueue.sort {
-            let p1 = EntityInfoTool.workPriority(entity: entity, workType: $0.type)
-            let p2 = EntityInfoTool.workPriority(entity: entity, workType: $1.type)
+            let p1 = EntityInfoTool.workPriority(entity: entity, workType: $0.realType)
+            let p2 = EntityInfoTool.workPriority(entity: entity, workType: $1.realType)
 
             // 优先级为 0 或负数的排在最后
             if p1 <= 0 && p2 <= 0 {
@@ -310,7 +315,10 @@ extension TaskSystem {
                     task?.haulingTask.needMaxCount = needHaulCount
                     /// 设置搬运目的地
                     task?.haulingTask.targetId = blueE.entityID
-
+                    
+                    /// 实际等级是建造
+                    task?.realType = .Building
+                    
                     /// 设置数量
                     alreadyHaulDic[targetEntity.entityID] = actualCount
                     
@@ -321,7 +329,6 @@ extension TaskSystem {
 
                 }
                 
-
             }
 
         }

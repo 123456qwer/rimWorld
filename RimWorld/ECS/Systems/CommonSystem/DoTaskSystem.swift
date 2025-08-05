@@ -16,9 +16,10 @@ class DoTaskSystem: System {
     
    
     ///  KEY：执行人entityID
-    var cuttingTasks :[Int : WorkTask] = [:]
-    var restingTasks :[Int : WorkTask] = [:]
-    var buildingTasks:[Int : WorkTask] = [:]
+    var cuttingTasks  :[Int : WorkTask] = [:]
+    var restingTasks  :[Int : WorkTask] = [:]
+    var buildingTasks :[Int : WorkTask] = [:]
+    var sleepingTasks :[Int : WorkTask] = [:]
 //    var growingTasks :[Int : WorkTask] = [:]
 
 
@@ -51,6 +52,13 @@ class DoTaskSystem: System {
                                  tick: elapsedTicks)
         }
         
+        /// 睡觉
+        for (executorEntityID, workTask) in sleepingTasks {
+            executeSleepingAction(executorEntityID: executorEntityID,
+                                  task: workTask,
+                                  tick: elapsedTicks)
+        }
+        
         /// 建造
         for (executorEntityID, workTask) in buildingTasks {
             executeBuildingAction(executorEntityID: executorEntityID,
@@ -75,6 +83,9 @@ class DoTaskSystem: System {
     /// 强制结束任务
     func forceSwitchTask(_ entity: RMEntity,
                          _ task: WorkTask) {
+        
+      
+        
         switch task.type {
             
         case .Cutting:
@@ -85,9 +96,20 @@ class DoTaskSystem: System {
             self.cancelBuildingAction(entity: entity, task: task)
         case .Growing:
             self.cancelGrowingAction(entity: entity, task: task)
-            
         default:
             print("默认方法")
+        }
+        
+        
+        switch task.hightType {
+        case .Eat:
+            break
+        case .Sleep:
+            break
+        case .Relax:
+            break
+        case .None:
+            break
         }
     }
     
@@ -104,20 +126,28 @@ class DoTaskSystem: System {
             
         case .Cutting:
             setCuttingAction(entity: entity, task: task)
-            
         case .Rest:
             setRestingAction(entity: entity, task: task)
-            
         case .Hauling:
             setHaulingAction(entity: entity, task: task)
-            
         case .Building:
             setBuildingAction(entity: entity, task: task)
-            
         case .Growing:
             setGrowingAction(entity: entity, task: task)
             
         default:
+            break
+        }
+        
+        
+        switch task.hightType {
+        case .Eat:
+            break
+        case .Sleep:
+            setSleepingAction(entity: entity, task: task)
+        case .Relax:
+            break
+        case .None:
             break
         }
     }

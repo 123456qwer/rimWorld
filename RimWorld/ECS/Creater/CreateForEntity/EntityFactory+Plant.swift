@@ -29,6 +29,30 @@ extension EntityFactory {
         saveEntity(entity: entity)
     }
     
+    
+    func appleTree (point: CGPoint) {
+        
+        let entity = RMEntity()
+        entity.type = kAppleTree
+        
+        let treeComponent = PlantBasicInfoComponent()
+        let treeName = ["apple"].randomElement()!
+        treeComponent.plantTexture = treeName
+        
+        let foodComponent = FoodInfoComponent()
+        
+        let pointComponent = PositionComponent()
+        pointComponent.x = point.x
+        pointComponent.y = point.y
+        pointComponent.z = maxZpoint - point.y
+        
+        entity.addComponent(pointComponent)
+        entity.addComponent(treeComponent)
+        entity.addComponent(foodComponent)
+        
+        saveEntity(entity: entity)
+    }
+    
     /// 水稻
     func createRice (point: CGPoint,
                      params: PlantParams,

@@ -81,8 +81,8 @@ class EnergySystem: System {
                 if energyComponent.zeroSend { continue }
                 energyComponent.zeroSend = true
                 
-                /// 休息任务
-                RMEventBus.shared.requestRestTask(entity: value, mustRest: true)
+                /// 睡觉任务
+                RMEventBus.shared.requestSleepTask(entity: value)
                 
             }else if energyComponent.current <= threshold {
 
@@ -90,8 +90,8 @@ class EnergySystem: System {
                 if energyComponent.alreadySend { continue }
                 energyComponent.alreadySend = true
                 
-                /// 休息任务
-                RMEventBus.shared.requestRestTask(entity: value, mustRest: false)
+                /// 睡觉任务
+                RMEventBus.shared.requestSleepTask(entity: value)
             }
         }
         

@@ -14,39 +14,51 @@ enum GameEvent {
     
     /// 点击暂停
     case pause
-    
     case speed1
     case speed2
     case speed3
     
+    // MARK: - InfoView相关操作
     /// 点击实体
     case didSelectEntity(entity:RMEntity,nodes:[Any])
     /// 点击空白
     case clickEmpty
+    /// 刷新所有系统
+    case updateAllSystem(entitys: [RMEntity],
+                         entityMap: [Int : RMBaseNode])
+
+    /// 关闭游戏时，删除一些进行时中的依赖关系（比如携带了树木）
+    case terminateForRemoveTaskOwner
     
-    /// 修改树是否可以砍伐的状态
-    case cuttingTask(entity:RMEntity, canChop:Bool)
     
-    /// 增加休息任务
-    case restTask(entity: RMEntity, mustRest: Bool)
+    // MARK: - 对实体的增删改查 -
+    /// 删除实体
+    case removeEntity(entity: RMEntity)
+    /// 创建实体
+    case createEntity(type: String,
+                      point: CGPoint,
+                      param: EntityCreationParams)
+    /// 添加实体
+    case addEntity(entity: RMEntity)
+    /// 修改实体归属
+    case reparentEntity(entity:RMEntity,
+                        z:CGFloat,
+                        point:CGPoint)
+    /// 修改存储实体
+    case changeStorage(entity:RMEntity)
+    /// 修改角色优先级
+    case updatePriorityEntity(entity: RMEntity,
+                              workType: WorkType)
     
-    /// 搬运任务
-    case haulingTask(entity: RMEntity)
+
     
-    /// 建造任务
-    case buildingTask(entity: RMEntity)
-    
-    /// 将实体从可搬运列表里移除
-    case removeFromHaulCategory(entity: RMEntity)
-    
+    // MARK: - 任务系统通用事件 -
     /// 去做任务
     case doTask(entityID: Int, task: WorkTask)
     /// 完成任务
     case completeTask(entityID: Int, task: WorkTask)
     /// 切换任务，停止之前的寻路
     case forceCancelTask(entity: RMEntity, task: WorkTask)
-    
-    
     /// 寻路事件
     case findingPath(entity: RMEntity,
                      startPoint:CGPoint,
@@ -54,50 +66,42 @@ enum GameEvent {
                      task:WorkTask)
     /// 移动事件
     case move(points:[CGPoint], entity: RMEntity, task: WorkTask)
-    
     /// 移动停止（比如终止任务等）
     case moveStop(entity: RMEntity)
-    
     /// 移动结束事件（完成移动）
     case moveEnd(entity: RMEntity,
                  task: WorkTask)
-    
     /// 重置此类型的搬运任务
     case reloadHaulingTasks(materialType:MaterialType)
+    /// 将实体从可搬运列表里移除
+    case removeFromHaulCategory(entity: RMEntity)
     
-    /// 删除实体
-    case removeEntity(entity: RMEntity)
     
-    /// 创建实体
-    case createEntity(type: String,
-                      point: CGPoint,
-                      param: EntityCreationParams)
     
-    /// 添加实体
-    case addEntity(entity: RMEntity)
     
-    /// 修改实体归属
-    case reparentEntity(entity:RMEntity,
-                        z:CGFloat,
-                        point:CGPoint)
+    // MARK: - 玩家可控制等级的任务 -
+    /// 休息任务
+    case restTask(entity: RMEntity, mustRest: Bool)
+    /// 建造任务
+    case buildingTask(entity: RMEntity)
+    /// 砍伐任务
+    case cuttingTask(entity:RMEntity, canChop:Bool)
+    /// 搬运任务
+    case haulingTask(entity: RMEntity)
     
-    /// 修改存储实体
-    case changeStorage(entity:RMEntity)
     
-    /// 修改角色优先级
-    case updatePriorityEntity(entity: RMEntity,
-                              workType: WorkType)
     
-    /// 刷新所有系统
-    case updateAllSystem(entitys: [RMEntity],
-                         entityMap: [Int : RMBaseNode])
     
+    // MARK: - 玩家不可控任务 -
+    /// 睡觉
+    case sleepTask(entity: RMEntity)
     /// 角色休息状态改变
     case restStatusChange(entity: RMEntity, isRest:Bool)
-    
-    /// 关闭游戏时，删除一些进行时中的依赖关系（比如携带了树木）
-    case terminateForRemoveTaskOwner
-    
+    /// 吃饭
+    case eatTask(entity: RMEntity)
+    /// 娱乐
+    case relaxTask(entity: RMEntity)
+
 }
 
 /// 事件总线
@@ -181,7 +185,7 @@ extension RMEventBus {
 
 /// 优先级任务（休息、搬运、研究等）
 extension RMEventBus {
-    /// 休息任务
+    /// 休息任务（并非Sleep,而是受伤后，主动修养）
     func requestRestTask(entity: RMEntity, mustRest: Bool) {
         self.publish(.restTask(entity: entity, mustRest: mustRest))
     }
@@ -196,6 +200,22 @@ extension RMEventBus {
     /// 建造任务
     func requestBuildTask (_ entity: RMEntity) {
         self.publish(.buildingTask(entity: entity))
+    }
+}
+
+/// 高优先级任务（吃饭，睡觉，娱乐）
+extension RMEventBus {
+    /// 睡觉任务
+    func requestSleepTask(entity: RMEntity) {
+        self.publish(.sleepTask(entity: entity))
+    }
+    /// 吃饭任务
+    func requestEatTask(entity: RMEntity) {
+        self.publish(.eatTask(entity: entity))
+    }
+    /// 娱乐任务
+    func requestRelaxTask(entity: RMEntity) {
+        self.publish(.relaxTask(entity: entity))
     }
 }
 

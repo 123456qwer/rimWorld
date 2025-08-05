@@ -11,8 +11,8 @@ import UIKit
 class WorkPanelView: UIView {
     
     var clickWorkLevelBlock:((UIButton) -> Void)?
-    let workTypes: [WorkType] = WorkType.allCases
-    let workTypeStrings: [String] = WorkType.allCases.map { $0.rawValue }
+    var workTypes: [WorkType] = WorkType.allCases
+    var workTypeStrings: [String] = WorkType.allCases.map { $0.rawValue }
     let userWidth:CGFloat = 60.0
     
 
@@ -21,7 +21,8 @@ class WorkPanelView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        workTypes.remove(at: 0)
+        workTypeStrings.remove(at: 0)
         //        setupUI()
         //        setupLayout()
     }

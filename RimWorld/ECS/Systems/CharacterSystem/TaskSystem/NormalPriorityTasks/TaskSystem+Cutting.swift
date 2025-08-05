@@ -20,10 +20,7 @@ extension TaskSystem {
                 ECSLogger.log("此树没有基础组件：\(tree.name)")
                 continue
             }
-            
-            /// 初始化时，直接所有都可以砍
-            treeComponent.choppedEntityID = 0
-            
+    
             /// 砍伐任务
             if treeComponent.canChop == true {
                 addCuttingTask(tree)

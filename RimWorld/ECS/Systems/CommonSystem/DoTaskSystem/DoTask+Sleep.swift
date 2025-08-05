@@ -1,29 +1,28 @@
 //
-//  DoTask+Rest.swift
+//  DoTask+Sleep.swift
 //  RimWorld
 //
-//  Created by wu on 2025/7/7.
+//  Created by wu on 2025/8/5.
 //
 
 import Foundation
-
-/// Rest
+/// Sleep
 extension DoTaskSystem {
 
     /// 强制停止休息任务
-    func cancelRestingAction(entity: RMEntity,
+    func cancelSleepingAction(entity: RMEntity,
                              task: WorkTask){
         
     }
     
     
-    func setRestingAction(entity: RMEntity, task: WorkTask) {
+    func setSleepingAction(entity: RMEntity, task: WorkTask) {
         EntityActionTool.startSleeping(entity: entity)
-        restingTasks[entity.entityID] = task
+        sleepingTasks[entity.entityID] = task
     }
     
     /// 开始休息
-    func executeRestingAction (executorEntityID: Int,
+    func executeSleepingAction (executorEntityID: Int,
                                task: WorkTask,
                                tick: Int) {
         
@@ -52,7 +51,7 @@ extension DoTaskSystem {
        
         
         /// 休息完
-        restingTasks.removeValue(forKey: executorEntityID)
+        sleepingTasks.removeValue(forKey: executorEntityID)
        
         energyComponent.current = energyComponent.total
         energyComponent.isResting = false

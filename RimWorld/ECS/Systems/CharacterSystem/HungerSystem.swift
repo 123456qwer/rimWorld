@@ -48,7 +48,7 @@ class HungerSystem: System {
             nutritionComponent.current = max(0, nutritionComponent.current)
             /// 饱食度小于临界值，需要吃饭了
             if nutritionComponent.threshold > nutritionComponent.current {
-                ECSLogger.log("饱食度小于临界值，该吃饭了！")
+                RMEventBus.shared.requestEatTask(entity: entity)
             }
             
         }

@@ -190,6 +190,9 @@ enum WorkPriority: Int, Comparable, Codable {
 
 /// 工作类型
 enum WorkType: String, CaseIterable, Codable {
+    
+    /// 默认无
+    case None
     /// 灭火
     case Firefighting
     /// 就医
@@ -231,6 +234,21 @@ enum WorkType: String, CaseIterable, Codable {
     /// 研究
     case Research
 }
+
+/// 高优先级工作类型
+enum HightWorkType: String, CaseIterable, Codable {
+    
+    /// 吃饭
+    case Eat
+    /// 睡觉
+    case Sleep
+    /// 休息
+    case Relax
+    
+    /// 无
+    case None
+}
+
 
 /// 人物技能
 enum SkillType: String, CaseIterable {

@@ -13,16 +13,25 @@ final class NodeBuilder: NSObject {
     /// 方法映射表
     lazy var selMap:[String: (RMEntity) -> RMBaseNode] = [
         
+        /// 角色
         kCharacter: buildCharacter,
+        /// 武器
         kWeapon: buildWeapon,
+        /// 树
         kTree:buildTree,
+        /// 苹果树
+        kAppleTree:appleTree,
+        /// 木头
         kWood:buildWood,
+        /// 存储区域
         kStorageArea:storage,
+        /// 种植区域
         kGrowingArea:growing,
-        
+        /// 蓝图
         kBlueprint:blueprint,
-        
+        /// 木头墙
         kWoodWall:woodWall,
+        /// 水稻
         kRice:rice,
         
     ]

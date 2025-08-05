@@ -702,18 +702,13 @@ struct EntityAbilityTool {
         }
         
         let currentType = currentTask.type
-        let useCurrentType = currentTask.type
+        let useCurrentType = currentTask.realType
         
         let newType = task.type
-        let useNewType = task.type
+        let useNewType = task.realType
         
         /// 任务类型完全相同，不能替换
         if useCurrentType == useNewType {
-            return false
-        }
-        
-        /// 当前正在休息中，不可替换（除非未来支持玩家强制替换）
-        if currentTask.type == .Rest {
             return false
         }
         
@@ -1006,6 +1001,8 @@ struct EntityInfoTool {
             return workComponent.cleaning
         case .Research:
             return workComponent.research
+        case .None:
+            return 0
         }
     }
     
@@ -1148,7 +1145,7 @@ struct EntityActionTool {
     }
     
     /// 设置开始休息状态
-    static func startRest(entity: RMEntity){
+    static func startSleeping(entity: RMEntity){
         
         guard let energyComponent = entity.getComponent(ofType: EnergyComponent.self) else {
             ECSLogger.log("开始休息动画失败，未找到执行人能量组件👻👻👻")
@@ -1207,6 +1204,8 @@ struct EntityActionTool {
             return textAction("正在清洁")
         case .Research:
             return textAction("正在研究")
+        case .None:
+            return textAction("未知")
         }
     }
     
@@ -1281,7 +1280,7 @@ struct EntityNodeTool {
     }
     
     /// 休息
-    static func restAnimation(entity: RMEntity,
+    static func sleepingAniamtion(entity: RMEntity,
                               tick: Int) {
         guard let executorNode = entity.node else { return }
         
@@ -1301,7 +1300,7 @@ struct EntityNodeTool {
     }
     
     /// 停止休息
-    static func endRestAnimation(entity: RMEntity){
+    static func endSleepingAnimation(entity: RMEntity){
         guard let executorNode = entity.node else { return }
         executorNode.zLabel.isHidden = true
     }

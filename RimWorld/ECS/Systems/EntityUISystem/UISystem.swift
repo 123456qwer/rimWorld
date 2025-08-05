@@ -82,7 +82,9 @@ class UISystem: System {
         if entity.type == kCharacter {
             /// 点击角色
             showCharacterInfo(node: node, nodes: nodes)
-        }else if entity.type == kTree || entity.type == kRice{
+        }else if entity.type == kTree ||
+                    entity.type == kRice ||
+                    entity.type == kAppleTree{
             /// 点击植物
             showPlantInfo(node: node, nodes: nodes)
         }else if entity.type == kWood {

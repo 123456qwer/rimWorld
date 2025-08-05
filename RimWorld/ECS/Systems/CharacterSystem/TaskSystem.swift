@@ -148,6 +148,19 @@ extension TaskSystem {
             return
         }
         
+
+        
+        switch task.hightType {
+        case .Eat:
+            return
+        case .Relax:
+            return
+        case .Sleep:
+            return
+        default:
+            break
+        }
+        
         /// 执行任务
         switch task.type {
         case .Firefighting:
@@ -195,10 +208,12 @@ extension TaskSystem {
             ECSLogger.log("开始清洁！")
         case .Research:
             ECSLogger.log("开始研究！")
+        case .None:
+            break
         }
-        
-
     }
+    
+    
     
     /// 完成任务
     func completeTask(entityID: Int,

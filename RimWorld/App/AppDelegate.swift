@@ -90,6 +90,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     EntityFactory.shared.tree(point: CGPoint(x: pointX, y: pointY))
                 }
                 
+                /// 苹果树
+                if Int.random(in: 0...100) < 2 {
+                    EntityFactory.shared.appleTree(point: CGPoint(x: pointX, y: pointY))
+                }
+                
             }
         }
     }
