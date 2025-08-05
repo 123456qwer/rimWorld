@@ -151,18 +151,21 @@ class ECSManager {
         /// 能量系统
         systemManager.getSystem(ofType: EnergySystem.self)?.energyUpdate(currentTick: tick)
         
+        /// 饥饿值系统
+        systemManager.getSystem(ofType: HungerSystem.self)?.hungerUpdate(currentTick: tick)
+        
         /// 植物成长系统
         systemManager.getSystem(ofType: PlantGrowthSystem.self)?.growUpdate(currentTick: tick)
         
 //        /// 任务系统
-//        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.eventUpdate()
+//        systemManager.getSystem(ofType: TaskSystem.self)?.eventUpdate()
         
     }
  
     
     /// 退出游戏删除一些运行时依赖
     func terminateRemoveOnwer() {
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.terminateAction()
+        systemManager.getSystem(ofType: TaskSystem.self)?.terminateAction()
     }
 }
 
@@ -251,7 +254,7 @@ extension ECSManager {
         
         
         /// 初始化任务系统
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.setupTasks()
+        systemManager.getSystem(ofType: TaskSystem.self)?.setupTasks()
         
        
         /// 初始化不能行走的路径
@@ -280,7 +283,7 @@ extension ECSManager {
         /// 任务终止，动画系统
         doTaskSystemForceSwitchTask(entity, task)
         /// 任务终止，任务系统
-        characterTaskSystemForceSwitchTask(entity: entity, task: task)
+        TaskSystemForceSwitchTask(entity: entity, task: task)
     }
     
     

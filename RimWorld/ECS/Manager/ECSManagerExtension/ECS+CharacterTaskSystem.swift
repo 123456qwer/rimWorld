@@ -1,5 +1,5 @@
 //
-//  ECS+CharacterTaskSystem.swift
+//  ECS+TaskSystem.swift
 //  RimWorld
 //
 //  Created by wu on 2025/7/10.
@@ -14,25 +14,25 @@ extension ECSManager {
     func addRestTask(_ entity: RMEntity,
                      _ mustRest:Bool){
         
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.addRestTask(entity, mustRest)
+        systemManager.getSystem(ofType: TaskSystem.self)?.addRestTask(entity, mustRest)
     }
     
     /// 添加搬运任务
     func addHaulingTask(_ entity: RMEntity){
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.addHaulingTask(entity)
+        systemManager.getSystem(ofType: TaskSystem.self)?.addHaulingTask(entity)
     }
     
     /// 添加砍伐任务
     func addOrCancelCuttingTask (_ entity: RMEntity,
                                  _ canChop: Bool) {
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.addOrCancelCuttingTask(entity, canChop)
+        systemManager.getSystem(ofType: TaskSystem.self)?.addOrCancelCuttingTask(entity, canChop)
         /// UI显示是否有斧头
         self.treeStatusChange(entity,canChop: canChop)
     }
     
     /// 添加建造任务
     func addBuildTask (_ entity: RMEntity){
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.addBuildTask(entity)
+        systemManager.getSystem(ofType: TaskSystem.self)?.addBuildTask(entity)
     }
     
 
@@ -42,48 +42,48 @@ extension ECSManager {
     
     /// 执行任务
     func doTask(entityID: Int, task: WorkTask) {
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.doTask(entityID: entityID, task: task)
+        systemManager.getSystem(ofType: TaskSystem.self)?.doTask(entityID: entityID, task: task)
     }
     
     /// 完成任务
     func completeTask(entityID: Int,
                       task: WorkTask) {
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.completeTask(entityID: entityID, task: task)
+        systemManager.getSystem(ofType: TaskSystem.self)?.completeTask(entityID: entityID, task: task)
     }
     
     /// 强制转换任务
-    func characterTaskSystemForceSwitchTask(entity: RMEntity,
+    func TaskSystemForceSwitchTask(entity: RMEntity,
                                             task: WorkTask){
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.forceSwitchTask(entity: entity, task: task)
+        systemManager.getSystem(ofType: TaskSystem.self)?.forceSwitchTask(entity: entity, task: task)
     }
     
     /// 修改任务优先级
     func updatePriorityEntity(entity: RMEntity,
                               workType: WorkType) {
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.updatePriorityEntity(entity: entity, workType: workType)
+        systemManager.getSystem(ofType: TaskSystem.self)?.updatePriorityEntity(entity: entity, workType: workType)
     }
     
     /// 修改存储实体
     func changeSaveAreaEntity(_ entity: RMEntity) {
-        systemManager.getSystem(ofType:CharacterTaskSystem.self)?.refreshHaulingTasksForChangeSaveArea(entity)
+        systemManager.getSystem(ofType:TaskSystem.self)?.refreshHaulingTasksForChangeSaveArea(entity)
     }
     
     
     /// 任务系统新增实体
     func characterTaskAdd(entity: RMEntity) {
         
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.addForRefreshTasks(entity: entity)
+        systemManager.getSystem(ofType: TaskSystem.self)?.addForRefreshTasks(entity: entity)
     }
     
     /// 任务系统删除实体
     func characterTaskRemove(entity: RMEntity) {
         
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.removeForRefreshTasks(entity: entity)
+        systemManager.getSystem(ofType: TaskSystem.self)?.removeForRefreshTasks(entity: entity)
     }
     
     /// 重置此类型的搬运任务
     func reloadHaulingTasks(materialType: MaterialType) {
-        systemManager.getSystem(ofType: CharacterTaskSystem.self)?.reloadHaulTaskWithMaterial(material: materialType)
+        systemManager.getSystem(ofType: TaskSystem.self)?.reloadHaulTaskWithMaterial(material: materialType)
     }
     
     

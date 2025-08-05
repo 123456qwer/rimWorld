@@ -1,5 +1,5 @@
 //
-//  CharacterTaskSystem+Cleaning.swift
+//  TaskSystem+Cleaning.swift
 //  RimWorld
 //
 //  Created by wu on 2025/6/10.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// 清洁
-extension CharacterTaskSystem {
+extension TaskSystem {
     func generateCleaningTask () {
         
     }

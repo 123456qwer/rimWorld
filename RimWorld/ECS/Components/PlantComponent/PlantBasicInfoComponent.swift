@@ -24,10 +24,10 @@ final class PlantBasicInfoComponent: TableCodable, Component {
     /// 收货后可获得的最大数量
     var harvestYield:Int = 25
     /// 成熟度
-    var growthPercent:Float = 0.5
+    var growthPercent:Float = 0.0
     
     /// 成长速度
-    var growthSpeed:Float = 0.001
+    var growthSpeed:Float = 0.0001
     
     /// 砍伐生命值
     var health:Double = 100

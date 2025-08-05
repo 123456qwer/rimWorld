@@ -1,5 +1,5 @@
 //
-//  CharacterTaskSystem+Supervise.swift
+//  TaskSystem+Supervise.swift
 //  RimWorld
 //
 //  Created by wu on 2025/6/10.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// 监管
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     func generateSuperviseTask () {
         

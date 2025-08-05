@@ -48,8 +48,8 @@ class GrowingInfoTableView: UITableView, UITableViewDelegate, UITableViewDataSou
         self.delegate = self
         self.dataSource = self
         
-        self.layer.borderColor = UIColor.white.cgColor
-        self.layer.borderWidth = 2.0
+//        self.layer.borderColor = UIColor.white.cgColor
+//        self.layer.borderWidth = 2.0
         
         self.register(UINib(nibName: "SaveAreaCell", bundle: nil), forCellReuseIdentifier: "SaveAreaCell")
     }
@@ -60,6 +60,22 @@ class GrowingInfoTableView: UITableView, UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.rimWorldCrops.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,7 +90,7 @@ class GrowingInfoTableView: UITableView, UITableViewDelegate, UITableViewDataSou
         if crop.crop == selectType {
             cell.selectButton.isSelected = true
         }else {
-            cell.selectButton.isSelected = true
+            cell.selectButton.isSelected = false
         }
         
         cell.selectBlock = {[weak self] isSelect in

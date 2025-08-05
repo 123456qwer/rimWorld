@@ -40,6 +40,19 @@ struct WoodParams: EntityCreationParams {
     var saveIndex: Int = -1
 }
 
+/// 植物
+struct PlantParams: EntityCreationParams {
+    /// 种植区域ID
+    let ownerId: Int
+    
+    /// 类型
+    let cropType: RimWorldCrop
+    
+    /// 生成位置
+    let saveKey: Int
+}
+
+
 /// 墙参数
 struct WallParams: EntityCreationParams {
     /// 类型材质
@@ -79,6 +92,8 @@ class EntityNodeFactorySystem: System {
             createWall(point, params: params as! WallParams)
         }else if type == kGrowingArea {
             createGrowingArea(point, params: params as! GrowingParams)
+        }else if type == kRice {
+            createRice(point, params: params as! PlantParams)
         }
         
     }
@@ -110,15 +125,18 @@ class EntityNodeFactorySystem: System {
         createNodeAction(entity)
     }
     
+    /// 创建水稻
+    func createRice(_ point: CGPoint, params: PlantParams) {
+        let entity = EntityFactory.shared.createRice(point: point, params: params,ecsManager: ecsManager)
+        createNodeAction(entity)
+    }
+    
     /// 创建建造蓝图
     func createBlueprint(_ point:CGPoint, params: BlueprintParams) {
         
         let entity = EntityFactory.shared.createBlueprint(point: point,params: params)
         createNodeAction(entity)
     }
-    
-    
-    
     
     
     /// 创建node和设置实体

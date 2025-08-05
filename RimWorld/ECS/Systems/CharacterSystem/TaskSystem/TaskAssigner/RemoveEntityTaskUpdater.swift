@@ -8,7 +8,7 @@
 import Foundation
 
 /// 移除实体，处理任务逻辑
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 移除实体
     func removeForRefreshTasks(entity: RMEntity) {
@@ -28,6 +28,9 @@ extension CharacterTaskSystem {
         case kBlueprint:
             /// 移除蓝图实体
             removeBlueprint(targetEntity: entity)
+        case kGrowingArea:
+            /// 移除种植区域
+            removeGrowArea(targetEntity: entity)
         default:
             break
         }
@@ -55,6 +58,16 @@ extension CharacterTaskSystem {
         }
     }
     
+    
+ 
+}
+
+
+
+
+
+// MARK: - 蓝图取消任务相关 -
+extension TaskSystem {
     
     /// 移除蓝图
     func removeBlueprint(targetEntity: RMEntity) {
@@ -112,17 +125,31 @@ extension CharacterTaskSystem {
         
         return points
     }
+    
 }
 
-
-
-
-
-// MARK: - 蓝图取消任务相关 -
-extension CharacterTaskSystem {
+// MARK: - 种植区域取消任务相关 -
+extension TaskSystem {
     
-    func blueprintRemoveForHauling(task:WorkTask) {
+    /// 移除种植区域
+    func removeGrowArea(targetEntity: RMEntity) {
+        guard let growComponent = targetEntity.getComponent(ofType: GrowInfoComponent.self) else { return }
         
+        let allEntities = growComponent.saveEntities
+        let growPoint = PositionTool.nowPosition(targetEntity)
+        let points = PositionTool.getAreaAllPoints(size: growComponent.size)
+        
+        /// 将子视图坐标转换成父视图坐标
+        
+        for (index,cropID) in allEntities {
+            let cropEntity = ecsManager.getEntity(cropID) ?? RMEntity()
+            let cropPoint = points[index]
+            let pointForScene = CGPoint(x: growPoint.x + cropPoint.x, y: growPoint.y + cropPoint.y)
+            PositionTool.setPosition(entity:cropEntity, point: pointForScene)
+            OwnerShipTool.removeOwner(owned: cropEntity, ecsManager: ecsManager)
+            cropEntity.removeComponent(ofType: OwnedComponent.self)
+            
+            RMEventBus.shared.requestReparentEntity(entity: cropEntity, z: 0, point: pointForScene)
+        }
     }
-    
 }

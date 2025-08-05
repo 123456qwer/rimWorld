@@ -7,10 +7,13 @@
 
 import Foundation
 import UIKit
+import Combine
 
 /// 需求
 class CharacterMoodStatusView: UIView {
     
+    var cancellables = Set<AnyCancellable>()
+
     private let bg = UIView()
     private let leftContentView   = UIView()
     private let rightContentView  = UIView()
@@ -62,32 +65,31 @@ class CharacterMoodStatusView: UIView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(updateHunger), name: .RMGameTimeHungerTick, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(updateEnergy), name: .RMGameTimeUpdateEnergy, object: nil)
-      
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(updateJoy), name: .RMGameTimeJoyTick, object: nil)
+   
+        RMInfoViewEventBus.shared.publisher().sink {[weak self] event in
+            guard let self = self else {return}
+            switch event {
+            case .updateMoodInfo:
+                self.updateHunger()
+                self.updateEnergy()
+                self.updateJoy()
+            default:
+                break
+            }
 
+        }.store(in: &cancellables)
+        
         setupUI()
-        
-        
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
-        
-
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
+  
     /// 饥饿值
-    @objc func updateHunger() {
+    func updateHunger() {
         
         guard let entity = weakEntity else { return }
         
@@ -103,7 +105,7 @@ class CharacterMoodStatusView: UIView {
     }
    
     /// 休息值
-    @objc func updateEnergy() {
+    func updateEnergy() {
         
         guard let entity = weakEntity else { return }
         /// 休息值
@@ -117,7 +119,7 @@ class CharacterMoodStatusView: UIView {
     }
     
     /// 娱乐值
-    @objc func updateJoy() {
+    func updateJoy() {
         
         guard let entity = weakEntity else { return }
         
@@ -287,9 +289,12 @@ class CharacterMoodStatusView: UIView {
         if let nutritionComponent = entity.getComponent(ofType: NutritionComponent.self) {
             currentNutrition = nutritionComponent.current
             maxNutrition = nutritionComponent.total
+            let p1 = nutritionComponent.threshold / maxNutrition
+            nutritionBarView.setThreshold(percents: [p1])
         }
         
         nutritionBarView.updateProgressBar(total: maxNutrition, current: currentNutrition, statusName: "")
+        
         
         /// 休息值
         var currentRest = 100.0
@@ -297,8 +302,13 @@ class CharacterMoodStatusView: UIView {
         if let resstComponent = entity.getComponent(ofType: EnergyComponent.self) {
             currentRest = resstComponent.current
             maxRest = resstComponent.total
+            let p1 = resstComponent.threshold1 / maxRest
+            let p2 = resstComponent.threshold2 / maxRest
+            let p3 = resstComponent.threshold3 / maxRest
+            restBarView.setThreshold(percents: [p1,p2,p3])
         }
         restBarView.updateProgressBar(total: maxRest, current: currentRest, statusName: "")
+        
         
         /// 娱乐值
         var currentJoy = 100.0
@@ -306,13 +316,17 @@ class CharacterMoodStatusView: UIView {
         if let joyComponent = entity.getComponent(ofType: JoyComponent.self) {
             currentJoy = joyComponent.current
             maxJoy = joyComponent.total
+            let p1 = joyComponent.threshold
+            joyBarView.setThreshold(percents: [p1])
         }
         joyBarView.updateProgressBar(total: maxJoy, current: currentJoy, statusName: "")
+        
         
         
         aestheticBarView.updateProgressBar(total: 100, current: 35, statusName: "")
         comfortBarView.updateProgressBar(total: 100, current: 60, statusName: "")
         outdoorBarView.updateProgressBar(total: 100, current: 80, statusName: "")
+        
         
         let color = UIColor.ml_color(hexValue: 0x4cdffb)
         nutritionBarView.changeFillBarColor(color: color)

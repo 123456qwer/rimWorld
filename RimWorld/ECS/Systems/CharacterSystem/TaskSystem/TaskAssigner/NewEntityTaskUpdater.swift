@@ -8,7 +8,7 @@
 import Foundation
 
 /// 新增实体，处理任务逻辑
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 新增实体
     func addForRefreshTasks(entity: RMEntity){
@@ -26,6 +26,9 @@ extension CharacterTaskSystem {
         case kBlueprint:
             /// 新增蓝图实体
             addBlueprint(targetEntity: entity)
+        case kGrowingArea:
+            /// 新增种植区域
+            addGrowingArea(targetEntity: entity)
             
         default:
             break
@@ -95,7 +98,7 @@ extension CharacterTaskSystem {
     
     
     /// 新增可搬运实体
-    func addHaulingTasks(targetEntity: RMEntity){
+    func addHaulingTasks(targetEntity: RMEntity) {
         
         /// 未有搬运人
         let ableToHaul = ecsManager.entitiesAbleToHaul()
@@ -187,5 +190,17 @@ extension CharacterTaskSystem {
         
     }
     
+    
+    /// 新增种植区域实体
+    func addGrowingArea(targetEntity: RMEntity) {
+        
+        let growAllKeys = EntityInfoTool.getGrowingAllKeys(targetEntity: targetEntity)
+        
+        for index in growAllKeys {
+            addGrowingTask(targetEntity,emptyIndex: index)
+        }
+        
+        assignTask()
+    }
     
 }

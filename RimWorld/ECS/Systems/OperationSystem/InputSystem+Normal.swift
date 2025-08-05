@@ -75,10 +75,12 @@ extension InputSystem {
                     maxZNode = node
                 }
                 
+                /*
                 /// 被持有的node先简单忽略处理
                 if (rmNode.rmEntity?.getComponent(ofType: OwnedComponent.self)) != nil {
                     continue
                 }
+                 */
                 
                 // 点击node
                 RMEventBus.shared.requestClickEntity(rmNode.rmEntity ?? RMEntity(), nodes)

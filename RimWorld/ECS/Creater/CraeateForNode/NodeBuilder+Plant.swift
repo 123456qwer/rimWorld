@@ -63,4 +63,22 @@ extension NodeBuilder {
         
         return RMBaseNode()
     }
+    
+    /// 水稻
+    func rice (_ entity: RMEntity) -> RMBaseNode {
+        
+        if let plantComponent = entity.getComponent(ofType: PlantBasicInfoComponent.self), let pointComponent = entity.getComponent(ofType: PositionComponent.self) {
+            
+            /// 750 750
+            let node = RMBaseNode(texture: TextureManager.shared.getTexture(plantComponent.plantTexture), color: .black, size: CGSize(width: tileSize, height: tileSize))
+            node.name = "plant"
+            node.position = CGPoint(x: pointComponent.x, y: pointComponent.y)
+            node.zPosition = pointComponent.z
+            
+            return node
+        }
+        
+        
+        return RMBaseNode()
+    }
 }

@@ -1,5 +1,5 @@
 //
-//  CharacterTaskSystem+Rest.swift
+//  TaskSystem+Rest.swift
 //  RimWorld
 //
 //  Created by wu on 2025/6/10.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// 修养
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 修养任务
     func generateRestTask() {
@@ -76,7 +76,7 @@ extension CharacterTaskSystem {
 
 
 /// 执行修养任务
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 执行修养任务
     func doRestTask(_ task: WorkTask) {
@@ -121,7 +121,7 @@ extension CharacterTaskSystem {
 
 
 /// 中断任务
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     
     func cancelRest(entity: RMEntity, task: WorkTask) {

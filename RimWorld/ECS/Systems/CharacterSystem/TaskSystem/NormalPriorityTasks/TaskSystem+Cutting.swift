@@ -1,5 +1,5 @@
 //
-//  CharacterTaskSystem+Cutting.swift
+//  TaskSystem+Cutting.swift
 //  RimWorld
 //
 //  Created by wu on 2025/6/9.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// 砍伐
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 砍伐任务
     func generateCuttingTask() {
@@ -96,7 +96,7 @@ extension CharacterTaskSystem {
 
 
 /// 执行砍伐任务
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 执行砍伐任务
     func doCuttingTask (_ task: WorkTask) {
@@ -125,7 +125,7 @@ extension CharacterTaskSystem {
 
 
 /// 结束任务
-extension CharacterTaskSystem {
+extension TaskSystem {
     /// 中断砍伐任务
     func cancelCutting (entityID: Int,
                         task: WorkTask) {

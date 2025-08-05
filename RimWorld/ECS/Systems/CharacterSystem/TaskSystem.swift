@@ -1,5 +1,5 @@
 //
-//  CharacterTaskSystem.swift
+//  TaskSystem.swift
 //  RimWorld
 //
 //  Created by wu on 2025/6/5.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import SpriteKit
 
-class CharacterTaskSystem: System {
+class TaskSystem: System {
 
     
     /// 所有任务
@@ -111,7 +111,7 @@ class CharacterTaskSystem: System {
 }
 
 //MARK: - 实体变动 -
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 修改任务优先级
     func updatePriorityEntity(entity: RMEntity,
@@ -129,7 +129,7 @@ extension CharacterTaskSystem {
 
 
 //MARK: - 任务 -
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 执行任务
     func doTask(entityID: Int, task: WorkTask) {
@@ -174,6 +174,7 @@ extension CharacterTaskSystem {
             doBuildingTask(task)
         case .Growing:
             ECSLogger.log("开始种植！")
+            doGrowingTask(task)
         case .Mining:
             ECSLogger.log("开始采矿！")
         case .Cutting:
@@ -196,13 +197,7 @@ extension CharacterTaskSystem {
             ECSLogger.log("开始研究！")
         }
         
-        /*
-        /// 遍历所有任务，但是只执行第一个任务
-        for task in taskComponent.tasks {
-            /// 只执行第一个任务
-            return
-        }
-         */
+
     }
     
     /// 完成任务
@@ -269,7 +264,7 @@ extension CharacterTaskSystem {
 
 
 //MARK: - TOOL ACTION -
-extension CharacterTaskSystem {
+extension TaskSystem {
     
 
     /// 工具方法： 删除正在做的任务（doTaskQueue）

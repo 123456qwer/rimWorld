@@ -8,7 +8,7 @@
 import Foundation
 
 /// 重置任务
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 因为蓝图搬运过程中可能会改变对应数量，所以需要重置已经创建的任务
     func reloadHaulTaskWithMaterial(material: MaterialType) {

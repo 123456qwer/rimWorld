@@ -32,6 +32,7 @@ class PlantGrowthSystem: System {
         let tick = Float(elapsedTicks)
         for plant in plants {
             guard let plantComponent = plant.getComponent(ofType: PlantBasicInfoComponent.self) else { continue }
+            
             plantComponent.growthPercent += plantComponent.growthSpeed * tick
             plantComponent.growthPercent = min(1, plantComponent.growthPercent)
             /// 为1以后，直接移除，不需要在成长了

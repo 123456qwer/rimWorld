@@ -10,8 +10,8 @@ import UIKit
 
 extension UISystem {
     
-    /// 树信息
-    func showTreeInfo(node: RMBaseNode, nodes: [Any]) {
+    /// 植物信息
+    func showPlantInfo(node: RMBaseNode, nodes: [Any]) {
         guard let entity = node.rmEntity else {
             ECSLogger.log("此node：\(node.name ?? "")，未有实体")
             return
@@ -19,7 +19,7 @@ extension UISystem {
         
         removeAllInfoAction()
         
-        treeInfoView       = TreeInfoView()
+        treeInfoView       = PlantInfoView()
         
         UIApplication.ml_keyWindow?.addSubview(treeInfoView!)
         

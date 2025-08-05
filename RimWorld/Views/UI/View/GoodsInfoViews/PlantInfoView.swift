@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Combine
 
-class TreeInfoView: UIView {
+class PlantInfoView: UIView {
     
     var cancellables = Set<AnyCancellable>()
 

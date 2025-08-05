@@ -113,6 +113,123 @@ struct PositionTool {
     }
     
     
+    /// 根据size获取区域的所有坐标点
+    static func getAreaAllPoints(size: CGSize) -> [CGPoint] {
+        
+        let cols = Int(size.width / tileSize)
+        let rows = Int(size.height / tileSize)
+        // 存储区域总格子数
+        let totalTiles = abs(cols * rows)
+        
+        var points:[CGPoint] = []
+        for index in 0..<totalTiles {
+            let col = index % cols
+            let row = index / cols
+
+            let x = CGFloat(col) * tileSize + 16.0
+            let y = CGFloat(row) * -tileSize - 16.0
+            points.append(CGPoint(x: x, y: y))
+        }
+        return points
+    }
+    
+    /// 根据Index获取位置
+    static func growAreaCropPoint(area: RMEntity, key: Int) -> CGPoint {
+        guard let saveComponent = area.getComponent(ofType: GrowInfoComponent.self) else {
+            ECSLogger.log("获取存储实体空余坐标时，此存储区域没有基础存储控件！💀💀💀")
+            return .zero
+        }
+        
+        let size = saveComponent.size
+        
+        let cols = Int(size.width / tileSize)
+        let rows = Int(size.height / tileSize)
+        // 存储区域总格子数
+        let totalTiles = abs(cols * rows)
+        
+        var points:[CGPoint] = []
+        for index in 0..<totalTiles {
+            let col = index % cols
+            let row = index / cols
+
+            let x = CGFloat(col) * tileSize + 16.0
+            let y = CGFloat(row) * -tileSize - 16.0
+            points.append(CGPoint(x: x, y: y))
+        }
+
+        if key < points.count {
+            return points[key]
+        }else {
+            return .zero
+        }
+    }
+    
+    /// 当前存储实体空余的坐标
+    static func growAreaEmptyPosition( saveArea: RMEntity) -> CGPoint {
+        
+        guard let saveComponent = saveArea.getComponent(ofType: GrowInfoComponent.self) else {
+            ECSLogger.log("获取存储实体空余坐标时，此存储区域没有基础存储控件！💀💀💀")
+            return .zero
+        }
+        
+        let size = saveComponent.size
+        
+        let cols = Int(size.width / tileSize)
+        let rows = Int(size.height / tileSize)
+        // 存储区域总格子数
+        let totalTiles = abs(cols * rows)
+        
+        let saveEntities = saveComponent.saveEntities
+        
+        /// 空闲位置
+        var point = CGPoint(x: 0, y: 0)
+        
+        /// 返回空余空间
+        for index in 0..<totalTiles {
+            if saveEntities[index] != nil {
+                let col = index % cols
+                let row = index / cols
+
+                let x = CGFloat(col) * tileSize + 16.0
+                let y = CGFloat(row) * -tileSize - 16.0
+                point = CGPoint(x: x, y: y)
+                break
+            }
+        }
+        
+        /// 转换成实际位置
+        let savePoint = PositionTool.nowPosition(saveArea)
+        let returnPoint = CGPoint(x: savePoint.x + point.x, y: savePoint.y + point.y)
+        
+        
+        return returnPoint
+    }
+    
+    /// 种植空闲的位置
+    static func growAreaEmptyIndex( saveArea: RMEntity) -> Int {
+        guard let saveComponent = saveArea.getComponent(ofType: GrowInfoComponent.self) else {
+            ECSLogger.log("获取存储实体空余坐标时，此存储区域没有基础存储控件！💀💀💀")
+            return 0
+        }
+        
+        let size = saveComponent.size
+        
+        let cols = Int(size.width / tileSize)
+        let rows = Int(size.height / tileSize)
+        // 存储区域总格子数
+        let totalTiles = abs(cols * rows)
+        
+        let saveEntities = saveComponent.saveEntities
+    
+        /// 返回空余空间
+        for index in 0..<totalTiles {
+            if saveEntities[index] != nil {
+                return index
+            }
+        }
+        
+        return 0
+    }
     
 }
 
@@ -281,6 +398,7 @@ struct OwnerShipTool {
         carryComponent.currentLoad -= (ownedHaulComponent.weight * Double(ownedHaulComponent.currentCount))
         
     }
+
 
     
     /// 设置拥有者的entityID队列
@@ -474,6 +592,13 @@ struct EntityAbilityTool {
         }
         return false
     }
+    
+    static func isRestingNow(_ entity: RMEntity) -> Bool {
+        guard let restComponent = entity.getComponent(ofType: EnergyComponent.self) else {
+            return false
+        }
+        return restComponent.isResting
+    }
    
     /// 可以被砍伐的实体
     static func ableToBeCut(_ entity: RMEntity) -> Bool {
@@ -537,6 +662,23 @@ struct EntityAbilityTool {
         }
         return nil
     }
+    
+    /// 种植区域，可被种植的实体
+    static func ableToBeGrow(_ entity: RMEntity) -> Bool {
+        guard let growComponent = entity.getComponent(ofType: GrowInfoComponent.self) else {
+            return false
+        }
+        return true
+    }
+    
+    /// 可执行吃饭任务
+    static func ableToEat(_ entity: RMEntity) -> Bool {
+        guard let nutritionComponent = entity.getComponent(ofType: NutritionComponent.self) else {
+            return false
+        }
+        return true
+    }
+  
     
     /// 素材材料等
     static func ableToBeMaterial(_ entity: RMEntity) -> CategorizationComponent? {
@@ -875,6 +1017,29 @@ struct EntityInfoTool {
         let yield = Float(plantComponent.harvestYield) * plantComponent.growthPercent
         return max(1, Int(yield.rounded(.down)))
     }
+    
+    
+    /// 获取种植区域的所有keys
+    static func getGrowingAllKeys (targetEntity: RMEntity) -> [Int] {
+        guard let areaComponent = targetEntity.getComponent(ofType: GrowInfoComponent.self) else {
+            ECSLogger.log("此种植区域没有基础存储控件！💀💀💀")
+            return []
+        }
+        
+        let size = areaComponent.size
+        
+        let cols = Int(size.width / tileSize)
+        let rows = Int(size.height / tileSize)
+        
+        // 存储区域总格子数
+        let totalTiles = abs(cols * rows)
+        var keys:[Int] = []
+        for index in 0..<totalTiles {
+            keys.append(index)
+        }
+        
+        return keys
+    }
 }
 
 
@@ -1053,6 +1218,9 @@ struct EntityActionTool {
         DBManager.shared.updateEventLog(eventLog)
     }
     
+    
+    
+   
 
     
     /// 比较任务优先级

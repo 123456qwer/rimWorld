@@ -24,6 +24,10 @@ class EntityCategorizatonSystem: System {
     var entitiesAbleToRest: Set<RMEntity> = []
     /// 可执行建造任务的实体
     var entitiesAbleToBuild: [RMEntity] = []
+    /// 可执行吃饭任务的实体
+    var entitiesAbleToEat: Set<RMEntity> = []
+    
+
     /// 所有可以执行任务的实体
     var entitiesAbleToTask: Set<RMEntity> = []
     
@@ -33,10 +37,12 @@ class EntityCategorizatonSystem: System {
     var entitiesAbleToBeCut: Set<RMEntity> = []
     /// 可以被搬运的实体
     var entitiesAbleToBeHaul: Set<RMEntity> = []
-    
+    /// 可以被种植的实体<种植区域>
+    var entitiesAbleToBeGrowArea: Set<RMEntity> = []
     
     // MARK: - 可以生长的植物实体 -
     var entitiesAbleToPlantGrowth: Set<RMEntity> = []
+    
     
     
     // MARK: - 建筑蓝图 -
@@ -45,6 +51,13 @@ class EntityCategorizatonSystem: System {
     
     // MARK: - 建造素材等 -
     var entitiesMaterial: [MaterialType:Set<RMEntity>] = [:]
+    
+    
+    
+    /// 休息中的角色
+    var restEntities:[Int : RMEntity] = [:]
+    /// 非休息中的橘色
+    var unRestEntities:[Int: RMEntity] = [:]
     
     
     init(ecsManger: ECSManager) {
@@ -88,6 +101,10 @@ class EntityCategorizatonSystem: System {
         entitiesAbleToBeHaul.remove(entity)
         entitiesAbleToBeCut.remove(entity)
         entitiesAbleToPlantGrowth.remove(entity)
+        entitiesAbleToBeGrowArea.remove(entity)
+        entitiesAbleToEat.remove(entity)
+        restEntities.removeValue(forKey: entity.entityID)
+        unRestEntities.removeValue(forKey: entity.entityID)
         
         /// 删除建筑蓝图
         if let component = EntityAbilityTool.ableToBeBuild(entity) {
@@ -166,7 +183,14 @@ class EntityCategorizatonSystem: System {
         
         if EntityAbilityTool.ableToRest(entity) {
             entitiesAbleToRest.insert(entity)
+            
+            if EntityAbilityTool.isRestingNow(entity) {
+                restEntities[entity.entityID] = entity
+            }else {
+                unRestEntities[entity.entityID] = entity
+            }
         }
+        
         
         if EntityAbilityTool.ableBuild(entity) {
             entitiesAbleToBuild.append(entity)
@@ -200,6 +224,14 @@ class EntityCategorizatonSystem: System {
             entitiesAbleToPlantGrowth.insert(entity)
         }
         
+        if EntityAbilityTool.ableToBeGrow(entity) {
+            entitiesAbleToBeGrowArea.insert(entity)
+        }
+        
+        if EntityAbilityTool.ableToEat(entity) {
+            entitiesAbleToEat.insert(entity)
+        }
+
         if let component = EntityAbilityTool.ableToBeBuild(entity) {
             entitiesBlueprint[component.key] = entity
         }
@@ -217,5 +249,17 @@ class EntityCategorizatonSystem: System {
     /// 移除可生长的植物
     func removeGrowthEntity(_ entity: RMEntity) {
         entitiesAbleToPlantGrowth.remove(entity)
+    }
+    
+    /// 修改休息状态
+    func restStatusAction(entity: RMEntity,
+                          isRest: Bool){
+        if isRest {
+            unRestEntities.removeValue(forKey: entity.entityID)
+            restEntities[entity.entityID] = entity
+        }else {
+            restEntities.removeValue(forKey: entity.entityID)
+            unRestEntities[entity.entityID] = entity
+        }
     }
 }

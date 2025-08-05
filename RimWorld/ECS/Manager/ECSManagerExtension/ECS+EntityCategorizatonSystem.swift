@@ -65,6 +65,16 @@ extension ECSManager {
         return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesAbleToPlantGrowth ?? []
     }
     
+    /// 所有种植区域
+    func entitiesAbleToBeGrowArea() -> Set<RMEntity> {
+        return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesAbleToBeGrowArea ?? []
+    }
+    
+    /// 可以执行吃命令的实体
+    func entitiesAbleToEat() -> Set<RMEntity> {
+        return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesAbleToEat ?? []
+    }
+    
     /// 所有可以被建造的蓝图实体
     func entitiesAbleToBeBuild() -> [TilePoint:RMEntity] {
         return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesBlueprint ?? [:]
@@ -80,6 +90,16 @@ extension ECSManager {
         systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.removeHaulEntity(entity: entity)
     }
     
+    /// 正在休息的实体
+    func isRestingEntities() -> [Int: RMEntity] {
+        return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.restEntities ?? [:]
+    }
+    
+    /// 没休息的实体
+    func unRestingEntities() -> [Int: RMEntity] {
+        return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.unRestEntities ?? [:]
+    }
+    
     /// 添加实体，分区需要刷新
     func categorizationAdd(entity: RMEntity) {
         /// 分类系统，新加存储区域
@@ -90,4 +110,10 @@ extension ECSManager {
     func categorizationRemove(entity: RMEntity) {
         systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.removeEntity(entity)
     }
+    
+    /// 修改休息状态
+    func restStatusAction(entity: RMEntity, isRest: Bool){
+        systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.restStatusAction(entity: entity, isRest: isRest)
+    }
+    
 }

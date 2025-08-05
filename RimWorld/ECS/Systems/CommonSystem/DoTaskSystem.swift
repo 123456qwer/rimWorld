@@ -19,8 +19,10 @@ class DoTaskSystem: System {
     var cuttingTasks :[Int : WorkTask] = [:]
     var restingTasks :[Int : WorkTask] = [:]
     var buildingTasks:[Int : WorkTask] = [:]
- 
+//    var growingTasks :[Int : WorkTask] = [:]
 
+
+    
     /// 记录上次处理的tick
     var lastProcessedTick: Int = 0
     
@@ -63,6 +65,8 @@ class DoTaskSystem: System {
                                  tick: elapsedTicks)
         }
         
+       
+        
     
     }
 
@@ -79,6 +83,8 @@ class DoTaskSystem: System {
             self.cancelHaulingAction(entity: entity,task: task)
         case .Building:
             self.cancelBuildingAction(entity: entity, task: task)
+        case .Growing:
+            self.cancelGrowingAction(entity: entity, task: task)
             
         default:
             print("默认方法")
@@ -107,6 +113,9 @@ class DoTaskSystem: System {
             
         case .Building:
             setBuildingAction(entity: entity, task: task)
+            
+        case .Growing:
+            setGrowingAction(entity: entity, task: task)
             
         default:
             break

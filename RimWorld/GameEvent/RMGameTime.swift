@@ -36,9 +36,7 @@ final class RMGameTime: TableCodable,Component {
     
     /// 饥饿值掉落tick
     let ticksPerHunger = 400
-    
 
-    
     /// 娱乐值
     let ticksPerJoyDrop = 600
     
@@ -59,23 +57,7 @@ final class RMGameTime: TableCodable,Component {
                if oldHour != newHour {
                    NotificationCenter.default.post(name: .RMGameTimeHourChange, object: self)
                }
-               
-               /// 饥饿值
-               let oldHunger = oldValue / ticksPerHunger
-               let newHunger = totalTicks / ticksPerHunger
-               if oldHunger != newHunger {
-                   NotificationCenter.default.post(name: .RMGameTimeHungerTick, object: self)
-               }
-               
-             
-               
-               // 娱乐掉落值
-               let oldJoy = oldValue / ticksPerJoyDrop
-               let newJoy = totalTicks / ticksPerJoyDrop
-               if oldJoy != newJoy {
-                   NotificationCenter.default.post(name: .RMGameTimeJoyTick, object: self)
-               }
-               
+         
            }
        }
     

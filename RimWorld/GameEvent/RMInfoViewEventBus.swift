@@ -19,6 +19,9 @@ enum InfoViewEvent {
     
     /// 刷新蓝图
     case updateBlueprint
+    
+    /// 刷新需求界面
+    case updateMoodInfo
 }
 
 /// 事件总线（针对显示的view）
@@ -50,4 +53,9 @@ extension RMInfoViewEventBus {
     func requestTreeInfo(){
         RMInfoViewEventBus.shared.publish(.updatePlant)
     }
+    /// 刷新需求心情界面
+    func requestReloadMoodStatusInfo(){
+        RMInfoViewEventBus.shared.publish(.updateMoodInfo)
+    }
+    
 }

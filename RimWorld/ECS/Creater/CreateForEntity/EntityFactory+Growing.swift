@@ -17,7 +17,7 @@ extension EntityFactory {
         
         let areaComponent = GrowInfoComponent()
         areaComponent.size = params.size
-        areaComponent.type = params.cropType.rawValue
+        areaComponent.cropType = params.cropType.rawValue
         
         let pointComponent = PositionComponent()
         pointComponent.x = point.x

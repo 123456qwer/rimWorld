@@ -11,31 +11,31 @@
 		943677512DF676800052A36F /* AnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677502DF676800052A36F /* AnimationUtils.swift */; };
 		943677542DF67F0E0052A36F /* RMProgressBarNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677532DF67F0E0052A36F /* RMProgressBarNode.swift */; };
 		943677582DF6AFFD0052A36F /* RMGameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677572DF6AFFD0052A36F /* RMGameContext.swift */; };
-		9436775A2DF6E3300052A36F /* CharacterTaskSystem+Cutting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677592DF6E3300052A36F /* CharacterTaskSystem+Cutting.swift */; };
-		9436775C2DF7C2830052A36F /* CharacterTaskSystem+Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436775B2DF7C2830052A36F /* CharacterTaskSystem+Rest.swift */; };
-		9436775E2DF7C63E0052A36F /* CharacterTaskSystem+Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436775D2DF7C63E0052A36F /* CharacterTaskSystem+Fire.swift */; };
-		943677602DF7C6A90052A36F /* CharacterTaskSystem+SelfCare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436775F2DF7C6A90052A36F /* CharacterTaskSystem+SelfCare.swift */; };
-		943677632DF7C74F0052A36F /* CharacterTaskSystem+Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677622DF7C74F0052A36F /* CharacterTaskSystem+Doctor.swift */; };
-		943677652DF7C78D0052A36F /* CharacterTaskSystem+Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677642DF7C78D0052A36F /* CharacterTaskSystem+Basic.swift */; };
-		943677672DF7C7E70052A36F /* CharacterTaskSystem+Supervise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677662DF7C7E70052A36F /* CharacterTaskSystem+Supervise.swift */; };
-		943677692DF7C8320052A36F /* CharacterTaskSystem+AnimalHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677682DF7C8320052A36F /* CharacterTaskSystem+AnimalHandling.swift */; };
-		9436776B2DF7C8850052A36F /* CharacterTaskSystem+Cooking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436776A2DF7C8850052A36F /* CharacterTaskSystem+Cooking.swift */; };
-		9436776D2DF7C8C70052A36F /* CharacterTaskSystem+Hunting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436776C2DF7C8C70052A36F /* CharacterTaskSystem+Hunting.swift */; };
-		9436776F2DF7C90D0052A36F /* CharacterTaskSystem+Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436776E2DF7C90D0052A36F /* CharacterTaskSystem+Building.swift */; };
-		943677712DF7C9410052A36F /* CharacterTaskSystem+Growing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677702DF7C9410052A36F /* CharacterTaskSystem+Growing.swift */; };
-		943677732DF7C9830052A36F /* CharacterTaskSystem+Mining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677722DF7C9830052A36F /* CharacterTaskSystem+Mining.swift */; };
-		943677752DF7C9F00052A36F /* CharacterTaskSystem+Smithing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677742DF7C9EF0052A36F /* CharacterTaskSystem+Smithing.swift */; };
-		943677772DF7CA710052A36F /* CharacterTaskSystem+Tailoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677762DF7CA710052A36F /* CharacterTaskSystem+Tailoring.swift */; };
-		943677792DF7CA9D0052A36F /* CharacterTaskSystem+Art.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677782DF7CA9D0052A36F /* CharacterTaskSystem+Art.swift */; };
-		9436777B2DF7CAD80052A36F /* CharacterTaskSystem+Crafting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436777A2DF7CAD80052A36F /* CharacterTaskSystem+Crafting.swift */; };
-		9436777D2DF7CB110052A36F /* CharacterTaskSystem+Hauling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436777C2DF7CB110052A36F /* CharacterTaskSystem+Hauling.swift */; };
-		9436777F2DF7CB400052A36F /* CharacterTaskSystem+Cleaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436777E2DF7CB400052A36F /* CharacterTaskSystem+Cleaning.swift */; };
-		943677812DF7CB6B0052A36F /* CharacterTaskSystem+Research.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677802DF7CB6B0052A36F /* CharacterTaskSystem+Research.swift */; };
+		9436775A2DF6E3300052A36F /* TaskSystem+Cutting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677592DF6E3300052A36F /* TaskSystem+Cutting.swift */; };
+		9436775C2DF7C2830052A36F /* TaskSystem+Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436775B2DF7C2830052A36F /* TaskSystem+Rest.swift */; };
+		9436775E2DF7C63E0052A36F /* TaskSystem+Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436775D2DF7C63E0052A36F /* TaskSystem+Fire.swift */; };
+		943677602DF7C6A90052A36F /* TaskSystem+SelfCare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436775F2DF7C6A90052A36F /* TaskSystem+SelfCare.swift */; };
+		943677632DF7C74F0052A36F /* TaskSystem+Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677622DF7C74F0052A36F /* TaskSystem+Doctor.swift */; };
+		943677652DF7C78D0052A36F /* TaskSystem+Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677642DF7C78D0052A36F /* TaskSystem+Basic.swift */; };
+		943677672DF7C7E70052A36F /* TaskSystem+Supervise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677662DF7C7E70052A36F /* TaskSystem+Supervise.swift */; };
+		943677692DF7C8320052A36F /* TaskSystem+AnimalHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677682DF7C8320052A36F /* TaskSystem+AnimalHandling.swift */; };
+		9436776B2DF7C8850052A36F /* TaskSystem+Cooking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436776A2DF7C8850052A36F /* TaskSystem+Cooking.swift */; };
+		9436776D2DF7C8C70052A36F /* TaskSystem+Hunting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436776C2DF7C8C70052A36F /* TaskSystem+Hunting.swift */; };
+		9436776F2DF7C90D0052A36F /* TaskSystem+Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436776E2DF7C90D0052A36F /* TaskSystem+Building.swift */; };
+		943677712DF7C9410052A36F /* TaskSystem+Growing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677702DF7C9410052A36F /* TaskSystem+Growing.swift */; };
+		943677732DF7C9830052A36F /* TaskSystem+Mining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677722DF7C9830052A36F /* TaskSystem+Mining.swift */; };
+		943677752DF7C9F00052A36F /* TaskSystem+Smithing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677742DF7C9EF0052A36F /* TaskSystem+Smithing.swift */; };
+		943677772DF7CA710052A36F /* TaskSystem+Tailoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677762DF7CA710052A36F /* TaskSystem+Tailoring.swift */; };
+		943677792DF7CA9D0052A36F /* TaskSystem+Art.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677782DF7CA9D0052A36F /* TaskSystem+Art.swift */; };
+		9436777B2DF7CAD80052A36F /* TaskSystem+Crafting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436777A2DF7CAD80052A36F /* TaskSystem+Crafting.swift */; };
+		9436777D2DF7CB110052A36F /* TaskSystem+Hauling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436777C2DF7CB110052A36F /* TaskSystem+Hauling.swift */; };
+		9436777F2DF7CB400052A36F /* TaskSystem+Cleaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436777E2DF7CB400052A36F /* TaskSystem+Cleaning.swift */; };
+		943677812DF7CB6B0052A36F /* TaskSystem+Research.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677802DF7CB6B0052A36F /* TaskSystem+Research.swift */; };
 		944B55312E1279660006D639 /* EntityFactory+wood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55302E1279660006D639 /* EntityFactory+wood.swift */; };
 		944B55332E12799D0006D639 /* WoodBasicInfoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55322E12799D0006D639 /* WoodBasicInfoComponent.swift */; };
 		944B55372E13820C0006D639 /* NodeBuilder+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55362E13820C0006D639 /* NodeBuilder+Character.swift */; };
 		944B55392E1382440006D639 /* NodeBuilder+Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55382E1382440006D639 /* NodeBuilder+Weapon.swift */; };
-		944B553B2E1382610006D639 /* NodeBuilder+Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B553A2E1382610006D639 /* NodeBuilder+Tree.swift */; };
+		944B553B2E1382610006D639 /* NodeBuilder+Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B553A2E1382610006D639 /* NodeBuilder+Plant.swift */; };
 		944B553E2E13916D0006D639 /* WoodInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B553D2E13916D0006D639 /* WoodInfoView.swift */; };
 		944B55402E13945A0006D639 /* EntityNodeFactorySystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B553F2E13945A0006D639 /* EntityNodeFactorySystem.swift */; };
 		944B55422E14EAEF0006D639 /* EntityFactory+Stroage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55412E14EAEF0006D639 /* EntityFactory+Stroage.swift */; };
@@ -94,6 +94,8 @@
 		9467A2302E4052990097734D /* GrowingInfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A22F2E4052990097734D /* GrowingInfoTableView.swift */; };
 		9467A2322E40548B0097734D /* UISystem+Growing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2312E40548B0097734D /* UISystem+Growing.swift */; };
 		9467A2342E40564C0097734D /* NodeBuilder+Growing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2332E40564C0097734D /* NodeBuilder+Growing.swift */; };
+		9467A2362E409C940097734D /* DoTask+Growing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2352E409C940097734D /* DoTask+Growing.swift */; };
+		9467A24F2E41F6CF0097734D /* TaskSystem+Eat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A24E2E41F6CF0097734D /* TaskSystem+Eat.swift */; };
 		946E543B2E1FDE1D008A841B /* ECS+CharacterTaskSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946E543A2E1FDE1D008A841B /* ECS+CharacterTaskSystem.swift */; };
 		946E543D2E1FE0DD008A841B /* ECS+RenderSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946E543C2E1FE0DD008A841B /* ECS+RenderSystem.swift */; };
 		946E543F2E1FE1DD008A841B /* ECS+MovementSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946E543E2E1FE1DD008A841B /* ECS+MovementSystem.swift */; };
@@ -209,14 +211,14 @@
 		94B705CE2DEEF45300A47EE5 /* JoySystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705CD2DEEF45300A47EE5 /* JoySystem.swift */; };
 		94B705D42DF01B1A00A47EE5 /* RMEventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705D32DF01B1A00A47EE5 /* RMEventBus.swift */; };
 		94B705D62DF044D900A47EE5 /* PlantBasicInfoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705D52DF044D900A47EE5 /* PlantBasicInfoComponent.swift */; };
-		94B705D82DF12D2C00A47EE5 /* EntityFactory+tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705D72DF12D2C00A47EE5 /* EntityFactory+tree.swift */; };
+		94B705D82DF12D2C00A47EE5 /* EntityFactory+Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705D72DF12D2C00A47EE5 /* EntityFactory+Plant.swift */; };
 		94B705DA2DF134D600A47EE5 /* UISystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705D92DF134D600A47EE5 /* UISystem.swift */; };
 		94B705DC2DF1446100A47EE5 /* UISystem+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705DB2DF1446100A47EE5 /* UISystem+Character.swift */; };
-		94B705E02DF1451D00A47EE5 /* UISystem+Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705DF2DF1451D00A47EE5 /* UISystem+Tree.swift */; };
-		94B705E22DF1468400A47EE5 /* TreeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705E12DF1468400A47EE5 /* TreeInfoView.swift */; };
+		94B705E02DF1451D00A47EE5 /* UISystem+Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705DF2DF1451D00A47EE5 /* UISystem+Plant.swift */; };
+		94B705E22DF1468400A47EE5 /* PlantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705E12DF1468400A47EE5 /* PlantInfoView.swift */; };
 		94B705E52DF1682C00A47EE5 /* RenderSystem+Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705E42DF1682C00A47EE5 /* RenderSystem+Tree.swift */; };
 		94B705E72DF16F2300A47EE5 /* TaskQueueComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705E62DF16F2300A47EE5 /* TaskQueueComponent.swift */; };
-		94B705E92DF173C500A47EE5 /* CharacterTaskSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705E82DF173C500A47EE5 /* CharacterTaskSystem.swift */; };
+		94B705E92DF173C500A47EE5 /* TaskSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705E82DF173C500A47EE5 /* TaskSystem.swift */; };
 		94B705EB2DF1B0E300A47EE5 /* TestScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705EA2DF1B0E300A47EE5 /* TestScene.swift */; };
 		94B705ED2DF1BCA100A47EE5 /* TestScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 94B705EC2DF1BCA100A47EE5 /* TestScene.sks */; };
 		94B705EF2DF2846E00A47EE5 /* AHeap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705EE2DF2846E00A47EE5 /* AHeap.swift */; };
@@ -232,31 +234,31 @@
 		943677502DF676800052A36F /* AnimationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtils.swift; sourceTree = "<group>"; };
 		943677532DF67F0E0052A36F /* RMProgressBarNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMProgressBarNode.swift; sourceTree = "<group>"; };
 		943677572DF6AFFD0052A36F /* RMGameContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMGameContext.swift; sourceTree = "<group>"; };
-		943677592DF6E3300052A36F /* CharacterTaskSystem+Cutting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Cutting.swift"; sourceTree = "<group>"; };
-		9436775B2DF7C2830052A36F /* CharacterTaskSystem+Rest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Rest.swift"; sourceTree = "<group>"; };
-		9436775D2DF7C63E0052A36F /* CharacterTaskSystem+Fire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Fire.swift"; sourceTree = "<group>"; };
-		9436775F2DF7C6A90052A36F /* CharacterTaskSystem+SelfCare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+SelfCare.swift"; sourceTree = "<group>"; };
-		943677622DF7C74F0052A36F /* CharacterTaskSystem+Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Doctor.swift"; sourceTree = "<group>"; };
-		943677642DF7C78D0052A36F /* CharacterTaskSystem+Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Basic.swift"; sourceTree = "<group>"; };
-		943677662DF7C7E70052A36F /* CharacterTaskSystem+Supervise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Supervise.swift"; sourceTree = "<group>"; };
-		943677682DF7C8320052A36F /* CharacterTaskSystem+AnimalHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+AnimalHandling.swift"; sourceTree = "<group>"; };
-		9436776A2DF7C8850052A36F /* CharacterTaskSystem+Cooking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Cooking.swift"; sourceTree = "<group>"; };
-		9436776C2DF7C8C70052A36F /* CharacterTaskSystem+Hunting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Hunting.swift"; sourceTree = "<group>"; };
-		9436776E2DF7C90D0052A36F /* CharacterTaskSystem+Building.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Building.swift"; sourceTree = "<group>"; };
-		943677702DF7C9410052A36F /* CharacterTaskSystem+Growing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Growing.swift"; sourceTree = "<group>"; };
-		943677722DF7C9830052A36F /* CharacterTaskSystem+Mining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Mining.swift"; sourceTree = "<group>"; };
-		943677742DF7C9EF0052A36F /* CharacterTaskSystem+Smithing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Smithing.swift"; sourceTree = "<group>"; };
-		943677762DF7CA710052A36F /* CharacterTaskSystem+Tailoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Tailoring.swift"; sourceTree = "<group>"; };
-		943677782DF7CA9D0052A36F /* CharacterTaskSystem+Art.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Art.swift"; sourceTree = "<group>"; };
-		9436777A2DF7CAD80052A36F /* CharacterTaskSystem+Crafting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Crafting.swift"; sourceTree = "<group>"; };
-		9436777C2DF7CB110052A36F /* CharacterTaskSystem+Hauling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Hauling.swift"; sourceTree = "<group>"; };
-		9436777E2DF7CB400052A36F /* CharacterTaskSystem+Cleaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Cleaning.swift"; sourceTree = "<group>"; };
-		943677802DF7CB6B0052A36F /* CharacterTaskSystem+Research.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterTaskSystem+Research.swift"; sourceTree = "<group>"; };
+		943677592DF6E3300052A36F /* TaskSystem+Cutting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Cutting.swift"; sourceTree = "<group>"; };
+		9436775B2DF7C2830052A36F /* TaskSystem+Rest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Rest.swift"; sourceTree = "<group>"; };
+		9436775D2DF7C63E0052A36F /* TaskSystem+Fire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Fire.swift"; sourceTree = "<group>"; };
+		9436775F2DF7C6A90052A36F /* TaskSystem+SelfCare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+SelfCare.swift"; sourceTree = "<group>"; };
+		943677622DF7C74F0052A36F /* TaskSystem+Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Doctor.swift"; sourceTree = "<group>"; };
+		943677642DF7C78D0052A36F /* TaskSystem+Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Basic.swift"; sourceTree = "<group>"; };
+		943677662DF7C7E70052A36F /* TaskSystem+Supervise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Supervise.swift"; sourceTree = "<group>"; };
+		943677682DF7C8320052A36F /* TaskSystem+AnimalHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+AnimalHandling.swift"; sourceTree = "<group>"; };
+		9436776A2DF7C8850052A36F /* TaskSystem+Cooking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Cooking.swift"; sourceTree = "<group>"; };
+		9436776C2DF7C8C70052A36F /* TaskSystem+Hunting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Hunting.swift"; sourceTree = "<group>"; };
+		9436776E2DF7C90D0052A36F /* TaskSystem+Building.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Building.swift"; sourceTree = "<group>"; };
+		943677702DF7C9410052A36F /* TaskSystem+Growing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Growing.swift"; sourceTree = "<group>"; };
+		943677722DF7C9830052A36F /* TaskSystem+Mining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Mining.swift"; sourceTree = "<group>"; };
+		943677742DF7C9EF0052A36F /* TaskSystem+Smithing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Smithing.swift"; sourceTree = "<group>"; };
+		943677762DF7CA710052A36F /* TaskSystem+Tailoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Tailoring.swift"; sourceTree = "<group>"; };
+		943677782DF7CA9D0052A36F /* TaskSystem+Art.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Art.swift"; sourceTree = "<group>"; };
+		9436777A2DF7CAD80052A36F /* TaskSystem+Crafting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Crafting.swift"; sourceTree = "<group>"; };
+		9436777C2DF7CB110052A36F /* TaskSystem+Hauling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Hauling.swift"; sourceTree = "<group>"; };
+		9436777E2DF7CB400052A36F /* TaskSystem+Cleaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Cleaning.swift"; sourceTree = "<group>"; };
+		943677802DF7CB6B0052A36F /* TaskSystem+Research.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Research.swift"; sourceTree = "<group>"; };
 		944B55302E1279660006D639 /* EntityFactory+wood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+wood.swift"; sourceTree = "<group>"; };
 		944B55322E12799D0006D639 /* WoodBasicInfoComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoodBasicInfoComponent.swift; sourceTree = "<group>"; };
 		944B55362E13820C0006D639 /* NodeBuilder+Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Character.swift"; sourceTree = "<group>"; };
 		944B55382E1382440006D639 /* NodeBuilder+Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Weapon.swift"; sourceTree = "<group>"; };
-		944B553A2E1382610006D639 /* NodeBuilder+Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Tree.swift"; sourceTree = "<group>"; };
+		944B553A2E1382610006D639 /* NodeBuilder+Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Plant.swift"; sourceTree = "<group>"; };
 		944B553D2E13916D0006D639 /* WoodInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoodInfoView.swift; sourceTree = "<group>"; };
 		944B553F2E13945A0006D639 /* EntityNodeFactorySystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityNodeFactorySystem.swift; sourceTree = "<group>"; };
 		944B55412E14EAEF0006D639 /* EntityFactory+Stroage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+Stroage.swift"; sourceTree = "<group>"; };
@@ -315,6 +317,8 @@
 		9467A22F2E4052990097734D /* GrowingInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingInfoTableView.swift; sourceTree = "<group>"; };
 		9467A2312E40548B0097734D /* UISystem+Growing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISystem+Growing.swift"; sourceTree = "<group>"; };
 		9467A2332E40564C0097734D /* NodeBuilder+Growing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Growing.swift"; sourceTree = "<group>"; };
+		9467A2352E409C940097734D /* DoTask+Growing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoTask+Growing.swift"; sourceTree = "<group>"; };
+		9467A24E2E41F6CF0097734D /* TaskSystem+Eat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Eat.swift"; sourceTree = "<group>"; };
 		946E543A2E1FDE1D008A841B /* ECS+CharacterTaskSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ECS+CharacterTaskSystem.swift"; sourceTree = "<group>"; };
 		946E543C2E1FE0DD008A841B /* ECS+RenderSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ECS+RenderSystem.swift"; sourceTree = "<group>"; };
 		946E543E2E1FE1DD008A841B /* ECS+MovementSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ECS+MovementSystem.swift"; sourceTree = "<group>"; };
@@ -431,14 +435,14 @@
 		94B705CD2DEEF45300A47EE5 /* JoySystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoySystem.swift; sourceTree = "<group>"; };
 		94B705D32DF01B1A00A47EE5 /* RMEventBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEventBus.swift; sourceTree = "<group>"; };
 		94B705D52DF044D900A47EE5 /* PlantBasicInfoComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantBasicInfoComponent.swift; sourceTree = "<group>"; };
-		94B705D72DF12D2C00A47EE5 /* EntityFactory+tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+tree.swift"; sourceTree = "<group>"; };
+		94B705D72DF12D2C00A47EE5 /* EntityFactory+Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+Plant.swift"; sourceTree = "<group>"; };
 		94B705D92DF134D600A47EE5 /* UISystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISystem.swift; sourceTree = "<group>"; };
 		94B705DB2DF1446100A47EE5 /* UISystem+Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISystem+Character.swift"; sourceTree = "<group>"; };
-		94B705DF2DF1451D00A47EE5 /* UISystem+Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISystem+Tree.swift"; sourceTree = "<group>"; };
-		94B705E12DF1468400A47EE5 /* TreeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeInfoView.swift; sourceTree = "<group>"; };
+		94B705DF2DF1451D00A47EE5 /* UISystem+Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISystem+Plant.swift"; sourceTree = "<group>"; };
+		94B705E12DF1468400A47EE5 /* PlantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantInfoView.swift; sourceTree = "<group>"; };
 		94B705E42DF1682C00A47EE5 /* RenderSystem+Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RenderSystem+Tree.swift"; sourceTree = "<group>"; };
 		94B705E62DF16F2300A47EE5 /* TaskQueueComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskQueueComponent.swift; sourceTree = "<group>"; };
-		94B705E82DF173C500A47EE5 /* CharacterTaskSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTaskSystem.swift; sourceTree = "<group>"; };
+		94B705E82DF173C500A47EE5 /* TaskSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSystem.swift; sourceTree = "<group>"; };
 		94B705EA2DF1B0E300A47EE5 /* TestScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestScene.swift; sourceTree = "<group>"; };
 		94B705EC2DF1BCA100A47EE5 /* TestScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TestScene.sks; sourceTree = "<group>"; };
 		94B705EE2DF2846E00A47EE5 /* AHeap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AHeap.swift; sourceTree = "<group>"; };
@@ -482,28 +486,9 @@
 		943677612DF7C6B10052A36F /* TaskSystem */ = {
 			isa = PBXGroup;
 			children = (
+				9467A24D2E41F6690097734D /* NormalPriorityTasks */,
+				9467A24C2E41F6410097734D /* HighPriorityTasks */,
 				9467A21D2E39A5690097734D /* TaskAssigner */,
-				94B705E82DF173C500A47EE5 /* CharacterTaskSystem.swift */,
-				9436775D2DF7C63E0052A36F /* CharacterTaskSystem+Fire.swift */,
-				9436775F2DF7C6A90052A36F /* CharacterTaskSystem+SelfCare.swift */,
-				943677622DF7C74F0052A36F /* CharacterTaskSystem+Doctor.swift */,
-				9436775B2DF7C2830052A36F /* CharacterTaskSystem+Rest.swift */,
-				943677642DF7C78D0052A36F /* CharacterTaskSystem+Basic.swift */,
-				943677662DF7C7E70052A36F /* CharacterTaskSystem+Supervise.swift */,
-				943677682DF7C8320052A36F /* CharacterTaskSystem+AnimalHandling.swift */,
-				9436776A2DF7C8850052A36F /* CharacterTaskSystem+Cooking.swift */,
-				9436776C2DF7C8C70052A36F /* CharacterTaskSystem+Hunting.swift */,
-				9436776E2DF7C90D0052A36F /* CharacterTaskSystem+Building.swift */,
-				943677702DF7C9410052A36F /* CharacterTaskSystem+Growing.swift */,
-				943677722DF7C9830052A36F /* CharacterTaskSystem+Mining.swift */,
-				943677592DF6E3300052A36F /* CharacterTaskSystem+Cutting.swift */,
-				943677742DF7C9EF0052A36F /* CharacterTaskSystem+Smithing.swift */,
-				943677762DF7CA710052A36F /* CharacterTaskSystem+Tailoring.swift */,
-				943677782DF7CA9D0052A36F /* CharacterTaskSystem+Art.swift */,
-				9436777A2DF7CAD80052A36F /* CharacterTaskSystem+Crafting.swift */,
-				9436777C2DF7CB110052A36F /* CharacterTaskSystem+Hauling.swift */,
-				9436777E2DF7CB400052A36F /* CharacterTaskSystem+Cleaning.swift */,
-				943677802DF7CB6B0052A36F /* CharacterTaskSystem+Research.swift */,
 			);
 			path = TaskSystem;
 			sourceTree = "<group>";
@@ -516,7 +501,7 @@
 				949FAD032DD709760044E4E5 /* EntityFactory+Weapon.swift */,
 				949FAD052DD70C370044E4E5 /* EntityFactory+Armor.swift */,
 				949FAD0A2DD73DC30044E4E5 /* EntityFactory+Goods.swift */,
-				94B705D72DF12D2C00A47EE5 /* EntityFactory+tree.swift */,
+				94B705D72DF12D2C00A47EE5 /* EntityFactory+Plant.swift */,
 				944B55302E1279660006D639 /* EntityFactory+wood.swift */,
 				944B55412E14EAEF0006D639 /* EntityFactory+Stroage.swift */,
 				9467A2282E404CF40097734D /* EntityFactory+Growing.swift */,
@@ -532,7 +517,7 @@
 				946577CE2DCD97AA005D34F3 /* NodeBuilder.swift */,
 				944B55362E13820C0006D639 /* NodeBuilder+Character.swift */,
 				944B55382E1382440006D639 /* NodeBuilder+Weapon.swift */,
-				944B553A2E1382610006D639 /* NodeBuilder+Tree.swift */,
+				944B553A2E1382610006D639 /* NodeBuilder+Plant.swift */,
 				944B55462E14EBF10006D639 /* NodeBuilder+Storage.swift */,
 				9467A2332E40564C0097734D /* NodeBuilder+Growing.swift */,
 				9467A2082E31D81A0097734D /* NodeBuilder+Blueprint.swift */,
@@ -544,7 +529,7 @@
 		944B553C2E1391530006D639 /* GoodsInfoViews */ = {
 			isa = PBXGroup;
 			children = (
-				94B705E12DF1468400A47EE5 /* TreeInfoView.swift */,
+				94B705E12DF1468400A47EE5 /* PlantInfoView.swift */,
 				944B553D2E13916D0006D639 /* WoodInfoView.swift */,
 			);
 			path = GoodsInfoViews;
@@ -577,6 +562,7 @@
 				944B555C2E1B5FA30006D639 /* DoTask+Cutting.swift */,
 				944B555E2E1B5FEE0006D639 /* DoTask+Hauling.swift */,
 				9467A2112E335B7F0097734D /* DoTask+Building.swift */,
+				9467A2352E409C940097734D /* DoTask+Growing.swift */,
 			);
 			path = DoTaskSystem;
 			sourceTree = "<group>";
@@ -725,6 +711,41 @@
 				9467A22F2E4052990097734D /* GrowingInfoTableView.swift */,
 			);
 			path = GrowingInfoViews;
+			sourceTree = "<group>";
+		};
+		9467A24C2E41F6410097734D /* HighPriorityTasks */ = {
+			isa = PBXGroup;
+			children = (
+				9467A24E2E41F6CF0097734D /* TaskSystem+Eat.swift */,
+			);
+			path = HighPriorityTasks;
+			sourceTree = "<group>";
+		};
+		9467A24D2E41F6690097734D /* NormalPriorityTasks */ = {
+			isa = PBXGroup;
+			children = (
+				9436775D2DF7C63E0052A36F /* TaskSystem+Fire.swift */,
+				9436775F2DF7C6A90052A36F /* TaskSystem+SelfCare.swift */,
+				943677622DF7C74F0052A36F /* TaskSystem+Doctor.swift */,
+				9436775B2DF7C2830052A36F /* TaskSystem+Rest.swift */,
+				943677642DF7C78D0052A36F /* TaskSystem+Basic.swift */,
+				943677662DF7C7E70052A36F /* TaskSystem+Supervise.swift */,
+				943677682DF7C8320052A36F /* TaskSystem+AnimalHandling.swift */,
+				9436776A2DF7C8850052A36F /* TaskSystem+Cooking.swift */,
+				9436776C2DF7C8C70052A36F /* TaskSystem+Hunting.swift */,
+				9436776E2DF7C90D0052A36F /* TaskSystem+Building.swift */,
+				943677702DF7C9410052A36F /* TaskSystem+Growing.swift */,
+				943677722DF7C9830052A36F /* TaskSystem+Mining.swift */,
+				943677592DF6E3300052A36F /* TaskSystem+Cutting.swift */,
+				943677742DF7C9EF0052A36F /* TaskSystem+Smithing.swift */,
+				943677762DF7CA710052A36F /* TaskSystem+Tailoring.swift */,
+				943677782DF7CA9D0052A36F /* TaskSystem+Art.swift */,
+				9436777A2DF7CAD80052A36F /* TaskSystem+Crafting.swift */,
+				9436777C2DF7CB110052A36F /* TaskSystem+Hauling.swift */,
+				9436777E2DF7CB400052A36F /* TaskSystem+Cleaning.swift */,
+				943677802DF7CB6B0052A36F /* TaskSystem+Research.swift */,
+			);
+			path = NormalPriorityTasks;
 			sourceTree = "<group>";
 		};
 		946E54392E1FDDFA008A841B /* ECSManagerExtension */ = {
@@ -1039,6 +1060,7 @@
 			isa = PBXGroup;
 			children = (
 				943677612DF7C6B10052A36F /* TaskSystem */,
+				94B705E82DF173C500A47EE5 /* TaskSystem.swift */,
 				94B705C82DEED80300A47EE5 /* HungerSystem.swift */,
 				94B705CB2DEEEBD000A47EE5 /* EnergySystem.swift */,
 				94B705CD2DEEF45300A47EE5 /* JoySystem.swift */,
@@ -1059,7 +1081,7 @@
 			children = (
 				94B705D92DF134D600A47EE5 /* UISystem.swift */,
 				94B705DB2DF1446100A47EE5 /* UISystem+Character.swift */,
-				94B705DF2DF1451D00A47EE5 /* UISystem+Tree.swift */,
+				94B705DF2DF1451D00A47EE5 /* UISystem+Plant.swift */,
 				944B55482E14FE170006D639 /* UISystem+Storage.swift */,
 				9467A2312E40548B0097734D /* UISystem+Growing.swift */,
 				9467A20C2E3319500097734D /* UISystem+Blueprint.swift */,
@@ -1264,11 +1286,11 @@
 				94B705C12DEE939300A47EE5 /* RMGameTime.swift in Sources */,
 				9467A21F2E39A5B20097734D /* NewEntityTaskUpdater.swift in Sources */,
 				944B55562E17A6070006D639 /* HaulableComponent.swift in Sources */,
-				9436775C2DF7C2830052A36F /* CharacterTaskSystem+Rest.swift in Sources */,
+				9436775C2DF7C2830052A36F /* TaskSystem+Rest.swift in Sources */,
 				949FACBF2DD1881C0044E4E5 /* TraitComponent.swift in Sources */,
 				946E543D2E1FE0DD008A841B /* ECS+RenderSystem.swift in Sources */,
 				943677542DF67F0E0052A36F /* RMProgressBarNode.swift in Sources */,
-				9436775A2DF6E3300052A36F /* CharacterTaskSystem+Cutting.swift in Sources */,
+				9436775A2DF6E3300052A36F /* TaskSystem+Cutting.swift in Sources */,
 				946E54452E1FE4D2008A841B /* ECS+UISystem.swift in Sources */,
 				944B55472E14EBF10006D639 /* NodeBuilder+Storage.swift in Sources */,
 				9467A22E2E4051CA0097734D /* GrowingInfoView.swift in Sources */,
@@ -1281,11 +1303,11 @@
 				946577BD2DCC580C005D34F3 /* DataCoder.swift in Sources */,
 				949FACE62DD43CFA0044E4E5 /* RelationshipView.swift in Sources */,
 				946E54472E1FE500008A841B /* ECS+EntityNodeFactorySystem.swift in Sources */,
-				944B553B2E1382610006D639 /* NodeBuilder+Tree.swift in Sources */,
+				944B553B2E1382610006D639 /* NodeBuilder+Plant.swift in Sources */,
 				949FACFC2DD5E29E0044E4E5 /* ComfortTemperatureComponent.swift in Sources */,
-				943677812DF7CB6B0052A36F /* CharacterTaskSystem+Research.swift in Sources */,
+				943677812DF7CB6B0052A36F /* TaskSystem+Research.swift in Sources */,
 				946E54492E1FE527008A841B /* ECS+EntityCategorizatonSystem.swift in Sources */,
-				943677752DF7C9F00052A36F /* CharacterTaskSystem+Smithing.swift in Sources */,
+				943677752DF7C9F00052A36F /* TaskSystem+Smithing.swift in Sources */,
 				949FAD042DD709760044E4E5 /* EntityFactory+Weapon.swift in Sources */,
 				94973BB92DC087A7005AB8DB /* Timer.swift in Sources */,
 				944B554C2E1501280006D639 /* StorageInfoView.swift in Sources */,
@@ -1295,32 +1317,33 @@
 				946577DE2DCDEB1F005D34F3 /* EmotionComponent.swift in Sources */,
 				94973BBB2DC087A7005AB8DB /* GameScene.swift in Sources */,
 				9467A21A2E3715440097734D /* RMWorkTask.swift in Sources */,
-				9436776D2DF7C8C70052A36F /* CharacterTaskSystem+Hunting.swift in Sources */,
+				9436776D2DF7C8C70052A36F /* TaskSystem+Hunting.swift in Sources */,
 				94973BE12DC9AB56005AB8DB /* UIAppliaction+Extensions.swift in Sources */,
 				949FAD062DD70C370044E4E5 /* EntityFactory+Armor.swift in Sources */,
 				949FACDC2DD3483E0044E4E5 /* ComfortComponent.swift in Sources */,
-				943677692DF7C8320052A36F /* CharacterTaskSystem+AnimalHandling.swift in Sources */,
+				943677692DF7C8320052A36F /* TaskSystem+AnimalHandling.swift in Sources */,
 				944B55422E14EAEF0006D639 /* EntityFactory+Stroage.swift in Sources */,
-				9436776F2DF7C90D0052A36F /* CharacterTaskSystem+Building.swift in Sources */,
+				9436776F2DF7C90D0052A36F /* TaskSystem+Building.swift in Sources */,
 				94973BBC2DC087A7005AB8DB /* BuildingModel.swift in Sources */,
 				946E543B2E1FDE1D008A841B /* ECS+CharacterTaskSystem.swift in Sources */,
 				94B705E72DF16F2300A47EE5 /* TaskQueueComponent.swift in Sources */,
-				9436777F2DF7CB400052A36F /* CharacterTaskSystem+Cleaning.swift in Sources */,
+				9436777F2DF7CB400052A36F /* TaskSystem+Cleaning.swift in Sources */,
 				9467A2162E3382BB0097734D /* WallComponent.swift in Sources */,
+				9467A24F2E41F6CF0097734D /* TaskSystem+Eat.swift in Sources */,
 				949FACE22DD4323F0044E4E5 /* SocialComponent.swift in Sources */,
 				949FACFA2DD5E1A50044E4E5 /* CarryingCapacityComponent.swift in Sources */,
 				9467A2322E40548B0097734D /* UISystem+Growing.swift in Sources */,
 				94B705C92DEED80300A47EE5 /* HungerSystem.swift in Sources */,
-				9436777B2DF7CAD80052A36F /* CharacterTaskSystem+Crafting.swift in Sources */,
+				9436777B2DF7CAD80052A36F /* TaskSystem+Crafting.swift in Sources */,
 				9467A1FE2E31C9490097734D /* InputSystem+Normal.swift in Sources */,
-				943677772DF7CA710052A36F /* CharacterTaskSystem+Tailoring.swift in Sources */,
+				943677772DF7CA710052A36F /* TaskSystem+Tailoring.swift in Sources */,
 				946577CA2DCCBAD5005D34F3 /* OwnershipComponent.swift in Sources */,
 				94B705C52DEEA5AC00A47EE5 /* OperationView.swift in Sources */,
 				9467A2122E335B7F0097734D /* DoTask+Building.swift in Sources */,
 				949FACEE2DD478EA0044E4E5 /* EventBattleLogComponent.swift in Sources */,
 				949C3D3D2DCF2829003EA431 /* ActionStateComponent.swift in Sources */,
 				949FACF82DD57C1D0044E4E5 /* BodyPartComponent.swift in Sources */,
-				9436777D2DF7CB110052A36F /* CharacterTaskSystem+Hauling.swift in Sources */,
+				9436777D2DF7CB110052A36F /* TaskSystem+Hauling.swift in Sources */,
 				944B556B2E1D21E30006D639 /* RMEntity+SaveAreaEntity.swift in Sources */,
 				94973C1C2DCC5307005AB8DB /* DBManager+Entity.swift in Sources */,
 				9467A2212E39A6720097734D /* RemoveEntityTaskUpdater.swift in Sources */,
@@ -1328,22 +1351,22 @@
 				94973C112DCB88C7005AB8DB /* WeaponComponent.swift in Sources */,
 				946577D52DCDB3F7005D34F3 /* TextureManager.swift in Sources */,
 				944B55582E17B3610006D639 /* EntityCategorizatonSystem.swift in Sources */,
-				943677712DF7C9410052A36F /* CharacterTaskSystem+Growing.swift in Sources */,
+				943677712DF7C9410052A36F /* TaskSystem+Growing.swift in Sources */,
 				94973BBE2DC087A7005AB8DB /* SystemManager.swift in Sources */,
-				94B705E92DF173C500A47EE5 /* CharacterTaskSystem.swift in Sources */,
+				94B705E92DF173C500A47EE5 /* TaskSystem.swift in Sources */,
 				94B705CE2DEEF45300A47EE5 /* JoySystem.swift in Sources */,
-				943677672DF7C7E70052A36F /* CharacterTaskSystem+Supervise.swift in Sources */,
-				9436775E2DF7C63E0052A36F /* CharacterTaskSystem+Fire.swift in Sources */,
+				943677672DF7C7E70052A36F /* TaskSystem+Supervise.swift in Sources */,
+				9436775E2DF7C63E0052A36F /* TaskSystem+Fire.swift in Sources */,
 				946577D12DCD990C005D34F3 /* BaseScene.swift in Sources */,
 				94B705BE2DE93EBB00A47EE5 /* TileMapResource.swift in Sources */,
 				9467A2342E40564C0097734D /* NodeBuilder+Growing.swift in Sources */,
 				94973BBF2DC087A7005AB8DB /* SKTexture+Utils.swift in Sources */,
 				94973BC02DC087A7005AB8DB /* RenderSystem.swift in Sources */,
 				944B55312E1279660006D639 /* EntityFactory+wood.swift in Sources */,
-				9436776B2DF7C8850052A36F /* CharacterTaskSystem+Cooking.swift in Sources */,
+				9436776B2DF7C8850052A36F /* TaskSystem+Cooking.swift in Sources */,
 				94973BFF2DCB392A005AB8DB /* BasicInfoComponent.swift in Sources */,
-				943677602DF7C6A90052A36F /* CharacterTaskSystem+SelfCare.swift in Sources */,
-				943677792DF7CA9D0052A36F /* CharacterTaskSystem+Art.swift in Sources */,
+				943677602DF7C6A90052A36F /* TaskSystem+SelfCare.swift in Sources */,
+				943677792DF7CA9D0052A36F /* TaskSystem+Art.swift in Sources */,
 				94973BC22DC087A7005AB8DB /* InputSystem.swift in Sources */,
 				944B55372E13820C0006D639 /* NodeBuilder+Character.swift in Sources */,
 				94B705AD2DE6E22600A47EE5 /* LogCell.swift in Sources */,
@@ -1355,7 +1378,7 @@
 				946577D32DCD9AFA005D34F3 /* RenderContext.swift in Sources */,
 				944B55652E1CF43F0006D639 /* PlantGrowthSystem.swift in Sources */,
 				94973C162DCC496E005AB8DB /* DBManager+Weapon.swift in Sources */,
-				943677732DF7C9830052A36F /* CharacterTaskSystem+Mining.swift in Sources */,
+				943677732DF7C9830052A36F /* TaskSystem+Mining.swift in Sources */,
 				9467A2102E331AB10097734D /* BlueprintInfoView.swift in Sources */,
 				94973BE52DC9ADCE005AB8DB /* UIView+Extensions.swift in Sources */,
 				94973BC32DC087A7005AB8DB /* GameViewController.swift in Sources */,
@@ -1376,13 +1399,14 @@
 				9467A2002E31C95D0097734D /* InputSystem+Build.swift in Sources */,
 				946E544D2E20A82B008A841B /* LogComponent.swift in Sources */,
 				94973BC62DC087A7005AB8DB /* ECSManager.swift in Sources */,
+				9467A2362E409C940097734D /* DoTask+Growing.swift in Sources */,
 				949FACCE2DD327100044E4E5 /* String+Extensions.swift in Sources */,
 				944B55332E12799D0006D639 /* WoodBasicInfoComponent.swift in Sources */,
 				94B705CC2DEEEBD000A47EE5 /* EnergySystem.swift in Sources */,
 				94973C0B2DCB72BA005AB8DB /* CharacterInfoView.swift in Sources */,
 				94973BC92DC087A7005AB8DB /* SKNode+Extensions.swift in Sources */,
-				943677632DF7C74F0052A36F /* CharacterTaskSystem+Doctor.swift in Sources */,
-				94B705E22DF1468400A47EE5 /* TreeInfoView.swift in Sources */,
+				943677632DF7C74F0052A36F /* TaskSystem+Doctor.swift in Sources */,
+				94B705E22DF1468400A47EE5 /* PlantInfoView.swift in Sources */,
 				949FACEA2DD450F90044E4E5 /* EventSocialLogComponent.swift in Sources */,
 				949FAD0B2DD73DC30044E4E5 /* EntityFactory+Goods.swift in Sources */,
 				949FACF42DD4904B0044E4E5 /* BodyPowerDetailView.swift in Sources */,
@@ -1426,16 +1450,16 @@
 				94973C012DCB3AA7005AB8DB /* WorkPriorityComponent.swift in Sources */,
 				94973BFD2DCAFDC3005AB8DB /* DBManager+WorkPriority.swift in Sources */,
 				94973C182DCC4D3C005AB8DB /* PositionComponent.swift in Sources */,
-				94B705E02DF1451D00A47EE5 /* UISystem+Tree.swift in Sources */,
+				94B705E02DF1451D00A47EE5 /* UISystem+Plant.swift in Sources */,
 				94973BD02DC087A7005AB8DB /* ItemModel.swift in Sources */,
 				94973BD12DC087A7005AB8DB /* UnitModel.swift in Sources */,
 				949FACDE2DD348C30044E4E5 /* OutdoorComponent.swift in Sources */,
 				946577E02DCDEDA4005D34F3 /* EnergyComponent.swift in Sources */,
 				94973C092DCB49AB005AB8DB /* RMBaseNode.swift in Sources */,
 				9467A2092E31D81A0097734D /* NodeBuilder+Blueprint.swift in Sources */,
-				943677652DF7C78D0052A36F /* CharacterTaskSystem+Basic.swift in Sources */,
+				943677652DF7C78D0052A36F /* TaskSystem+Basic.swift in Sources */,
 				9467A2142E336B6D0097734D /* EntityFactory+Wall.swift in Sources */,
-				94B705D82DF12D2C00A47EE5 /* EntityFactory+tree.swift in Sources */,
+				94B705D82DF12D2C00A47EE5 /* EntityFactory+Plant.swift in Sources */,
 				94973C1A2DCC50E4005AB8DB /* EntityData.swift in Sources */,
 				94B705DA2DF134D600A47EE5 /* UISystem.swift in Sources */,
 				94973BF92DC9F1F3005AB8DB /* DBManager+BasicInfo.swift in Sources */,

@@ -179,6 +179,8 @@ let kBlueprint = "bluePrint"
 let kMedicine = "Medicine"
 /// 木头
 let kWood = "Wood"
+/// 水稻
+let kRice = "Rice"
 
 /// 木墙
 let kWoodWall = "WoodWall"

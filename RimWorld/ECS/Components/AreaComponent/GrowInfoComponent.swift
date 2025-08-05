@@ -16,6 +16,9 @@ final class GrowInfoComponent: TableCodable, Component {
     var entityID:Int = -1
     
     var size:CGSize = CGSize(width: 0, height: 0)
+    
+    /// 当前格子上存储的实体
+    var saveEntities:[Int:Int] = [:]
 
     var cropType: String = ""
     
@@ -29,6 +32,7 @@ final class GrowInfoComponent: TableCodable, Component {
         case entityID
         case size
         case cropType
+        case saveEntities
     }
     
     func bindEntityID(_ bindEntityID: Int) { entityID = bindEntityID }

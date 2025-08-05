@@ -23,7 +23,7 @@ final class NodeBuilder: NSObject {
         kBlueprint:blueprint,
         
         kWoodWall:woodWall,
-        
+        kRice:rice,
         
     ]
     

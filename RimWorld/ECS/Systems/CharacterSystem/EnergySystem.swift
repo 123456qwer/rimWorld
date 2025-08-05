@@ -12,14 +12,7 @@ import Combine
 class EnergySystem: System {
     
     var cancellables = Set<AnyCancellable>()
-    
-    /// 角色
-    var characters:[RMEntity] = []
-    
-    /// 休息中的角色
-    var restEntities:[Int : RMEntity] = [:]
-    /// 非休息中的橘色
-    var unRestEntities:[Int: RMEntity] = [:]
+
     
     /// 记录上次处理的tick
     var lastProcessedTick: Int = 0
@@ -32,27 +25,14 @@ class EnergySystem: System {
     
     
     func setupEnergy(){
-        for entity in ecsManager.allEntities() {
-            if entity.type == kCharacter {
-                characters.append(entity)
-            }
-            
-            /// 能量组件
-            guard let energyComponent = entity.getComponent(ofType: EnergyComponent.self) else {
-                continue
-            }
-            
-            if energyComponent.isResting {
-                restEntities[entity.entityID] = entity
-            }else{
-                unRestEntities[entity.entityID] = entity
-            }
-       
-        }
+  
     }
     
     /// 每帧更新
     func energyUpdate(currentTick: Int) {
+        
+        let restEntities = ecsManager.isRestingEntities()
+        let unRestEntities = ecsManager.unRestingEntities()
         
         var elapsedTicks = currentTick - lastProcessedTick
         /// 首次进入
@@ -117,16 +97,6 @@ class EnergySystem: System {
         
     }
  
-    
-    /// 修改休息状态
-    func restStatusAction(entity: RMEntity, isRest: Bool){
-        if isRest {
-            unRestEntities.removeValue(forKey: entity.entityID)
-            restEntities[entity.entityID] = entity
-        }else {
-            restEntities.removeValue(forKey: entity.entityID)
-            unRestEntities[entity.entityID] = entity
-        }
-    }
+
     
 }

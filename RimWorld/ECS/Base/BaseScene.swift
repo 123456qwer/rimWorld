@@ -91,6 +91,8 @@ class BaseScene:SKScene, RenderContext {
     /// 根据是否有父ID来确认是直接添加到场景还是添加到某一Node上
     func addNode(_ node: RMBaseNode, to parentID: Int) {
         
+        /// 先大概设置Z的位置
+        node.zPosition = 10000 - node.position.y
         
         /// 已添加
         if node.parent != nil { return }
@@ -204,8 +206,8 @@ class BaseScene:SKScene, RenderContext {
     }()
 
     /// 人物任务系统
-    lazy var taskSystem: CharacterTaskSystem = {
-        CharacterTaskSystem(ecsManager: ecsManager,
+    lazy var taskSystem: TaskSystem = {
+        TaskSystem(ecsManager: ecsManager,
                             provider: self)
     }()
 

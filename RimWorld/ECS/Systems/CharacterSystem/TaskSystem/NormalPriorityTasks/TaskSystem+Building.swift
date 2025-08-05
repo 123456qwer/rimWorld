@@ -1,5 +1,5 @@
 //
-//  CharacterTaskSystem+Building.swift
+//  TaskSystem+Building.swift
 //  RimWorld
 //
 //  Created by wu on 2025/6/10.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// 建造
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     func generateBuildingTask () {
         let bluePrints = ecsManager.entitiesAbleToBeBuild()
@@ -49,7 +49,7 @@ extension CharacterTaskSystem {
 
 
 /// 增删改查，要同时刷新任务列表
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     func refreshBuildTask (_ entity: RMEntity){
         
@@ -67,7 +67,7 @@ extension CharacterTaskSystem {
 
 
 /// 执行建造任务
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 执行建造任务
     func doBuildingTask (_ task: WorkTask) {
@@ -93,7 +93,7 @@ extension CharacterTaskSystem {
 
 
 /// 中断建造任务
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     
     func cancelBuilding(entity: RMEntity,

@@ -1,5 +1,5 @@
 //
-//  CharacterTaskSystem+Tailoring.swift
+//  TaskSystem+Tailoring.swift
 //  RimWorld
 //
 //  Created by wu on 2025/6/10.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// 缝纫
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     func generateTailoringTask () {
         

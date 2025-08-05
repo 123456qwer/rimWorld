@@ -1,5 +1,5 @@
 //
-//  CharacterTaskSystem+Hauling.swift
+//  TaskSystem+Hauling.swift
 //  RimWorld
 //
 //  Created by wu on 2025/6/10.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// 搬运
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 初始化搬运任务
     func generateHaulingTask () {
@@ -54,7 +54,7 @@ extension CharacterTaskSystem {
 
 
 /// 执行搬运任务
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 搬运任务
     func doHaulingTask(_ task: WorkTask) {
@@ -90,7 +90,7 @@ extension CharacterTaskSystem {
 }
 
 /// 中断搬运任务
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     func cancelHauling(entity: RMEntity,
                        task: WorkTask) {
@@ -133,7 +133,7 @@ extension CharacterTaskSystem {
 
 
 /// 增删改查，要同时刷新任务列表
-extension CharacterTaskSystem {
+extension TaskSystem {
     
    
     

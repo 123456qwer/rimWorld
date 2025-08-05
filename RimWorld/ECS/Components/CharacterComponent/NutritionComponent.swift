@@ -21,7 +21,7 @@ final class NutritionComponent: TableCodable, Component {
     var threshold:Double = 25
     
     /// 每次减少的饥饿值
-    var nutritionDecayPerTick:Double = 1
+    var nutritionDecayPerTick:Double = 0.1
  
     
     enum CodingKeys: String, CodingTableKey {

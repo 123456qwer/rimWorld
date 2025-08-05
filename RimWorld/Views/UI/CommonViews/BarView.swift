@@ -11,6 +11,8 @@ import UIKit
 /// 条状状态
 class BarView: UIView {
     
+    var lines:[UIView] = []
+    
     lazy var progressBarBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
@@ -34,6 +36,7 @@ class BarView: UIView {
         super.init(frame: frame)
         setupUI()
     }
+    
     
     
     func changeFillBarColor(color:UIColor) {
@@ -60,6 +63,29 @@ class BarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// 设置临界值（百分比数组）
+    func setThreshold(percents:[CGFloat]) {
+        
+        progressBarBackgroundView.layoutIfNeeded()
+        let parentWidth = progressBarBackgroundView.bounds.width
+        
+        for percent in percents {
+            let line = UIView()
+            line.backgroundColor = .red
+            self.insertSubview(line, aboveSubview: progressBarFillView)
+            
+            let offset = parentWidth * percent
+
+            line.snp.makeConstraints { make in
+                make.bottom.equalToSuperview()
+                make.width.equalTo(2.0)
+                make.height.equalToSuperview().multipliedBy(0.5)
+                make.leading.equalToSuperview().offset(offset)
+            }
+            
+        }
+    }
+    
     /// 更新进度条
     func updateProgressBar(total:Double, current:Double,statusName:String){
         progressBarFillView.snp.removeConstraints()
@@ -73,5 +99,7 @@ class BarView: UIView {
 //            self.progressBarFillView.frame.size.width = newWidth
 //        }
         status.text = statusName
+        
+      
     }
 }

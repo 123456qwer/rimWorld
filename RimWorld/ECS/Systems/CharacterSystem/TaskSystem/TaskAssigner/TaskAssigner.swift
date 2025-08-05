@@ -8,7 +8,7 @@
 import Foundation
 
 /// 任务分配
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 分配任务 （如生成新实体等，会调用此方法）
     func assignTask(){
@@ -60,8 +60,20 @@ extension CharacterTaskSystem {
         /// 先按距离顺序排序
         allTaskQueue.sort {
             
-            let pos1 = PositionTool.nowPosition(ecsManager.getEntity($0.targetEntityID) ?? RMEntity())
-            let pos2 = PositionTool.nowPosition(ecsManager.getEntity($1.targetEntityID) ?? RMEntity())
+            let target1 = ecsManager.getEntity($0.targetEntityID) ?? RMEntity()
+            let target2 = ecsManager.getEntity($1.targetEntityID) ?? RMEntity()
+            
+            var pos1 = PositionTool.nowPosition(target1)
+            var pos2 = PositionTool.nowPosition(target2)
+            
+            /// 种植的位置
+            if target1.type == kGrowingArea {
+                pos1 = $0.growingTask.targetPoint
+            }
+            if target2.type == kGrowingArea {
+                pos2 = $1.growingTask.targetPoint
+            }
+            
             let entityPoint = PositionTool.nowPosition(entity)
             
             let distance1 = MathUtils.distance(entityPoint, pos1)
@@ -128,6 +140,8 @@ extension CharacterTaskSystem {
             handleHaulingTask(executorEntity: executorEntity, task: task)
         case .Building:
             handleBuildingTask(executorEntity: executorEntity, task: task)
+        case .Growing:
+            handleGrowingTask(executorEntity: executorEntity, task: task)
         default:
             break
         }
@@ -140,7 +154,7 @@ extension CharacterTaskSystem {
 
 
 /// 中断任务
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 从任务队列中删除任务
     func removeTaskFromAllTaskQueue(entity: RMEntity){
@@ -158,7 +172,7 @@ extension CharacterTaskSystem {
 
 
 /// 任务生成
-extension CharacterTaskSystem {
+extension TaskSystem {
     
     /// 是否可以生成搬运任务到存储区域
     @discardableResult

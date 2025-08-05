@@ -43,7 +43,6 @@ extension DoTaskSystem {
         }
         
     
-        
         guard let blueprintComponent = blueTargetEntity.getComponent(ofType: BlueprintComponent.self) else {
             return
         }

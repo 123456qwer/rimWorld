@@ -37,7 +37,7 @@ class UISystem: System {
     var characterLogView:CharacterLogView?
     
     // MARK: - 树 -
-    var treeInfoView:TreeInfoView?
+    var treeInfoView:PlantInfoView?
     /// 木头
     var woodInfoView:WoodInfoView?
     
@@ -82,9 +82,9 @@ class UISystem: System {
         if entity.type == kCharacter {
             /// 点击角色
             showCharacterInfo(node: node, nodes: nodes)
-        }else if entity.type == kTree {
-            /// 点击树
-            showTreeInfo(node: node, nodes: nodes)
+        }else if entity.type == kTree || entity.type == kRice{
+            /// 点击植物
+            showPlantInfo(node: node, nodes: nodes)
         }else if entity.type == kWood {
             /// 点击木头
             showWoodInfo(node: node, nodes: nodes)

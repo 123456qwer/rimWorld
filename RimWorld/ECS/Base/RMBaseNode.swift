@@ -126,3 +126,19 @@ extension RMBaseNode {
     
    
 }
+
+
+
+/// 种植相关
+extension RMBaseNode {
+    
+    /// 种植
+    func growingAnimation( block:@escaping ()->Void) {
+        
+        self.run(SKAction.rotate(toAngle: MathUtils.degreesToRadians(360), duration: 0.15)) {
+            block()
+        }
+        
+    }
+    
+}

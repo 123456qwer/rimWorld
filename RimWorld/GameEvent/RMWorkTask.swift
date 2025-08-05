@@ -27,6 +27,8 @@ class WorkTask: Hashable {
     /// 搬运任务
     var haulingTask: HaulingTask = HaulingTask()
     
+    /// 种植任务
+    var growingTask: GrowingTask = GrowingTask()
     
     
     /// 任务目标，例如一棵树、一块矿
@@ -91,6 +93,15 @@ struct HaulingTask: Hashable {
     
     /// 实际搬运的数量
     var currentCount: Int = 0
+}
+
+/// 种植任务
+struct GrowingTask: Hashable {
+    
+    /// 目标位置（实际在scene上的位置）
+    var targetPoint: CGPoint = CGPoint(x: 0, y: 0)
+    /// 种植空闲的位置，在这里生成植物
+    var emptyIndex: Int = 0
 }
 
 

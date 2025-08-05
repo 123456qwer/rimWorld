@@ -27,6 +27,7 @@ class GrowingInfoView: UIView {
     func setupUI(){
         addSubview(bgView)
         bgView.addSubview(growingTableView)
+        bgView.addSubview(removeBtn)
     }
     
     func setupLayout(){
@@ -34,12 +35,28 @@ class GrowingInfoView: UIView {
         bgView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        growingTableView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(5.0)
-            make.leading.equalToSuperview().offset(12)
+        removeBtn.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(2.5)
             make.trailing.equalToSuperview().offset(-12)
+            make.width.equalTo(120)
+            make.height.equalTo(30)
+        }
+        growingTableView.snp.makeConstraints { make in
+            make.top.equalTo(removeBtn.snp.bottom).offset(2)
+            make.leading.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-8)
             make.bottom.equalToSuperview().offset(-5)
         }
+    }
+    
+    @objc func deleteAction() {
+        guard let entity = entity else {
+            return
+        }
+        /// 删除实体
+        RMEventBus.shared.requestRemoveEntity(entity)
+        /// 点击空白
+        RMEventBus.shared.requestClickEmpty()
     }
     
     
@@ -71,6 +88,16 @@ class GrowingInfoView: UIView {
         view.layer.borderColor = UIColor.white.cgColor
         view.layer.borderWidth = 2.0
         return view
+    }()
+    
+    lazy var removeBtn: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.setTitle(textAction("Delete"), for: .normal)
+        btn.backgroundColor = UIColor.btnBgColor()
+        btn.setTitleColor(.white, for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 12.0)
+        btn.addTarget(self, action: #selector(deleteAction), for: .touchUpInside)
+        return btn
     }()
     
     lazy var growingTableView = {

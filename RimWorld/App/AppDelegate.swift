@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         measureTime {
             createData()
         }
+        
 
         return true
     }
@@ -38,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         createMap()
         
-        let qiaodan = EntityFactory.shared.createCharacterEntity(kMichaelJordan)
+//        let qiaodan = EntityFactory.shared.createCharacterEntity(kMichaelJordan)
         let yuefei = EntityFactory.shared.createCharacterEntity(kYueFei)
 
 //        let so = SocialComponent()
@@ -51,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        so2.entityID = yuefei.entityID
 //        yuefei.addComponent(so2)
 
-        EntityFactory.shared.saveEntity(entity: qiaodan)
+//        EntityFactory.shared.saveEntity(entity: qiaodan)
         EntityFactory.shared.saveEntity(entity: yuefei)
 //
         let eventLog = DBManager.shared.getEventLog()

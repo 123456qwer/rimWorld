@@ -127,7 +127,7 @@ extension EntityFactory {
         if let nutritionComponent = entity.getComponent(ofType: NutritionComponent.self) {
             nutritionComponent.total = 150
             nutritionComponent.current = 150
-            nutritionComponent.nutritionDecayPerTick = 1
+            nutritionComponent.nutritionDecayPerTick = 0.1
         }
         
         self.yueFeiForGoods(entity)
