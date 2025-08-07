@@ -80,9 +80,20 @@ class PlantInfoView: UIView {
     
     func setData(_ entity:RMEntity) {
         
+        guard let info = entity.getComponent(ofType: PlantBasicInfoComponent.self) else { return }
+        
+        let percentString = "\(Int(info.growthPercent * 100))%"
+        name.text = info.plantTexture + "    " + textAction("GrowthPercent") + "：" + percentString
+        
         weakEntity = entity
+        
         chopBtn.isSelected = EntityAbilityTool.ableToMarkCut(entity, ecsManager!)
         pickBtn.isSelected = EntityAbilityTool.ableToMarkPick(entity, ecsManager!)
+        
+        if entity.type == kAppleTree {
+            pickBtn.isHidden = false
+        }
+    
     }
     
     func updateTreeInfo() {
@@ -155,6 +166,7 @@ class PlantInfoView: UIView {
         btn.layer.borderColor = UIColor.ml_color(hexValue: 0x007BFF).cgColor
         btn.layer.borderWidth = 1.5
         btn.addTarget(self, action: #selector(pickAction), for: .touchUpInside)
+        btn.isHidden = true
         return btn
     }()
     

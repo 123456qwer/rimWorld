@@ -92,7 +92,7 @@ extension DoTaskSystem {
             
             /// 砍伐动画
             targetNode.cuttingAnimation()
-            targetNode.barAnimation(total: targetBasicComponent.cropCurrentHealth, current: targetBasicComponent.cropHealth)
+            targetNode.barAnimation(total: targetBasicComponent.cropHealth, current: targetBasicComponent.cropCurrentHealth)
         }
         
     }
@@ -181,7 +181,7 @@ extension DoTaskSystem {
             
             /// 采摘动画
             targetNode.pickingAnimation()
-            targetNode.barAnimation(total: targetBasicComponent.pickCurrentHealth, current: targetBasicComponent.pickHealth)
+            targetNode.barAnimation(total: targetBasicComponent.pickHealth, current: targetBasicComponent.pickCurrentHealth)
         }
         
     }

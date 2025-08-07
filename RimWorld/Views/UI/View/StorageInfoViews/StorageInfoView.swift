@@ -42,8 +42,11 @@ class StorageInfoView: UIView {
         guard let entity = entity else {
             return
         }
+        
+        let reason = StorageRemoveReason(entity: entity)
+
         /// 删除实体
-        RMEventBus.shared.requestRemoveEntity(entity)
+        RMEventBus.shared.requestRemoveEntity(entity,reason: reason)
         /// 点击空白
         RMEventBus.shared.requestClickEmpty()
     }

@@ -46,7 +46,8 @@ extension InputSystem {
             return
         }
         
+        let reason = BlueprintRemoveReason(entity: entity)
         /// 移除
-        RMEventBus.shared.requestRemoveEntity(entity)
+        RMEventBus.shared.requestRemoveEntity(entity,reason: reason)
     }
 }
