@@ -9,24 +9,7 @@ import Foundation
 import SpriteKit
 import Combine
 
-/// 依赖注入
-protocol PathfindingProvider {
-    
-    /// 根据当前坐标，获取tile的实际坐标位置
-    func converPointForTile(point: CGPoint) -> CGPoint
-    /// 是否可行走方法
-    func isWalkable(x: Int, y: Int) -> Bool
-    /// 设置是否可行走
-    func setWalkable(x: Int, y: Int, canWalk: Bool)
-    
-    /// 添加寻路的路径node
-    func addPathNode(pathNode:SKSpriteNode)
-    
-    /// 实体在场景下的坐标
-    func pointFromScene(_ entity: RMEntity) -> CGPoint
-}
-
-
+/// 寻路系统
 class PathfindingSystem: System {
     
     
@@ -216,4 +199,23 @@ extension PathfindingSystem {
         
         return path.reversed()
     }
+}
+
+
+
+/// 依赖注入
+protocol PathfindingProvider {
+    
+    /// 根据当前坐标，获取tile的实际坐标位置
+    func converPointForTile(point: CGPoint) -> CGPoint
+    /// 是否可行走方法
+    func isWalkable(x: Int, y: Int) -> Bool
+    /// 设置是否可行走
+    func setWalkable(x: Int, y: Int, canWalk: Bool)
+    
+    /// 添加寻路的路径node
+    func addPathNode(pathNode:SKSpriteNode)
+    
+    /// 实体在场景下的坐标
+    func pointFromScene(_ entity: RMEntity) -> CGPoint
 }

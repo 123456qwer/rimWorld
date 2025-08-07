@@ -13,17 +13,12 @@ extension TaskSystem {
     /// 砍伐任务
     func generateCuttingTask() {
 
-        let trees = ecsManager.entitiesAbleToBeCut()
+        let plants = ecsManager.entitiesAbleToBeCut()
         /// 可以砍伐的树
-        for tree in trees {
-            guard let treeComponent = tree.getComponent(ofType: PlantBasicInfoComponent.self) else {
-                ECSLogger.log("此树没有基础组件：\(tree.name)")
-                continue
-            }
-    
+        for plant in plants {
             /// 砍伐任务
-            if treeComponent.canChop == true {
-                addCuttingTask(tree)
+            if EntityAbilityTool.ableToMarkCut(plant, ecsManager) {
+                addCuttingTask(plant)
             }
         }
         
@@ -42,17 +37,35 @@ extension TaskSystem {
 
     
     /// 添加砍伐任务
-    func addCuttingTask (_ tree: RMEntity) {
+    @discardableResult
+    func addCuttingTask (_ plantEntity: RMEntity) -> WorkTask{
         
         let task = WorkTask(type: .Cutting,
-                            targetEntityID: tree.entityID,
+                            targetEntityID: plantEntity.entityID,
                             executorEntityID: 0)
         allTaskQueue.append(task)
         assignTask()
+        
+        return task
+    }
+    
+    /// 添加采摘任务
+    @discardableResult
+    func addPickingTask (_ plantEntity: RMEntity) -> WorkTask{
+        
+        let task = WorkTask(type: .Cutting,
+                            targetEntityID: plantEntity.entityID,
+                            executorEntityID: 0)
+        task.subType = .Pick
+        allTaskQueue.append(task)
+        assignTask()
+        
+        return task
     }
     
     /// 取消砍伐任务
     func removeCuttingTask (_ plantEntity: RMEntity) {
+        
         removeTaskFromAllTaskQueue(entity: plantEntity)
         
         if let index = doTaskQueue.firstIndex(where: {
@@ -60,25 +73,21 @@ extension TaskSystem {
         }){
             
             let workTask = doTaskQueue[index]
+            workTask.isCancel = true
             let executor = ecsManager.getEntity(workTask.executorEntityID)
             /// 中断之前的执行
             RMEventBus.shared.requestForceCancelTask(entity: executor ?? RMEntity(), task: workTask)
+            EntityActionTool.removeTask(entity: executor ?? RMEntity(), task: workTask)
         }
     }
+    
+  
     
     
     
     /// 砍伐任务
     func addOrCancelCuttingTask (_ plantEntity: RMEntity,
                                  _ canChop: Bool) {
-        
-        guard let plantComponent = plantEntity.getComponent(ofType: PlantBasicInfoComponent.self) else {
-            ECSLogger.log("此植物没详情组件")
-            return
-        }
-        
-        plantComponent.canChop = canChop
-        
         if canChop == true {
             addCuttingTask(plantEntity)
         }else{
@@ -87,6 +96,15 @@ extension TaskSystem {
     
     }
     
+    /// 采摘任务
+    func addOrCancelPickingTask (_ plantEntity: RMEntity,
+                                 _ canPick: Bool) {
+        if canPick == true {
+            addPickingTask(plantEntity)
+        }else {
+            removeCuttingTask(plantEntity)
+        }
+    }
  
 
 }
@@ -127,20 +145,16 @@ extension TaskSystem {
     func cancelCutting (entityID: Int,
                         task: WorkTask) {
      
-        
-        guard let treeEntity = ecsManager.getEntity(task.targetEntityID) else {
+        removeDoTask(task: task)
+
+        guard let plantEntity = ecsManager.getEntity(task.targetEntityID) else {
             ECSLogger.log("砍伐中断操作💀💀💀：任务对应的被砍伐实体没有了")
             return
         }
         
-        guard let treeBasicComponent = treeEntity.getComponent(ofType: PlantBasicInfoComponent.self) else {
-            ECSLogger.log("砍伐中断操作💀💀💀：树实体没有对应的基础组件")
-            return
+        /// 非点击砍伐标记取消任务
+        if EntityAbilityTool.ableToMarkCut(plantEntity, ecsManager) {
+            allTaskQueue.append(task)
         }
-        
-        
-        removeDoTask(task: task)
-        allTaskQueue.append(task)
-        
     }
 }

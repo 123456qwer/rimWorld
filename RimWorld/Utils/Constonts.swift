@@ -100,6 +100,8 @@ let kCategorizationComponent = "CategorizationComponent"
 let kFoodInfoComponent = "FoodInfoComponent"
 /// 墙组件
 let kWallComponent = "WallComponent"
+/// 是否可点击组件
+let kNonInteractiveComponent = "NonInteractiveComponent"
 
 /// 搬运状态组件
 let kHaulableComponent = "HaulableComponent"
@@ -162,6 +164,7 @@ let componentTypeMap: [String: Decodable.Type] = [
     kWallComponent:WallComponent.self,
     kGrowInfoComponent:GrowInfoComponent.self,
     kFoodInfoComponent:FoodInfoComponent.self,
+    kNonInteractiveComponent:NonInteractiveComponent.self,
 ]
 
 // MARK: - 实体类型 -
@@ -187,6 +190,10 @@ let kMedicine = "Medicine"
 let kWood = "Wood"
 /// 水稻
 let kRice = "Rice"
+/// 斧头
+let kAX = "AX"
+/// 采摘（✋🏻图）
+let kPickHand = "PickHand"
 
 /// 木墙
 let kWoodWall = "WoodWall"

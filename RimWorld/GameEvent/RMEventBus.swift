@@ -33,7 +33,8 @@ enum GameEvent {
     
     // MARK: - 对实体的增删改查 -
     /// 删除实体
-    case removeEntity(entity: RMEntity)
+    case removeEntity(entity: RMEntity,
+                      reason: RemoveReason?)
     /// 创建实体
     case createEntity(type: String,
                       point: CGPoint,
@@ -86,6 +87,8 @@ enum GameEvent {
     case buildingTask(entity: RMEntity)
     /// 砍伐任务
     case cuttingTask(entity:RMEntity, canChop:Bool)
+    /// 采摘任务
+    case pickTask(entity: RMEntity, canPick:Bool)
     /// 搬运任务
     case haulingTask(entity: RMEntity)
     
@@ -141,8 +144,8 @@ final class RMEventBus {
 /// 实体的增删改查任务
 extension RMEventBus {
     /// 删除实体
-    func requestRemoveEntity(_ entity: RMEntity) {
-        self.publish(.removeEntity(entity: entity))
+    func requestRemoveEntity(_ entity: RMEntity, reason: RemoveReason? = nil) {
+        self.publish(.removeEntity(entity: entity, reason: reason))
     }
     
     /// 创建实体
@@ -192,6 +195,9 @@ extension RMEventBus {
     /// 砍树任务
     func requestCuttingTask(entity: RMEntity, canChop: Bool) {
         self.publish(.cuttingTask(entity: entity, canChop: canChop))
+    }
+    func requestPickingTask(entity: RMEntity, canPick: Bool) {
+        self.publish(.pickTask(entity: entity, canPick: canPick))
     }
     /// 搬运任务
     func requestHaulTask(_ entity: RMEntity) {

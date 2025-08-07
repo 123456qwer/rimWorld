@@ -9,6 +9,8 @@ import Foundation
 import Combine
 import SpriteKit
 
+
+/// 移动系统
 class MovementSystem: System {
     
     var moveCharacter:[Int:RMEntity] = [:]

@@ -17,6 +17,9 @@ class WorkTask: Hashable {
     /// 例如，可能是建造过程中生成的搬运任务，那么这个任务真实等级是建造
     var realType: WorkType
     
+    /// 例如，采集，属于砍伐的子类
+    var subType: SubWorkType = .None
+    
     /// 任务类型 （高优先级，默认是无）
     var hightType: HightWorkType = .None
     

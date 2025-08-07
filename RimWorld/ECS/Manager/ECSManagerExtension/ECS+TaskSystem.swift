@@ -25,9 +25,17 @@ extension ECSManager {
     /// 添加砍伐任务
     func addOrCancelCuttingTask (_ entity: RMEntity,
                                  _ canChop: Bool) {
-        systemManager.getSystem(ofType: TaskSystem.self)?.addOrCancelCuttingTask(entity, canChop)
         /// UI显示是否有斧头
-        self.treeStatusChange(entity,canChop: canChop)
+        chopStatusChange(entity,canChop: canChop)
+        systemManager.getSystem(ofType: TaskSystem.self)?.addOrCancelCuttingTask(entity, canChop)
+    }
+    
+    /// 添加采摘任务
+    func addOrCancelPickingTask (_ entity: RMEntity,
+                                 _ canPick: Bool) {
+        /// UI显示是否有手
+        pickStatusChange(entity,canPick: canPick)
+        systemManager.getSystem(ofType: TaskSystem.self)?.addOrCancelPickingTask(entity, canPick)
     }
     
     /// 添加建造任务

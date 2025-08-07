@@ -81,6 +81,8 @@ class BaseScene:SKScene, RenderContext {
         ecsManager.addSystem(plantGrowthSystem)
         /// 添加任务系统
         ecsManager.addSystem(taskSystem)
+        /// 添加移除实体系统
+        ecsManager.addSystem(entityResourceSystem)
         
         /// 初始化各种行为
         ecsManager.setupAllEntityBehaviors(provider: self)
@@ -236,6 +238,11 @@ class BaseScene:SKScene, RenderContext {
     /// 实体分类系统
     lazy var entityCategorizationSystem: EntityCategorizatonSystem = {
         EntityCategorizatonSystem(ecsManger: ecsManager)
+    }()
+    
+    /// 移除实体系统
+    lazy var entityResourceSystem: ResourceHarvestSystem = {
+        ResourceHarvestSystem(ecsManager: ecsManager)
     }()
     
     /// 植物成长系统

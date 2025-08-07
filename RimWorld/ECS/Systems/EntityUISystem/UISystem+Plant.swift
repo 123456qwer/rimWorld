@@ -20,6 +20,7 @@ extension UISystem {
         removeAllInfoAction()
         
         treeInfoView       = PlantInfoView()
+        treeInfoView?.ecsManager = ecsManager
         
         UIApplication.ml_keyWindow?.addSubview(treeInfoView!)
         

@@ -47,7 +47,7 @@ class GameScene: BaseScene {
                 self.isPaused = false
                 self.rmTime.timeScale = 3.0
                 print("游戏速度 3 倍")
-            case .removeEntity(let entity):
+            case .removeEntity(let entity,let reason):
                 ECSLogger.log("删除实体：\(entity.name)")
                 
             default:

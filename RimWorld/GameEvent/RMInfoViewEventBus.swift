@@ -50,7 +50,7 @@ extension RMInfoViewEventBus {
         RMInfoViewEventBus.shared.publish(.updateBlueprint)
     }
     /// 刷新树界面
-    func requestTreeInfo(){
+    func requestPlantInfo(){
         RMInfoViewEventBus.shared.publish(.updatePlant)
     }
     /// 刷新需求心情界面

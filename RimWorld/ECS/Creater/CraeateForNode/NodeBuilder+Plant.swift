@@ -19,14 +19,6 @@ extension NodeBuilder {
             node.position = CGPoint(x: pointComponent.x, y: pointComponent.y)
             node.zPosition = pointComponent.z
             
-            /// 是否可以砍伐
-            if treeComponent.canChop {
-                let axe = SKSpriteNode(texture: TextureManager.shared.getTexture("chopIcon"),color: .black,size: CGSize(width: tileSize * 2.0, height: tileSize * 2.0))
-                axe.name = "axeChop"
-                axe.zPosition = 5
-                node.addChild(axe)
-            }
-            
             return node
         }
         
@@ -35,20 +27,14 @@ extension NodeBuilder {
     
     /// 苹果树
     func appleTree(_ entity: RMEntity) -> RMBaseNode {
+        
         if let pointComponent = entity.getComponent(ofType: PositionComponent.self),
            let treeComponent = entity.getComponent(ofType: PlantBasicInfoComponent.self) {
             let node = RMBaseNode(texture: TextureManager.shared.getTexture(treeComponent.plantTexture), color: .black, size: CGSize(width: tileSize, height: tileSize))
             node.name = "apple"
             node.position = CGPoint(x: pointComponent.x, y: pointComponent.y)
             node.zPosition = pointComponent.z
-            
-            /// 是否可以砍伐
-            if treeComponent.canChop {
-                let axe = SKSpriteNode(texture: TextureManager.shared.getTexture("chopIcon"),color: .black,size: CGSize(width: tileSize * 2.0, height: tileSize * 2.0))
-                axe.name = "axeChop"
-                axe.zPosition = 5
-                node.addChild(axe)
-            }
+   
             
             return node
         }

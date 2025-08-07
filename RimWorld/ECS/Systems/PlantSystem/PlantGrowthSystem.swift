@@ -42,6 +42,6 @@ class PlantGrowthSystem: System {
         }
         
         /// 树长大
-        RMInfoViewEventBus.shared.requestTreeInfo()
+        RMInfoViewEventBus.shared.requestPlantInfo()
     }
 }

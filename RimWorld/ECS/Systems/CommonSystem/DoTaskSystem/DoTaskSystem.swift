@@ -17,9 +17,11 @@ class DoTaskSystem: System {
    
     ///  KEY：执行人entityID
     var cuttingTasks  :[Int : WorkTask] = [:]
+    var pickingTasks  :[Int : WorkTask] = [:]
     var restingTasks  :[Int : WorkTask] = [:]
     var buildingTasks :[Int : WorkTask] = [:]
     var sleepingTasks :[Int : WorkTask] = [:]
+    
 //    var growingTasks :[Int : WorkTask] = [:]
 
 
@@ -73,9 +75,13 @@ class DoTaskSystem: System {
                                  tick: elapsedTicks)
         }
         
-       
-        
-    
+        /// 采摘
+        for (executorEntityID, workTask) in pickingTasks {
+            executePickingAction(executorEntityID: executorEntityID,
+                                 task: workTask,
+                                 tick: elapsedTicks)
+        }
+   
     }
 
 
@@ -125,7 +131,11 @@ class DoTaskSystem: System {
         switch task.type {
             
         case .Cutting:
-            setCuttingAction(entity: entity, task: task)
+            if task.subType == .Pick {
+                setPickingAction(entity: entity, task: task)
+            }else {
+                setCuttingAction(entity: entity, task: task)
+            }
         case .Rest:
             setRestingAction(entity: entity, task: task)
         case .Hauling:

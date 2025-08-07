@@ -31,8 +31,8 @@ class ECSManager {
             
             switch event {
                 /// 删除实体
-            case .removeEntity(let entity):
-                self.removeEntity(entity)
+            case .removeEntity(let entity, let reason):
+                self.removeEntity(entity,reason: reason)
                 
                 /// 添加实体
             case .addEntity(let entity):
@@ -87,6 +87,10 @@ class ECSManager {
                 /// 创建砍伐任务
             case .cuttingTask(let entity, let canChop):
                 self.addOrCancelCuttingTask(entity, canChop)
+                
+                /// 创建采摘任务
+            case .pickTask(let entity, let canPick):
+                self.addOrCancelPickingTask(entity, canPick)
 
                 /// 创建休息任务
             case .restTask(let entity, let isRest):
@@ -206,7 +210,10 @@ extension ECSManager {
     
     
     /// 移除实体
-    func removeEntity(_ entity: RMEntity) {
+    func removeEntity(_ entity: RMEntity, reason: RemoveReason? = nil) {
+        
+        /// 处理移除实体后，可能会生成子类的问题
+        handleRemovalAndHarvestCreation(entity, reason: reason)
         
         /// 移除依赖关系
         OwnerShipTool.removeOwner(owned: entity, ecsManager: self)

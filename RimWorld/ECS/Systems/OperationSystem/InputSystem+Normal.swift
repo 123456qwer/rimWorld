@@ -62,31 +62,30 @@ extension InputSystem {
         
         for node in nodes {
             
-            if let rmNode = node as? RMBaseNode {
-                let distance = MathUtils.distance(node.position, pos)
-                
-                // 如果没有设置最接近的节点，直接设定
-                if nearNode == nil || distance < MathUtils.distance(nearNode!.position, pos) {
-                    nearNode = node
-                }
-                
-                // 如果没有设置最大的Z值节点，或者当前节点的Z值更大
-                if maxZNode == nil || node.zPosition > maxZNode!.zPosition {
-                    maxZNode = node
-                }
-                
-                /*
-                /// 被持有的node先简单忽略处理
-                if (rmNode.rmEntity?.getComponent(ofType: OwnedComponent.self)) != nil {
-                    continue
-                }
-                 */
-                
-                // 点击node
-                RMEventBus.shared.requestClickEntity(rmNode.rmEntity ?? RMEntity(), nodes)
-                
-                return
+            guard let rmNode = node as? RMBaseNode, let rmEntity = rmNode.rmEntity else { continue }
+            
+            /// 是否可相应点击
+            if EntityAbilityTool.ableToClick(rmEntity) == false {
+                continue
             }
+            
+            let distance = MathUtils.distance(node.position, pos)
+            
+            // 如果没有设置最接近的节点，直接设定
+            if nearNode == nil || distance < MathUtils.distance(nearNode!.position, pos) {
+                nearNode = node
+            }
+            
+            // 如果没有设置最大的Z值节点，或者当前节点的Z值更大
+            if maxZNode == nil || node.zPosition > maxZNode!.zPosition {
+                maxZNode = node
+            }
+        
+            
+            // 点击node
+            RMEventBus.shared.requestClickEntity(rmNode.rmEntity ?? RMEntity(), nodes)
+            
+            return 
         }
         
         /// 点击空白

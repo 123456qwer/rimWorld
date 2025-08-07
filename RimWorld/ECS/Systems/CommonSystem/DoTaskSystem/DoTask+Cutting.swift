@@ -20,7 +20,9 @@ extension DoTaskSystem {
         }
         
         cuttingTasks.removeValue(forKey: entity.entityID)
+        pickingTasks.removeValue(forKey: entity.entityID)
         EntityNodeTool.stopCuttingAnimation(entity: targetEntity)
+        
     }
     
     
@@ -29,7 +31,7 @@ extension DoTaskSystem {
         cuttingTasks[entity.entityID] = task
     }
     
-  
+    
     
     /// 执行砍树命令
     func executeCuttingAction(executorEntityID: Int,
@@ -45,33 +47,107 @@ extension DoTaskSystem {
             return
         }
         guard let executorEntity = ecsManager.getEntity(executorEntityID) else {
-            ECSLogger.log("未找到砍伐实体")
+            ECSLogger.log("未找到砍伐实体💀💀💀")
             return
         }
-        guard let executorNode = executorEntity.node else {
-            ECSLogger.log("未找到砍伐实体对应的Node：\(executorEntity.name)")
+        guard executorEntity.node != nil else {
+            ECSLogger.log("未找到砍伐实体对应的Node：\(executorEntity.name)💀💀💀")
             return
         }
         guard let targetBasicComponent = targetEntity.getComponent(ofType: PlantBasicInfoComponent.self) else {
-            ECSLogger.log("这个砍伐目标没有对应的详情组件")
+            ECSLogger.log("这个砍伐目标没有对应的详情组件💀💀💀")
             return
         }
         
         /// 停止砍伐
-        if targetBasicComponent.canChop == false {
+        if EntityAbilityTool.ableToMarkCut(targetEntity, ecsManager) == false {
             return
         }
         
         /// 砍伐速度  基础值0.4 / tick  约等于 0.4 * 60  24 / s
         let cuttingSpeed = 0.4 * Double(tick)
         /// 砍树
-        targetBasicComponent.currentHealth -= cuttingSpeed
+        targetBasicComponent.cropCurrentHealth -= cuttingSpeed
 
         /// 砍伐完毕
-        if targetBasicComponent.currentHealth <= 0 {
+        if targetBasicComponent.cropCurrentHealth <= 0 {
             
 
             /// 砍伐结束动画
+            EntityNodeTool.cuttingFinish(targetNode: targetNode)
+          
+            
+            let removeReason = TreeRemoveReason(entity: targetEntity)
+            
+            /// 删除被砍伐的木材
+            RMEventBus.shared.requestRemoveEntity(targetEntity,reason:removeReason)
+            
+            /// 删除
+            cuttingTasks.removeValue(forKey: executorEntity.entityID)
+
+            /// 完成任务
+            EntityActionTool.completeTaskAction(entity: executorEntity, task: task)
+            
+        }else{
+            
+            /// 砍伐动画
+            targetNode.cuttingAnimation()
+            targetNode.barAnimation(total: targetBasicComponent.cropCurrentHealth, current: targetBasicComponent.cropHealth)
+        }
+        
+    }
+    
+}
+
+
+/// Picking
+extension DoTaskSystem {
+    
+    func setPickingAction(entity: RMEntity, task: WorkTask) {
+        pickingTasks[entity.entityID] = task
+    }
+    
+    /// 执行采摘命令
+    func executePickingAction(executorEntityID: Int,
+                              task: WorkTask,
+                              tick: Int){
+        guard let targetEntity = ecsManager.getEntity(task.targetEntityID) else {
+            ECSLogger.log("未找到采摘的目标实体💀💀💀")
+            return
+        }
+        guard let targetNode = targetEntity.node else {
+            ECSLogger.log("未找到采摘的目标💀💀💀")
+            return
+        }
+        guard let executorEntity = ecsManager.getEntity(executorEntityID) else {
+            ECSLogger.log("未找到采摘实体💀💀💀")
+            return
+        }
+        guard executorEntity.node != nil else {
+            ECSLogger.log("未找到采摘实体对应的Node：\(executorEntity.name)💀💀💀")
+            return
+        }
+        guard let targetBasicComponent = targetEntity.getComponent(ofType: PlantBasicInfoComponent.self) else {
+            ECSLogger.log("这个采摘目标没有对应的详情组件💀💀💀")
+            return
+        }
+        
+        
+        /// 停止采摘
+        if EntityAbilityTool.ableToMarkPick(targetEntity, ecsManager) == false {
+            return
+        }
+        
+        /// 采摘速度  基础值0.4 / tick  约等于 0.4 * 60  24 / s
+        let cuttingSpeed = 0.4 * Double(tick)
+        /// 采摘
+        targetBasicComponent.pickCurrentHealth -= cuttingSpeed
+
+        /// 采摘完毕
+        if targetBasicComponent.pickCurrentHealth <= 0 {
+            
+
+            /// 采摘结束动画
             EntityNodeTool.cuttingFinish(targetNode: targetNode)
             
             /// 树坐标
@@ -93,9 +169,8 @@ extension DoTaskSystem {
                                                       params: params)
             }
           
-            /// 删除被砍伐的木材
-            RMEventBus.shared.requestRemoveEntity(targetEntity)
             
+        
             /// 删除
             cuttingTasks.removeValue(forKey: executorEntity.entityID)
 
@@ -104,14 +179,10 @@ extension DoTaskSystem {
             
         }else{
             
-            /// 砍伐动画
-            targetNode.cuttingAnimation()
-            targetNode.barAnimation(total: targetBasicComponent.health, current: targetBasicComponent.currentHealth)
+            /// 采摘动画
+            targetNode.pickingAnimation()
+            targetNode.barAnimation(total: targetBasicComponent.pickCurrentHealth, current: targetBasicComponent.pickHealth)
         }
         
     }
-    
-    
-    
-    
 }

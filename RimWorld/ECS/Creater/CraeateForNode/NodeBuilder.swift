@@ -33,6 +33,10 @@ final class NodeBuilder: NSObject {
         kWoodWall:woodWall,
         /// 水稻
         kRice:rice,
+        /// 斧头
+        kAX:ax,
+        /// 手
+        kPickHand:pickHand,
         
     ]
     

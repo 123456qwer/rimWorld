@@ -16,10 +16,7 @@ final class PlantBasicInfoComponent: TableCodable, Component {
     var entityID:Int = -1
     /// 植物纹理
     var plantTexture:String = ""
-    /// 是否可以砍伐
-    var canChop: Bool = false
-    /// 是否可以收获
-    var canHarvest: Bool = false
+ 
 
     
     /// 收货后可获得的最大数量
@@ -31,8 +28,14 @@ final class PlantBasicInfoComponent: TableCodable, Component {
     var growthSpeed:Float = 0.0001
     
     /// 砍伐生命值
-    var health:Double = 100
-    var currentHealth:Double = 100
+    var cropHealth:Double = 100
+    var cropCurrentHealth:Double = 100
+    
+    
+    /// 采摘生命值
+    var pickHealth:Double = 100
+    var pickCurrentHealth:Double = 100
+    
     
     enum CodingKeys: String, CodingTableKey {
         typealias Root = PlantBasicInfoComponent
@@ -44,10 +47,12 @@ final class PlantBasicInfoComponent: TableCodable, Component {
         case entityID
         case plantTexture
         
-        case health
-        case currentHealth
-        case canChop
-        case canHarvest
+        case cropHealth
+        case cropCurrentHealth
+        
+        case pickHealth
+        case pickCurrentHealth
+        
         case harvestYield
         case growthPercent
         case growthSpeed

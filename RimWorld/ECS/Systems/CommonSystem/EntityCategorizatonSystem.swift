@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+/// 分类系统
 class EntityCategorizatonSystem: System {
     
     let ecsManger:ECSManager

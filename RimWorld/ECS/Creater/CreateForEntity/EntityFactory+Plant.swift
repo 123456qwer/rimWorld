@@ -88,3 +88,74 @@ extension EntityFactory {
     }
     
 }
+
+
+/// 与植物相关的node（如斧头等）
+extension EntityFactory {
+    
+    /// 砍伐的斧头
+    func createAX(point: CGPoint,
+                  params: AXParams,
+                  ecsManager: ECSManager) -> RMEntity{
+        
+        let entity = RMEntity()
+        entity.type = kAX
+        
+        let ownedComponent = OwnedComponent()
+        ownedComponent.ownedEntityID = params.ownerId
+        
+        let nonComponent = NonInteractiveComponent()
+        
+        let pointComponent = PositionComponent()
+        pointComponent.x = point.x
+        pointComponent.y = point.y
+        
+        entity.addComponent(ownedComponent)
+        entity.addComponent(pointComponent)
+        entity.addComponent(nonComponent)
+        
+        
+        /// 设置拥有者
+        if let ownerEntity = ecsManager.getEntity(params.ownerId) {
+            OwnerShipTool.handleOwnershipChange(newOwner: ownerEntity, owned: entity, ecsManager: ecsManager)
+        }else{
+            ECSLogger.log("砍伐的树木目标没了！💀💀💀")
+        }
+        
+        return entity
+    }
+    
+    
+    /// 采摘的手
+    func createHand(point: CGPoint,
+                    params: HandParams,
+                    ecsManager: ECSManager) -> RMEntity{
+        
+        let entity = RMEntity()
+        entity.type = kPickHand
+        
+        let ownedComponent = OwnedComponent()
+        ownedComponent.ownedEntityID = params.ownerId
+        
+        let nonComponent = NonInteractiveComponent()
+        
+        let pointComponent = PositionComponent()
+        pointComponent.x = point.x
+        pointComponent.y = point.y
+        
+        entity.addComponent(ownedComponent)
+        entity.addComponent(pointComponent)
+        entity.addComponent(nonComponent)
+        
+        
+        /// 设置拥有者
+        if let ownerEntity = ecsManager.getEntity(params.ownerId) {
+            OwnerShipTool.handleOwnershipChange(newOwner: ownerEntity, owned: entity, ecsManager: ecsManager)
+        }else{
+            ECSLogger.log("砍伐的树木目标没了！💀💀💀")
+        }
+        
+        return entity
+    }
+    
+}

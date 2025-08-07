@@ -188,6 +188,8 @@ enum WorkPriority: Int, Comparable, Codable {
     }
 }
 
+
+
 /// 工作类型
 enum WorkType: String, CaseIterable, Codable {
     
@@ -233,6 +235,14 @@ enum WorkType: String, CaseIterable, Codable {
     case Cleaning
     /// 研究
     case Research
+}
+
+/// 子工作类型
+enum SubWorkType: String, CaseIterable, Codable {
+    /// 无
+    case None
+    /// 采集（归属在砍伐）
+    case Pick
 }
 
 /// 高优先级工作类型

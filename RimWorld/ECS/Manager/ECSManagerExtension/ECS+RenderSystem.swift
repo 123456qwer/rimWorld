@@ -10,9 +10,35 @@ import Foundation
 /// 渲染系统
 extension ECSManager {
     /// 修改砍伐状态
-    func treeStatusChange(_ entity: RMEntity,
+    func chopStatusChange(_ entity: RMEntity,
                           canChop: Bool) {
-        systemManager.getSystem(ofType: RenderSystem.self)?.treeStatusChange(entity, canChop: canChop)
+        /// 可以砍伐，生成斧子node,不可以，删除斧子Node
+        if canChop {
+            /// 添加斧子
+            let params = AXParams(ownerId: entity.entityID)
+            RMEventBus.shared.requestCreateEntity(type: kAX, point: CGPoint(x: 0, y: 0), params: params)
+        }else {
+            /// 移除斧子
+            if let ax = EntityInfoTool.getAX(targetEntity: entity, ecsManager: self){
+                RMEventBus.shared.requestRemoveEntity(ax)
+            }
+        }
+    }
+    
+    /// 修改采摘状态
+    func pickStatusChange(_ entity: RMEntity,
+                          canPick: Bool) {
+        /// 可以采摘，生成手node,不可以，删除手Node
+        if canPick {
+            /// 添加手
+            let params = HandParams(ownerId: entity.entityID)
+            RMEventBus.shared.requestCreateEntity(type: kPickHand, point: CGPoint(x: 0, y: 0), params: params)
+        }else {
+            /// 移除手
+            if let hand = EntityInfoTool.getHand(targetEntity: entity, ecsManager: self){
+                RMEventBus.shared.requestRemoveEntity(hand)
+            }
+        }
     }
     
     /// 修改父类

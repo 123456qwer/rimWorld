@@ -60,6 +60,7 @@ extension RMBaseNode {
     func cuttingAnimation() {
         
         let cutting = self.childNode(withName: "cutting") ?? SKSpriteNode(texture: TextureManager.shared.getTexture("cutting"), size: CGSize(width: 80, height: 80))
+        cutting.isHidden = false
         cutting.name = "cutting"
         cutting.position = CGPoint(x: 0, y: -20)
         cutting.zPosition = 12
@@ -74,13 +75,39 @@ extension RMBaseNode {
         }
     }
     
+    
+    /// 采摘动画
+    func pickingAnimation() {
+        
+        let cutting = self.childNode(withName: "pickHand") ?? SKSpriteNode(texture: TextureManager.shared.getTexture("pickHand"), size: CGSize(width: 80, height: 80))
+        cutting.isHidden = false
+        cutting.name = "pickHand"
+        cutting.position = CGPoint(x: 0, y: -20)
+        cutting.zPosition = 12
+        if cutting.parent == nil {
+            self.addChild(cutting)
+        }
+        
+        let animation = cutting.action(forKey: "pickHand")
+        if animation == nil {
+            let animation = AnimationUtils.rotateActionRep(withDegreesArr: [10,-10], timeArr: [0.6,0.6])
+            cutting.run(animation,withKey: "pickHand")
+        }
+    }
+    
     /// 停止砍树
     func stopCuttingAnimation() {
         let cutting = self.childNode(withName: "cutting")
-        cutting?.removeFromParent()
+        cutting?.isHidden = true
         self.progressBar.isHidden = true
     }
    
+    /// 停止采摘
+    func stopPickingAnimation() {
+        let cutting = self.childNode(withName: "pickHand")
+        cutting?.isHidden = true
+        self.progressBar.isHidden = true
+    }
 }
 
 
