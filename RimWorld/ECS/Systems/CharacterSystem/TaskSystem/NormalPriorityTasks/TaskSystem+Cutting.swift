@@ -77,7 +77,6 @@ extension TaskSystem {
             let executor = ecsManager.getEntity(workTask.executorEntityID)
             /// 中断之前的执行
             RMEventBus.shared.requestForceCancelTask(entity: executor ?? RMEntity(), task: workTask)
-            EntityActionTool.removeTask(entity: executor ?? RMEntity(), task: workTask)
         }
     }
     

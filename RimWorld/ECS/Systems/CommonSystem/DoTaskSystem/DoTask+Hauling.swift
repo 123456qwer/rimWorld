@@ -31,7 +31,6 @@ extension DoTaskSystem {
          
             /// 取消任务
             RMEventBus.shared.requestForceCancelTask(entity: entity, task: task)
-            EntityActionTool.removeTask(entity: entity, task: task)
             
             return
         }

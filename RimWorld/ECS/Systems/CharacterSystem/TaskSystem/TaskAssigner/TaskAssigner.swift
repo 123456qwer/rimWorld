@@ -129,7 +129,6 @@ extension TaskSystem {
         if let cancelTask = cancelTask {
             cancelTask.isCancel = true
             RMEventBus.shared.requestForceCancelTask(entity: executorEntity, task: cancelTask)
-            EntityActionTool.removeTask(entity: executorEntity, task: cancelTask)
         }
         
         /// 将任务添加到执行队列中

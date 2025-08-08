@@ -251,6 +251,9 @@ extension TaskSystem {
     func forceSwitchTask(entity: RMEntity,
                          task: WorkTask) {
         
+        
+
+        
         switch task.type {
         case .Cutting:
             cancelCutting(entityID: entity.entityID, task: task)
@@ -264,6 +267,9 @@ extension TaskSystem {
             break
         }
         
+        /// 执行者取消关联任务
+        EntityActionTool.removeTask(entity: entity, task: task)
+
     }
   
     

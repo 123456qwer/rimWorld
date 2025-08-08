@@ -73,7 +73,6 @@ extension TaskSystem {
             ECSLogger.log("搬运目的地为空！💀💀💀")
             
             RMEventBus.shared.requestForceCancelTask(entity: executorEntity, task: task)
-            EntityActionTool.removeTask(entity: executorEntity, task: task)
 
             return
         }
