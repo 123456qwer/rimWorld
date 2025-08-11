@@ -204,7 +204,7 @@ class BaseScene:SKScene, RenderContext {
 
     /// UI 系统
     lazy var uiSystem: UISystem = {
-        UISystem(ecsManager: ecsManager)
+        UISystem(ecsManager: ecsManager,gameContext: gameContext)
     }()
 
     /// 人物任务系统
@@ -398,6 +398,8 @@ extension BaseScene: AreaSelectProvider {
         
         var type = ""
         var params:EntityCreationParams?
+        var isCancel = false
+        var isCuttring = false
         
         if gameContext.currentMode == .storage {
             /// 仓库
@@ -407,13 +409,22 @@ extension BaseScene: AreaSelectProvider {
             /// 种植区域
             params = GrowingParams(size: areaSize, cropType: .rice)
             type = kGrowingArea
+        }else if gameContext.currentMode == .cancel {
+            isCancel = true
+        }else if gameContext.currentMode == .cutting {
+            isCuttring = true
         }
         
         
-        RMEventBus.shared.requestCreateEntity(type: type,
-                                             point: areaPoint,
-                                            params: params!)
+        /// 仓库，种植
+        if gameContext.currentMode == .storage || gameContext.currentMode == .growing {
+            RMEventBus.shared.requestCreateEntity(type: type,
+                                                 point: areaPoint,
+                                                params: params!)
+        }
        
+
+        
         
         for y in 0...Int(yCount - 1) {
             for x in 0...Int(xCount - 1) {
@@ -430,10 +441,38 @@ extension BaseScene: AreaSelectProvider {
                 
                 let action = SKAction.sequence([SKAction.scale(to: 2.0, duration: 0.15),SKAction.scale(to: 0, duration: 0.15),SKAction.removeFromParent()])
                 node.run(action)
+                
+                if isCancel {
+                    cancelAction(point)
+                }else if isCuttring {
+                    cuttingAction(point)
+                }
             }
         }
         
    
+    }
+    
+    /// 取消操作
+    private func cancelAction(_ point: CGPoint) {
+        let nodes = self.nodes(at: point)
+        for node in nodes {
+            guard let node = node as? RMBaseNode else { continue }
+            guard let entity = node.rmEntity else { continue }
+            
+            EntityActionTool.cancelAction(entity: entity)
+        }
+    }
+    
+    /// 割除操作
+    private func cuttingAction(_ point: CGPoint) {
+        let nodes = self.nodes(at: point)
+        for node in nodes {
+            guard let node = node as? RMBaseNode else { continue }
+            guard let entity = node.rmEntity else { continue }
+            
+            EntityActionTool.cuttingAction(entity: entity)
+        }
     }
 }
 

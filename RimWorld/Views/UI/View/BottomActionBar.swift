@@ -7,100 +7,78 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class BottomActionBar: UIView {
     
-    
+    var cancellables = Set<AnyCancellable>()
+    var isSelect:Bool = false
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupUI()
         setupLayout()
+        
+        RMInfoViewEventBus.shared.publisher().sink {[weak self] event in
+            guard let self = self else {return}
+            switch event {
+            case .clickMainInfo(let type):
+                self.updateBottomBtn(actionType: type)
+            default:
+                break
+            }
+
+        }.store(in: &cancellables)
     }
     
-    func clickPlan (){
+    /// 刷新底部按钮颜色
+    func updateBottomBtn(actionType: ActionType){
         
-        planBtn.isSelected = !planBtn.isSelected
+        isSelect = true
+        planBtn.setTitleColor(.red, for: .normal)
         
-        if planBtn.isSelected {
-            planBtn.backgroundColor = .red
-        }else{
-            planBtn.backgroundColor = .white
+        switch actionType {
+        case .none:
+            planBtn.setTitle(textAction("Plan"), for: .normal)
+            planBtn.setTitleColor(.black, for: .normal)
+            isSelect = false
+        case .cancel:
+            planBtn.setTitle(textAction("Cancel"), for: .normal)
+        case .chopWood:
+            planBtn.setTitle(textAction("ChopWood"), for: .normal)
+        default:
+            break
         }
-        
-        planBtnBuild.isHidden = !planBtn.isSelected
-        planBtnSaveArea.isHidden = !planBtn.isSelected
-        plantBtnRemove.isHidden = !planBtn.isSelected
-        planBtnGrowing.isHidden = !planBtn.isSelected
     }
     
-    
-    func hiddenSubButton() {
-        planBtnBuild.isHidden = true
-        planBtnSaveArea.isHidden = true
-        plantBtnRemove.isHidden = true
-        planBtnGrowing.isHidden = true
-    }
     
     func setupUI() {
-        addSubview(workBtn)
         addSubview(planBtn)
-        addSubview(planBtnSaveArea)
-        addSubview(planBtnBuild)
-        addSubview(plantBtnRemove)
-        addSubview(planBtnGrowing)
+        addSubview(workBtn)
     }
     
+    
     func setupLayout() {
-        workBtn.snp.makeConstraints { make in
+      
+        planBtn.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.bottom.equalToSuperview()
             make.width.equalTo(60.0)
         }
-        planBtn.snp.makeConstraints { make in
+        workBtn.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.left.equalTo(workBtn.snp.right)
+            make.left.equalTo(planBtn.snp.right)
             make.bottom.equalToSuperview()
             make.width.equalTo(60.0)
         }
-        planBtnSaveArea.snp.makeConstraints { make in
-            make.left.equalTo(workBtn.snp.right)
-            make.width.equalTo(60.0)
-            make.bottom.equalTo(planBtn.snp.top).offset(-5)
-            make.height.equalTo(planBtn.snp.height)
-        }
-        planBtnGrowing.snp.makeConstraints { make in
-            make.left.equalTo(workBtn.snp.right)
-            make.width.equalTo(60.0)
-            make.bottom.equalTo(planBtnSaveArea.snp.top).offset(-5)
-            make.height.equalTo(planBtn.snp.height)
-        }
-        planBtnBuild.snp.makeConstraints { make in
-            make.left.equalTo(workBtn.snp.right)
-            make.width.equalTo(60.0)
-            make.bottom.equalTo(planBtnGrowing.snp.top).offset(-5)
-            make.height.equalTo(planBtn.snp.height)
-        }
-        plantBtnRemove.snp.makeConstraints { make in
-            make.left.equalTo(workBtn.snp.right)
-            make.width.equalTo(60.0)
-            make.bottom.equalTo(planBtnBuild.snp.top).offset(-5)
-            make.height.equalTo(planBtn.snp.height)
-        }
-        
-        planBtnSaveArea.isHidden = true
-        planBtnBuild.isHidden = true
-        plantBtnRemove.isHidden = true
-        planBtnGrowing.isHidden = true
+ 
+       
     }
     
     
-    lazy var workBtn:UIButton = {
-        let btn = UIButton(type: .custom)
-        styleButton(sender: btn, text: textAction("Work"))
-        return btn
-    }()
+ 
     
     lazy var planBtn:UIButton = {
         let btn = UIButton(type: .custom)
@@ -108,32 +86,14 @@ class BottomActionBar: UIView {
         return btn
     }()
     
-    lazy var planBtnBuild:UIButton = {
+    lazy var workBtn:UIButton = {
         let btn = UIButton(type: .custom)
-        styleButton(sender: btn, text: textAction("Build"))
+        styleButton(sender: btn, text: textAction("Work"))
         return btn
     }()
     
-    lazy var plantBtnRemove:UIButton = {
-        let btn = UIButton(type: .custom)
-        styleButton(sender: btn, text: textAction("Deconstruct"))
-        return btn
-    }()
-    
-    lazy var planBtnSaveArea:UIButton = {
-        let btn = UIButton(type: .custom)
-        styleButton(sender: btn, text: textAction("Storage"))
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 12.0)
-        return btn
-    }()
-    
-    lazy var planBtnGrowing:UIButton = {
-        let btn = UIButton(type: .custom)
-        styleButton(sender: btn, text: textAction("PlantZone"))
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 12.0)
-        return btn
-    }()
-    
+
+
     
     
     private func styleButton(sender:UIButton, text:String){

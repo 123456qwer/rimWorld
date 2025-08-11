@@ -19,4 +19,9 @@ extension ECSManager {
     func removeAllInfoAction() {
         systemManager.getSystem(ofType: UISystem.self)?.removeAllInfoAction()
     }
+    
+    /// 点击底部按钮
+    func clickBottomBtn(_ buttonType: ButtonType) {
+        systemManager.getSystem(ofType: UISystem.self)?.clickButton(buttonType: buttonType)
+    }
 }

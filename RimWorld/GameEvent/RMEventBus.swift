@@ -93,6 +93,9 @@ enum GameEvent {
     case haulingTask(entity: RMEntity)
     
     
+    // MARK: - UIView 操作 -
+    case clickBottomButton(btnType: ButtonType)
+    
     
     
     // MARK: - 玩家不可控任务 -
@@ -236,6 +239,11 @@ extension RMEventBus {
     /// 点击空白处
     func requestClickEmpty() {
         self.publish(.clickEmpty)
+    }
+    
+    /// 点击底部UI按钮
+    func requestClickBottomButton(buttonType: ButtonType) {
+        self.publish(.clickBottomButton(btnType: buttonType))
     }
 }
 

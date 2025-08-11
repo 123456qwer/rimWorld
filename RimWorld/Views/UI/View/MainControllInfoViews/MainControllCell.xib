@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MainControllCell" customModule="RimWorld" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="206" height="174"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="206" height="174"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U0P-jm-OGg">
+                        <rect key="frame" x="0.0" y="0.0" width="206" height="174"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="命令"/>
+                        <connections>
+                            <action selector="clickAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="srn-XR-rXu"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="U0P-jm-OGg" secondAttribute="trailing" id="4Kb-yt-fGX"/>
+                <constraint firstItem="U0P-jm-OGg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="8CX-yc-rk5"/>
+                <constraint firstItem="U0P-jm-OGg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="r5q-EL-3AL"/>
+                <constraint firstAttribute="bottom" secondItem="U0P-jm-OGg" secondAttribute="bottom" id="seo-KX-nGQ"/>
+            </constraints>
+            <size key="customSize" width="206" height="174"/>
+            <connections>
+                <outlet property="clickBtn" destination="U0P-jm-OGg" id="2TX-XS-Qxs"/>
+            </connections>
+            <point key="canvasLocation" x="32.061068702290072" y="-26.760563380281692"/>
+        </collectionViewCell>
+    </objects>
+</document>

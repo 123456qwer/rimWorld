@@ -246,3 +246,14 @@
 "Hop" = "啤酒花";                  // 同上，可酿酒
 "Bamboo" = "竹子";                 // 某些Mod中出现，用于建筑
 "Xerigium" = "愈伤草（旧名）";     // Healroot 的旧称
+
+
+
+"Cancel" = "取消";
+"Deconstruct" = "拆除";
+"Mine" = "开采";
+"ChopWood" = "伐木";
+"Harvest" = "收获";
+"Hunt" = "狩猎";
+"Slaughter" = "宰杀";
+"Tame" = "驯服";

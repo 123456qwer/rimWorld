@@ -22,6 +22,9 @@ enum InfoViewEvent {
     
     /// 刷新需求界面
     case updateMoodInfo
+    
+    /// 点击主操作界面
+    case clickMainInfo(actionType: ActionType)
 }
 
 /// 事件总线（针对显示的view）
@@ -58,4 +61,8 @@ extension RMInfoViewEventBus {
         RMInfoViewEventBus.shared.publish(.updateMoodInfo)
     }
     
+    /// 刷新底部界面
+    func requestReloadBottomView(actionType:ActionType){
+        RMInfoViewEventBus.shared.publish(.clickMainInfo(actionType: actionType))
+    }
 }

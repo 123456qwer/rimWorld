@@ -1,18 +1,18 @@
 //
-//  InputSystem+AreaSelect.swift
+//  InputSystem+Cutting.swift
 //  RimWorld
 //
-//  Created by wu on 2025/7/24.
+//  Created by wu on 2025/8/11.
 //
 
 import Foundation
 import SpriteKit
 
-/// 存储区域选择模式
+/// 割除操作
 extension InputSystem {
     
     /// 按下
-    func areaSelectTouchdown(atPoint pos: CGPoint, scene: BaseScene) {
+    func cuttingTouchdown(atPoint pos: CGPoint, scene: BaseScene) {
         lastTouchLocation = pos
         
         selectNode.removeFromParent()
@@ -22,22 +22,20 @@ extension InputSystem {
         selectNode.position = pos
         scene.addChild(selectNode)
     }
-    
+   
     /// 滑动
-    func areaSelectTouchMoved(atPoint pos: CGPoint, scene: BaseScene) {
-        
-        
+    func cuttingTouchMoved(atPoint pos: CGPoint, scene: BaseScene) {
         let xChange = pos.x - lastTouchLocation.x
         let yChange = pos.y - lastTouchLocation.y
         
         selectNode.xScale = xChange / 1
         selectNode.yScale = yChange / 1
         selectNode.alpha = 0.2
-
+    
     }
     
     /// 抬起
-    func areaSelectTouchUp(atPoint pos: CGPoint, scene: BaseScene) {
+    func cuttingTouchUp(atPoint pos: CGPoint, scene: BaseScene) {
         
         areaProvider.selectArea(start: lastTouchLocation,
                                 end: pos,

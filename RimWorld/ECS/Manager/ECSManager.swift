@@ -130,7 +130,12 @@ class ECSManager {
                 self.moveAction(points: points,
                            entity: entity
                            ,task: task)
+                
+                /// 点击底部按钮
+            case .clickBottomButton(let btnType):
+                self.clickBottomBtn(btnType)
             
+                
             case .terminateForRemoveTaskOwner:
                 self.terminateRemoveOnwer()
           

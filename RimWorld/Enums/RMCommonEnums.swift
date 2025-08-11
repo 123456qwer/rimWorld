@@ -538,6 +538,8 @@ enum GameMode {
     case storage              // 拉框选择存储区域
     case growing              // 拉框选择种植区域
     case deconstruct          // 拆除：拆除建造好的或者没建造的蓝图
+    case cancel               // 取消：取消砍伐、预建造等
+    case cutting              // 割除：标记所有要割除的物体
 }
 
 
@@ -642,6 +644,78 @@ enum HaulTaskStage {
     /// 正在搬运到目标位置
     case movingToTarget
 }
+
+
+/// 操作UI
+enum ButtonType: String, CaseIterable {
+    case architect = "建筑规划"
+    case work = "工作"
+    case restrict = "管制"
+    case assign = "方案"
+    case animals = "动物"
+    case wildlife = "野生动物"
+    case research = "研究"
+    case world = "世界"
+    case history = "历史"
+    case factions = "派系"
+    case menu = "菜单"
+}
+
+/// 建筑规划子操作
+enum ArchitectCategory: String, CaseIterable {
+    case command = "命令"
+    case zone = "区域"
+    case structure = "结构"
+    case production = "生产"
+    case furniture = "家具"
+    case power = "电力"
+    case security = "防卫"
+    case misc = "杂项"
+    case floor = "地板"
+    case joy = "娱乐"
+    case culture = "文化"
+    case biotech = "生物技术"
+}
+
+/// 玩家操作
+enum ActionType: String {
+    
+    /// 无操作
+    case none = "None"
+    /// 取消
+    case cancel = "Cancel"
+    /// 拆除
+    case deconstruct = "Deconstruct"
+    /// 开采
+    case mine = "Mine"
+    /// 伐木
+    case chopWood = "ChopWood"
+    /// 收获
+    case harvest = "Harvest"
+    /// 狩猎
+    case hunt = "Hunt"
+    /// 宰杀
+    case slaughter = "Slaughter"
+    /// 驯服
+    case tame = "Tame"
+    
+    // 如果需要可以加一个方法返回中文描述
+    func description() -> String {
+        switch self {
+        case .cancel: return "取消"
+        case .deconstruct: return "拆除"
+        case .mine: return "开采"
+        case .chopWood: return "伐木"
+        case .harvest: return "收获"
+        case .hunt: return "狩猎"
+        case .slaughter: return "宰杀"
+        case .tame: return "驯服"
+        case .none: return "无"
+            
+        }
+    }
+}
+
 
 
 enum RimWorldCrop: String, CaseIterable {

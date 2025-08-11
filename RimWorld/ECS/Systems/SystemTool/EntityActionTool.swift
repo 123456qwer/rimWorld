@@ -185,9 +185,26 @@ struct EntityActionTool {
     }
     
     
-    
+    /// 取消操作
+    static func cancelAction(entity:RMEntity) {
+        let type = entity.type
+        if type == kTree {
+            RMEventBus.shared.requestCuttingTask(entity: entity,
+                                                 canChop:false)
+            RMInfoViewEventBus.shared.requestPlantInfo()
+        }
+    }
    
-
+    /// 割除操作
+    static func cuttingAction(entity: RMEntity) {
+        let type = entity.type
+        if type == kTree {
+            RMEventBus.shared.requestCuttingTask(entity: entity,
+                                                 canChop:true)
+            RMInfoViewEventBus.shared.requestPlantInfo()
+        }
+    }
+    
     
     /// 比较任务优先级
     /// 相等优先级情况下，对比type

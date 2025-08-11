@@ -50,11 +50,20 @@ class UISystem: System {
     // MARK: - 蓝图 -
     var blueprintInfoView:BlueprintInfoView?
     
+    // MARK: - 规划 -
+    var mainConrollInfoView: MainControllInfoView?
+    
+    // MARK: - 工作盘 -
+    var workInfoView: WorkPanelView?
+    var workPanelVM: WorkPanelVM?
+    
     
     let ecsManager: ECSManager
+    let gameContext: RMGameContext
     
-    init (ecsManager: ECSManager) {
+    init (ecsManager: ECSManager, gameContext: RMGameContext) {
         self.ecsManager = ecsManager
+        self.gameContext = gameContext
     }
     
    
@@ -103,8 +112,25 @@ class UISystem: System {
     }
     
     
+    /// 点击按钮
+    func clickButton(buttonType: ButtonType) {
+        
+        switch buttonType {
+        case .architect:
+            showMainControllInfoView()
+        case .work:
+            showWorkInfoView()
+        default:
+            break
+        }
+        
+    }
+    
+    
     
     func removeAllInfoAction() {
+        removeMainInfo()
+        removeWorkInfo()
         removeTreeInfo()
         removeWoodInfo()
         removeUserInfo()

@@ -37,7 +37,6 @@ final class NodeBuilder: NSObject {
         kAX:ax,
         /// 手
         kPickHand:pickHand,
-        
     ]
     
     /// 根据类型创建Node

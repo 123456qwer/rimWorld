@@ -1,0 +1,157 @@
+//
+//  MainSubInfoView.swift
+//  RimWorld
+//
+//  Created by wu on 2025/8/11.
+//
+
+import UIKit
+
+class MainSubInfoView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    private let collectionView: UICollectionView
+    var gameContext: RMGameContext?
+
+    let height = 44.0
+    
+    let key:ArchitectCategory = .command
+    
+ 
+    private let items: [ArchitectCategory:[String]] = [.command:[
+        textAction("Cancel"),
+        textAction("Deconstruct"),
+        textAction("Mine"),
+        textAction("ChopWood"),
+        textAction("Harvest"),
+        textAction("Hunt"),
+        textAction("Slaughter"),
+        textAction("Tame")
+      ],
+                                                       .zone:[],
+                                                       .structure:[],
+                                                       .production:[],
+                                                       .furniture:[],
+                                                       .power:[],
+                                                       .security:[],
+                                                       .misc:[],
+                                                       .floor:[],
+                                                       .joy:[],
+                                                       .culture:[],
+                                                       .biotech:[],
+    ]
+    
+    private let itemsClick: [ArchitectCategory:[ActionType]] = [.command:[
+        .cancel,
+        .deconstruct,
+        .mine,
+        .chopWood,
+        .harvest,
+        .hunt,
+        .slaughter,
+        .tame
+      ],
+                                                       .zone:[],
+                                                       .structure:[],
+                                                       .production:[],
+                                                       .furniture:[],
+                                                       .power:[],
+                                                       .security:[],
+                                                       .misc:[],
+                                                       .floor:[],
+                                                       .joy:[],
+                                                       .culture:[],
+                                                       .biotech:[],
+    ]
+
+
+
+
+    override init(frame: CGRect) {
+
+        
+        // 创建布局
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 1   // 行间距
+        layout.minimumInteritemSpacing = 5 // 列间距
+        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+    
+        super.init(frame: frame)
+        
+
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.backgroundColor = .clear
+        
+        collectionView.register(UINib.init(nibName: "MainSubInfoCell", bundle: nil), forCellWithReuseIdentifier: "MainSubInfoCell")
+        
+        addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        collectionView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(0.0)
+            make.width.equalToSuperview()
+            make.height.equalToSuperview()
+        }
+    }
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - UICollectionViewDataSource
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let arr = items[key]
+        return arr!.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainSubInfoCell", for: indexPath) as! MainSubInfoCell
+        
+        let arr = items[key]!
+
+
+        // 样式
+        cell.contentView.backgroundColor = UIColor.btnBgColor()
+
+        cell.layer.borderColor = UIColor.white.cgColor
+        cell.layer.borderWidth = 1.0
+        cell.nameLabel.text = arr[indexPath.row]
+        
+        return cell
+    }
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let width = 44.0
+        return CGSize(width: width, height: height)
+    }
+    
+    /// 选中操作
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let items = itemsClick[key]!
+        
+        let type = items[indexPath.row]
+        switch type {
+        case .cancel:
+            gameContext?.currentMode = .cancel
+        case .deconstruct:
+            gameContext?.currentMode = .deconstruct
+        case .chopWood:
+            gameContext?.currentMode = .cutting
+        default:
+            break
+        }
+        
+        
+        RMInfoViewEventBus.shared.requestReloadBottomView(actionType: type)
+        RMEventBus.shared.requestClickEmpty()
+    }
+}

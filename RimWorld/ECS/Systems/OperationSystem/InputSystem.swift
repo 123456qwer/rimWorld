@@ -17,6 +17,9 @@ protocol AreaSelectProvider {
 }
 
 
+typealias TouchHandler = (CGPoint, BaseScene) -> Void
+
+
 class InputSystem: System {
 
     /// 最大可移动范围
@@ -37,6 +40,41 @@ class InputSystem: System {
     
    
     
+    // 触摸按下映射
+    lazy var touchDownHandlers: [GameMode: TouchHandler] = [
+        .normal: normalTouchdown,
+        .storage: areaSelectTouchdown,
+        .build: buildTouchdown,
+        .deconstruct: deconstructTouchdown,
+        .growing: growingTouchdown,
+        .cancel: cancelTouchdown,
+        .cutting: cuttingTouchdown,
+    ]
+    
+    // 触摸移动映射
+    lazy var touchMovedHandlers: [GameMode: TouchHandler] = [
+        .normal: normalTouchMoved,
+        .storage: areaSelectTouchMoved,
+        .build: buildTouchMoved,
+        .deconstruct: deconstructTouchMoved,
+        .growing: growingTouchMoved,
+        .cancel: cancelTouchMoved,
+        .cutting: cuttingTouchMoved,
+    ]
+    
+    // 触摸抬起映射
+    lazy var touchUpHandlers: [GameMode: TouchHandler] = [
+        .normal: normalTouchUp,
+        .storage: areaSelectTouchUp,
+        .build: buildTouchUp,
+        .deconstruct: deconstructTouchUp,
+        .growing: growingTouchUp,
+        .cancel: cancelTouchUp,
+        .cutting: cuttingTouchUp,
+        
+    ]
+    
+    
     init (ecsManager: ECSManager,
           gameContext: RMGameContext,
           areaProvider: AreaSelectProvider) {
@@ -46,60 +84,18 @@ class InputSystem: System {
     }
     
     func touchDown(atPoint pos : CGPoint, scene:BaseScene) {
-
-//        ECSLogger.log("点下操作：\(pos)")
-        
-        switch gameContext.currentMode {
-        case .normal:
-            normalTouchdown(atPoint: pos, scene: scene)
-        case .storage:
-            areaSelectTouchdown(atPoint: pos, scene: scene)
-        case .build:
-            buildTouchdown(atPoint: pos, scene: scene)
-        case .deconstruct:
-            deconstructTouchdown(atPoint: pos, scene: scene)
-        case .growing:
-            growingTouchdown(atPoint: pos, scene: scene)
-        }
+        touchDownHandlers[gameContext.currentMode]?(pos, scene)
     }
-    
     
     func touchMoved(toPoint pos : CGPoint, scene:BaseScene) {
-
-        switch gameContext.currentMode {
-        case .normal:
-            normalTouchMoved(atPoint: pos, scene: scene)
-        case .storage:
-            areaSelectTouchMoved(atPoint: pos, scene: scene)
-        case .build:
-            buildTouchMoved(atPoint: pos, scene: scene)
-        case .deconstruct:
-            deconstructTouchMoved(atPoint: pos, scene: scene)
-        case .growing:
-            growingTouchMoved(atPoint: pos, scene: scene)
-        }
+        touchMovedHandlers[gameContext.currentMode]?(pos, scene)
     }
     
-    func touchUp(atPoint pos: CGPoint, scene: BaseScene, entities: [RMEntity]) {
-        
-//        ECSLogger.log("抬起操作：\(pos)")
-
-        switch gameContext.currentMode {
-        case .normal:
-            normalTouchUp(atPoint: pos, scene: scene)
-        case .storage:
-            areaSelectTouchUp(atPoint: pos, scene: scene)
-        case .build:
-            buildTouchUp(atPoint: pos, scene: scene)
-        case .deconstruct:
-            deconstructTouchUp(atPoint: pos, scene: scene)
-        case .growing:
-            growingTouchUp(atPoint: pos, scene: scene)
-        }
-
+    func touchUp(atPoint pos: CGPoint, scene: BaseScene) {
+        touchUpHandlers[gameContext.currentMode]?(pos, scene)
     }
     
- 
+
 }
 
 

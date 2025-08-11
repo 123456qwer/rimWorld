@@ -40,30 +40,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         createMap()
         
 //        let qiaodan = EntityFactory.shared.createCharacterEntity(kMichaelJordan)
-        let yuefei = EntityFactory.shared.createCharacterEntity(kYueFei)
+//        let yuefei = EntityFactory.shared.createCharacterEntity(kYueFei)
 
-//        let so = SocialComponent()
-//        so.relationship[yuefei.entityID] = RelationshipType.friend.rawValue
-//        so.entityID = qiaodan.entityID
-//        qiaodan.addComponent(so)
-
-//        let so2 = SocialComponent()
-//        so2.relationship[qiaodan.entityID] = RelationshipType.friend.rawValue
-//        so2.entityID = yuefei.entityID
-//        yuefei.addComponent(so2)
 
 //        EntityFactory.shared.saveEntity(entity: qiaodan)
-        EntityFactory.shared.saveEntity(entity: yuefei)
-//
-        let eventLog = DBManager.shared.getEventLog()
-//        eventLog.addLog(from: qiaodan.entityID, to: yuefei.entityID, content: "谈到印度战机问题",emotion: .surprised)
-//        eventLog.addLog(from: qiaodan.entityID, to: yuefei.entityID, content: "开玩笑的说到我是历史第一人",emotion: .happy)
-//        eventLog.addLog(from: yuefei.entityID, to: qiaodan.entityID, content: "谈到威名远扬",emotion: .happy)
-//        eventLog.addLog(from: qiaodan.entityID, to: yuefei.entityID, content: "嘲笑猩猩",emotion: .neutral)
-//        eventLog.addLog(from: qiaodan.entityID, to: yuefei.entityID, content: "谈到抽雪茄",emotion: .neutral)
-//        eventLog.addLog(from: qiaodan.entityID, to: yuefei.entityID, content: "谈到篮球运动",emotion: .excited)
-//        eventLog.addLog(from: qiaodan.entityID, to: yuefei.entityID, content: "谈到肤色和人种",emotion: .sad)
-//        DBManager.shared.updateEventLog(eventLog)
+//        EntityFactory.shared.saveEntity(entity: yuefei)
+
+   
     }
     
     

@@ -33,11 +33,10 @@ class WorkPanelVM: NSObject {
         }
         
         
-        /// 点击工作
+        /// 点击关闭按钮
         view.close.publisher(for: .touchUpInside).sink(receiveValue: {[weak self] _ in
             guard let self = self else {return}
-            self.bindView?.removeFromSuperview()
-            self.bindView = nil
+            RMEventBus.shared.requestClickEmpty()
         }).store(in: &cancellables)
         
         

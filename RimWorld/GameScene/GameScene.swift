@@ -71,7 +71,7 @@ class GameScene: BaseScene {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        inputSystem.touchUp(atPoint: pos, scene: self, entities: ecsManager.allEntities())
+        inputSystem.touchUp(atPoint: pos, scene: self)
     }
     
   

@@ -55,6 +55,16 @@
 		944B55652E1CF43F0006D639 /* PlantGrowthSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55642E1CF43F0006D639 /* PlantGrowthSystem.swift */; };
 		944B55672E1D01A90006D639 /* RMInfoViewEventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55662E1D01A90006D639 /* RMInfoViewEventBus.swift */; };
 		944B556B2E1D21E30006D639 /* RMEntity+SaveAreaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B556A2E1D21E30006D639 /* RMEntity+SaveAreaEntity.swift */; };
+		94579B142E497F0A00CB2ACF /* MainControllInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B132E497F0A00CB2ACF /* MainControllInfoView.swift */; };
+		94579B162E4980D800CB2ACF /* UISystem+MainInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B152E4980D800CB2ACF /* UISystem+MainInfoView.swift */; };
+		94579B1D2E49870900CB2ACF /* MainControllCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94579B1C2E49870900CB2ACF /* MainControllCell.xib */; };
+		94579B1E2E49870900CB2ACF /* MainControllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B1B2E49870900CB2ACF /* MainControllCell.swift */; };
+		94579B202E498F0500CB2ACF /* MainSubInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B1F2E498F0500CB2ACF /* MainSubInfoView.swift */; };
+		94579B232E49916900CB2ACF /* MainSubInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94579B222E49916900CB2ACF /* MainSubInfoCell.xib */; };
+		94579B242E49916900CB2ACF /* MainSubInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B212E49916900CB2ACF /* MainSubInfoCell.swift */; };
+		94579B262E49994200CB2ACF /* UISystem+WorkInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B252E49994200CB2ACF /* UISystem+WorkInfoView.swift */; };
+		94579B292E499EFF00CB2ACF /* InputSystem+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B282E499EFF00CB2ACF /* InputSystem+Cancel.swift */; };
+		94579B2B2E49A60B00CB2ACF /* InputSystem+Cutting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B2A2E49A60B00CB2ACF /* InputSystem+Cutting.swift */; };
 		946577BD2DCC580C005D34F3 /* DataCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946577BC2DCC580C005D34F3 /* DataCoder.swift */; };
 		946577C42DCCB304005D34F3 /* EntityFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946577C32DCCB304005D34F3 /* EntityFactory.swift */; };
 		946577C82DCCB4DA005D34F3 /* EntityFactory+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946577C72DCCB4DA005D34F3 /* EntityFactory+Character.swift */; };
@@ -298,6 +308,16 @@
 		944B55642E1CF43F0006D639 /* PlantGrowthSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantGrowthSystem.swift; sourceTree = "<group>"; };
 		944B55662E1D01A90006D639 /* RMInfoViewEventBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMInfoViewEventBus.swift; sourceTree = "<group>"; };
 		944B556A2E1D21E30006D639 /* RMEntity+SaveAreaEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMEntity+SaveAreaEntity.swift"; sourceTree = "<group>"; };
+		94579B132E497F0A00CB2ACF /* MainControllInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControllInfoView.swift; sourceTree = "<group>"; };
+		94579B152E4980D800CB2ACF /* UISystem+MainInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISystem+MainInfoView.swift"; sourceTree = "<group>"; };
+		94579B1B2E49870900CB2ACF /* MainControllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControllCell.swift; sourceTree = "<group>"; };
+		94579B1C2E49870900CB2ACF /* MainControllCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainControllCell.xib; sourceTree = "<group>"; };
+		94579B1F2E498F0500CB2ACF /* MainSubInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSubInfoView.swift; sourceTree = "<group>"; };
+		94579B212E49916900CB2ACF /* MainSubInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSubInfoCell.swift; sourceTree = "<group>"; };
+		94579B222E49916900CB2ACF /* MainSubInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainSubInfoCell.xib; sourceTree = "<group>"; };
+		94579B252E49994200CB2ACF /* UISystem+WorkInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISystem+WorkInfoView.swift"; sourceTree = "<group>"; };
+		94579B282E499EFF00CB2ACF /* InputSystem+Cancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputSystem+Cancel.swift"; sourceTree = "<group>"; };
+		94579B2A2E49A60B00CB2ACF /* InputSystem+Cutting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputSystem+Cutting.swift"; sourceTree = "<group>"; };
 		946577BC2DCC580C005D34F3 /* DataCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCoder.swift; sourceTree = "<group>"; };
 		946577C32DCCB304005D34F3 /* EntityFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFactory.swift; sourceTree = "<group>"; };
 		946577C72DCCB4DA005D34F3 /* EntityFactory+Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+Character.swift"; sourceTree = "<group>"; };
@@ -632,6 +652,27 @@
 				944B556A2E1D21E30006D639 /* RMEntity+SaveAreaEntity.swift */,
 			);
 			path = SaveAreaEntity;
+			sourceTree = "<group>";
+		};
+		94579B122E497ED900CB2ACF /* MainControllInfoViews */ = {
+			isa = PBXGroup;
+			children = (
+				94579B132E497F0A00CB2ACF /* MainControllInfoView.swift */,
+				94579B1B2E49870900CB2ACF /* MainControllCell.swift */,
+				94579B1C2E49870900CB2ACF /* MainControllCell.xib */,
+				94579B1F2E498F0500CB2ACF /* MainSubInfoView.swift */,
+				94579B212E49916900CB2ACF /* MainSubInfoCell.swift */,
+				94579B222E49916900CB2ACF /* MainSubInfoCell.xib */,
+			);
+			path = MainControllInfoViews;
+			sourceTree = "<group>";
+		};
+		94579B272E499A8200CB2ACF /* WorkPanelView */ = {
+			isa = PBXGroup;
+			children = (
+				94973BED2DC9B384005AB8DB /* WorkPanelView.swift */,
+			);
+			path = WorkPanelView;
 			sourceTree = "<group>";
 		};
 		946577CB2DCD968A005D34F3 /* Entity */ = {
@@ -1009,6 +1050,8 @@
 		94973BE62DC9B00D005AB8DB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				94579B272E499A8200CB2ACF /* WorkPanelView */,
+				94579B122E497ED900CB2ACF /* MainControllInfoViews */,
 				9467A22C2E40519E0097734D /* GrowingInfoViews */,
 				9467A20E2E331AA00097734D /* BlueprintInfoViews */,
 				944B554A2E1500F00006D639 /* StorageInfoViews */,
@@ -1016,7 +1059,6 @@
 				94B705CF2DEEF6A800A47EE5 /* SystemOperationViews */,
 				949FACCF2DD333640044E4E5 /* CharacterTabbarViews */,
 				94973BDE2DC9A9D0005AB8DB /* BottomActionBar.swift */,
-				94973BED2DC9B384005AB8DB /* WorkPanelView.swift */,
 				94973C0A2DCB72BA005AB8DB /* CharacterInfoView.swift */,
 			);
 			path = View;
@@ -1129,6 +1171,8 @@
 			isa = PBXGroup;
 			children = (
 				94B705D92DF134D600A47EE5 /* UISystem.swift */,
+				94579B252E49994200CB2ACF /* UISystem+WorkInfoView.swift */,
+				94579B152E4980D800CB2ACF /* UISystem+MainInfoView.swift */,
 				94B705DB2DF1446100A47EE5 /* UISystem+Character.swift */,
 				94B705DF2DF1451D00A47EE5 /* UISystem+Plant.swift */,
 				944B55482E14FE170006D639 /* UISystem+Storage.swift */,
@@ -1147,6 +1191,8 @@
 				9467A1FF2E31C95D0097734D /* InputSystem+Build.swift */,
 				9467A2012E31CF990097734D /* InputSystem+Deconstruct.swift */,
 				9467A2262E404A0F0097734D /* InputSystem+Growing.swift */,
+				94579B282E499EFF00CB2ACF /* InputSystem+Cancel.swift */,
+				94579B2A2E49A60B00CB2ACF /* InputSystem+Cutting.swift */,
 			);
 			path = OperationSystem;
 			sourceTree = "<group>";
@@ -1299,10 +1345,12 @@
 				94B705A22DE6DEE400A47EE5 /* TalkCell.xib in Resources */,
 				94B705AC2DE6E22600A47EE5 /* LogCell.xib in Resources */,
 				944B55542E176B2F0006D639 /* Assets.xcassets in Resources */,
+				94579B1D2E49870900CB2ACF /* MainControllCell.xib in Resources */,
 				94973BD72DC087A7005AB8DB /* GameScene.sks in Resources */,
 				94973BD82DC087A7005AB8DB /* Localizable.strings in Resources */,
 				94973BD92DC087A7005AB8DB /* LaunchScreen.storyboard in Resources */,
 				944B55512E150E4B0006D639 /* SaveAreaCell.xib in Resources */,
+				94579B232E49916900CB2ACF /* MainSubInfoCell.xib in Resources */,
 				94973BDA2DC087A7005AB8DB /* Main.strings in Resources */,
 				94973BDB2DC087A7005AB8DB /* LaunchScreen.strings in Resources */,
 				94B705ED2DF1BCA100A47EE5 /* TestScene.sks in Resources */,
@@ -1366,6 +1414,7 @@
 				9467A20D2E3319500097734D /* UISystem+Blueprint.swift in Sources */,
 				9467A2532E41FAF70097734D /* TaskSystem+Relax.swift in Sources */,
 				949FACD32DD33DA80044E4E5 /* NutritionComponent.swift in Sources */,
+				94579B162E4980D800CB2ACF /* UISystem+MainInfoView.swift in Sources */,
 				94973BB42DC087A7005AB8DB /* CameraManager.swift in Sources */,
 				946E544B2E1FE588008A841B /* ECS+DoTaskSystem.swift in Sources */,
 				94B705C72DEEA96100A47EE5 /* Notification+Extensions.swift in Sources */,
@@ -1385,6 +1434,7 @@
 				94973BB62DC087A7005AB8DB /* ECSLogger.swift in Sources */,
 				94973BDF2DC9A9D0005AB8DB /* BottomActionBar.swift in Sources */,
 				94DD32B92E4489860096A8C7 /* EntityNodeActionTool.swift in Sources */,
+				94579B292E499EFF00CB2ACF /* InputSystem+Cancel.swift in Sources */,
 				94973BB72DC087A7005AB8DB /* MathUtils.swift in Sources */,
 				94B705DC2DF1446100A47EE5 /* UISystem+Character.swift in Sources */,
 				94B705C32DEE945400A47EE5 /* DBManager+Time.swift in Sources */,
@@ -1439,6 +1489,7 @@
 				9436777D2DF7CB110052A36F /* TaskSystem+Hauling.swift in Sources */,
 				944B556B2E1D21E30006D639 /* RMEntity+SaveAreaEntity.swift in Sources */,
 				94973C1C2DCC5307005AB8DB /* DBManager+Entity.swift in Sources */,
+				94579B202E498F0500CB2ACF /* MainSubInfoView.swift in Sources */,
 				9467A2212E39A6720097734D /* RemoveEntityTaskUpdater.swift in Sources */,
 				94B7059F2DE6DB3500A47EE5 /* TalkTableView.swift in Sources */,
 				94973C112DCB88C7005AB8DB /* WeaponComponent.swift in Sources */,
@@ -1488,6 +1539,7 @@
 				943677582DF6AFFD0052A36F /* RMGameContext.swift in Sources */,
 				949C3D3F2DCF3348003EA431 /* CharacterTabbarView.swift in Sources */,
 				94DD32C62E44A1A40096A8C7 /* Harvest+Blueprint.swift in Sources */,
+				94579B242E49916900CB2ACF /* MainSubInfoCell.swift in Sources */,
 				949FACEC2DD46D700044E4E5 /* DBManager+EventLog.swift in Sources */,
 				944B555B2E1B5F710006D639 /* DoTask+Rest.swift in Sources */,
 				94973C0F2DCB7B8C005AB8DB /* Constonts.swift in Sources */,
@@ -1517,6 +1569,7 @@
 				94B705A72DE6E20400A47EE5 /* LogView.swift in Sources */,
 				9436774F2DF6716C0052A36F /* DoTaskSystem.swift in Sources */,
 				949C3D3B2DCF255B003EA431 /* RMCommonEnums.swift in Sources */,
+				94579B262E49994200CB2ACF /* UISystem+WorkInfoView.swift in Sources */,
 				94B705F42DF29CAB00A47EE5 /* MovementSystem.swift in Sources */,
 				94973C032DCB3C85005AB8DB /* SkillComponent.swift in Sources */,
 				9467A2182E33898C0097734D /* NodeBuilder+Wall.swift in Sources */,
@@ -1535,6 +1588,7 @@
 				94B705D62DF044D900A47EE5 /* PlantBasicInfoComponent.swift in Sources */,
 				946577C42DCCB304005D34F3 /* EntityFactory.swift in Sources */,
 				949FAD022DD5F7B60044E4E5 /* ArmorComponent.swift in Sources */,
+				94579B2B2E49A60B00CB2ACF /* InputSystem+Cutting.swift in Sources */,
 				949FACCA2DD2F05D0044E4E5 /* BlockedActionComponent.swift in Sources */,
 				9467A2292E404CF40097734D /* EntityFactory+Growing.swift in Sources */,
 				94973BCC2DC087A7005AB8DB /* System.swift in Sources */,
@@ -1553,6 +1607,7 @@
 				94B705E02DF1451D00A47EE5 /* UISystem+Plant.swift in Sources */,
 				94973BD02DC087A7005AB8DB /* ItemModel.swift in Sources */,
 				94973BD12DC087A7005AB8DB /* UnitModel.swift in Sources */,
+				94579B1E2E49870900CB2ACF /* MainControllCell.swift in Sources */,
 				949FACDE2DD348C30044E4E5 /* OutdoorComponent.swift in Sources */,
 				946577E02DCDEDA4005D34F3 /* EnergyComponent.swift in Sources */,
 				94973C092DCB49AB005AB8DB /* RMBaseNode.swift in Sources */,
@@ -1584,6 +1639,7 @@
 				944B55492E14FE170006D639 /* UISystem+Storage.swift in Sources */,
 				944B554E2E150C230006D639 /* StorageInfoTabelView.swift in Sources */,
 				949FACF62DD5795E0044E4E5 /* BodyPartDetailView.swift in Sources */,
+				94579B142E497F0A00CB2ACF /* MainControllInfoView.swift in Sources */,
 				94DD32B12E4488F10096A8C7 /* EntityInfoTool.swift in Sources */,
 				949FACFE2DD5E41A0044E4E5 /* CharacterEquipView.swift in Sources */,
 			);
