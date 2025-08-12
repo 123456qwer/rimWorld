@@ -40,11 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         createMap()
         
         let qiaodan = EntityFactory.shared.createCharacterEntity(kMichaelJordan)
-        let yuefei = EntityFactory.shared.createCharacterEntity(kYueFei)
+//        let yuefei = EntityFactory.shared.createCharacterEntity(kYueFei)
 
 
         EntityFactory.shared.saveEntity(entity: qiaodan)
-        EntityFactory.shared.saveEntity(entity: yuefei)
+//        EntityFactory.shared.saveEntity(entity: yuefei)
 
    
     }

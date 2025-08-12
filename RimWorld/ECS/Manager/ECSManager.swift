@@ -80,6 +80,10 @@ class ECSManager {
                 self.moveEnd(entity:entity,
                              task: task)
                 
+                /// 创建吃饭任务
+            case .eatTask(let entity):
+                self.addEatTask(entity)
+                
                 /// 创建睡觉任务
             case .sleepTask(let entity):
                 self.addSleepTask(entity)
@@ -149,10 +153,6 @@ class ECSManager {
             case .speed3: break
             case .moveStop(_): break
             case .updateAllSystem(_,_): break
-                
-          
-            case .eatTask(_):
-                break
             case .relaxTask(_):
                 break
             }

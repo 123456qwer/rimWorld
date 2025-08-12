@@ -38,6 +38,13 @@ extension TaskSystem {
             if (task.type == .Rest || task.hightType == .Sleep || task.hightType == .Eat || task.hightType == .Relax) && task.targetEntityID != executorEntity.entityID {
                 continue
             }
+           
+            
+            /// 吃饭任务没有目标（没饭o(╥﹏╥)o）
+            if task.hightType == .Eat && task.eatTask.targetID == 0 {
+                continue
+            }
+            
             
             if EntityAbilityTool.ableForceSwitchTask(entity: executorEntity, task: task) {
                 
@@ -148,6 +155,12 @@ extension TaskSystem {
             handleGrowingTask(executorEntity: executorEntity, task: task)
         case .Mining:
             handleMiningTask(executorEntity: executorEntity, task: task)
+        case .None:
+            
+            if task.hightType == .Eat {
+                handleEatTask(executorEntity: executorEntity, task: task)
+            }
+            
         default:
             break
         }
@@ -263,7 +276,7 @@ extension TaskSystem {
                 /// 创建搬运任务
                 let task = addHaulingTask(targetEntity)
                 /// 设置搬运目的地
-                task?.haulingTask.targetId = storageE.entityID
+                task?.haulingTask.targetID = storageE.entityID
                 return true
             }
         }
@@ -315,7 +328,7 @@ extension TaskSystem {
                     /// 需要搬的数量（走到位置后计算实际搬运数量）
                     task?.haulingTask.needMaxCount = needHaulCount
                     /// 设置搬运目的地
-                    task?.haulingTask.targetId = blueE.entityID
+                    task?.haulingTask.targetID = blueE.entityID
                     
                     /// 实际等级是建造
                     task?.realType = .Building

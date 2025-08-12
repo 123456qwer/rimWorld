@@ -25,7 +25,7 @@ extension DoTaskSystem {
             return
         }
         
-        guard let targetEntity = ecsManager.getEntity(task.haulingTask.targetId) else {
+        guard let targetEntity = ecsManager.getEntity(task.haulingTask.targetID) else {
             
             ECSLogger.log("执行的搬运的存储目标没有了！💀💀💀")
          

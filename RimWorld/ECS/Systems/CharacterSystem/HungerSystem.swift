@@ -47,7 +47,9 @@ class HungerSystem: System {
             /// 最小不小于0
             nutritionComponent.current = max(0, nutritionComponent.current)
             /// 饱食度小于临界值，需要吃饭了
-            if nutritionComponent.threshold > nutritionComponent.current {
+            if nutritionComponent.threshold > nutritionComponent.current && nutritionComponent.isCreateTask == false {
+                /// 只创建一次
+                nutritionComponent.isCreateTask = true
                 RMEventBus.shared.requestEatTask(entity: entity)
             }
             

@@ -66,6 +66,11 @@ class EntityNodeFactorySystem: System {
             EntityFactory.shared.createWoodEntityWithoutSaving(point: point, params: params, ecsManager: self!.ecsManager)
         }
         
+        /// 苹果
+        register(type: kApple) { [weak self] point, params in
+            EntityFactory.shared.createApple(point: point, params: params, ecsManager: self!.ecsManager)
+        }
+        
         /// 矿石
         register(type: kOre) {[weak self] point, params in
             EntityFactory.shared.createOreEntityWithoutSaving(point: point, params: params, ecsManager: self!.ecsManager)

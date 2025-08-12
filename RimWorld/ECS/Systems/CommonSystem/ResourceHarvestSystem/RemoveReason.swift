@@ -16,6 +16,11 @@ struct TreeRemoveReason: RemoveReason {
     let entity: RMEntity
 }
 
+/// 摘除
+struct PickRemoveReason: RemoveReason {
+    let entity: RMEntity
+}
+
 /// 矿产被移除
 struct MineRemoveReason: RemoveReason {
     let entity: RMEntity

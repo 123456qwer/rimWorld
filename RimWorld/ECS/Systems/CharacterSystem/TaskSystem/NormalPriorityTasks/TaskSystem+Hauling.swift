@@ -69,7 +69,7 @@ extension TaskSystem {
             return
         }
         /// 搬运目的地
-        guard ecsManager.getEntity(task.haulingTask.targetId) != nil else {
+        guard ecsManager.getEntity(task.haulingTask.targetID) != nil else {
             ECSLogger.log("搬运目的地为空！💀💀💀")
             
             RMEventBus.shared.requestForceCancelTask(entity: executorEntity, task: task)
@@ -112,7 +112,7 @@ extension TaskSystem {
         
         
         /// 蓝图，需要取消对应的
-        if let blueEntity = ecsManager.getEntity(task.haulingTask.targetId) {
+        if let blueEntity = ecsManager.getEntity(task.haulingTask.targetID) {
             if let blueComponent = blueEntity.getComponent(ofType: BlueprintComponent.self) {
                 
                 /// 设置为0

@@ -22,14 +22,14 @@ class EntityCategorizatonSystem: System {
     var entitiesAbleToHaul: [RMEntity] = []
     /// 可执行存储任务的实体
     var entitiesAbleToStorage: [RMEntity] = []
-    /// 可执行休息任务的实体
-    var entitiesAbleToRest: Set<RMEntity> = []
     /// 可执行建造任务的实体
     var entitiesAbleToBuild: [RMEntity] = []
+    
+    
+    /// 可执行休息任务的实体
+    var entitiesAbleToRest: Set<RMEntity> = []
     /// 可执行吃饭任务的实体
     var entitiesAbleToEat: Set<RMEntity> = []
-    
-
     /// 所有可以执行任务的实体
     var entitiesAbleToTask: Set<RMEntity> = []
     
@@ -41,6 +41,8 @@ class EntityCategorizatonSystem: System {
     var entitiesAbleToBeHaul: Set<RMEntity> = []
     /// 可以被种植的实体<种植区域>
     var entitiesAbleToBeGrowArea: Set<RMEntity> = []
+    /// 可以被吃的实体<也叫食物...>
+    var entitiesAbleToBeEat: Set<RMEntity> = []
     
     // MARK: - 可以生长的植物实体 -
     var entitiesAbleToPlantGrowth: Set<RMEntity> = []
@@ -54,6 +56,9 @@ class EntityCategorizatonSystem: System {
     // MARK: - 建造素材等 -
     var entitiesMaterial: [MaterialType:Set<RMEntity>] = [:]
     
+    /// 移除的时候统一从这里处理
+    private var setEntities:[Set<RMEntity>] = []
+    private var arrEntities:[[RMEntity]] = []
     
     
     /// 休息中的角色
@@ -64,6 +69,24 @@ class EntityCategorizatonSystem: System {
     
     init(ecsManger: ECSManager) {
         self.ecsManger = ecsManger
+        var arr  = [entitiesAbleToCut,
+                    entitiesAbleToHaul,
+                    entitiesAbleToStorage,
+                    entitiesAbleToBuild,]
+        var sets = [entitiesAbleToRest,
+                    entitiesAbleToEat,
+                    entitiesAbleToTask,
+                    entitiesAbleToBeCut,
+                    entitiesAbleToBeHaul,
+                    entitiesAbleToBeGrowArea,
+                    entitiesAbleToBeEat,
+                    entitiesAbleToPlantGrowth]
+        for entities in sets {
+            setEntities.append(entities)
+        }
+        for entities in arr {
+            arrEntities.append(entities)
+        }
     }
     
     /// 排序
@@ -85,26 +108,20 @@ class EntityCategorizatonSystem: System {
     /// 删除实体
     func removeEntity(_ entity: RMEntity) {
         
-        if let index = entitiesAbleToCut.firstIndex(where: { $0 === entity}){
-            entitiesAbleToCut.remove(at: index)
-        }
-        if let index = entitiesAbleToHaul.firstIndex(where: { $0 === entity}){
-            entitiesAbleToHaul.remove(at: index)
-        }
-        if let index = entitiesAbleToStorage.firstIndex(where: { $0 === entity}){
-            entitiesAbleToStorage.remove(at: index)
-        }
-        if let index = entitiesAbleToBuild.firstIndex(where: {
-            $0 == entity}){
-            entitiesAbleToBuild.remove(at: index)
+        /// 从arr数组中删除
+        for i in arrEntities.indices {
+            var entities = arrEntities[i]
+            if let index = entities.firstIndex(where: { $0 === entity}){
+                entities.remove(at: index)
+            }
         }
         
-        entitiesAbleToRest.remove(entity)
-        entitiesAbleToBeHaul.remove(entity)
-        entitiesAbleToBeCut.remove(entity)
-        entitiesAbleToPlantGrowth.remove(entity)
-        entitiesAbleToBeGrowArea.remove(entity)
-        entitiesAbleToEat.remove(entity)
+        /// 从set数组中删除
+        for i in setEntities.indices {
+            setEntities[i].remove(entity)
+        }
+        
+   
         restEntities.removeValue(forKey: entity.entityID)
         unRestEntities.removeValue(forKey: entity.entityID)
         
@@ -233,6 +250,12 @@ class EntityCategorizatonSystem: System {
         if EntityAbilityTool.ableToEat(entity) {
             entitiesAbleToEat.insert(entity)
         }
+        
+        
+        if EntityAbilityTool.ableToBeEat(entity) {
+            entitiesAbleToBeEat.insert(entity)
+        }
+        
 
         if let component = EntityAbilityTool.ableToBeBuild(entity) {
             entitiesBlueprint[component.key] = entity

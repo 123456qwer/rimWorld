@@ -23,8 +23,14 @@ class WorkTask: Hashable {
     /// 任务类型 （高优先级，默认是无）
     var hightType: HightWorkType = .None
     
+    /// 玩家设置的命令（最高优先级）
+    var isUserSetTask: Bool = false
+    
     /// 休息任务
     var restingTask: RestingTask = RestingTask()
+    
+    /// 吃饭任务
+    var eatTask: EatTask = EatTask()
     
     /// 建造任务
     var buildingTask: BuindingTask = BuindingTask()
@@ -89,12 +95,19 @@ struct CuttingTask: Hashable {
     
 }
 
+/// 吃饭任务
+struct EatTask: Hashable {
+    /// 食物ID
+    var targetID: Int = 0
+    
+}
+
 /// 搬运任务
 struct HaulingTask: Hashable {
     /// 搬运状态
     var haulStage: HaulTaskStage?
     /// 搬运目的地
-    var targetId: Int = 0
+    var targetID: Int = 0
     
     /// 需要搬运的数量
     var needMaxCount: Int = 0

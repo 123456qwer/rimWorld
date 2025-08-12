@@ -23,6 +23,11 @@ struct EntityNodeTool {
         targetNode.run(SKAction.sequence([SKAction.fadeAlpha(to: 0, duration: 0.3),SKAction.removeFromParent()]))
     }
     
+    /// 采摘完成
+    static func pickingFinish(targetNode: RMBaseNode) {
+        stopCuttingAnimation(entity: targetNode.rmEntity ?? RMEntity())
+    }
+    
     /// 停止砍树
     static func stopCuttingAnimation(entity: RMEntity) {
         guard let targetNode = entity.node else {

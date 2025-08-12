@@ -214,9 +214,11 @@ let kPickHand = "PickHand"
 let kWoodWall = "WoodWall"
 
 
-/// 食物
+// MARK: - 食物 -
 /// 鸡腿
 let kChicken = "Chicken"
+/// 苹果
+let kApple = "Apple"
 
 
 

@@ -31,8 +31,8 @@ extension NodeBuilder {
         
         if let pointComponent = entity.getComponent(ofType: PositionComponent.self),
            let treeComponent = entity.getComponent(ofType: PlantBasicInfoComponent.self) {
-            let node = RMBaseNode(texture: TextureManager.shared.getTexture(treeComponent.plantTexture), color: .black, size: CGSize(width: tileSize, height: tileSize))
-            node.name = "apple"
+            let node = RMBaseNode(texture: TextureManager.shared.getTexture(treeComponent.plantTexture), color: .black, size: CGSize(width:tileSize * 2.0, height: tileSize * 2.0))
+            node.name = "appleTree"
             node.position = CGPoint(x: pointComponent.x, y: pointComponent.y)
             node.zPosition = pointComponent.z
    

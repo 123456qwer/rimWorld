@@ -43,6 +43,8 @@ final class NodeBuilder: NSObject {
         kPickHand:pickHand,
         /// 矿产
         kOre:ore,
+        /// 苹果
+        kApple:apple,
     ]
     
     /// 根据类型创建Node

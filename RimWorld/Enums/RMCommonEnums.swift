@@ -638,13 +638,15 @@ enum BlueprintType: Int {
 }
 
 
-
+///
 enum HaulTaskStage {
     /// 前往物品
     case movingToItem
     /// 正在搬运到目标位置
     case movingToTarget
 }
+
+
 
 
 /// 操作UI

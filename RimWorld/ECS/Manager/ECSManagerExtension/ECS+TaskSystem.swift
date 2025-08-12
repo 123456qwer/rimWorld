@@ -59,7 +59,10 @@ extension ECSManager {
         systemManager.getSystem(ofType: TaskSystem.self)?.addSleepTask(entity)
     }
  
-  
+    /// 添加吃饭任务
+    func addEatTask(_ entity: RMEntity) {
+        systemManager.getSystem(ofType: TaskSystem.self)?.addEatTask(entity)
+    }
     
     /// 执行任务
     func doTask(entityID: Int, task: WorkTask) {

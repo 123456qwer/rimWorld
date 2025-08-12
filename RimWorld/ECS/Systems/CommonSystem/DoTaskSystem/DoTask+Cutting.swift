@@ -147,32 +147,20 @@ extension DoTaskSystem {
         if targetBasicComponent.pickCurrentHealth <= 0 {
             
 
-            /// 采摘结束动画
-            EntityNodeTool.cuttingFinish(targetNode: targetNode)
-            
-            /// 树坐标
-            let targetPoint = PositionTool.nowPosition(targetEntity)
-            
-            /// 生成的木头量
-            let woodCount = EntityInfoTool.currentHarvestAmountForPlant(entity: targetEntity)
-            
-            /// 生成树大于0，才产生新的木头
-            if woodCount > 0 {
-                
-                let params = WoodParams(
-                    woodCount: woodCount
-                )
-                
-                /// 创建木材实体（需要当前这个树来确定生成多少个木头）
-                RMEventBus.shared.requestCreateEntity(type: kWood,
-                                                      point: targetPoint,
-                                                      params: params)
-            }
+            /// 砍伐结束动画
+            EntityNodeTool.pickingFinish(targetNode: targetNode)
           
             
-        
+            // TODO: - 获取苹果 -
+            if let apple = EntityInfoTool.getSubEntityWithType(targetEntity: targetEntity, ecsManager: ecsManager, type: kApple) {
+                
+                let reason = PickRemoveReason(entity: apple)
+                RMEventBus.shared.requestRemoveEntity(apple, reason: reason)
+            }
+            
+            
             /// 删除
-            cuttingTasks.removeValue(forKey: executorEntity.entityID)
+            pickingTasks.removeValue(forKey: executorEntity.entityID)
 
             /// 完成任务
             EntityActionTool.completeTaskAction(entity: executorEntity, task: task)

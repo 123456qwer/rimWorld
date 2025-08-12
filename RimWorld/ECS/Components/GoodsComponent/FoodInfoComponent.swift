@@ -16,6 +16,8 @@ final class FoodInfoComponent: TableCodable, Component {
     /// 所属实体
     var entityID:Int = -1
     
+    var textureName: String = ""
+    
     enum CodingKeys: String, CodingTableKey {
         typealias Root = FoodInfoComponent
         static let objectRelationalMapping = TableBinding(CodingKeys.self){

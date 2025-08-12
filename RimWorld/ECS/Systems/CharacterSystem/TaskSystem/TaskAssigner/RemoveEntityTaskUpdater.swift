@@ -23,7 +23,7 @@ extension TaskSystem {
         })
         
         for task in doTaskQueue {
-            guard task.haulingTask.targetId == targetEntity.entityID else {
+            guard task.haulingTask.targetID == targetEntity.entityID else {
                 continue
             }
             guard let executorEntity = ecsManager.getEntity(task.executorEntityID) else {

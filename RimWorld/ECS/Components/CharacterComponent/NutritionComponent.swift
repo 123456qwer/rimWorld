@@ -23,6 +23,9 @@ final class NutritionComponent: TableCodable, Component {
     /// 每次减少的饥饿值
     var nutritionDecayPerTick:Double = 0.1
  
+    /// 是否创建了对应任务
+    var isCreateTask:Bool = false
+    
     
     enum CodingKeys: String, CodingTableKey {
         typealias Root = NutritionComponent

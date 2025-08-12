@@ -97,7 +97,7 @@ class UISystem: System {
                     entity.type == kAppleTree{
             /// 点击植物
             showPlantInfo(node: node, nodes: nodes)
-        }else if entity.type == kWood || entity.type == kOre{
+        }else if entity.type == kWood || entity.type == kOre || entity.type == kApple {
             /// 点击物品（木头、矿产）
             showGoodsInfo(node: node, nodes: nodes)
         }else if entity.type == kStorageArea {

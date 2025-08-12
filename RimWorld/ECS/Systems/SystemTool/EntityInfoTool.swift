@@ -231,7 +231,7 @@ struct EntityInfoTool {
         guard let plantComponent = entity.getComponent(ofType: PlantBasicInfoComponent.self) else {
             return 0
         }
-        let yield = Float(plantComponent.harvestYield) * plantComponent.growthPercent
+        let yield = Float(plantComponent.harvestYield) * Float(plantComponent.growthPercent)
         return max(1, Int(yield.rounded(.down)))
     }
     
@@ -305,5 +305,22 @@ struct EntityInfoTool {
         
         return nil
     }
+    
+    
+    /// 获取子类
+    static func getSubEntityWithType(targetEntity: RMEntity, ecsManager: ECSManager,type: String) -> RMEntity? {
+        guard let ownerComponent = targetEntity.getComponent(ofType: OwnershipComponent.self) else { return nil }
+        
+        for entityID in ownerComponent.ownedEntityIDS {
+            if let entity = ecsManager.getEntity(entityID), entity.type == type  {
+                return entity
+            }
+        }
+        
+        return nil
+    }
+    
+   
+    
     
 }

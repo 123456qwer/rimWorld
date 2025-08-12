@@ -137,7 +137,15 @@ struct EntityAbilityTool {
     
     /// 可执行吃饭任务
     static func ableToEat(_ entity: RMEntity) -> Bool {
-        guard let nutritionComponent = entity.getComponent(ofType: NutritionComponent.self) else {
+        guard entity.getComponent(ofType: NutritionComponent.self) != nil else {
+            return false
+        }
+        return true
+    }
+    
+    /// 可被吃的实体
+    static func ableToBeEat(_ entity: RMEntity) -> Bool {
+        guard entity.getComponent(ofType: FoodInfoComponent.self) != nil else {
             return false
         }
         return true
@@ -162,6 +170,17 @@ struct EntityAbilityTool {
         
         /// 没有任务，直接替换
         guard let currentTask = EntityInfoTool.currentTask(entity) else {
+            return true
+        }
+        
+        /// 玩家设置的任务，优先级最高
+        if currentTask.isUserSetTask == true {
+            return false
+        }
+    
+        
+        /// 高优先级任务，直接切换
+        if task.hightType != .None {
             return true
         }
         
