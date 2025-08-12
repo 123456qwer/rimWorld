@@ -96,6 +96,8 @@ class BaseScene:SKScene, RenderContext {
         /// 先大概设置Z的位置
         node.zPosition = 10000 - node.position.y
         
+       
+        
         /// 已添加
         if node.parent != nil { return }
         
@@ -400,6 +402,7 @@ extension BaseScene: AreaSelectProvider {
         var params:EntityCreationParams?
         var isCancel = false
         var isCuttring = false
+        var isMining = false
         
         if gameContext.currentMode == .storage {
             /// 仓库
@@ -413,6 +416,8 @@ extension BaseScene: AreaSelectProvider {
             isCancel = true
         }else if gameContext.currentMode == .cutting {
             isCuttring = true
+        }else if gameContext.currentMode == .mining {
+            isMining = true
         }
         
         
@@ -446,6 +451,8 @@ extension BaseScene: AreaSelectProvider {
                     cancelAction(point)
                 }else if isCuttring {
                     cuttingAction(point)
+                }else if isMining {
+                    miningAction(point)
                 }
             }
         }
@@ -471,7 +478,18 @@ extension BaseScene: AreaSelectProvider {
             guard let node = node as? RMBaseNode else { continue }
             guard let entity = node.rmEntity else { continue }
             
-            EntityActionTool.cuttingAction(entity: entity)
+            EntityActionTool.cuttingAction(entity: entity,ecsManager: ecsManager)
+        }
+    }
+    
+    /// 采矿操作
+    private func miningAction(_ point: CGPoint) {
+        let nodes = self.nodes(at: point)
+        for node in nodes {
+            guard let node = node as? RMBaseNode else { continue }
+            guard let entity = node.rmEntity else { continue }
+            
+            EntityActionTool.miningAction(entity: entity,ecsManager: ecsManager)
         }
     }
 }

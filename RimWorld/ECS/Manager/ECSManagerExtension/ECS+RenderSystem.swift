@@ -41,6 +41,23 @@ extension ECSManager {
         }
     }
     
+    
+    /// 修改采矿状态
+    func mineStatusChange(_ entity: RMEntity,
+                          canMine: Bool) {
+        /// 可以挖掘，生成node,不可以，删除Node
+        if canMine {
+            /// 添加镐子
+            let params = MineParams(ownerId: entity.entityID)
+            RMEventBus.shared.requestCreateEntity(type: kPickaxe, point: CGPoint(x: 0, y: 0), params: params)
+        }else {
+            /// 移除镐子
+            if let hand = EntityInfoTool.getMine(targetEntity: entity, ecsManager: self){
+                RMEventBus.shared.requestRemoveEntity(hand)
+            }
+        }
+    }
+    
     /// 修改父类
     func reparentNode(_ entity: RMEntity,
                       _ z: CGFloat,

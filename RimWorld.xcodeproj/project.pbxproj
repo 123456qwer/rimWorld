@@ -32,11 +32,10 @@
 		9436777F2DF7CB400052A36F /* TaskSystem+Cleaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436777E2DF7CB400052A36F /* TaskSystem+Cleaning.swift */; };
 		943677812DF7CB6B0052A36F /* TaskSystem+Research.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943677802DF7CB6B0052A36F /* TaskSystem+Research.swift */; };
 		944B55312E1279660006D639 /* EntityFactory+wood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55302E1279660006D639 /* EntityFactory+wood.swift */; };
-		944B55332E12799D0006D639 /* WoodBasicInfoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55322E12799D0006D639 /* WoodBasicInfoComponent.swift */; };
 		944B55372E13820C0006D639 /* NodeBuilder+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55362E13820C0006D639 /* NodeBuilder+Character.swift */; };
 		944B55392E1382440006D639 /* NodeBuilder+Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55382E1382440006D639 /* NodeBuilder+Weapon.swift */; };
-		944B553B2E1382610006D639 /* NodeBuilder+Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B553A2E1382610006D639 /* NodeBuilder+Plant.swift */; };
-		944B553E2E13916D0006D639 /* WoodInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B553D2E13916D0006D639 /* WoodInfoView.swift */; };
+		944B553B2E1382610006D639 /* NodeBuilder+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B553A2E1382610006D639 /* NodeBuilder+Environment.swift */; };
+		944B553E2E13916D0006D639 /* CommonGoodsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B553D2E13916D0006D639 /* CommonGoodsInfoView.swift */; };
 		944B55402E13945A0006D639 /* EntityNodeFactorySystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B553F2E13945A0006D639 /* EntityNodeFactorySystem.swift */; };
 		944B55422E14EAEF0006D639 /* EntityFactory+Stroage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55412E14EAEF0006D639 /* EntityFactory+Stroage.swift */; };
 		944B55452E14EB620006D639 /* StorageInfoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B55442E14EB620006D639 /* StorageInfoComponent.swift */; };
@@ -63,8 +62,13 @@
 		94579B232E49916900CB2ACF /* MainSubInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94579B222E49916900CB2ACF /* MainSubInfoCell.xib */; };
 		94579B242E49916900CB2ACF /* MainSubInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B212E49916900CB2ACF /* MainSubInfoCell.swift */; };
 		94579B262E49994200CB2ACF /* UISystem+WorkInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B252E49994200CB2ACF /* UISystem+WorkInfoView.swift */; };
-		94579B292E499EFF00CB2ACF /* InputSystem+Cancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B282E499EFF00CB2ACF /* InputSystem+Cancel.swift */; };
-		94579B2B2E49A60B00CB2ACF /* InputSystem+Cutting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B2A2E49A60B00CB2ACF /* InputSystem+Cutting.swift */; };
+		94579B2D2E49C38C00CB2ACF /* MovementBlockerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B2C2E49C38C00CB2ACF /* MovementBlockerComponent.swift */; };
+		94579B2F2E49C60500CB2ACF /* MiningComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B2E2E49C60500CB2ACF /* MiningComponent.swift */; };
+		94579B312E49C7C100CB2ACF /* MiningInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B302E49C7C100CB2ACF /* MiningInfoView.swift */; };
+		94579B332E49C8F600CB2ACF /* UISystem+MiningInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B322E49C8F600CB2ACF /* UISystem+MiningInfoView.swift */; };
+		94579B352E49D1CA00CB2ACF /* DoTask+Mining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B342E49D1CA00CB2ACF /* DoTask+Mining.swift */; };
+		94579B372E49D7A900CB2ACF /* Harvest+Mine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B362E49D7A900CB2ACF /* Harvest+Mine.swift */; };
+		94579B3D2E49DE1300CB2ACF /* GoodsBasicInfoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94579B3C2E49DE1300CB2ACF /* GoodsBasicInfoComponent.swift */; };
 		946577BD2DCC580C005D34F3 /* DataCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946577BC2DCC580C005D34F3 /* DataCoder.swift */; };
 		946577C42DCCB304005D34F3 /* EntityFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946577C32DCCB304005D34F3 /* EntityFactory.swift */; };
 		946577C82DCCB4DA005D34F3 /* EntityFactory+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946577C72DCCB4DA005D34F3 /* EntityFactory+Character.swift */; };
@@ -97,7 +101,6 @@
 		9467A21F2E39A5B20097734D /* NewEntityTaskUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A21E2E39A5B20097734D /* NewEntityTaskUpdater.swift */; };
 		9467A2212E39A6720097734D /* RemoveEntityTaskUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2202E39A6720097734D /* RemoveEntityTaskUpdater.swift */; };
 		9467A2232E39EC8D0097734D /* ReloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2222E39EC8D0097734D /* ReloadTask.swift */; };
-		9467A2272E404A0F0097734D /* InputSystem+Growing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2262E404A0F0097734D /* InputSystem+Growing.swift */; };
 		9467A2292E404CF40097734D /* EntityFactory+Growing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A2282E404CF40097734D /* EntityFactory+Growing.swift */; };
 		9467A22B2E404D840097734D /* GrowInfoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A22A2E404D840097734D /* GrowInfoComponent.swift */; };
 		9467A22E2E4051CA0097734D /* GrowingInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467A22D2E4051CA0097734D /* GrowingInfoView.swift */; };
@@ -228,7 +231,7 @@
 		94B705D82DF12D2C00A47EE5 /* EntityFactory+Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705D72DF12D2C00A47EE5 /* EntityFactory+Plant.swift */; };
 		94B705DA2DF134D600A47EE5 /* UISystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705D92DF134D600A47EE5 /* UISystem.swift */; };
 		94B705DC2DF1446100A47EE5 /* UISystem+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705DB2DF1446100A47EE5 /* UISystem+Character.swift */; };
-		94B705E02DF1451D00A47EE5 /* UISystem+Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705DF2DF1451D00A47EE5 /* UISystem+Plant.swift */; };
+		94B705E02DF1451D00A47EE5 /* UISystem+Goods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705DF2DF1451D00A47EE5 /* UISystem+Goods.swift */; };
 		94B705E22DF1468400A47EE5 /* PlantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705E12DF1468400A47EE5 /* PlantInfoView.swift */; };
 		94B705E72DF16F2300A47EE5 /* TaskQueueComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705E62DF16F2300A47EE5 /* TaskQueueComponent.swift */; };
 		94B705E92DF173C500A47EE5 /* TaskSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B705E82DF173C500A47EE5 /* TaskSystem.swift */; };
@@ -285,11 +288,10 @@
 		9436777E2DF7CB400052A36F /* TaskSystem+Cleaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Cleaning.swift"; sourceTree = "<group>"; };
 		943677802DF7CB6B0052A36F /* TaskSystem+Research.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskSystem+Research.swift"; sourceTree = "<group>"; };
 		944B55302E1279660006D639 /* EntityFactory+wood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+wood.swift"; sourceTree = "<group>"; };
-		944B55322E12799D0006D639 /* WoodBasicInfoComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoodBasicInfoComponent.swift; sourceTree = "<group>"; };
 		944B55362E13820C0006D639 /* NodeBuilder+Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Character.swift"; sourceTree = "<group>"; };
 		944B55382E1382440006D639 /* NodeBuilder+Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Weapon.swift"; sourceTree = "<group>"; };
-		944B553A2E1382610006D639 /* NodeBuilder+Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Plant.swift"; sourceTree = "<group>"; };
-		944B553D2E13916D0006D639 /* WoodInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoodInfoView.swift; sourceTree = "<group>"; };
+		944B553A2E1382610006D639 /* NodeBuilder+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Environment.swift"; sourceTree = "<group>"; };
+		944B553D2E13916D0006D639 /* CommonGoodsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonGoodsInfoView.swift; sourceTree = "<group>"; };
 		944B553F2E13945A0006D639 /* EntityNodeFactorySystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityNodeFactorySystem.swift; sourceTree = "<group>"; };
 		944B55412E14EAEF0006D639 /* EntityFactory+Stroage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+Stroage.swift"; sourceTree = "<group>"; };
 		944B55442E14EB620006D639 /* StorageInfoComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageInfoComponent.swift; sourceTree = "<group>"; };
@@ -316,8 +318,13 @@
 		94579B212E49916900CB2ACF /* MainSubInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSubInfoCell.swift; sourceTree = "<group>"; };
 		94579B222E49916900CB2ACF /* MainSubInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainSubInfoCell.xib; sourceTree = "<group>"; };
 		94579B252E49994200CB2ACF /* UISystem+WorkInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISystem+WorkInfoView.swift"; sourceTree = "<group>"; };
-		94579B282E499EFF00CB2ACF /* InputSystem+Cancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputSystem+Cancel.swift"; sourceTree = "<group>"; };
-		94579B2A2E49A60B00CB2ACF /* InputSystem+Cutting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputSystem+Cutting.swift"; sourceTree = "<group>"; };
+		94579B2C2E49C38C00CB2ACF /* MovementBlockerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementBlockerComponent.swift; sourceTree = "<group>"; };
+		94579B2E2E49C60500CB2ACF /* MiningComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningComponent.swift; sourceTree = "<group>"; };
+		94579B302E49C7C100CB2ACF /* MiningInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiningInfoView.swift; sourceTree = "<group>"; };
+		94579B322E49C8F600CB2ACF /* UISystem+MiningInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISystem+MiningInfoView.swift"; sourceTree = "<group>"; };
+		94579B342E49D1CA00CB2ACF /* DoTask+Mining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoTask+Mining.swift"; sourceTree = "<group>"; };
+		94579B362E49D7A900CB2ACF /* Harvest+Mine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Harvest+Mine.swift"; sourceTree = "<group>"; };
+		94579B3C2E49DE1300CB2ACF /* GoodsBasicInfoComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsBasicInfoComponent.swift; sourceTree = "<group>"; };
 		946577BC2DCC580C005D34F3 /* DataCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCoder.swift; sourceTree = "<group>"; };
 		946577C32DCCB304005D34F3 /* EntityFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFactory.swift; sourceTree = "<group>"; };
 		946577C72DCCB4DA005D34F3 /* EntityFactory+Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+Character.swift"; sourceTree = "<group>"; };
@@ -350,7 +357,6 @@
 		9467A21E2E39A5B20097734D /* NewEntityTaskUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntityTaskUpdater.swift; sourceTree = "<group>"; };
 		9467A2202E39A6720097734D /* RemoveEntityTaskUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveEntityTaskUpdater.swift; sourceTree = "<group>"; };
 		9467A2222E39EC8D0097734D /* ReloadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadTask.swift; sourceTree = "<group>"; };
-		9467A2262E404A0F0097734D /* InputSystem+Growing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputSystem+Growing.swift"; sourceTree = "<group>"; };
 		9467A2282E404CF40097734D /* EntityFactory+Growing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+Growing.swift"; sourceTree = "<group>"; };
 		9467A22A2E404D840097734D /* GrowInfoComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowInfoComponent.swift; sourceTree = "<group>"; };
 		9467A22D2E4051CA0097734D /* GrowingInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingInfoView.swift; sourceTree = "<group>"; };
@@ -482,7 +488,7 @@
 		94B705D72DF12D2C00A47EE5 /* EntityFactory+Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+Plant.swift"; sourceTree = "<group>"; };
 		94B705D92DF134D600A47EE5 /* UISystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISystem.swift; sourceTree = "<group>"; };
 		94B705DB2DF1446100A47EE5 /* UISystem+Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISystem+Character.swift"; sourceTree = "<group>"; };
-		94B705DF2DF1451D00A47EE5 /* UISystem+Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISystem+Plant.swift"; sourceTree = "<group>"; };
+		94B705DF2DF1451D00A47EE5 /* UISystem+Goods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISystem+Goods.swift"; sourceTree = "<group>"; };
 		94B705E12DF1468400A47EE5 /* PlantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantInfoView.swift; sourceTree = "<group>"; };
 		94B705E62DF16F2300A47EE5 /* TaskQueueComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskQueueComponent.swift; sourceTree = "<group>"; };
 		94B705E82DF173C500A47EE5 /* TaskSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSystem.swift; sourceTree = "<group>"; };
@@ -578,7 +584,7 @@
 				94DD32A82E445D650096A8C7 /* NodeBuilder+SubNodes.swift */,
 				944B55362E13820C0006D639 /* NodeBuilder+Character.swift */,
 				944B55382E1382440006D639 /* NodeBuilder+Weapon.swift */,
-				944B553A2E1382610006D639 /* NodeBuilder+Plant.swift */,
+				944B553A2E1382610006D639 /* NodeBuilder+Environment.swift */,
 				944B55462E14EBF10006D639 /* NodeBuilder+Storage.swift */,
 				9467A2332E40564C0097734D /* NodeBuilder+Growing.swift */,
 				9467A2082E31D81A0097734D /* NodeBuilder+Blueprint.swift */,
@@ -591,7 +597,8 @@
 			isa = PBXGroup;
 			children = (
 				94B705E12DF1468400A47EE5 /* PlantInfoView.swift */,
-				944B553D2E13916D0006D639 /* WoodInfoView.swift */,
+				944B553D2E13916D0006D639 /* CommonGoodsInfoView.swift */,
+				94579B302E49C7C100CB2ACF /* MiningInfoView.swift */,
 			);
 			path = GoodsInfoViews;
 			sourceTree = "<group>";
@@ -622,6 +629,7 @@
 				9436774E2DF6716C0052A36F /* DoTaskSystem.swift */,
 				944B555A2E1B5F710006D639 /* DoTask+Rest.swift */,
 				944B555C2E1B5FA30006D639 /* DoTask+Cutting.swift */,
+				94579B342E49D1CA00CB2ACF /* DoTask+Mining.swift */,
 				944B555E2E1B5FEE0006D639 /* DoTask+Hauling.swift */,
 				9467A2112E335B7F0097734D /* DoTask+Building.swift */,
 				9467A2352E409C940097734D /* DoTask+Growing.swift */,
@@ -748,6 +756,7 @@
 				946E544C2E20A82B008A841B /* LogComponent.swift */,
 				9467A20A2E3204BD0097734D /* CategorizationComponent.swift */,
 				94DD32A32E44434F0096A8C7 /* NonInteractiveComponent.swift */,
+				94579B3C2E49DE1300CB2ACF /* GoodsBasicInfoComponent.swift */,
 			);
 			path = CommonComponent;
 			sourceTree = "<group>";
@@ -766,6 +775,7 @@
 			children = (
 				9467A2042E31D0D50097734D /* BlueprintComponent.swift */,
 				9467A2152E3382BB0097734D /* WallComponent.swift */,
+				94579B2C2E49C38C00CB2ACF /* MovementBlockerComponent.swift */,
 			);
 			path = BuildComponent;
 			sourceTree = "<group>";
@@ -1133,8 +1143,8 @@
 			isa = PBXGroup;
 			children = (
 				949FAD082DD73A720044E4E5 /* MedicalKitComponent.swift */,
-				944B55322E12799D0006D639 /* WoodBasicInfoComponent.swift */,
 				9467A2562E42064B0097734D /* FoodInfoComponent.swift */,
+				94579B2E2E49C60500CB2ACF /* MiningComponent.swift */,
 			);
 			path = GoodsComponent;
 			sourceTree = "<group>";
@@ -1171,10 +1181,11 @@
 			isa = PBXGroup;
 			children = (
 				94B705D92DF134D600A47EE5 /* UISystem.swift */,
+				94579B322E49C8F600CB2ACF /* UISystem+MiningInfoView.swift */,
 				94579B252E49994200CB2ACF /* UISystem+WorkInfoView.swift */,
 				94579B152E4980D800CB2ACF /* UISystem+MainInfoView.swift */,
 				94B705DB2DF1446100A47EE5 /* UISystem+Character.swift */,
-				94B705DF2DF1451D00A47EE5 /* UISystem+Plant.swift */,
+				94B705DF2DF1451D00A47EE5 /* UISystem+Goods.swift */,
 				944B55482E14FE170006D639 /* UISystem+Storage.swift */,
 				9467A2312E40548B0097734D /* UISystem+Growing.swift */,
 				9467A20C2E3319500097734D /* UISystem+Blueprint.swift */,
@@ -1190,9 +1201,6 @@
 				9467A1FB2E31C9280097734D /* InputSystem+AreaSelect.swift */,
 				9467A1FF2E31C95D0097734D /* InputSystem+Build.swift */,
 				9467A2012E31CF990097734D /* InputSystem+Deconstruct.swift */,
-				9467A2262E404A0F0097734D /* InputSystem+Growing.swift */,
-				94579B282E499EFF00CB2ACF /* InputSystem+Cancel.swift */,
-				94579B2A2E49A60B00CB2ACF /* InputSystem+Cutting.swift */,
 			);
 			path = OperationSystem;
 			sourceTree = "<group>";
@@ -1266,6 +1274,7 @@
 				94DD32BE2E449BC00096A8C7 /* ResourceHarvestSystem.swift */,
 				94DD32C32E44A1920096A8C7 /* Harvest+Storage.swift */,
 				94DD32C72E44A1E90096A8C7 /* Harvest+Plant.swift */,
+				94579B362E49D7A900CB2ACF /* Harvest+Mine.swift */,
 				94DD32C52E44A1A40096A8C7 /* Harvest+Blueprint.swift */,
 				94DD32C92E44A4140096A8C7 /* Harvest+Growing.swift */,
 			);
@@ -1424,6 +1433,7 @@
 				94DD32C42E44A1920096A8C7 /* Harvest+Storage.swift in Sources */,
 				9436775C2DF7C2830052A36F /* TaskSystem+Rest.swift in Sources */,
 				949FACBF2DD1881C0044E4E5 /* TraitComponent.swift in Sources */,
+				94579B332E49C8F600CB2ACF /* UISystem+MiningInfoView.swift in Sources */,
 				946E543D2E1FE0DD008A841B /* ECS+RenderSystem.swift in Sources */,
 				943677542DF67F0E0052A36F /* RMProgressBarNode.swift in Sources */,
 				9436775A2DF6E3300052A36F /* TaskSystem+Cutting.swift in Sources */,
@@ -1434,15 +1444,15 @@
 				94973BB62DC087A7005AB8DB /* ECSLogger.swift in Sources */,
 				94973BDF2DC9A9D0005AB8DB /* BottomActionBar.swift in Sources */,
 				94DD32B92E4489860096A8C7 /* EntityNodeActionTool.swift in Sources */,
-				94579B292E499EFF00CB2ACF /* InputSystem+Cancel.swift in Sources */,
 				94973BB72DC087A7005AB8DB /* MathUtils.swift in Sources */,
 				94B705DC2DF1446100A47EE5 /* UISystem+Character.swift in Sources */,
 				94B705C32DEE945400A47EE5 /* DBManager+Time.swift in Sources */,
 				946577BD2DCC580C005D34F3 /* DataCoder.swift in Sources */,
+				94579B372E49D7A900CB2ACF /* Harvest+Mine.swift in Sources */,
 				949FACE62DD43CFA0044E4E5 /* RelationshipView.swift in Sources */,
 				946E54472E1FE500008A841B /* ECS+EntityNodeFactorySystem.swift in Sources */,
 				94DD32B72E4489590096A8C7 /* PositionTool.swift in Sources */,
-				944B553B2E1382610006D639 /* NodeBuilder+Plant.swift in Sources */,
+				944B553B2E1382610006D639 /* NodeBuilder+Environment.swift in Sources */,
 				949FACFC2DD5E29E0044E4E5 /* ComfortTemperatureComponent.swift in Sources */,
 				943677812DF7CB6B0052A36F /* TaskSystem+Research.swift in Sources */,
 				946E54492E1FE527008A841B /* ECS+EntityCategorizatonSystem.swift in Sources */,
@@ -1471,8 +1481,10 @@
 				94B705E72DF16F2300A47EE5 /* TaskQueueComponent.swift in Sources */,
 				9436777F2DF7CB400052A36F /* TaskSystem+Cleaning.swift in Sources */,
 				9467A2162E3382BB0097734D /* WallComponent.swift in Sources */,
+				94579B352E49D1CA00CB2ACF /* DoTask+Mining.swift in Sources */,
 				9467A24F2E41F6CF0097734D /* TaskSystem+Eat.swift in Sources */,
 				949FACE22DD4323F0044E4E5 /* SocialComponent.swift in Sources */,
+				94579B312E49C7C100CB2ACF /* MiningInfoView.swift in Sources */,
 				949FACFA2DD5E1A50044E4E5 /* CarryingCapacityComponent.swift in Sources */,
 				9467A2322E40548B0097734D /* UISystem+Growing.swift in Sources */,
 				94B705C92DEED80300A47EE5 /* HungerSystem.swift in Sources */,
@@ -1551,7 +1563,6 @@
 				94973BC62DC087A7005AB8DB /* ECSManager.swift in Sources */,
 				9467A2362E409C940097734D /* DoTask+Growing.swift in Sources */,
 				949FACCE2DD327100044E4E5 /* String+Extensions.swift in Sources */,
-				944B55332E12799D0006D639 /* WoodBasicInfoComponent.swift in Sources */,
 				94B705CC2DEEEBD000A47EE5 /* EnergySystem.swift in Sources */,
 				94973C0B2DCB72BA005AB8DB /* CharacterInfoView.swift in Sources */,
 				94973BC92DC087A7005AB8DB /* SKNode+Extensions.swift in Sources */,
@@ -1588,7 +1599,6 @@
 				94B705D62DF044D900A47EE5 /* PlantBasicInfoComponent.swift in Sources */,
 				946577C42DCCB304005D34F3 /* EntityFactory.swift in Sources */,
 				949FAD022DD5F7B60044E4E5 /* ArmorComponent.swift in Sources */,
-				94579B2B2E49A60B00CB2ACF /* InputSystem+Cutting.swift in Sources */,
 				949FACCA2DD2F05D0044E4E5 /* BlockedActionComponent.swift in Sources */,
 				9467A2292E404CF40097734D /* EntityFactory+Growing.swift in Sources */,
 				94973BCC2DC087A7005AB8DB /* System.swift in Sources */,
@@ -1600,11 +1610,12 @@
 				949FACE82DD43D5F0044E4E5 /* TalkView.swift in Sources */,
 				949C3D412DCF354C003EA431 /* CharacterDetailInfoView.swift in Sources */,
 				9467A2022E31CF990097734D /* InputSystem+Deconstruct.swift in Sources */,
+				94579B3D2E49DE1300CB2ACF /* GoodsBasicInfoComponent.swift in Sources */,
 				94B705A52DE6E1BA00A47EE5 /* CharacterLogView.swift in Sources */,
 				94973C012DCB3AA7005AB8DB /* WorkPriorityComponent.swift in Sources */,
 				94973BFD2DCAFDC3005AB8DB /* DBManager+WorkPriority.swift in Sources */,
 				94973C182DCC4D3C005AB8DB /* PositionComponent.swift in Sources */,
-				94B705E02DF1451D00A47EE5 /* UISystem+Plant.swift in Sources */,
+				94B705E02DF1451D00A47EE5 /* UISystem+Goods.swift in Sources */,
 				94973BD02DC087A7005AB8DB /* ItemModel.swift in Sources */,
 				94973BD12DC087A7005AB8DB /* UnitModel.swift in Sources */,
 				94579B1E2E49870900CB2ACF /* MainControllCell.swift in Sources */,
@@ -1624,9 +1635,8 @@
 				94973BEE2DC9B384005AB8DB /* WorkPanelView.swift in Sources */,
 				94973BE32DC9ACE9005AB8DB /* UIScreen+Extensions.swift in Sources */,
 				944B55392E1382440006D639 /* NodeBuilder+Weapon.swift in Sources */,
-				944B553E2E13916D0006D639 /* WoodInfoView.swift in Sources */,
+				944B553E2E13916D0006D639 /* CommonGoodsInfoView.swift in Sources */,
 				94DD32B52E44893F0096A8C7 /* OwnerShipTool.swift in Sources */,
-				9467A2272E404A0F0097734D /* InputSystem+Growing.swift in Sources */,
 				94DD32CA2E44A4140096A8C7 /* Harvest+Growing.swift in Sources */,
 				943677512DF676800052A36F /* AnimationUtils.swift in Sources */,
 				94973BF52DC9EBAB005AB8DB /* DBManager.swift in Sources */,
@@ -1636,6 +1646,8 @@
 				949FACF22DD47D250044E4E5 /* CharacterBodyPartView.swift in Sources */,
 				949FACD12DD333A00044E4E5 /* CharacterMoodStatusView.swift in Sources */,
 				9467A2052E31D0D50097734D /* BlueprintComponent.swift in Sources */,
+				94579B2F2E49C60500CB2ACF /* MiningComponent.swift in Sources */,
+				94579B2D2E49C38C00CB2ACF /* MovementBlockerComponent.swift in Sources */,
 				944B55492E14FE170006D639 /* UISystem+Storage.swift in Sources */,
 				944B554E2E150C230006D639 /* StorageInfoTabelView.swift in Sources */,
 				949FACF62DD5795E0044E4E5 /* BodyPartDetailView.swift in Sources */,

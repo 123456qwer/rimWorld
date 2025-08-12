@@ -80,9 +80,21 @@ class ECSManager {
                 self.moveEnd(entity:entity,
                              task: task)
                 
-                /// 创建搬运任务
-            case .haulingTask(let entity):
-                self.addHaulingTask(entity)
+                /// 创建睡觉任务
+            case .sleepTask(let entity):
+                self.addSleepTask(entity)
+                
+                /// 创建休息任务
+            case .restTask(let entity, let isRest):
+                self.addRestTask(entity, isRest)
+                
+                /// 创建建造任务
+            case .buildingTask(let entity):
+                self.addBuildTask(entity)
+                
+                /// 创建挖掘任务
+            case .miningTask(let entity,let canMine):
+                self.addOrCancelMiningTask(entity, canMine)
                 
                 /// 创建砍伐任务
             case .cuttingTask(let entity, let canChop):
@@ -91,18 +103,10 @@ class ECSManager {
                 /// 创建采摘任务
             case .pickTask(let entity, let canPick):
                 self.addOrCancelPickingTask(entity, canPick)
-
-                /// 创建休息任务
-            case .restTask(let entity, let isRest):
-                self.addRestTask(entity, isRest)
-               
-                /// 创建建造任务
-            case .buildingTask(let entity):
-                self.addBuildTask(entity)
                 
-                /// 创建睡觉任务
-            case .sleepTask(let entity):
-                self.addSleepTask(entity)
+                /// 创建搬运任务
+            case .haulingTask(let entity):
+                self.addHaulingTask(entity)
                 
                 /// 执行任务
             case .doTask(let entityID, let task):
@@ -281,7 +285,7 @@ extension ECSManager {
         /// 初始化不能行走的路径
         let allEntities = allEntities()
         for entity in allEntities {
-            guard let wallComponent = entity.getComponent(ofType: WallComponent.self),
+            guard let blockComponent = entity.getComponent(ofType: BlockedActionComponent.self),
                   let pointComponent = entity.getComponent(ofType: PositionComponent.self) else { continue }
             provider.setWalkable(x: Int(pointComponent.x), y: Int(pointComponent.y), canWalk: false)
         }

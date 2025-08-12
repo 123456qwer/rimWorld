@@ -8,6 +8,7 @@
 import Foundation
 import SpriteKit
 
+/// Plant
 extension NodeBuilder {
     
     /// 树
@@ -46,13 +47,13 @@ extension NodeBuilder {
     func buildWood(_ entity:RMEntity) -> RMBaseNode {
         
         if let pointComponent = entity.getComponent(ofType: PositionComponent.self),
-           let woodComponent = entity.getComponent(ofType: WoodBasicInfoComponent.self),
+           let woodComponent = entity.getComponent(ofType: GoodsBasicInfoComponent.self),
             let haulComponent = entity.getComponent(ofType: HaulableComponent.self) {
             
             
             
             /// 750 750
-            let node = RMBaseNode(texture: TextureManager.shared.getTexture(woodComponent.woodTexture), color: .black, size: CGSize(width: tileSize, height: tileSize))
+            let node = RMBaseNode(texture: TextureManager.shared.getTexture(woodComponent.textureName), color: .black, size: CGSize(width: tileSize, height: tileSize))
             node.name = "wood"
             node.position = CGPoint(x: pointComponent.x, y: pointComponent.y)
             node.zPosition = pointComponent.z
@@ -90,4 +91,25 @@ extension NodeBuilder {
         
         return RMBaseNode()
     }
+}
+
+/// 石头
+extension NodeBuilder {
+    
+    func stone(_ entity: RMEntity) -> RMBaseNode {
+        
+        if let pointComponent = entity.getComponent(ofType: PositionComponent.self),
+           let miningComponent = entity.getComponent(ofType: MiningComponent.self) {
+            
+            let node = RMBaseNode(texture: TextureManager.shared.getTexture(miningComponent.miningTexture), color: .black, size: CGSize(width: tileSize, height: tileSize))
+            node.name = "stone"
+            node.position = CGPoint(x: pointComponent.x, y: pointComponent.y)
+            node.zPosition = 10
+            
+            return node
+        }
+        
+        return RMBaseNode()
+    }
+    
 }

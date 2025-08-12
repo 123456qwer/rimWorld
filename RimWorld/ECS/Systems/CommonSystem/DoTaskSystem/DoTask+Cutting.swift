@@ -154,7 +154,7 @@ extension DoTaskSystem {
             let targetPoint = PositionTool.nowPosition(targetEntity)
             
             /// 生成的木头量
-            let woodCount = EntityInfoTool.currentHarvestAmount(entity: targetEntity)
+            let woodCount = EntityInfoTool.currentHarvestAmountForPlant(entity: targetEntity)
             
             /// 生成树大于0，才产生新的木头
             if woodCount > 0 {

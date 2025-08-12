@@ -190,6 +190,7 @@ extension TaskSystem {
             doGrowingTask(task)
         case .Mining:
             ECSLogger.log("开始采矿！")
+            doMiningTask(task)
         case .Cutting:
             ECSLogger.log("开始执行割除任务！")
             doCuttingTask(task)
@@ -250,9 +251,6 @@ extension TaskSystem {
     /// 中断任务（任务转换）
     func forceSwitchTask(entity: RMEntity,
                          task: WorkTask) {
-        
-        
-
         
         switch task.type {
         case .Cutting:

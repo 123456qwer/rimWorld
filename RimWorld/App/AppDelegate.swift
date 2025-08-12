@@ -39,12 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         createMap()
         
-//        let qiaodan = EntityFactory.shared.createCharacterEntity(kMichaelJordan)
-//        let yuefei = EntityFactory.shared.createCharacterEntity(kYueFei)
+        let qiaodan = EntityFactory.shared.createCharacterEntity(kMichaelJordan)
+        let yuefei = EntityFactory.shared.createCharacterEntity(kYueFei)
 
 
-//        EntityFactory.shared.saveEntity(entity: qiaodan)
-//        EntityFactory.shared.saveEntity(entity: yuefei)
+        EntityFactory.shared.saveEntity(entity: qiaodan)
+        EntityFactory.shared.saveEntity(entity: yuefei)
 
    
     }
@@ -68,14 +68,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                node.texture = TextureManager.shared.getTexture(textureName!)
 //                self.addChild(node)
                 
-                /// 树
-                if Int.random(in: 0...100) < 2 {
-                    EntityFactory.shared.tree(point: CGPoint(x: pointX, y: pointY))
-                }
                 
-                /// 苹果树
                 if Int.random(in: 0...100) < 2 {
+                    /// 树
+                    EntityFactory.shared.tree(point: CGPoint(x: pointX, y: pointY))
+                }else if Int.random(in: 0...100) < 2 {
+                    /// 苹果树
                     EntityFactory.shared.appleTree(point: CGPoint(x: pointX, y: pointY))
+                }else if Int.random(in: 0...100) < 2 {
+                    /// 石头
+                    EntityFactory.shared.stone(point: CGPoint(x: pointX, y: pointY))
                 }
                 
             }

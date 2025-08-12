@@ -86,21 +86,7 @@ extension UISystem {
         /// 下一个
         characterView.nextBlock = {[weak self] in
             guard let self = self else {return}
-            // 找到下一个不同名字的 RMBaseNode
-            guard let currentName = node.name,
-                  let nextNode = nodes.compactMap({ $0 as? RMBaseNode }).first(where: { $0.name != currentName }) else {
-                self.removeAllInfoAction()
-                return
-            }
-
-            // 构造新的 nodes 列表，移除当前 node
-            let filteredNodes = nodes.filter {
-                guard let rmNode = $0 as? RMBaseNode else { return true }
-                return rmNode.name != currentName
-            }
-
-            // 发布事件
-            RMEventBus.shared.publish(.didSelectEntity(entity: nextNode.rmEntity ?? RMEntity(), nodes: filteredNodes))
+            self.nextAction(node: node, nodes: nodes)
         }
         
     }

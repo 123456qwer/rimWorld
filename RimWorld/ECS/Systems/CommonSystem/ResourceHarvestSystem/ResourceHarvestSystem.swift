@@ -55,6 +55,11 @@ class ResourceHarvestSystem: System {
             self!.removePlant(params: params)
         }
         
+        /// 移除矿石
+        register(type: kStone) { [weak self] (params: MineRemoveReason) in
+            self!.removeMine(params: params)
+        }
+        
         /// 移除存储区域
         register(type: kStorageArea) { [weak self] (params: StorageRemoveReason) in
             self!.removeStorage(reason: params)
@@ -69,6 +74,8 @@ class ResourceHarvestSystem: System {
         register(type: kGrowingArea) { [weak self] (params: GrowingAreaRemoveReason) in
             self!.removeGrowing(reason: params)
         }
+        
+        
     }
     
     

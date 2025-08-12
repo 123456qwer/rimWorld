@@ -28,7 +28,7 @@ class MainControllInfoView: UIView, UICollectionViewDataSource, UICollectionView
     ]
     
     /// 子类型
-    let buildCategories: [String] = ArchitectCategory.allCases.map { $0.rawValue }
+    let buildCategories: [ArchitectCategory] = ArchitectCategory.allCases.map { $0 }
 
     
     override init(frame: CGRect) {
@@ -93,8 +93,8 @@ class MainControllInfoView: UIView, UICollectionViewDataSource, UICollectionView
             guard let self = self else {return}
             self.isSelect = indexPath.row
             self.collectionView.reloadData()
+            self.subInfoView?.reloadSubDataWithKey(key: buildCategories[indexPath.row])
         }
-        
         return cell
     }
     

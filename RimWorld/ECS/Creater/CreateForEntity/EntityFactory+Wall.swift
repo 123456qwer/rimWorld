@@ -17,6 +17,8 @@ extension EntityFactory {
         let wall = RMEntity()
         wall.type = params.type
         
+        let blockComponent = MovementBlockerComponent()
+        
         let wallComponent = WallComponent()
         wallComponent.textureName = params.wallTexture
         
@@ -36,6 +38,8 @@ extension EntityFactory {
         
         wall.addComponent(wallComponent)
         wall.addComponent(positionComponent)
+        wall.addComponent(blockComponent)
+
         
         let point = PositionTool.nowPosition(wall)
         provider.setWalkable(x: Int(point.x), y: Int(point.y), canWalk: false)

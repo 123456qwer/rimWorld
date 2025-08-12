@@ -75,6 +75,24 @@ extension RMBaseNode {
         }
     }
     
+    /// 挖掘动画
+    func miningAnimation() {
+        
+        let cutting = self.childNode(withName: "cutting") ?? SKSpriteNode(texture: TextureManager.shared.getTexture("cutting"), size: CGSize(width: 80, height: 80))
+        cutting.isHidden = false
+        cutting.name = "cutting"
+        cutting.position = CGPoint(x: 0, y: -20)
+        cutting.zPosition = 12
+        if cutting.parent == nil {
+            self.addChild(cutting)
+        }
+        
+        let animation = cutting.action(forKey: "cutting")
+        if animation == nil {
+            let animation = AnimationUtils.rotateActionRep(withDegreesArr: [10,-10], timeArr: [0.6,0.6])
+            cutting.run(animation,withKey: "cutting")
+        }
+    }
     
     /// 采摘动画
     func pickingAnimation() {

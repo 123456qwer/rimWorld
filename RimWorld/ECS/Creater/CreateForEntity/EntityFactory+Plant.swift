@@ -158,4 +158,37 @@ extension EntityFactory {
         return entity
     }
     
+    
+    /// 挖掘的镐
+    func createMine(point: CGPoint,
+                  params: MineParams,
+                  ecsManager: ECSManager) -> RMEntity{
+        
+        let entity = RMEntity()
+        entity.type = kPickaxe
+        
+        let ownedComponent = OwnedComponent()
+        ownedComponent.ownedEntityID = params.ownerId
+        
+        let nonComponent = NonInteractiveComponent()
+        
+        let pointComponent = PositionComponent()
+        pointComponent.x = point.x
+        pointComponent.y = point.y
+        
+        entity.addComponent(ownedComponent)
+        entity.addComponent(pointComponent)
+        entity.addComponent(nonComponent)
+        
+        
+        /// 设置拥有者
+        if let ownerEntity = ecsManager.getEntity(params.ownerId) {
+            OwnerShipTool.handleOwnershipChange(newOwner: ownerEntity, owned: entity, ecsManager: ecsManager)
+        }else{
+            ECSLogger.log("挖掘的矿产目标没了！💀💀💀")
+        }
+        
+        return entity
+    }
+    
 }

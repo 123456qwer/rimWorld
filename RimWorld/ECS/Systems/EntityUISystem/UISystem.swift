@@ -36,10 +36,12 @@ class UISystem: System {
     /// 日志（包括社交和战斗）
     var characterLogView:CharacterLogView?
     
-    // MARK: - 树 -
+    // MARK: - 环境 -
     var treeInfoView:PlantInfoView?
-    /// 木头
-    var woodInfoView:WoodInfoView?
+    /// 通用物品
+    var goodsInfoView:CommonGoodsInfoView?
+    /// 矿产
+    var miningInfoView:MiningInfoView?
     
     // MARK: - 存储区域设置 -
     var storageInfoView:StorageInfoView?
@@ -66,7 +68,6 @@ class UISystem: System {
         self.gameContext = gameContext
     }
     
-   
     
     /// 点击实体
     func clickEntity(_ entity:RMEntity,_ nodes:[Any]) {
@@ -96,9 +97,9 @@ class UISystem: System {
                     entity.type == kAppleTree{
             /// 点击植物
             showPlantInfo(node: node, nodes: nodes)
-        }else if entity.type == kWood {
-            /// 点击木头
-            showWoodInfo(node: node, nodes: nodes)
+        }else if entity.type == kWood || entity.type == kOre{
+            /// 点击物品（木头、矿产）
+            showGoodsInfo(node: node, nodes: nodes)
         }else if entity.type == kStorageArea {
             /// 点击了存储区域
             showStorageInfo(node: node, nodes: nodes)
@@ -108,6 +109,9 @@ class UISystem: System {
         }else if entity.type == kBlueprint {
             /// 点击蓝图
             showBlueprintInfo(node: node, nodes: nodes)
+        }else if entity.type == kStone {
+            /// 点击矿产
+            showMiningInfo(node: node, nodes: nodes)
         }
     }
     
@@ -127,11 +131,33 @@ class UISystem: System {
     }
     
     
+    /// 点击下一个
+    func nextAction(node: RMBaseNode,
+                    nodes: [Any]){
+        
+        // 找到下一个不同名字的 RMBaseNode
+        guard let currentName = node.name,
+              let nextNode = nodes.compactMap({ $0 as? RMBaseNode }).first(where: { $0.name != currentName && EntityAbilityTool.ableToClick($0.rmEntity!) }) else {
+            self.removeAllInfoAction()
+            return
+        }
+
+        // 构造新的 nodes 列表，移除当前 node
+        let filteredNodes = nodes.filter {
+            guard let rmNode = $0 as? RMBaseNode else { return true }
+            return rmNode.name != currentName
+        }
+
+        // 发布事件
+        RMEventBus.shared.publish(.didSelectEntity(entity: nextNode.rmEntity ?? RMEntity(), nodes: filteredNodes))
+    }
+    
     
     func removeAllInfoAction() {
         removeMainInfo()
         removeWorkInfo()
         removeTreeInfo()
+        removeMiningInfo()
         removeWoodInfo()
         removeUserInfo()
         removeStorageInfo()

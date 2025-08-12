@@ -49,6 +49,7 @@ class InputSystem: System {
         .growing: growingTouchdown,
         .cancel: cancelTouchdown,
         .cutting: cuttingTouchdown,
+        .mining: miningTouchdown,
     ]
     
     // 触摸移动映射
@@ -60,6 +61,7 @@ class InputSystem: System {
         .growing: growingTouchMoved,
         .cancel: cancelTouchMoved,
         .cutting: cuttingTouchMoved,
+        .mining: miningTouchMoved,
     ]
     
     // 触摸抬起映射
@@ -71,7 +73,7 @@ class InputSystem: System {
         .growing: growingTouchUp,
         .cancel: cancelTouchUp,
         .cutting: cuttingTouchUp,
-        
+        .mining: miningTouchUp,
     ]
     
     

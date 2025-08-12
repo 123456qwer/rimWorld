@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class WoodInfoView: UIView {
+class CommonGoodsInfoView: UIView {
     
     /// 更新各种值
     weak var weakEntity:RMEntity?
@@ -54,8 +54,8 @@ class WoodInfoView: UIView {
     func setData(_ entity:RMEntity) {
         weakEntity = entity
         
-        if let info = entity.getComponent(ofType: WoodBasicInfoComponent.self) {
-            name.text = info.woodTexture
+        if let info = entity.getComponent(ofType: GoodsBasicInfoComponent.self) {
+            name.text = info.textureName
         }
     }
     

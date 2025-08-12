@@ -14,33 +14,14 @@ class MainSubInfoView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
 
     let height = 44.0
     
-    let key:ArchitectCategory = .command
+    var key:ArchitectCategory = .command
     
  
-    private let items: [ArchitectCategory:[String]] = [.command:[
-        textAction("Cancel"),
-        textAction("Deconstruct"),
-        textAction("Mine"),
-        textAction("ChopWood"),
-        textAction("Harvest"),
-        textAction("Hunt"),
-        textAction("Slaughter"),
-        textAction("Tame")
-      ],
-                                                       .zone:[],
-                                                       .structure:[],
-                                                       .production:[],
-                                                       .furniture:[],
-                                                       .power:[],
-                                                       .security:[],
-                                                       .misc:[],
-                                                       .floor:[],
-                                                       .joy:[],
-                                                       .culture:[],
-                                                       .biotech:[],
-    ]
+   
     
-    private let itemsClick: [ArchitectCategory:[ActionType]] = [.command:[
+    private let itemsClick: [ArchitectCategory:[ActionType]] = [
+        
+        .command:[
         .cancel,
         .deconstruct,
         .mine,
@@ -50,17 +31,40 @@ class MainSubInfoView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
         .slaughter,
         .tame
       ],
-                                                       .zone:[],
-                                                       .structure:[],
-                                                       .production:[],
-                                                       .furniture:[],
-                                                       .power:[],
-                                                       .security:[],
-                                                       .misc:[],
-                                                       .floor:[],
-                                                       .joy:[],
-                                                       .culture:[],
-                                                       .biotech:[],
+        
+            .zone:[.cancel,
+                   .deconstruct,
+                   .storageArea,
+                   .garbageArea,
+                   .plantingArea,
+                   .removeArea,
+                   .addResidentialArea,
+                   .removeResidentialArea,
+                   .addActivityArea,
+                   .removeActivityArea],
+                                                                
+        
+            .structure:[.cancel,
+                        .deconstruct,
+                        .wall],
+                                                     
+            .production:[],
+                                                     
+            .furniture:[],
+                                                     
+            .power:[],
+                                                     
+            .security:[],
+                                                     
+            .misc:[],
+                                                     
+            .floor:[],
+                                                      
+            .joy:[],
+                                                     
+            .culture:[],
+                                                     
+            .biotech:[],
     ]
 
 
@@ -102,16 +106,22 @@ class MainSubInfoView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    func reloadSubDataWithKey(key:ArchitectCategory) {
+        self.key = key
+        collectionView.reloadData()
+    }
+    
     // MARK: - UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let arr = items[key]
+        let arr = itemsClick[key]
         return arr!.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainSubInfoCell", for: indexPath) as! MainSubInfoCell
         
-        let arr = items[key]!
+        let arr = itemsClick[key]!
 
 
         // 样式
@@ -119,7 +129,7 @@ class MainSubInfoView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
 
         cell.layer.borderColor = UIColor.white.cgColor
         cell.layer.borderWidth = 1.0
-        cell.nameLabel.text = arr[indexPath.row]
+        cell.nameLabel.text = textAction(arr[indexPath.row].rawValue)
         
         return cell
     }
@@ -146,6 +156,14 @@ class MainSubInfoView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
             gameContext?.currentMode = .deconstruct
         case .chopWood:
             gameContext?.currentMode = .cutting
+        case .wall:
+            gameContext?.currentMode = .build
+        case .storageArea:
+            gameContext?.currentMode = .storage
+        case .plantingArea:
+            gameContext?.currentMode = .growing
+        case .mine:
+            gameContext?.currentMode = .mining
         default:
             break
         }

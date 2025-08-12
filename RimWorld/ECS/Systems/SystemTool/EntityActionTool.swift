@@ -192,15 +192,42 @@ struct EntityActionTool {
             RMEventBus.shared.requestCuttingTask(entity: entity,
                                                  canChop:false)
             RMInfoViewEventBus.shared.requestPlantInfo()
+        }else if type == kBlueprint {
+            let reason = BlueprintRemoveReason(entity: entity)
+            /// 移除
+            RMEventBus.shared.requestRemoveEntity(entity,reason: reason)
         }
     }
    
     /// 割除操作
-    static func cuttingAction(entity: RMEntity) {
+    static func cuttingAction(entity: RMEntity,
+                              ecsManager: ECSManager) {
         let type = entity.type
         if type == kTree {
+            
+            /// 去重
+            if EntityAbilityTool.ableToAddTask(entity: entity, ecsManager: ecsManager) == false {
+                return
+            }
+            
             RMEventBus.shared.requestCuttingTask(entity: entity,
                                                  canChop:true)
+            RMInfoViewEventBus.shared.requestPlantInfo()
+        }
+    }
+    
+    /// 采矿操作
+    static func miningAction(entity: RMEntity,
+                              ecsManager: ECSManager) {
+        let type = entity.type
+        if type == kStone {
+            
+            /// 去重
+            if EntityAbilityTool.ableToAddTask(entity: entity, ecsManager: ecsManager) == false {
+                return
+            }
+            
+            RMEventBus.shared.requestMiningTask(entity: entity, canMine: true)
             RMInfoViewEventBus.shared.requestPlantInfo()
         }
     }

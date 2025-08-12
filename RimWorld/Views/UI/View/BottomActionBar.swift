@@ -38,15 +38,13 @@ class BottomActionBar: UIView {
         isSelect = true
         planBtn.setTitleColor(.red, for: .normal)
         
+        planBtn.setTitle(textAction(actionType.rawValue), for: .normal)
+        
         switch actionType {
         case .none:
             planBtn.setTitle(textAction("Plan"), for: .normal)
             planBtn.setTitleColor(.black, for: .normal)
             isSelect = false
-        case .cancel:
-            planBtn.setTitle(textAction("Cancel"), for: .normal)
-        case .chopWood:
-            planBtn.setTitle(textAction("ChopWood"), for: .normal)
         default:
             break
         }

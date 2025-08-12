@@ -8,12 +8,7 @@
 import Foundation
 import SpriteKit
 
-struct TilePoint: Hashable {
-    let x: Int
-    let y: Int
-}
-
-
+/// 建造模式
 extension InputSystem {
     
     /// 按下

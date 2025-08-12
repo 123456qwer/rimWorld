@@ -82,8 +82,6 @@ let kComfortTemperatureComponent = "ComfortTemperatureComponent"
 let kDefenseComponent = "DefenseComponent"
 /// 树组件
 let kPlantBasicInfoComponent = "PlantBasicInfoComponent"
-/// 木头组件
-let kWoodBasicInfoComponent = "WoodBasicInfoComponent"
 /// 任务队列组件
 let kTaskQueueComponent = "TaskQueueComponent"
 /// 寻路组件系统
@@ -102,12 +100,19 @@ let kFoodInfoComponent = "FoodInfoComponent"
 let kWallComponent = "WallComponent"
 /// 是否可点击组件
 let kNonInteractiveComponent = "NonInteractiveComponent"
+/// 是否可行走组件
+let kMovementBlockerComponent = "MovementBlockerComponent"
+/// 可挖掘资源
+let kMiningComponent = "MiningComponent"
+
 
 /// 搬运状态组件
 let kHaulableComponent = "HaulableComponent"
 /// 日志组件
 let kLogComponent = "LogComponent"
 
+/// 物品通用基础组件
+let kGoodsBasicInfoComponent = "GoodsBasicInfoComponent"
 
 
 /// 所有实体表
@@ -155,7 +160,6 @@ let componentTypeMap: [String: Decodable.Type] = [
     kPlantBasicInfoComponent:PlantBasicInfoComponent.self,
     kTaskQueueComponent:TaskQueueComponent.self,
     kMoveComponent:MoveComponent.self,
-    kWoodBasicInfoComponent:WoodBasicInfoComponent.self,
     kStorageInfoComponent:StorageInfoComponent.self,
     kHaulableComponent:HaulableComponent.self,
     kLogComponent:LogComponent.self,
@@ -165,6 +169,9 @@ let componentTypeMap: [String: Decodable.Type] = [
     kGrowInfoComponent:GrowInfoComponent.self,
     kFoodInfoComponent:FoodInfoComponent.self,
     kNonInteractiveComponent:NonInteractiveComponent.self,
+    kMovementBlockerComponent:MovementBlockerComponent.self,
+    kMiningComponent:MiningComponent.self,
+    kGoodsBasicInfoComponent:GoodsBasicInfoComponent.self,
 ]
 
 // MARK: - 实体类型 -
@@ -178,6 +185,8 @@ let kArmor = "armor"
 let kTree = "tree"
 /// 苹果树
 let kAppleTree = "AppleTree"
+/// 石头
+let kStone = "Stone"
 
 /// 蓝图
 let kBlueprint = "bluePrint"
@@ -188,10 +197,16 @@ let kBlueprint = "bluePrint"
 let kMedicine = "Medicine"
 /// 木头
 let kWood = "Wood"
+
+/// 矿石
+let kOre = "Ore"
+
 /// 水稻
 let kRice = "Rice"
 /// 斧头
 let kAX = "AX"
+/// 镐子
+let kPickaxe = "Pickaxe"
 /// 采摘（✋🏻图）
 let kPickHand = "PickHand"
 

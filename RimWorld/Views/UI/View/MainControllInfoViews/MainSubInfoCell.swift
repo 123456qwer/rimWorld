@@ -13,6 +13,8 @@ class MainSubInfoCell: UICollectionViewCell {
     @IBOutlet weak var bgImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
+        nameLabel.font = UIFont.systemFont(ofSize: 12.0)
+        nameLabel.numberOfLines = 0
         // Initialization code
     }
 

@@ -248,7 +248,7 @@
 "Xerigium" = "愈伤草（旧名）";     // Healroot 的旧称
 
 
-
+"Structure" = "结构";
 "Cancel" = "取消";
 "Deconstruct" = "拆除";
 "Mine" = "开采";
@@ -257,3 +257,11 @@
 "Hunt" = "狩猎";
 "Slaughter" = "宰杀";
 "Tame" = "驯服";
+"StorageArea" = "存储区";
+"GarbageStorageArea" = "垃圾存储区";
+"PlantingArea" = "种植区";
+"RemoveArea" = "移除区域";
+"AddResidentialArea" = "添加居住区";
+"RemoveResidentialArea" = "移除居住区";
+"AddActivityArea" = "添加活动区";
+"RemoveActivityArea" = "移除活动区";

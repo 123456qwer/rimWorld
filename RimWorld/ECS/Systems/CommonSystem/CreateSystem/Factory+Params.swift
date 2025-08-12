@@ -38,6 +38,19 @@ struct WoodParams: EntityCreationParams {
     var saveIndex: Int = -1
 }
 
+
+// MARK: 矿石参数
+struct OreParams: EntityCreationParams {
+    let oreCount: Int
+    /// 如果有，直接关联（搬运，从仓库中取出，有剩余时，创建新的，需要直接关联仓库）
+    var superEntity: Int = -1
+    /// 对应存储的位置
+    var saveIndex: Int = -1
+    /// 材质
+    var materialType: MaterialType = .marble
+}
+
+
 // MARK: 植物
 struct PlantParams: EntityCreationParams {
     /// 种植区域ID
@@ -53,6 +66,12 @@ struct PlantParams: EntityCreationParams {
 // MARK: 斧头
 struct AXParams: EntityCreationParams {
     /// 植物ID
+    let ownerId: Int
+}
+
+// MARK: 镐子
+struct MineParams: EntityCreationParams {
+    /// 矿物
     let ownerId: Int
 }
 

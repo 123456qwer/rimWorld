@@ -33,10 +33,16 @@ final class NodeBuilder: NSObject {
         kWoodWall:woodWall,
         /// 水稻
         kRice:rice,
+        /// 石头
+        kStone: stone,
         /// 斧头
         kAX:ax,
+        /// 镐子
+        kPickaxe:pickaxe,
         /// 手
         kPickHand:pickHand,
+        /// 矿产
+        kOre:ore,
     ]
     
     /// 根据类型创建Node

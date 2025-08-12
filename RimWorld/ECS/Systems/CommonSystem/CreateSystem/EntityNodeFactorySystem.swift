@@ -65,6 +65,11 @@ class EntityNodeFactorySystem: System {
         register(type: kWood) { [weak self] point, params in
             EntityFactory.shared.createWoodEntityWithoutSaving(point: point, params: params, ecsManager: self!.ecsManager)
         }
+        
+        /// 矿石
+        register(type: kOre) {[weak self] point, params in
+            EntityFactory.shared.createOreEntityWithoutSaving(point: point, params: params, ecsManager: self!.ecsManager)
+        }
 
         /// 存储区域
         register(type: kStorageArea) { point, params in
@@ -94,6 +99,11 @@ class EntityNodeFactorySystem: System {
         /// 砍伐的斧头
         register(type: kAX) { [weak self] point, params in
             EntityFactory.shared.createAX(point: point, params: params, ecsManager: self!.ecsManager)
+        }
+        
+        /// 挖掘的镐子
+        register(type: kPickaxe) {[weak self] point, params in
+            EntityFactory.shared.createMine(point: point, params: params, ecsManager: self!.ecsManager)
         }
         
         /// 采摘的手

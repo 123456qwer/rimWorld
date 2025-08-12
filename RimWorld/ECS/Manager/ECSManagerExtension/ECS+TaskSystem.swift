@@ -22,6 +22,14 @@ extension ECSManager {
         systemManager.getSystem(ofType: TaskSystem.self)?.addHaulingTask(entity)
     }
     
+    /// 添加采矿任务
+    func addOrCancelMiningTask (_ entity: RMEntity,
+                                _ canMine: Bool) {
+        /// UI显示是否有镐子
+        mineStatusChange(entity, canMine: canMine)
+        systemManager.getSystem(ofType: TaskSystem.self)?.addOrCancelMiningTask(entity, canMine)
+    }
+    
     /// 添加砍伐任务
     func addOrCancelCuttingTask (_ entity: RMEntity,
                                  _ canChop: Bool) {
@@ -37,6 +45,8 @@ extension ECSManager {
         pickStatusChange(entity,canPick: canPick)
         systemManager.getSystem(ofType: TaskSystem.self)?.addOrCancelPickingTask(entity, canPick)
     }
+    
+    
     
     /// 添加建造任务
     func addBuildTask (_ entity: RMEntity) {

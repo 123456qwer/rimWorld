@@ -87,6 +87,8 @@ enum GameEvent {
     case buildingTask(entity: RMEntity)
     /// 砍伐任务
     case cuttingTask(entity:RMEntity, canChop:Bool)
+    /// 采矿任务
+    case miningTask(entity:RMEntity, canMine:Bool)
     /// 采摘任务
     case pickTask(entity: RMEntity, canPick:Bool)
     /// 搬运任务
@@ -195,10 +197,15 @@ extension RMEventBus {
     func requestRestTask(entity: RMEntity, mustRest: Bool) {
         self.publish(.restTask(entity: entity, mustRest: mustRest))
     }
+    /// 采矿任务
+    func requestMiningTask(entity: RMEntity, canMine: Bool) {
+        self.publish(.miningTask(entity: entity, canMine: canMine))
+    }
     /// 砍树任务
     func requestCuttingTask(entity: RMEntity, canChop: Bool) {
         self.publish(.cuttingTask(entity: entity, canChop: canChop))
     }
+    /// 采摘任务
     func requestPickingTask(entity: RMEntity, canPick: Bool) {
         self.publish(.pickTask(entity: entity, canPick: canPick))
     }

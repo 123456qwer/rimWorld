@@ -16,11 +16,12 @@ class DoTaskSystem: System {
     
    
     ///  KEY：执行人entityID
-    var cuttingTasks  :[Int : WorkTask] = [:]
-    var pickingTasks  :[Int : WorkTask] = [:]
-    var restingTasks  :[Int : WorkTask] = [:]
-    var buildingTasks :[Int : WorkTask] = [:]
-    var sleepingTasks :[Int : WorkTask] = [:]
+    var cuttingTasks  : [Int : WorkTask] = [:]
+    var pickingTasks  : [Int : WorkTask] = [:]
+    var miningTasks   : [Int : WorkTask] = [:]
+    var restingTasks  : [Int : WorkTask] = [:]
+    var buildingTasks : [Int : WorkTask] = [:]
+    var sleepingTasks : [Int : WorkTask] = [:]
     
 //    var growingTasks :[Int : WorkTask] = [:]
 
@@ -68,6 +69,13 @@ class DoTaskSystem: System {
                                   tick: elapsedTicks)
         }
         
+        /// 挖掘
+        for (executorEntityID, workTask) in miningTasks {
+            executeMiningAction(executorEntityID: executorEntityID,
+                                 task: workTask,
+                                 tick: elapsedTicks)
+        }
+        
         /// 砍伐
         for (executorEntityID, workTask) in cuttingTasks {
             executeCuttingAction(executorEntityID: executorEntityID,
@@ -82,6 +90,7 @@ class DoTaskSystem: System {
                                  tick: elapsedTicks)
         }
    
+        
     }
 
 
@@ -102,6 +111,8 @@ class DoTaskSystem: System {
             self.cancelBuildingAction(entity: entity, task: task)
         case .Growing:
             self.cancelGrowingAction(entity: entity, task: task)
+        case .Mining:
+            self.cancelMiningAction(entity: entity, task: task)
         default:
             print("默认方法")
         }
@@ -144,6 +155,8 @@ class DoTaskSystem: System {
             setBuildingAction(entity: entity, task: task)
         case .Growing:
             setGrowingAction(entity: entity, task: task)
+        case .Mining:
+            setMiningAction(entity: entity, task: task)
             
         default:
             break

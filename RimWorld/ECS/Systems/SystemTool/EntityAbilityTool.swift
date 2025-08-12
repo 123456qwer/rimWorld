@@ -63,7 +63,7 @@ struct EntityAbilityTool {
         }
         return restComponent.isResting
     }
-   
+    
     /// 可以被砍伐的实体
     static func ableToBeCut(_ entity: RMEntity) -> Bool {
         if entity.getComponent(ofType: PlantBasicInfoComponent.self) != nil {
@@ -80,14 +80,14 @@ struct EntityAbilityTool {
         guard entity.getComponent(ofType: HaulableComponent.self) != nil else {
             return false
         }
-
+        
         /// 可搬运物体，如果在非仓库的情况下，不能再次被搬运(后续在看有别的变化没)
         if let owned = entity.getComponent(ofType: OwnedComponent.self),
            let ownerEntity = ecsManager.getEntity(owned.ownedEntityID),
            ownerEntity.type != kStorageArea {
             return false
         }
-
+        
         return true
     }
     
@@ -142,7 +142,7 @@ struct EntityAbilityTool {
         }
         return true
     }
-  
+    
     
     /// 素材材料等
     static func ableToBeMaterial(_ entity: RMEntity) -> CategorizationComponent? {
@@ -154,7 +154,7 @@ struct EntityAbilityTool {
     
     /// 是否可以强制替换任务
     static func ableForceSwitchTask(entity: RMEntity,
-                            task: WorkTask) -> Bool{
+                                    task: WorkTask) -> Bool{
         
         guard entity.getComponent(ofType: WorkPriorityComponent.self) != nil else {
             return false
@@ -191,7 +191,7 @@ struct EntityAbilityTool {
             /// 相等的情况
             /// 玩家设置的优先级相等，比较从左至右优先级，返回优先级高的
             let type = EntityActionTool.compareTaskPriority(type1: useNewType, type2: useCurrentType)
-
+            
             /// 如果返回的是新任务，那么新任务优先级高，可以强转
             if type == task.type {
                 return true
@@ -199,7 +199,7 @@ struct EntityAbilityTool {
                 return false
             }
         }
-      
+        
     }
     
     /// 是否可以点击
@@ -210,7 +210,7 @@ struct EntityAbilityTool {
         
         return true
     }
-
+    
     /// 是否被标记了可以砍伐
     static func ableToMarkCut(_ entity: RMEntity,
                               _ ecsManager: ECSManager) -> Bool {
@@ -222,6 +222,18 @@ struct EntityAbilityTool {
         return false
     }
     
+    /// 是否被标记了可以采矿
+    static func ableToMarkMine(_ entity: RMEntity,
+                              _ ecsManager: ECSManager) -> Bool {
+        
+        if EntityInfoTool.getMine(targetEntity: entity, ecsManager: ecsManager) != nil {
+            return true
+        }
+        
+        return false
+    }
+    
+    
     /// 是否被标记了可以砍伐
     static func ableToMarkPick(_ entity: RMEntity,
                                _ ecsManager: ECSManager) -> Bool {
@@ -231,6 +243,33 @@ struct EntityAbilityTool {
         }
         
         return false
+    }
+    
+    /// 是否可以生成砍伐任务
+    static func ableToAddTask(entity: RMEntity, ecsManager: ECSManager) -> Bool{
+        
+        guard let taskSystem = ecsManager.systemManager.getSystem(ofType: TaskSystem.self) else {
+            return false
+        }
+        
+        
+        let doTaskQueue = taskSystem.doTaskQueue
+        let allTaskQueue = taskSystem.allTaskQueue
+        
+        /// 正在做的任务有此目标
+        if doTaskQueue.firstIndex(where: {
+            $0.targetEntityID == entity.entityID
+        }) != nil{
+            return false
+        }
+        
+        /// 总任务列表里有此目标
+        if allTaskQueue.firstIndex(where: { $0.targetEntityID == entity.entityID
+        }) != nil{
+            return false
+        }
+        
+        return true
     }
     
     

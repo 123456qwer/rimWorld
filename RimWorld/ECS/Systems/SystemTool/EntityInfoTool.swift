@@ -227,11 +227,20 @@ struct EntityInfoTool {
     }
     
     /// 可收货量
-    static func currentHarvestAmount(entity: RMEntity) -> Int {
+    static func currentHarvestAmountForPlant(entity: RMEntity) -> Int {
         guard let plantComponent = entity.getComponent(ofType: PlantBasicInfoComponent.self) else {
             return 0
         }
         let yield = Float(plantComponent.harvestYield) * plantComponent.growthPercent
+        return max(1, Int(yield.rounded(.down)))
+    }
+    
+    /// 可收货量
+    static func currentHarvestAmountForMine(entity: RMEntity) -> Int {
+        guard let mineComponent = entity.getComponent(ofType: MiningComponent.self) else {
+            return 0
+        }
+        let yield = Float(mineComponent.harvestYield)
         return max(1, Int(yield.rounded(.down)))
     }
     
@@ -264,6 +273,19 @@ struct EntityInfoTool {
         
         for entityID in ownerComponent.ownedEntityIDS {
             if let entity = ecsManager.getEntity(entityID), entity.type == kAX  {
+                return entity
+            }
+        }
+        
+        return nil
+    }
+    
+    /// 获取矿稿
+    static func getMine (targetEntity: RMEntity, ecsManager: ECSManager) -> RMEntity? {
+        guard let ownerComponent = targetEntity.getComponent(ofType: OwnershipComponent.self) else { return nil }
+        
+        for entityID in ownerComponent.ownedEntityIDS {
+            if let entity = ecsManager.getEntity(entityID), entity.type == kPickaxe  {
                 return entity
             }
         }

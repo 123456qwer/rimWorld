@@ -15,9 +15,9 @@ extension EntityFactory {
         let entity = RMEntity()
         entity.type = kWood
         
-        let treeComponent = WoodBasicInfoComponent()
+        let treeComponent = GoodsBasicInfoComponent()
         let treeName = "wood"
-        treeComponent.woodTexture = treeName
+        treeComponent.textureName = treeName
         
         let pointComponent = PositionComponent()
         pointComponent.x = point.x
@@ -43,9 +43,9 @@ extension EntityFactory {
         categorizationComponent.categorization = MaterialType.wood.rawValue
 
         
-        let woodComponent = WoodBasicInfoComponent()
+        let woodComponent = GoodsBasicInfoComponent()
         let woodName = "wood"
-        woodComponent.woodTexture = woodName
+        woodComponent.textureName = woodName
         
         let haulComponent = HaulableComponent()
         haulComponent.weight = 1

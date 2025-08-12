@@ -146,6 +146,8 @@ extension TaskSystem {
             handleBuildingTask(executorEntity: executorEntity, task: task)
         case .Growing:
             handleGrowingTask(executorEntity: executorEntity, task: task)
+        case .Mining:
+            handleMiningTask(executorEntity: executorEntity, task: task)
         default:
             break
         }

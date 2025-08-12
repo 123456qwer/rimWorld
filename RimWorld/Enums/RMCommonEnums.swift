@@ -540,6 +540,7 @@ enum GameMode {
     case deconstruct          // 拆除：拆除建造好的或者没建造的蓝图
     case cancel               // 取消：取消砍伐、预建造等
     case cutting              // 割除：标记所有要割除的物体
+    case mining               // 开采：标记所有要开采的物体
 }
 
 
@@ -698,6 +699,24 @@ enum ActionType: String {
     case slaughter = "Slaughter"
     /// 驯服
     case tame = "Tame"
+    /// 墙
+    case wall = "Wall"
+    /// 存储区
+    case storageArea = "StorageArea"
+    /// 垃圾存储区
+    case garbageArea = "GarbageStorageArea"
+    /// 种植区
+    case plantingArea = "PlantingArea"
+    /// 移除区域
+    case removeArea = "RemoveArea"
+    /// 添加居住区
+    case addResidentialArea = "AddResidentialArea"
+    /// 移除居住区
+    case removeResidentialArea = "RemoveResidentialArea"
+    /// 添加活动区
+    case addActivityArea = "AddActivityArea"
+    /// 移除活动区
+    case removeActivityArea = "RemoveActivityArea"
     
     // 如果需要可以加一个方法返回中文描述
     func description() -> String {
@@ -710,7 +729,17 @@ enum ActionType: String {
         case .hunt: return "狩猎"
         case .slaughter: return "宰杀"
         case .tame: return "驯服"
+        case .wall: return "墙"
+        case .storageArea: return "存储区"
+        case .garbageArea: return "垃圾存储区"
+        case .plantingArea: return "种植区"
+        case .removeArea: return "移除区域"
+        case .addResidentialArea: return "添加居住区"
+        case .removeResidentialArea: return "移除居住区"
+        case .addActivityArea: return "添加活动区"
+        case .removeActivityArea: return "移除活动区"
         case .none: return "无"
+            
             
         }
     }

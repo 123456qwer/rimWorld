@@ -15,6 +15,9 @@ extension EntityFactory{
         let weaponEntity = RMEntity()
         weaponEntity.type = kWeapon
         
+        let noneComponent = NonInteractiveComponent()
+        
+        
         /// 位置
         let weaponPoint = PositionComponent()
         weaponPoint.x = 0
@@ -37,7 +40,7 @@ extension EntityFactory{
         weapon.level = RimWorldEntityQuality.normal.rawValue
         
         
-        addComponent([weapon,owed,weaponPoint], weaponEntity)
+        addComponent([weapon,owed,weaponPoint,noneComponent], weaponEntity)
 
         
         saveEntity(entity: weaponEntity)
