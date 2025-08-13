@@ -147,7 +147,7 @@ extension DoTaskSystem {
         if targetBasicComponent.pickCurrentHealth <= 0 {
             
 
-            /// 砍伐结束动画
+            /// 采摘结束动画
             EntityNodeTool.pickingFinish(targetNode: targetNode)
           
             

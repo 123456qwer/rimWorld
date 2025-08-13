@@ -203,7 +203,7 @@ struct EntityActionTool {
     static func cuttingAction(entity: RMEntity,
                               ecsManager: ECSManager) {
         let type = entity.type
-        if type == kTree {
+        if type == kTree || type == kAppleTree{
             
             /// 去重
             if EntityAbilityTool.ableToAddTask(entity: entity, ecsManager: ecsManager) == false {

@@ -14,9 +14,10 @@ class StorageInfoTabelView: UITableView,UITableViewDataSource,UITableViewDelegat
     let headerHeight:CGFloat = 30.0
     var allow:[String:[String:Bool]] = [textAction("Raw Meterial"):[textAction("Wood"):true]]
     
-    let sectionTitles = [
+    var sectionTitles = [
         textAction("Raw Meterial"),
-        textAction("Medicine")
+        textAction("Raw Food"),
+        textAction("Medicine"),
     ]
     
     var isSectionExpanded: [Int: Bool] = [:]
@@ -42,6 +43,9 @@ class StorageInfoTabelView: UITableView,UITableViewDataSource,UITableViewDelegat
         guard let basicComponent = entity.getComponent(ofType: StorageInfoComponent.self) else {
             return
         }
+        
+       
+        
         areaBasicComponent = basicComponent
         allow = basicComponent.allow
         for i in 0..<allow.count {

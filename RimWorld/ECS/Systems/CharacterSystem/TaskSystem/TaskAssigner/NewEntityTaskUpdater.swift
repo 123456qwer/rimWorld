@@ -17,7 +17,7 @@ extension TaskSystem {
         
         switch type {
             /// 搬运任务
-        case kWood:
+        case kWood,kApple:
             /// 新增木头、
             addHaulingTasks(targetEntity: entity)
         case kStorageArea:

@@ -115,9 +115,17 @@ struct EntityAbilityTool {
         }
         
         return storageComponent.canStorageType[textAction(material.type)] ?? false
-        
+
     }
     
+    /// 是否可以有果实收获
+    static func ableToHaverst(target: RMEntity) -> Bool {
+        guard let plantComponent = target.getComponent(ofType: PlantBasicInfoComponent.self) else { return false }
+        if plantComponent.growthPercent > 0.5 {
+            return true
+        }
+        return false
+    }
     
     /// 蓝图，可被建造的实体
     static func ableToBeBuild(_ entity: RMEntity) -> BlueprintComponent? {

@@ -30,6 +30,8 @@ final class StorageInfoComponent: TableCodable, Component {
         
         textAction("Raw Meterial"):[textAction("Wood"):true],
         
+        textAction("Raw Food"):[textAction("Apple"):true],
+        
         textAction("Medicine"):[textAction("herbal"):true,
                           textAction("industrial"):true,
                           textAction("glitter"):true]

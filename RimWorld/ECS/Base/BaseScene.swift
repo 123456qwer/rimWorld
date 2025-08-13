@@ -143,6 +143,7 @@ class BaseScene:SKScene, RenderContext {
     
     override func update(_ currentTime: TimeInterval) {
         
+        
         if self.canGo == false { return }
         
         var deltaTime = currentTime - lastUpdateTime
@@ -153,7 +154,8 @@ class BaseScene:SKScene, RenderContext {
         lastUpdateTime = currentTime
 
         tickAccumulator += deltaTime * 60 * rmTime.timeScale
-
+        
+        
         // 每当累积超过 1 tick，取整加入 totalTicks
         let ticksToAdd = Int(tickAccumulator)
         if ticksToAdd > 0 {

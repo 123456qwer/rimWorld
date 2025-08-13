@@ -14,15 +14,14 @@ class TextureManager: NSObject {
 
     var textures:[String: SKTexture] = [:]
     
-    func getTexture(_ textureName: String) -> SKTexture{
-        
-        var texture = textures[textureName]
-        if texture == nil {
-            let image = UIImage(named: textureName)
-            texture = SKTexture(image: image ?? UIImage(named: "workPreference")!)
+    func getTexture(_ textureName: String) -> SKTexture {
+        if let texture = textures[textureName] {
+            return texture
+        } else {
+            let texture = SKTexture(imageNamed: textureName)
             textures[textureName] = texture
+            return texture
         }
-        
-        return texture ?? SKTexture(image: UIImage(named: "workPreference")!)
     }
+
 }

@@ -11,8 +11,14 @@ extension EntityFactory {
     
     /// 生成可搬运的食物苹果
     func createApple(point:CGPoint,
-                     params:WoodParams,
+                     params:HarvestParams,
                      ecsManager: ECSManager) -> RMEntity{
+        
+        /// 挂在树上的苹果
+        if let superEntity = ecsManager.getEntity(params.superEntity),superEntity.type == kAppleTree {
+            return EntityFactory.shared.apple(superEntity: superEntity,save: false)
+        }
+        
         
         let entity = RMEntity()
         entity.type = kApple
@@ -24,7 +30,8 @@ extension EntityFactory {
         
         let haulComponent = HaulableComponent()
         haulComponent.weight = 1
-        haulComponent.currentCount = params.woodCount
+        haulComponent.currentCount = params.harvestCount
+        haulComponent.materialType = MaterialType.food.rawValue
 
        
         let pointComponent = PositionComponent()

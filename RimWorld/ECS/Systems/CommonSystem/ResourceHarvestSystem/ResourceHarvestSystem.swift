@@ -55,6 +55,11 @@ class ResourceHarvestSystem: System {
             self!.removePlant(params: params)
         }
         
+        /// 移除树苹果树（砍伐）
+        register(type: kAppleTree) {[weak self] (params: TreeRemoveReason) in
+            self!.removePlant(params: params)
+        }
+        
         /// 移除树上的苹果
         register(type: kApple) { [weak self] (params: PickRemoveReason) in
             self!.removeApple(params: params)

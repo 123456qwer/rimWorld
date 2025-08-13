@@ -588,6 +588,7 @@ enum MaterialType: Int {
     case stone = 4        // 石材
     case cloth = 5        // 布料
     
+    case food  = 100      // 食物
     
     case unowned = 10000
 }
@@ -600,6 +601,7 @@ extension MaterialType: CustomStringConvertible {
         case .steel: return "Steel"
         case .stone: return "Stone"
         case .cloth: return "Cloth"
+        case .food:  return "Food"
         case .unowned: return "Unowned"
         }
     }

@@ -38,7 +38,7 @@ extension ResourceHarvestSystem {
                 switch materialType {
                 case .wood:
                     /// 创建木头
-                    let params = WoodParams(woodCount: count)
+                    let params = HarvestParams(harvestCount: count)
                     RMEventBus.shared.requestCreateEntity(type: kWood, point: point, params: params)
                     
                 default:

@@ -29,9 +29,9 @@ struct GrowingParams: EntityCreationParams {
     let cropType: RimWorldCrop
 }
 
-// MARK: 木头参数
-struct WoodParams: EntityCreationParams {
-    let woodCount: Int
+// MARK: 收获物参数
+struct HarvestParams: EntityCreationParams {
+    let harvestCount: Int
     /// 如果有，直接关联（搬运，从仓库中取出，有剩余时，创建新的，需要直接关联仓库）
     var superEntity: Int = -1
     /// 对应存储的位置

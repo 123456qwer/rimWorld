@@ -32,7 +32,7 @@ extension EntityFactory {
     
     
     func createWoodEntityWithoutSaving(point:CGPoint,
-                                       params:WoodParams,
+                                       params:HarvestParams,
                                        ecsManager: ECSManager) -> RMEntity{
         
         let entity = RMEntity()
@@ -49,7 +49,7 @@ extension EntityFactory {
         
         let haulComponent = HaulableComponent()
         haulComponent.weight = 1
-        haulComponent.currentCount = params.woodCount
+        haulComponent.currentCount = params.harvestCount
 
        
         let pointComponent = PositionComponent()

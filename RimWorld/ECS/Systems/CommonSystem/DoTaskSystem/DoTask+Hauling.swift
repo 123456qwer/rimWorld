@@ -129,8 +129,8 @@ extension DoTaskSystem {
         
         // 👉 创建一个新的需求节点，代表剩余 remainingNeed 数量需要搬运
         let woodPoint = PositionTool.nowPosition(material)
-        let params = WoodParams(
-            woodCount: lastCount
+        let params = HarvestParams(
+            harvestCount: lastCount
         )
         
         RMEventBus.shared.requestCreateEntity(type: kWood,

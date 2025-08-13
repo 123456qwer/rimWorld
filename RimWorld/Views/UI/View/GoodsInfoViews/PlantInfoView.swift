@@ -90,11 +90,11 @@ class PlantInfoView: UIView {
         chopBtn.isSelected = EntityAbilityTool.ableToMarkCut(entity, ecsManager!)
         pickBtn.isSelected = EntityAbilityTool.ableToMarkPick(entity, ecsManager!)
         
-        if entity.type == kAppleTree {
+        if info.haveHarvest && info.growthPercent > 0.5{
             pickBtn.isHidden = false
         }
-    
     }
+    
     
     func updateTreeInfo() {
         guard let entity = weakEntity else { return }

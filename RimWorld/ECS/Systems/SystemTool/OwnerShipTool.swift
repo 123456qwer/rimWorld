@@ -58,7 +58,7 @@ struct OwnerShipTool {
                     /// 如果还有剩余，创建对应的实体，并放入到仓库中
                     var params:EntityCreationParams?
                     if owned.type == kWood {
-                        params = WoodParams(woodCount: lastCount,
+                        params = HarvestParams(harvestCount: lastCount,
                                             superEntity: storage.entityID,
                                             saveIndex: index)
                         
@@ -288,6 +288,9 @@ struct OwnerShipTool {
                         continue
                     }
                     
+                } else {
+                    /// 不同类型不能存
+                    continue
                 }
             }
 

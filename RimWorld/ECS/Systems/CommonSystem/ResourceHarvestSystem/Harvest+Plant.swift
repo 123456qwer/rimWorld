@@ -22,8 +22,8 @@ extension ResourceHarvestSystem {
         /// 生成树大于0，才产生新的木头
         if woodCount > 0 {
             
-            let params = WoodParams(
-                woodCount: woodCount
+            let params = HarvestParams(
+                harvestCount: woodCount
             )
             
             /// 创建木材实体（需要当前这个树来确定生成多少个木头）
@@ -31,6 +31,18 @@ extension ResourceHarvestSystem {
                                                   point: targetPoint,
                                                   params: params)
         }
+        
+        
+        
+        /// 是否可收获苹果果实
+        let ableToHaverst = EntityAbilityTool.ableToHaverst(target: targetEntity)
+        if ableToHaverst == true {
+            if let apple = EntityInfoTool.getSubEntityWithType(targetEntity: targetEntity, ecsManager: ecsManager, type: kApple){
+                let reason = PickRemoveReason(entity: apple)
+                RMEventBus.shared.requestRemoveEntity(apple, reason: reason)
+            }
+        }
+   
     }
     
     
@@ -44,8 +56,6 @@ extension ResourceHarvestSystem {
         }
         
         
-        
-        
         let targetEntity = treeEntity
         /// 树坐标
         let targetPoint = PositionTool.nowPosition(targetEntity)
@@ -57,8 +67,8 @@ extension ResourceHarvestSystem {
         /// 生成树大于0，
         if goodsCount > 0 {
             
-            let params = WoodParams(
-                woodCount: goodsCount
+            let params = HarvestParams(
+                harvestCount: goodsCount
             )
             
             /// 创建木材实体（需要当前这个树来确定生成多少个木头）
@@ -66,5 +76,6 @@ extension ResourceHarvestSystem {
                                                   point: applePoint,
                                                   params: params)
         }
+     
     }
 }

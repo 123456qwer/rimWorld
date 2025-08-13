@@ -70,7 +70,6 @@ extension EntityFactory {
         return characterEntity
     }
     
-    
     /// 创建岳飞
     func yueFei() -> RMEntity{
         
@@ -133,11 +132,9 @@ extension EntityFactory {
         self.yueFeiForGoods(entity)
         saveEntity(entity: entity)
         
-        
-        
+
         return entity
     }
-    
     
 }
 

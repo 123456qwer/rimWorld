@@ -15,6 +15,12 @@ class PlantGrowthSystem: System {
     /// 记录上次处理的tick
     var lastProcessedTick: Int = 0
     
+    var index = 0
+    
+    /// 待执行的创建任务
+    var pendingEntities: [(type: String, point: CGPoint, params: HarvestParams)] = []
+
+    
     init(ecsManager: ECSManager) {
         self.ecsManager = ecsManager
     }
@@ -28,6 +34,11 @@ class PlantGrowthSystem: System {
         }
         lastProcessedTick = currentTick
         
+//        if lastProcessedTick % 1 == 0 {
+//            updateFor1Second()
+//        }
+        
+        
         let plants = ecsManager.entitiesAbleToPlantGrowth()
         let tick = Float(elapsedTicks)
         for plant in plants {
@@ -35,13 +46,43 @@ class PlantGrowthSystem: System {
             
             plantComponent.growthPercent += plantComponent.growthSpeed * tick
             plantComponent.growthPercent = min(1, plantComponent.growthPercent)
+            
+            if plantComponent.growthPercent > 0.5 {
+                if let apple = EntityInfoTool.getSubEntityWithType(targetEntity: plant, ecsManager: ecsManager, type: kApple) {
+                    apple.node?.isHidden = false
+                }
+            }else{
+                if let apple = EntityInfoTool.getSubEntityWithType(targetEntity: plant, ecsManager: ecsManager, type: kApple) {
+                    apple.node?.isHidden = true
+                }
+            }
+            
             /// 为1以后，直接移除，不需要在成长了
             if plantComponent.growthPercent == 1 {
                 ecsManager.removeGrowthEntity(plant)
+            }
+            
+            if let apple = EntityInfoTool.getSubEntityWithType(targetEntity: plant, ecsManager: ecsManager, type: kApple) {
+                apple.node?.setScale(CGFloat(plantComponent.growthPercent))
             }
         }
         
         /// 树长大
         RMInfoViewEventBus.shared.requestPlantInfo()
+        
+        
     }
+    
+    /// 每秒更新1次
+    func updateFor1Second(){
+        if let task = pendingEntities.first {
+            RMEventBus.shared.requestCreateEntity(type: task.type, point: task.point, params: task.params)
+            pendingEntities.remove(at: 0)
+        }
+        
+        index += 1
+        print(index)
+    }
+    
+    
 }

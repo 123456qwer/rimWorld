@@ -44,9 +44,6 @@ extension EntityFactory{
 
         
         saveEntity(entity: weaponEntity)
-        
-        
-
     }
     
 }

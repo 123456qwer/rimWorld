@@ -24,6 +24,8 @@ final class PlantBasicInfoComponent: TableCodable, Component {
     /// 成熟度（设置成熟度到一定值后可以收获）
     var growthPercent:Float = 0.0
     
+
+    
     /// 成长速度
     var growthSpeed:Float = 0.0001
     
@@ -36,6 +38,8 @@ final class PlantBasicInfoComponent: TableCodable, Component {
     var pickHealth:Double = 100
     var pickCurrentHealth:Double = 100
     
+    /// 是否含有果实
+    var haveHarvest:Bool = false
     
     enum CodingKeys: String, CodingTableKey {
         typealias Root = PlantBasicInfoComponent
@@ -56,7 +60,8 @@ final class PlantBasicInfoComponent: TableCodable, Component {
         case harvestYield
         case growthPercent
         case growthSpeed
-
+        case haveHarvest
+        
     }
     
   
