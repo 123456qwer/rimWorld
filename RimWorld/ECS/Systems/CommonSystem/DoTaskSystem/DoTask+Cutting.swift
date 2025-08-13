@@ -24,13 +24,11 @@ extension DoTaskSystem {
         EntityNodeTool.stopCuttingAnimation(entity: targetEntity)
         
     }
-    
-    
+
     
     func setCuttingAction(entity: RMEntity, task: WorkTask) {
         cuttingTasks[entity.entityID] = task
     }
-    
     
     
     /// 执行砍树命令
@@ -152,12 +150,21 @@ extension DoTaskSystem {
           
             
             // TODO: - 获取苹果 -
-            if let apple = EntityInfoTool.getSubEntityWithType(targetEntity: targetEntity, ecsManager: ecsManager, type: kApple) {
-                
-                let reason = PickRemoveReason(entity: apple)
-                RMEventBus.shared.requestRemoveEntity(apple, reason: reason)
-            }
+            let targetPoint = PositionTool.nowPosition(targetEntity)
+            let applePoint = MathUtils.getSurroundingPoints(center: targetPoint).randomElement()!
+            let goodsCount = EntityInfoTool.currentHarvestAmountForPlant(entity: targetEntity)
+            /// 这里修改为不移除，直接隐藏，避免来回创建，直接将成熟度置为0
+            let params = HarvestParams(
+                harvestCount: goodsCount
+            )
             
+            /// 创建木材实体（需要当前这个树来确定生成多少个木头）
+            RMEventBus.shared.requestCreateEntity(type: kApple,
+                                                  point: applePoint,
+                                                  params: params)
+            
+            /// 设置成熟度为0
+            targetBasicComponent.growthPercent = 0
             
             /// 删除
             pickingTasks.removeValue(forKey: executorEntity.entityID)

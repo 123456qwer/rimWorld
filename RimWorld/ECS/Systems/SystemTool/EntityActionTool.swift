@@ -20,6 +20,17 @@ struct EntityActionTool {
         EntityNodeTool.updateHaulCountLabel(entity: entity, count: count)
     }
     
+    /// 吃饭后能量恢复
+    static func restoreHungerAfterEating(entity: RMEntity,
+                                         task: WorkTask) {
+        guard let nutritionComponent = entity.getComponent(ofType: NutritionComponent.self) else { return }
+     
+        nutritionComponent.current = nutritionComponent.total * task.eatTask.restorePercent
+        nutritionComponent.isCreateTask = false
+    }
+    
+   
+    
     /// 在实际搬运的时候，要考虑搬运人负重，所以需要更新蓝图对应的搬运中的素材数量
     static func setBlueprintHaulTaskCount(entity: RMEntity,
                                           blueEntity:RMEntity,
@@ -84,7 +95,7 @@ struct EntityActionTool {
             ECSLogger.log("在实体队列中的任务删除失败，没找到Index💀💀💀")
         }
         
-        writeLog(entity: entity, text: "完成了任务：\(task.type)")
+//        writeLog(entity: entity, text: "完成了任务：\(task.type)")
         
         workComponent.completeTask(task: task)
     }
@@ -231,6 +242,7 @@ struct EntityActionTool {
             RMInfoViewEventBus.shared.requestPlantInfo()
         }
     }
+    
     
     
     /// 比较任务优先级

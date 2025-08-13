@@ -73,6 +73,8 @@
 		9457EA0E2E4AECFC00CB2ACF /* NodeBuilder+Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457EA0D2E4AECFC00CB2ACF /* NodeBuilder+Food.swift */; };
 		9457EA102E4C233700CB2ACF /* EntityFactory+StartupEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457EA0F2E4C233700CB2ACF /* EntityFactory+StartupEntity.swift */; };
 		9457EA142E4C3A1600CB2ACF /* NodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457EA132E4C3A1600CB2ACF /* NodeManager.swift */; };
+		9457EA162E4C70E300CB2ACF /* DoTask+Eat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457EA152E4C70E300CB2ACF /* DoTask+Eat.swift */; };
+		9457EA182E4C8C3200CB2ACF /* TestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457EA172E4C8C3200CB2ACF /* TestManager.swift */; };
 		946577BD2DCC580C005D34F3 /* DataCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946577BC2DCC580C005D34F3 /* DataCoder.swift */; };
 		946577C42DCCB304005D34F3 /* EntityFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946577C32DCCB304005D34F3 /* EntityFactory.swift */; };
 		946577C82DCCB4DA005D34F3 /* EntityFactory+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946577C72DCCB4DA005D34F3 /* EntityFactory+Character.swift */; };
@@ -332,6 +334,8 @@
 		9457EA0D2E4AECFC00CB2ACF /* NodeBuilder+Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeBuilder+Food.swift"; sourceTree = "<group>"; };
 		9457EA0F2E4C233700CB2ACF /* EntityFactory+StartupEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+StartupEntity.swift"; sourceTree = "<group>"; };
 		9457EA132E4C3A1600CB2ACF /* NodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeManager.swift; sourceTree = "<group>"; };
+		9457EA152E4C70E300CB2ACF /* DoTask+Eat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DoTask+Eat.swift"; sourceTree = "<group>"; };
+		9457EA172E4C8C3200CB2ACF /* TestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestManager.swift; sourceTree = "<group>"; };
 		946577BC2DCC580C005D34F3 /* DataCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCoder.swift; sourceTree = "<group>"; };
 		946577C32DCCB304005D34F3 /* EntityFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityFactory.swift; sourceTree = "<group>"; };
 		946577C72DCCB4DA005D34F3 /* EntityFactory+Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityFactory+Character.swift"; sourceTree = "<group>"; };
@@ -643,6 +647,7 @@
 				9467A2112E335B7F0097734D /* DoTask+Building.swift */,
 				9467A2352E409C940097734D /* DoTask+Growing.swift */,
 				9467A2542E41FCE10097734D /* DoTask+Sleep.swift */,
+				9457EA152E4C70E300CB2ACF /* DoTask+Eat.swift */,
 			);
 			path = DoTaskSystem;
 			sourceTree = "<group>";
@@ -711,6 +716,7 @@
 				94973B8E2DC087A7005AB8DB /* SystemManager.swift */,
 				946577D42DCDB3F7005D34F3 /* TextureManager.swift */,
 				9457EA132E4C3A1600CB2ACF /* NodeManager.swift */,
+				9457EA172E4C8C3200CB2ACF /* TestManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1507,6 +1513,7 @@
 				9467A2122E335B7F0097734D /* DoTask+Building.swift in Sources */,
 				949FACEE2DD478EA0044E4E5 /* EventBattleLogComponent.swift in Sources */,
 				949C3D3D2DCF2829003EA431 /* ActionStateComponent.swift in Sources */,
+				9457EA162E4C70E300CB2ACF /* DoTask+Eat.swift in Sources */,
 				949FACF82DD57C1D0044E4E5 /* BodyPartComponent.swift in Sources */,
 				9436777D2DF7CB110052A36F /* TaskSystem+Hauling.swift in Sources */,
 				944B556B2E1D21E30006D639 /* RMEntity+SaveAreaEntity.swift in Sources */,
@@ -1629,6 +1636,7 @@
 				94B705E02DF1451D00A47EE5 /* UISystem+Goods.swift in Sources */,
 				94973BD02DC087A7005AB8DB /* ItemModel.swift in Sources */,
 				94973BD12DC087A7005AB8DB /* UnitModel.swift in Sources */,
+				9457EA182E4C8C3200CB2ACF /* TestManager.swift in Sources */,
 				94579B1E2E49870900CB2ACF /* MainControllCell.swift in Sources */,
 				949FACDE2DD348C30044E4E5 /* OutdoorComponent.swift in Sources */,
 				946577E02DCDEDA4005D34F3 /* EnergyComponent.swift in Sources */,

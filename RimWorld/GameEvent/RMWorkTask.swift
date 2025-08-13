@@ -99,7 +99,11 @@ struct CuttingTask: Hashable {
 struct EatTask: Hashable {
     /// 食物ID
     var targetID: Int = 0
+    /// 吃饭状态
+    var eatStage: EatTaskStage = .movingToItem
     
+    /// 饱食度
+    var restorePercent: CGFloat = 1.0
 }
 
 /// 搬运任务

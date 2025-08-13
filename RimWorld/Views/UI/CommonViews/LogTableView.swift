@@ -69,7 +69,13 @@ class LogTableView: UITableView,UITableViewDelegate,UITableViewDataSource {
     
     /// 每行高度
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 20
+        
+        let t = logs[indexPath.row]
+        let content = t.content
+        
+        let cellHeight = MathUtils.textHeight(content, font: UIFont.systemFont(ofSize: 13.0), width: UIScreen.screenWidth / 2.0)
+        print(content)
+        return cellHeight + 24
     }
     
     /// 头视图高度
@@ -114,8 +120,8 @@ class LogTableView: UITableView,UITableViewDelegate,UITableViewDataSource {
             toName = toBasic.nickName
         }
         
-        let text = fromName + "\(textAction("和"))" + toName + log.content
-        cell.logContent.text = text
+//        let text = fromName + "\(textAction("和"))" + toName + log.content
+        cell.logContent.text = log.content
         
         
         return cell

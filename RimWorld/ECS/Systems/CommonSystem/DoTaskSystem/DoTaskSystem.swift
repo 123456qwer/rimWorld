@@ -100,6 +100,16 @@ class DoTaskSystem: System {
                          _ task: WorkTask) {
         
       
+        switch task.hightType {
+        case .Eat:
+            return
+        case .Sleep:
+            return
+        case .Relax:
+            return
+        case .None:
+            break
+        }
         
         switch task.type {
             
@@ -118,16 +128,7 @@ class DoTaskSystem: System {
         }
         
         
-        switch task.hightType {
-        case .Eat:
-            break
-        case .Sleep:
-            break
-        case .Relax:
-            break
-        case .None:
-            break
-        }
+      
     }
     
     /// 移动结束
@@ -138,6 +139,21 @@ class DoTaskSystem: System {
             ECSLogger.log("做任务系统出问题了 \(entity.name) 💀💀💀 ")
             return
         }
+        
+        
+        switch task.hightType {
+        case .Eat:
+            setEatAction(entity: entity, task: task)
+            return
+        case .Sleep:
+            setSleepingAction(entity: entity, task: task)
+            return
+        case .Relax:
+            break
+        case .None:
+            break
+        }
+        
         
         switch task.type {
             
@@ -157,22 +173,12 @@ class DoTaskSystem: System {
             setGrowingAction(entity: entity, task: task)
         case .Mining:
             setMiningAction(entity: entity, task: task)
-            
         default:
             break
         }
         
         
-        switch task.hightType {
-        case .Eat:
-            break
-        case .Sleep:
-            setSleepingAction(entity: entity, task: task)
-        case .Relax:
-            break
-        case .None:
-            break
-        }
+     
     }
     
 }

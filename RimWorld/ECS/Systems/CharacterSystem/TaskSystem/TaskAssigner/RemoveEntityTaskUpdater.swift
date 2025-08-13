@@ -22,6 +22,16 @@ extension TaskSystem {
             $0.targetEntityID == targetEntity.entityID
         })
         
+        /// 移除食物后
+        for task in allTaskQueue {
+            guard let entity = ecsManager.getEntity(task.targetEntityID) else {
+                continue
+            }
+            if task.eatTask.targetID == targetEntity.entityID {
+                task.eatTask.targetID = getFoodEntityID(entity: entity)
+            }
+        }
+        
         for task in doTaskQueue {
             guard task.haulingTask.targetID == targetEntity.entityID else {
                 continue
@@ -30,6 +40,7 @@ extension TaskSystem {
                 ECSLogger.log("移除任务，当前执行人为空💀💀💀")
                 continue
             }
+            
         
             /// 强制停止任务
             RMEventBus.shared.requestForceCancelTask(entity: executorEntity, task: task)

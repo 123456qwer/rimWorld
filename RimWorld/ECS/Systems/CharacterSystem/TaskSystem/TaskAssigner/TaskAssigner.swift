@@ -69,6 +69,8 @@ extension TaskSystem {
     /// 按优先级排列任务
     func sortTask(entity: RMEntity) {
        
+        let entityPoint = PositionTool.nowPosition(entity)
+
         /// 先按距离顺序排序
         allTaskQueue.sort {
             
@@ -86,7 +88,6 @@ extension TaskSystem {
                 pos2 = $1.growingTask.targetPoint
             }
             
-            let entityPoint = PositionTool.nowPosition(entity)
             
             let distance1 = MathUtils.distance(entityPoint, pos1)
             let distance2 = MathUtils.distance(entityPoint, pos2)

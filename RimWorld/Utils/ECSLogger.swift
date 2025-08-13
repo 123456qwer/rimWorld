@@ -41,7 +41,9 @@ struct ECSLogger {
 
         if message.contains("💀💀💀") {
             print("\(logText)")
+            EntityActionTool.writeLog(entity: TestManager.shared.rmEntity, text: logText)
         }
+        
 
         // 写入文件
         if logToFile {

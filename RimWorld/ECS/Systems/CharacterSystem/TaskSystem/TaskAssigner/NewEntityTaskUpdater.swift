@@ -17,7 +17,7 @@ extension TaskSystem {
         
         switch type {
             /// 搬运任务
-        case kWood,kApple:
+        case kWood:
             /// 新增木头、
             addHaulingTasks(targetEntity: entity)
         case kStorageArea:
@@ -29,6 +29,10 @@ extension TaskSystem {
         case kGrowingArea:
             /// 新增种植区域
             addGrowingArea(targetEntity: entity)
+        case kApple:
+            /// 新增苹果
+            addFood(targetEntity: entity)
+            addHaulingTasks(targetEntity: entity)
             
         default:
             break
@@ -55,13 +59,9 @@ extension TaskSystem {
             /// 生成实体搬运任务
             ableToStorageForHaulingTask(storageE: targetEntity, targetEntity: entity, haulComponent: haulComponent)
         }
-        
-   
-        
-        assignTask()
-
-    }
     
+        assignTask()
+    }
     
     /// 新增蓝图实体
     func addBlueprint(targetEntity: RMEntity) {
@@ -96,7 +96,6 @@ extension TaskSystem {
         assignTask()
     }
     
-    
     /// 新增可搬运实体
     func addHaulingTasks(targetEntity: RMEntity) {
         
@@ -119,13 +118,13 @@ extension TaskSystem {
         
         /// 正在做的任务有此目标
         if doTaskQueue.firstIndex(where: {
-            $0.targetEntityID == targetEntity.entityID
+            $0.targetEntityID == targetEntity.entityID || $0.eatTask.targetID == targetEntity.entityID
         }) != nil{
             return
         }
         
         /// 总任务列表里有此目标
-        if allTaskQueue.firstIndex(where: { $0.targetEntityID == targetEntity.entityID
+        if allTaskQueue.firstIndex(where: { $0.targetEntityID == targetEntity.entityID || $0.eatTask.targetID == targetEntity.entityID
         }) != nil{
             return
         }
@@ -190,7 +189,6 @@ extension TaskSystem {
         
     }
     
-    
     /// 新增种植区域实体
     func addGrowingArea(targetEntity: RMEntity) {
         
@@ -201,6 +199,40 @@ extension TaskSystem {
         }
         
         assignTask()
+    }
+    
+    
+    /// 新增食物
+    func addFood(targetEntity: RMEntity) {
+        
+        /// 所有吃饭且未有食物目标的任务
+        var eatTasks = allTaskQueue.filter{ $0.hightType == .Eat && $0.eatTask.targetID == 0 }
+      
+        
+        let foodTargetPoint = PositionTool.nowPosition(targetEntity)
+        
+        eatTasks.sort {
+            guard let target1 = ecsManager.getEntity($0.targetEntityID),
+                  let target2 = ecsManager.getEntity($1.targetEntityID) else {
+                return false
+            }
+            
+            let point1 = PositionTool.nowPosition(target1)
+            let point2 = PositionTool.nowPosition(target2)
+            
+            let distance1 = MathUtils.distance(foodTargetPoint, point1)
+            let distance2 = MathUtils.distance(foodTargetPoint, point2)
+            
+            return distance1 < distance2
+        }
+        
+        if let task = eatTasks.first {
+            task.eatTask.targetID = targetEntity.entityID
+            guard let executorEntity = ecsManager.getEntity(task.targetEntityID) else {
+                return
+            }
+            assignTask(executorEntity: executorEntity)
+        }
     }
     
 }

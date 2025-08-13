@@ -25,8 +25,8 @@
                             <constraint firstAttribute="width" constant="15" id="skj-tD-H0i"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nm1-wi-9Uh">
-                        <rect key="frame" x="35" y="86" width="346" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内容" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nm1-wi-9Uh">
+                        <rect key="frame" x="35" y="86.333333333333329" width="346" height="15.666666666666671"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -37,6 +37,7 @@
                     <constraint firstItem="ZM8-hd-LYH" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="NId-Ju-YhI"/>
                     <constraint firstItem="nm1-wi-9Uh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="OdB-3I-Xap"/>
                     <constraint firstAttribute="trailingMargin" secondItem="nm1-wi-9Uh" secondAttribute="trailing" constant="12" id="aU1-6M-rhZ"/>
+                    <constraint firstItem="nm1-wi-9Uh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="joN-zE-cbI"/>
                     <constraint firstItem="nm1-wi-9Uh" firstAttribute="leading" secondItem="ZM8-hd-LYH" secondAttribute="trailing" constant="8" id="rn7-9k-TdM"/>
                 </constraints>
             </tableViewCellContentView>

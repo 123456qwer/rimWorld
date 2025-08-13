@@ -10,7 +10,7 @@ import Foundation
 /// 植物移除
 extension ResourceHarvestSystem {
     
-    ///
+    /// 移除植物
     func removePlant (params: TreeRemoveReason) {
         let targetEntity = params.entity
         /// 树坐标
@@ -44,6 +44,8 @@ extension ResourceHarvestSystem {
         }
    
     }
+    
+    
     
     
     /// 移除苹果，生成新苹果

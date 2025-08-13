@@ -35,6 +35,11 @@ extension ECSManager {
         return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesAbleToBeCut ?? []
     }
     
+    /// 获取所有可被吃的实体
+    func entitiesAbleToBeEat() -> Set<RMEntity> {
+        return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesAbleToBeEat ?? []
+    }
+    
     /// 获取所有可以执行搬运任务的实体
     func entitiesAbleToHaul() -> [RMEntity] {
         return systemManager.getSystem(ofType: EntityCategorizatonSystem.self)?.entitiesAbleToHaul ?? []

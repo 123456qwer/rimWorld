@@ -187,3 +187,23 @@ extension RMBaseNode {
     }
     
 }
+
+
+/// 吃饭相关
+extension RMBaseNode {
+    /// 吃饭
+    func eatAnimation( block:@escaping ()->Void) {
+        
+        let defaultS = 1.0
+        let scale = defaultS + 3.0
+
+        
+        let action1 = SKAction.scale(to: scale, duration: 0.3)
+        let action2 = SKAction.scale(to: defaultS, duration: 0.3)
+        let seq = SKAction.sequence([action1,action2])
+        
+        self.run(seq) {
+            block()
+        }
+    }
+}

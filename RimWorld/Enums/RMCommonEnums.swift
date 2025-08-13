@@ -648,7 +648,12 @@ enum HaulTaskStage {
     case movingToTarget
 }
 
-
+enum EatTaskStage {
+    /// 前往食物
+    case movingToItem
+    /// 正在搬运到目标位置
+    case movingToTarget
+}
 
 
 /// 操作UI

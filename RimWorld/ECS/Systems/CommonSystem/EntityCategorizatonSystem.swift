@@ -56,9 +56,7 @@ class EntityCategorizatonSystem: System {
     // MARK: - 建造素材等 -
     var entitiesMaterial: [MaterialType:Set<RMEntity>] = [:]
     
-    /// 移除的时候统一从这里处理
-    private var setEntities:[Set<RMEntity>] = []
-    private var arrEntities:[[RMEntity]] = []
+
     
     
     /// 休息中的角色
@@ -69,24 +67,6 @@ class EntityCategorizatonSystem: System {
     
     init(ecsManger: ECSManager) {
         self.ecsManger = ecsManger
-        var arr  = [entitiesAbleToCut,
-                    entitiesAbleToHaul,
-                    entitiesAbleToStorage,
-                    entitiesAbleToBuild,]
-        var sets = [entitiesAbleToRest,
-                    entitiesAbleToEat,
-                    entitiesAbleToTask,
-                    entitiesAbleToBeCut,
-                    entitiesAbleToBeHaul,
-                    entitiesAbleToBeGrowArea,
-                    entitiesAbleToBeEat,
-                    entitiesAbleToPlantGrowth]
-        for entities in sets {
-            setEntities.append(entities)
-        }
-        for entities in arr {
-            arrEntities.append(entities)
-        }
     }
     
     /// 排序
@@ -109,19 +89,31 @@ class EntityCategorizatonSystem: System {
     func removeEntity(_ entity: RMEntity) {
         
         /// 从arr数组中删除
-        for i in arrEntities.indices {
-            var entities = arrEntities[i]
-            if let index = entities.firstIndex(where: { $0 === entity}){
-                entities.remove(at: index)
-            }
+        if let index = entitiesAbleToCut.firstIndex(where: { $0.entityID == entity.entityID }){
+            entitiesAbleToCut.remove(at: index)
         }
+        if let index = entitiesAbleToHaul.firstIndex(where: { $0.entityID == entity.entityID }){
+            entitiesAbleToHaul.remove(at: index)
+        }
+        if let index = entitiesAbleToStorage.firstIndex(where: { $0.entityID == entity.entityID }){
+            entitiesAbleToStorage.remove(at: index)
+        }
+        if let index = entitiesAbleToBuild.firstIndex(where: { $0.entityID == entity.entityID }){
+            entitiesAbleToBuild.remove(at: index)
+        }
+ 
         
         /// 从set数组中删除
-        for i in setEntities.indices {
-            setEntities[i].remove(entity)
-        }
-        
+        entitiesAbleToRest.remove(entity)
+        entitiesAbleToEat.remove(entity)
+        entitiesAbleToTask.remove(entity)
+        entitiesAbleToBeCut.remove(entity)
+        entitiesAbleToBeHaul.remove(entity)
+        entitiesAbleToBeGrowArea.remove(entity)
+        entitiesAbleToBeEat.remove(entity)
+        entitiesAbleToPlantGrowth.remove(entity)
    
+        
         restEntities.removeValue(forKey: entity.entityID)
         unRestEntities.removeValue(forKey: entity.entityID)
         

@@ -127,18 +127,19 @@ extension DoTaskSystem {
         
         if lastCount <= 0 { return }
         
+        // TODO: - 这里是否要根据TYPE不同创建不同的Params -
+        
         // 👉 创建一个新的需求节点，代表剩余 remainingNeed 数量需要搬运
         let woodPoint = PositionTool.nowPosition(material)
         let params = HarvestParams(
             harvestCount: lastCount
         )
         
-        RMEventBus.shared.requestCreateEntity(type: kWood,
+        RMEventBus.shared.requestCreateEntity(type: material.type,
                                               point: woodPoint,
                                               params: params)
         
         EntityActionTool.setHaulingCount(entity: material, count: actualHaul)
-        
     }
     
     

@@ -319,8 +319,7 @@ struct EntityInfoTool {
         
         return nil
     }
-    
-   
+  
     
     
 }

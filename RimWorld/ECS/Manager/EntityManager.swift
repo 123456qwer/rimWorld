@@ -45,6 +45,11 @@ class EntityManager {
             entity.node = node
             node.rmEntity = entity
      
+            /// 测试专用
+            if entity.type == kCharacter {
+                TestManager.shared.rmEntity = entity
+            }
+            
         }
         
         

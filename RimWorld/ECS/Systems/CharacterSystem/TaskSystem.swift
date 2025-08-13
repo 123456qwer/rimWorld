@@ -152,6 +152,8 @@ extension TaskSystem {
         
         switch task.hightType {
         case .Eat:
+            ECSLogger.log("开始吃饭！")
+            doEatTask(task)
             return
         case .Relax:
             return

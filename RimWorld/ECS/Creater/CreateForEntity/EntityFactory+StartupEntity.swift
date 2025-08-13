@@ -12,23 +12,23 @@ extension EntityFactory {
     
     /// 树
     func tree (point:CGPoint) {
-    let entity = RMEntity()
-    entity.type = kTree
+        let entity = RMEntity()
+        entity.type = kTree
     
-    let treeComponent = PlantBasicInfoComponent()
-    let treeName = ["tree1","tree2","tree3"].randomElement()!
-    treeComponent.plantTexture = treeName
+        let treeComponent = PlantBasicInfoComponent()
+        let treeName = ["tree1","tree2","tree3"].randomElement()!
+        treeComponent.plantTexture = treeName
     
-    let pointComponent = PositionComponent()
-    pointComponent.x = point.x
-    pointComponent.y = point.y
-    pointComponent.z = maxZpoint - point.y
+        let pointComponent = PositionComponent()
+        pointComponent.x = point.x
+        pointComponent.y = point.y
+        pointComponent.z = maxZpoint - point.y
+        
+        entity.addComponent(pointComponent)
+        entity.addComponent(treeComponent)
     
-    entity.addComponent(pointComponent)
-    entity.addComponent(treeComponent)
-    
-    saveEntity(entity: entity)
-}
+        saveEntity(entity: entity)
+    }
     
     /// 苹果树
     func appleTree (point: CGPoint) {
@@ -41,7 +41,6 @@ extension EntityFactory {
         treeComponent.plantTexture = treeName
         treeComponent.haveHarvest = true
         
-        let foodComponent = FoodInfoComponent()
         
         let pointComponent = PositionComponent()
         pointComponent.x = point.x
@@ -52,8 +51,8 @@ extension EntityFactory {
         
         entity.addComponent(pointComponent)
         entity.addComponent(treeComponent)
-        entity.addComponent(foodComponent)
-       
+
+        
         /// 成熟度高于25，生成苹果
         apple(superEntity: entity,save: true)
         

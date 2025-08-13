@@ -36,6 +36,18 @@ enum MathUtils {
         return ceil(size.width)
     }
     
+    /// 文字高度
+    static func textHeight(_ text: String, font: UIFont, width: CGFloat) -> CGFloat {
+        let attributes: [NSAttributedString.Key: Any] = [.font: font]
+        let size = (text as NSString).boundingRect(
+            with: CGSize(width: width, height: .greatestFiniteMagnitude),
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: attributes,
+            context: nil
+        ).size
+        return ceil(size.height)
+    }
+    
     /// 九宫格
     static func getSurroundingPoints(center: CGPoint, distance: CGFloat = 32) -> [CGPoint] {
         var points: [CGPoint] = []

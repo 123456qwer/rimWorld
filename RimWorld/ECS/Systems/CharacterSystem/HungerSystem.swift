@@ -40,8 +40,11 @@ class HungerSystem: System {
             
             guard let nutritionComponent = entity.getComponent(ofType: NutritionComponent.self ) else { continue }
             
-            let decay = nutritionComponent.nutritionDecayPerTick * Double(elapsedTicks)
+            // TODO: - 先修改下饥饿度 -
+            var decay = nutritionComponent.nutritionDecayPerTick * Double(elapsedTicks)
+            decay = 0.01 * Double(elapsedTicks)
 
+            
             /// 更新角色实体饥饿值
             nutritionComponent.current -= decay
             /// 最小不小于0

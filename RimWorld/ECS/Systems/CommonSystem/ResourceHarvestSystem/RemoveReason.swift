@@ -16,6 +16,11 @@ struct TreeRemoveReason: RemoveReason {
     let entity: RMEntity
 }
 
+/// 食物移除
+struct FoodRemoveReason: RemoveReason {
+    let entity: RMEntity
+}
+
 /// 摘除
 struct PickRemoveReason: RemoveReason {
     let entity: RMEntity
