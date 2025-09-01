@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 建筑类
 extension EntityFactory {
     
     /// 创建墙
@@ -19,6 +20,7 @@ extension EntityFactory {
         
         let blockComponent = MovementBlockerComponent()
         
+        blockComponent.positions.append(point)
         let wallComponent = WallComponent()
         wallComponent.textureName = params.wallTexture
         
@@ -35,6 +37,8 @@ extension EntityFactory {
         let positionComponent = PositionComponent()
         positionComponent.x = point.x
         positionComponent.y = point.y
+        
+        
         
         wall.addComponent(wallComponent)
         wall.addComponent(positionComponent)

@@ -48,7 +48,10 @@ class MainSubInfoView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
                         .deconstruct,
                         .wall],
                                                      
-            .production:[],
+            .production:[.cancel,
+                         .deconstruct,
+                         .fueledStove,
+                         .electricStove],
                                                      
             .furniture:[],
                                                      
@@ -149,24 +152,7 @@ class MainSubInfoView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
         let items = itemsClick[key]!
         
         let type = items[indexPath.row]
-        switch type {
-        case .cancel:
-            gameContext?.currentMode = .cancel
-        case .deconstruct:
-            gameContext?.currentMode = .deconstruct
-        case .chopWood:
-            gameContext?.currentMode = .cutting
-        case .wall:
-            gameContext?.currentMode = .build
-        case .storageArea:
-            gameContext?.currentMode = .storage
-        case .plantingArea:
-            gameContext?.currentMode = .growing
-        case .mine:
-            gameContext?.currentMode = .mining
-        default:
-            break
-        }
+        gameContext?.currentMode = type
         
         
         RMInfoViewEventBus.shared.requestReloadBottomView(actionType: type)

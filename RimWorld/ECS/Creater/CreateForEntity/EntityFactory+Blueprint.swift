@@ -8,6 +8,7 @@
 import Foundation
 extension EntityFactory {
     
+    /// 创建蓝图
     func createBlueprint(point: CGPoint,
                          params: BlueprintParams) -> RMEntity{
         
@@ -20,7 +21,10 @@ extension EntityFactory {
         blueprintComponent.materials = params.materials
         blueprintComponent.blueprintType = params.type.rawValue
         blueprintComponent.totalBuildPoints = params.totalBuildPoint
-        
+        blueprintComponent.textureName = params.textureName
+        blueprintComponent.anchorX = params.anchorPoint.x
+        blueprintComponent.anchorY = params.anchorPoint.y
+        blueprintComponent.blueMaterial = params.material.rawValue
         
         let ownerComponent = OwnershipComponent()
         
@@ -38,10 +42,13 @@ extension EntityFactory {
         blueprintComponent.width = params.size.width
         blueprintComponent.height = params.size.height
         
+        let directionComponent = DirectionComponent()
+        
         entity.addComponent(blueprintComponent)
         entity.addComponent(positionComponent)
         entity.addComponent(ownerComponent)
-        
+        entity.addComponent(directionComponent)
+
         return entity
     }
     

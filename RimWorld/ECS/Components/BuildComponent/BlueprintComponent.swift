@@ -21,11 +21,14 @@ final class BlueprintComponent: TableCodable, Component {
     var width: CGFloat = 0.0
     var height: CGFloat = 0.0
     
-    /// 蓝图位置(例:top + left 说明是左上连接点，这样判断) 
-    var top: Bool = false
-    var bottom: Bool = false
-    var left : Bool = false
-    var right: Bool = false
+    /// 锚点
+    var anchorX:CGFloat = 0.5
+    var anchorY:CGFloat = 0.5
+    
+
+    
+    /// 蓝图对应的纹理
+    var textureName: String = ""
     
     /// 建筑用料 (默认木头)(key = "\(MaterialType.type.rawValue)" MaterialType)
     var materials: [String:Int] = [:]
@@ -38,6 +41,9 @@ final class BlueprintComponent: TableCodable, Component {
     
     /// 蓝图类型
     var blueprintType: Int = BlueprintType.wall.rawValue
+    
+    /// 最终建造材质（如木头墙，石头墙，木头桌子，大理石桌子）
+    var blueMaterial: Int = MaterialType.wood.rawValue
     
     /// 是否建造完成，建造完成，移除蓝图的时候，就不要把已有的数据删除了
     var isBuildFinish: Bool = false
@@ -69,16 +75,19 @@ final class BlueprintComponent: TableCodable, Component {
         
         case width
         case height
-        case top
-        case bottom
-        case left
-        case right
+
+ 
+        
         case materials
         case alreadyMaterials
         case blueprintType
         case totalBuildPoints
         case currentBuildPoints
         case isMaterialCompelte
+        case textureName
+        case anchorX
+        case anchorY
+        case blueMaterial
     }
     
     func bindEntityID(_ bindEntityID: Int) { entityID = bindEntityID }

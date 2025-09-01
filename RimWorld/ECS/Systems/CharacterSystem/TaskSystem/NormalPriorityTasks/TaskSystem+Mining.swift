@@ -83,8 +83,8 @@ extension TaskSystem {
         
    
         let startPoint = PositionTool.nowPosition(executorEntity)
-        let endPoint = PositionTool.nowPosition(targetEntity)
-        
+        var endPoint = PositionTool.nowPosition(targetEntity)
+//        endPoint = CGPoint(x: endPoint.x + tileSize, y: endPoint.y + tileSize)
         RMEventBus.shared.requestFindingPath(entity: executorEntity, startPoint: startPoint, endPoint: endPoint, task: task)
     }
 }

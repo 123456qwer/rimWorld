@@ -104,6 +104,8 @@ let kNonInteractiveComponent = "NonInteractiveComponent"
 let kMovementBlockerComponent = "MovementBlockerComponent"
 /// 可挖掘资源
 let kMiningComponent = "MiningComponent"
+/// 灶台
+let kStoveComponent = "StoveComponent"
 
 
 /// 搬运状态组件
@@ -113,6 +115,8 @@ let kLogComponent = "LogComponent"
 
 /// 物品通用基础组件
 let kGoodsBasicInfoComponent = "GoodsBasicInfoComponent"
+/// 方向组件
+let kDirectionComponent = "DirectionComponent"
 
 
 /// 所有实体表
@@ -172,6 +176,8 @@ let componentTypeMap: [String: Decodable.Type] = [
     kMovementBlockerComponent:MovementBlockerComponent.self,
     kMiningComponent:MiningComponent.self,
     kGoodsBasicInfoComponent:GoodsBasicInfoComponent.self,
+    kStoveComponent:StoveComponent.self,
+    kDirectionComponent:DirectionComponent.self,
 ]
 
 // MARK: - 实体类型 -
@@ -210,8 +216,11 @@ let kPickaxe = "Pickaxe"
 /// 采摘（✋🏻图）
 let kPickHand = "PickHand"
 
-/// 木墙
-let kWoodWall = "WoodWall"
+/// 墙
+let kWall = "Wall"
+
+/// 灶台
+let kStove = "Stove"
 
 
 // MARK: - 食物 -

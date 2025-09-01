@@ -244,6 +244,22 @@ struct EntityInfoTool {
         return max(1, Int(yield.rounded(.down)))
     }
     
+    /// 获取当前物品旋转度数
+    static func getZRotation(entity:RMEntity) -> CGFloat {
+        guard let directionComponent = entity.getComponent(ofType: DirectionComponent.self) else { return 0 }
+        if directionComponent.bottom == true {
+            return 0
+        }else if directionComponent.right == true {
+            return MathUtils.degreesToRadians(90)
+        }else if directionComponent.top == true {
+            return MathUtils.degreesToRadians(180)
+        }else if directionComponent.left == true {
+            return MathUtils.degreesToRadians(270)
+        }else {
+            return 0
+        }
+    }
+    
     
     /// 获取种植区域的所有keys
     static func getGrowingAllKeys (targetEntity: RMEntity) -> [Int] {

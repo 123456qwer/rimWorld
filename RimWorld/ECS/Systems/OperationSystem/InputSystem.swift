@@ -37,52 +37,65 @@ class InputSystem: System {
     let ecsManager: ECSManager
     let gameContext: RMGameContext
     let areaProvider: AreaSelectProvider
-    
+    let provider: PathfindingProvider
+
    
     
     // 触摸按下映射
-    lazy var touchDownHandlers: [GameMode: TouchHandler] = [
-        .normal: normalTouchdown,
-        .storage: areaSelectTouchdown,
-        .build: buildTouchdown,
+    lazy var touchDownHandlers: [ActionType: TouchHandler] = [
+        .none: normalTouchdown,
+        .storageArea: areaSelectTouchdown,
+        
+        .wall: buildStructureTouchdown,
+        .fueledStove: buildFurnitureTouchdown,
+
+        
         .deconstruct: deconstructTouchdown,
-        .growing: growingTouchdown,
+        .plantingArea: growingTouchdown,
         .cancel: cancelTouchdown,
-        .cutting: cuttingTouchdown,
-        .mining: miningTouchdown,
+        .chopWood: cuttingTouchdown,
+        .mine: miningTouchdown,
     ]
     
     // 触摸移动映射
-    lazy var touchMovedHandlers: [GameMode: TouchHandler] = [
-        .normal: normalTouchMoved,
-        .storage: areaSelectTouchMoved,
-        .build: buildTouchMoved,
+    lazy var touchMovedHandlers: [ActionType: TouchHandler] = [
+        .none: normalTouchMoved,
+        .storageArea: areaSelectTouchMoved,
+        
+        .wall: buildStructureTouchMoved,
+        .fueledStove: buildFurnitureTouchMoved,
+        
         .deconstruct: deconstructTouchMoved,
-        .growing: growingTouchMoved,
+        .plantingArea: growingTouchMoved,
         .cancel: cancelTouchMoved,
-        .cutting: cuttingTouchMoved,
-        .mining: miningTouchMoved,
+        .chopWood: cuttingTouchMoved,
+        .mine: miningTouchMoved,
     ]
     
     // 触摸抬起映射
-    lazy var touchUpHandlers: [GameMode: TouchHandler] = [
-        .normal: normalTouchUp,
-        .storage: areaSelectTouchUp,
-        .build: buildTouchUp,
+    lazy var touchUpHandlers: [ActionType: TouchHandler] = [
+        .none: normalTouchUp,
+        .storageArea: areaSelectTouchUp,
+        
+        .wall: buildStructureTouchUp,
+        .fueledStove: buildFurnitureTouchUp,
+        
         .deconstruct: deconstructTouchUp,
-        .growing: growingTouchUp,
+        .plantingArea: growingTouchUp,
         .cancel: cancelTouchUp,
-        .cutting: cuttingTouchUp,
-        .mining: miningTouchUp,
+        .chopWood: cuttingTouchUp,
+        .mine: miningTouchUp,
     ]
     
     
     init (ecsManager: ECSManager,
           gameContext: RMGameContext,
-          areaProvider: AreaSelectProvider) {
+          areaProvider: AreaSelectProvider,
+          provider: PathfindingProvider) {
         self.ecsManager = ecsManager
         self.gameContext = gameContext
         self.areaProvider = areaProvider
+        self.provider = provider
     }
     
     func touchDown(atPoint pos : CGPoint, scene:BaseScene) {

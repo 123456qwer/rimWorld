@@ -131,13 +131,22 @@ extension DoTaskSystem {
         
         // 👉 创建一个新的需求节点，代表剩余 remainingNeed 数量需要搬运
         let woodPoint = PositionTool.nowPosition(material)
-        let params = HarvestParams(
-            harvestCount: lastCount
-        )
+
+        var params:EntityCreationParams?
+        if material.type == kWood || material.type == kApple{
+            params = HarvestParams(
+                harvestCount: lastCount
+            )
+        }else if material.type == kOre {
+            params = OreParams(oreCount: lastCount,
+                               materialType: .marble)
+        }
+        
+       
         
         RMEventBus.shared.requestCreateEntity(type: material.type,
                                               point: woodPoint,
-                                              params: params)
+                                              params: params!)
         
         EntityActionTool.setHaulingCount(entity: material, count: actualHaul)
     }
@@ -332,7 +341,7 @@ extension DoTaskSystem {
         
         
         targetEntity.node?.texture = TextureManager.shared.getTexture("bluePrint2")
-        
+        targetEntity.node?.alpha = 1
 
         for (key,maxCount) in materials {
             let currentCount = currentMaterials[key]!

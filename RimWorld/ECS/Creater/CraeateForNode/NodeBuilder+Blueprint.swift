@@ -14,9 +14,20 @@ extension NodeBuilder {
             return RMBaseNode()
         }
         
+
+        let textureName = blueComponent.textureName
+        
+        
+        
         /// 先简单添加
         let node = RMBaseNode(color: .blue.withAlphaComponent(0.3), size: CGSize(width: blueComponent.width, height: blueComponent.height))
+        node.texture = TextureManager.shared.getTexture(textureName)
         node.position = CGPoint(x: blueComponent.tileX, y: blueComponent.tileY)
+        node.alpha = 0.3
+        
+
+        node.anchorPoint = CGPoint(x: blueComponent.anchorX, y: blueComponent.anchorY)
+        
         
         var isSubMaterial = false
         for (_,count) in blueComponent.alreadyMaterials {

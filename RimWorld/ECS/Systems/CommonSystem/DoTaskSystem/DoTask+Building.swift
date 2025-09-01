@@ -84,7 +84,9 @@ extension DoTaskSystem {
         let type = BlueprintType(rawValue: blueprintComponent.blueprintType)
         switch type {
         case .wall:
-            wall(blueprintComponent: blueprintComponent)
+            wall(blueprintComponent)
+        case .stove:
+            stove(blueprintComponent)
         default:
             break
         }
@@ -98,19 +100,19 @@ extension DoTaskSystem {
     
     
     /// 墙
-    func wall(blueprintComponent: BlueprintComponent){
+    func wall(_ blueprintComponent: BlueprintComponent) {
         
         /// 材料类型
-        let type = MaterialType(rawValue: Int(blueprintComponent.materials.keys.first!)!)
+        let type = materialType(blueprintComponent)
         let point = CGPoint(x: blueprintComponent.tileX, y: blueprintComponent.tileY)
         
         switch type {
         case .wood:
             
             let params = WallParams(
-                material: MaterialType.wood, wallTexture: "woodWall", type: kWoodWall
+                material: MaterialType.wood, wallTexture: "woodWall", type: kWall
             )
-            RMEventBus.shared.requestCreateEntity(type: kWoodWall, point: point, params: params)
+            RMEventBus.shared.requestCreateEntity(type: kWall, point: point, params: params)
             
         default:
             break
@@ -118,8 +120,24 @@ extension DoTaskSystem {
         
     }
     
+    /// 灶台
+    func stove(_ blueprintComponent: BlueprintComponent) {
+        
+        let point = CGPoint(x: blueprintComponent.tileX, y: blueprintComponent.tileY)
+        
+        let params = StoveParams(
+            material: MaterialType.wood, wallTexture: "stove", type: kStove,width: 0,height: 0,direction: .down
+        )
+        
+        RMEventBus.shared.requestCreateEntity(type: kStove, point: point, params: params)
+    }
     
     
+    /// 材质
+    private func materialType(_ blueprintComponent: BlueprintComponent) -> MaterialType {
+        let type = MaterialType(rawValue:blueprintComponent.blueMaterial)
+        return type!
+    }
     
     
 }

@@ -12,13 +12,13 @@ import SpriteKit
 extension InputSystem {
     
     /// 按下
-    func buildTouchdown(atPoint pos: CGPoint, scene: BaseScene) {
+    func buildStructureTouchdown(atPoint pos: CGPoint, scene: BaseScene) {
         lastTouchLocation = pos
         
     }
    
     /// 滑动
-    func buildTouchMoved(atPoint pos: CGPoint, scene: BaseScene) {
+    func buildStructureTouchMoved(atPoint pos: CGPoint, scene: BaseScene) {
         
         isTouchMoved = true
 
@@ -27,7 +27,7 @@ extension InputSystem {
     
     
     /// 抬起
-    func buildTouchUp(atPoint pos: CGPoint, scene: BaseScene) {
+    func buildStructureTouchUp(atPoint pos: CGPoint, scene: BaseScene) {
         if isTouchMoved {
             isTouchMoved = false
             return
@@ -52,11 +52,14 @@ extension InputSystem {
         let woodCount = 30
         let blueprintType = BlueprintType.wall
         
+        // TODO: - 这里先简单设置为woodWall,实际应该根据类型 -
+        
         let params = BlueprintParams(
             size: CGSizeMake(tileSize, tileSize),
             materials: ["\(wood)":woodCount],
             type: blueprintType,
-            totalBuildPoint: 100
+            totalBuildPoint: 100,
+            textureName: "woodWall"
         )
         
         /// 创建蓝图

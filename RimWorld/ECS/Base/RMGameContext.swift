@@ -15,7 +15,7 @@ class RMGameContext {
     var ecsManager:ECSManager!
     
     /// 当前的游戏模式（默认/建造/选择区域等）
-    var currentMode: GameMode = .normal
+    var currentMode: ActionType = .none
     
     
     func getAllEntities() -> [RMEntity] {

@@ -531,17 +531,7 @@ enum MedicalQuality: String {
 }
 
 
-/// 游戏的主要模式状态
-enum GameMode {
-    case normal               // 默认模式：点击、移动等常规操作
-    case build                // 建造模式：拖动放置建筑
-    case storage              // 拉框选择存储区域
-    case growing              // 拉框选择种植区域
-    case deconstruct          // 拆除：拆除建造好的或者没建造的蓝图
-    case cancel               // 取消：取消砍伐、预建造等
-    case cutting              // 割除：标记所有要割除的物体
-    case mining               // 开采：标记所有要开采的物体
-}
+
 
 
 /// 存储优先级
@@ -587,7 +577,6 @@ enum MaterialType: Int {
     case steel = 3        // 钢材（你可以按需添加）
     case stone = 4        // 石材
     case cloth = 5        // 布料
-    
     case food  = 100      // 食物
     
     case unowned = 10000
@@ -619,6 +608,7 @@ enum BlueprintType: Int {
     case floor = 8           // 地板
     case window = 9          // 窗户
     case roof = 10           // 屋顶
+    case stove = 11          // 灶台
 
     /// 获取英文描述
     var description: String {
@@ -633,6 +623,7 @@ enum BlueprintType: Int {
         case .floor: return "Floor"                   // 地板
         case .window: return "Window"                 // 窗户
         case .roof: return "Roof"                     // 屋顶
+        case .stove: return "Stove"                   // 灶台
         }
     }
     
@@ -710,6 +701,10 @@ enum ActionType: String {
     case tame = "Tame"
     /// 墙
     case wall = "Wall"
+    /// 电灶台
+    case electricStove = "ElectricStove"
+    /// 燃料灶台
+    case fueledStove = "FueledStove"
     /// 存储区
     case storageArea = "StorageArea"
     /// 垃圾存储区
@@ -726,6 +721,8 @@ enum ActionType: String {
     case addActivityArea = "AddActivityArea"
     /// 移除活动区
     case removeActivityArea = "RemoveActivityArea"
+    
+    
     
     // 如果需要可以加一个方法返回中文描述
     func description() -> String {
@@ -750,11 +747,38 @@ enum ActionType: String {
         case .none: return "无"
             
             
+        case .electricStove: return "电灶台"
+        case .fueledStove: return "燃料灶台"
         }
     }
 }
 
-
+enum Direction: String {
+    case up = "up"
+    case down = "down"
+    case left = "left"
+    case right = "right"
+    
+    /// 单位向量
+    var vector: CGVector {
+        switch self {
+        case .up: return CGVector(dx: 0, dy: 1)
+        case .down: return CGVector(dx: 0, dy: -1)
+        case .left: return CGVector(dx: -1, dy: 0)
+        case .right: return CGVector(dx: 1, dy: 0)
+        }
+    }
+    
+    /// 角度（弧度制，0 表示向右）
+    var angle: CGFloat {
+        switch self {
+        case .up: return .pi / 2
+        case .down: return .pi * 1.5
+        case .left: return .pi
+        case .right: return 0
+        }
+    }
+}
 
 enum RimWorldCrop: String, CaseIterable {
     // 粮食类

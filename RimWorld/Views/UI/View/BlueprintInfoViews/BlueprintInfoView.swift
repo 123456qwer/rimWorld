@@ -44,6 +44,7 @@ class BlueprintInfoView: UIView {
         bgView.addSubview(name)
         bgView.addSubview(nextNodeBtn)
         bgView.addSubview(need)
+        bgView.addSubview(directionBtn)
         setupLayout()
     }
     
@@ -72,6 +73,12 @@ class BlueprintInfoView: UIView {
             make.top.equalTo(name.snp.bottom).offset(3)
             make.leading.equalToSuperview().offset(leftPage)
             make.trailing.equalToSuperview().offset(-leftPage)
+        }
+        
+        directionBtn.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-8)
+            make.width.height.equalTo(25.0)
         }
    
     }
@@ -131,6 +138,38 @@ class BlueprintInfoView: UIView {
         nextBlock?()
     }
     
+    @objc func directionAction(_ sender:UIButton) {
+        guard let entity = weakEntity else { return }
+        
+        guard let blueComponent = entity.getComponent(ofType: BlueprintComponent.self) else {
+            return
+        }
+        guard let directionComponent = entity.getComponent(ofType: DirectionComponent.self) else {
+            return
+        }
+        
+        if directionComponent.bottom == true {
+            directionComponent.bottom = false
+            directionComponent.right = true
+            entity.node?.zRotation = MathUtils.degreesToRadians(90)
+        }else if directionComponent.right == true {
+            directionComponent.right = false
+            directionComponent.top = true
+            entity.node?.zRotation = MathUtils.degreesToRadians(180)
+        }else if directionComponent.top == true {
+            directionComponent.top = false
+            directionComponent.left = true
+            entity.node?.zRotation = MathUtils.degreesToRadians(270)
+        }else if directionComponent.left == true {
+            directionComponent.left = false
+            directionComponent.bottom = true
+            entity.node?.zRotation = MathUtils.degreesToRadians(0)
+        }
+        
+        
+    }
+    
+    
     
     /// 背景
     lazy var bgView:UIView = {
@@ -166,7 +205,13 @@ class BlueprintInfoView: UIView {
         return btn
     }()
     
-    
+    /// 旋转
+    lazy var directionBtn: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.setImage(UIImage(named: "directionBtn"), for: .normal)
+        btn.addTarget(self, action: #selector(directionAction), for: .touchUpInside)
+        return btn
+    }()
     
     
     

@@ -226,6 +226,10 @@
 "Plan" = "规划";
 "Storage" = "存储区域";
 "PlantZone" = "种植区域";
+"ElectricStove" = "电灶台";
+"FueledStove" = "燃料灶台";
+"Stove" = "灶台";
+
 
 "Progress" = "进度";
 "Todo" = "工作量";

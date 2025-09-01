@@ -59,7 +59,7 @@ class EnergySystem: System {
             
             /// 每tick减少休息值
 //            let speed = energyComponent.restDecayPerTick * Double(elapsedTicks)
-            let speed = 0.001 * Double(elapsedTicks)
+            let speed = 0.01 * Double(elapsedTicks)
             energyComponent.current -= speed
             if energyComponent.current <= 0 {
                 energyComponent.current = 0

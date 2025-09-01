@@ -14,6 +14,8 @@ final class MovementBlockerComponent: TableCodable, Component {
     var componentID:Int = -1
     /// 所属实体
     var entityID:Int = -1
+    /// 具体不能行走的点
+    var positions:[CGPoint] = []
     
     enum CodingKeys: String, CodingTableKey {
         typealias Root = MovementBlockerComponent
@@ -23,6 +25,7 @@ final class MovementBlockerComponent: TableCodable, Component {
         
         case componentID
         case entityID
+        case positions
     }
     
     func bindEntityID(_ bindEntityID: Int) { entityID = bindEntityID }

@@ -95,4 +95,29 @@ extension EntityFactory {
         return entity
     }
     
+    /// 石头
+    func stone(point: CGPoint) {
+        
+        let entity = RMEntity()
+        entity.type = kStone
+        
+        let blockComponent = MovementBlockerComponent()
+        let miningComponent = MiningComponent()
+        miningComponent.miningTexture = "stone"
+        
+        let pointComponent = PositionComponent()
+        pointComponent.x = point.x
+        pointComponent.y = point.y
+        pointComponent.z = maxZpoint - point.y
+        
+        blockComponent.positions.append(point)
+        
+        entity.addComponent(pointComponent)
+        entity.addComponent(blockComponent)
+        entity.addComponent(miningComponent)
+
+        
+        saveEntity(entity: entity)
+    }
+    
 }

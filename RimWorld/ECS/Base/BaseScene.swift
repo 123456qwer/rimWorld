@@ -182,7 +182,8 @@ class BaseScene:SKScene, RenderContext {
     lazy var inputSystem:InputSystem = {
         InputSystem(ecsManager: ecsManager,
                     gameContext: gameContext,
-                    areaProvider: self)
+                    areaProvider: self,
+                    provider: self)
     }()
     
     /// 饥饿值系统
@@ -406,25 +407,25 @@ extension BaseScene: AreaSelectProvider {
         var isCuttring = false
         var isMining = false
         
-        if gameContext.currentMode == .storage {
+        if gameContext.currentMode == .storageArea {
             /// 仓库
             params = StorageParams( size: areaSize )
             type = kStorageArea
-        }else if gameContext.currentMode == .growing {
+        }else if gameContext.currentMode == .plantingArea {
             /// 种植区域
             params = GrowingParams(size: areaSize, cropType: .rice)
             type = kGrowingArea
         }else if gameContext.currentMode == .cancel {
             isCancel = true
-        }else if gameContext.currentMode == .cutting {
+        }else if gameContext.currentMode == .chopWood {
             isCuttring = true
-        }else if gameContext.currentMode == .mining {
+        }else if gameContext.currentMode == .mine {
             isMining = true
         }
         
         
         /// 仓库，种植
-        if gameContext.currentMode == .storage || gameContext.currentMode == .growing {
+        if gameContext.currentMode == .storageArea || gameContext.currentMode == .plantingArea {
             RMEventBus.shared.requestCreateEntity(type: type,
                                                  point: areaPoint,
                                                 params: params!)

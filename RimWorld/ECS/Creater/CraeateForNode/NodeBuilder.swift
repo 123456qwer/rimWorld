@@ -30,7 +30,7 @@ final class NodeBuilder: NSObject {
         /// 蓝图
         kBlueprint:blueprint,
         /// 木头墙
-        kWoodWall:woodWall,
+        kWall:woodWall,
         /// 水稻
         kRice:rice,
         /// 石头
@@ -45,6 +45,10 @@ final class NodeBuilder: NSObject {
         kOre:ore,
         /// 苹果
         kApple:apple,
+        
+        
+        // MARK: - 家具 -
+        kStove: stove,
     ]
     
     /// 根据类型创建Node

@@ -285,9 +285,11 @@ extension ECSManager {
         /// 初始化不能行走的路径
         let allEntities = allEntities()
         for entity in allEntities {
-            guard let blockComponent = entity.getComponent(ofType: BlockedActionComponent.self),
-                  let pointComponent = entity.getComponent(ofType: PositionComponent.self) else { continue }
-            provider.setWalkable(x: Int(pointComponent.x), y: Int(pointComponent.y), canWalk: false)
+            guard let blockComponent = entity.getComponent(ofType: MovementBlockerComponent.self) else { continue }
+            for point in blockComponent.positions {
+                provider.setWalkable(x: Int(point.x), y: Int(point.y), canWalk: false)
+            }
+            
         }
         
     }

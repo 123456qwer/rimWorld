@@ -39,10 +39,10 @@ struct ECSLogger {
 //        let timestamp = currentTime()
         let logText = "[\(filename):\(line)] \(function) ➜ \(message)"
 
-        if message.contains("💀💀💀") {
+//        if message.contains("💀💀💀") {
             print("\(logText)")
             EntityActionTool.writeLog(entity: TestManager.shared.rmEntity, text: logText)
-        }
+//        }
         
 
         // 写入文件

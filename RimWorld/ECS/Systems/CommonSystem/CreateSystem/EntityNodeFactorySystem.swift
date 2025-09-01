@@ -87,8 +87,13 @@ class EntityNodeFactorySystem: System {
         }
 
         /// 木墙
-        register(type: kWoodWall) { [weak self] point, params in
+        register(type: kWall) { [weak self] point, params in
             EntityFactory.shared.createWall(point: point, params: params, provider: self!.provider)
+        }
+        
+        /// 灶台
+        register(type: kStove) { [weak self] point, params in
+            EntityFactory.shared.createStove(point: point, params: params, provider: self!.provider)
         }
 
         /// 种植区域

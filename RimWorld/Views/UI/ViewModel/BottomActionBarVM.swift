@@ -53,7 +53,7 @@ extension BottomActionBarVM{
         
         /// 再次点击，取消之前的操作
         if bindView?.isSelect == true {
-            gameContext.currentMode = .normal
+            gameContext.currentMode = .none
             bindView?.updateBottomBtn(actionType: .none)
         }else{
             RMEventBus.shared.requestClickEmpty()

@@ -16,6 +16,13 @@ struct BlueprintParams: EntityCreationParams {
     let materials: [String: Int]
     let type: BlueprintType
     let totalBuildPoint: Double
+    /// 朝向
+    let direction:Direction = .down
+    /// 蓝图纹理
+    let textureName:String
+    /// 锚点，默认0.5，0.5
+    var anchorPoint:CGPoint = CGPoint(x: 0.5, y: 0.5)
+    var material: MaterialType = .wood
 }
 
 // MARK: 存储区域参数
@@ -89,4 +96,18 @@ struct WallParams: EntityCreationParams {
     let wallTexture: String
     /// 类型
     let type: String
+}
+
+// MARK: 灶台参数
+struct StoveParams: EntityCreationParams {
+    /// 类型材质
+    let material: MaterialType
+    /// texture （直接传进来，省的在判断了）
+    let wallTexture: String
+    /// 类型
+    let type: String
+    
+    let width : CGFloat
+    let height : CGFloat
+    let direction: Direction
 }
